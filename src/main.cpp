@@ -37,7 +37,6 @@
 
  * TO DO:
 
-    - allow data_dir != main_dir/BarData (so move to github)
     - adaptive volatility bins (in NG6)
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)
