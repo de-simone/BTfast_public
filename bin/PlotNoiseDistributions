@@ -1,0 +1,20 @@
+#!/bin/bash
+# input : "Results/noise.csv"         (match 'noise' in main)
+# output: "Results/noise_distributions.png" (match in gnuplot script)
+
+if [ -e Results/noise.csv ]
+then
+    # Generate plot
+    gnuplot < 'gnuplotting/Noise_distributions.gp'
+
+    # Open plot file
+    OS="`uname`"
+    if [ "$OS" == "Linux" ]
+        then eog Results/noise_distributions.png &
+
+    elif [ "$OS" == "Darwin" ]
+        then open Results/noise_distributions.png
+
+    else echo "OS" $OS "not recognized"
+    fi
+fi

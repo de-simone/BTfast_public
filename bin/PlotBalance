@@ -1,0 +1,20 @@
+#!/bin/bash
+# input : "Results/profits.csv"     (match 'profit_file' in main)
+# output: "Results/equity_line.png" (match in gnuplot script)
+
+if [ -e Results/profits.csv ]
+then
+    # Generate plot
+    gnuplot < 'gnuplotting/Balance.gp'
+
+    # Open plot file 
+    OS="`uname`"
+    if [ "$OS" == "Linux" ]
+        then eog Results/equity_line.png &
+
+    elif [ "$OS" == "Darwin" ]
+        then open Results/equity_line.png
+
+    else echo "OS" $OS "not recognized"
+    fi
+fi

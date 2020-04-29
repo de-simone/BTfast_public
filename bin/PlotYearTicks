@@ -1,0 +1,20 @@
+#!/bin/bash
+# input : "Results/profits.csv"         (match 'profit_file' in main)
+# output: "Results/Year_ticks.png"       (match in gnuplot script)
+
+if [ -e Results/profits.csv ]
+then
+    # Generate plot
+    gnuplot < 'gnuplotting/Year_ticks.gp'
+
+    # Open plot file
+    OS="`uname`"
+    if [ "$OS" == "Linux" ]
+        then eog Results/Year_ticks.png &
+
+    elif [ "$OS" == "Darwin" ]
+        then open Results/Year_ticks.png
+        
+    else echo "OS" $OS "not recognized"
+    fi
+fi
