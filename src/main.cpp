@@ -13,7 +13,7 @@
  Copyright (c) 2019, Andrea De Simone - All rights reserved.<br/>
 
  \subsection Data Storage
- CSV files (SQLite database)
+        - CSV files
 
 
  * Required files:
