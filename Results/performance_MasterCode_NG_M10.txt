@@ -1,0 +1,97 @@
+# TimeStamp   : 2020-04-16 14:03:26
+# Strategy    : MasterCode
+# Symbol      : NG
+# TimeFrame   : M10
+# Date Range  : 2009-10-01 --> 2019-12-30
+#
+#<Strategies/MasterCode.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>1</Value>
+#     </Input>
+#     <Input>
+#         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
+#         <Value>2</Value>
+#     </Input>
+#     <Input>
+#         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
+#         <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>POI_switch</Name>         <!-- 1..8:1 -->
+#         <Value>6</Value>
+#     </Input>
+#     <Input>
+#         <Name>Distance_switch</Name>    <!-- 1..3:1 -->
+#         <Value>3</Value>
+#     </Input>
+#     <Input>
+#         <Name>FilterT_switch</Name>     <!-- 0..14:1 -->
+#         <Value>17</Value>
+#     </Input>
+#     <Input>
+#         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
+#         <Value>0</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
+#         <Start>6</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>fractN_long</Name>             <!-- 0..5:1 -->
+#         <Value>0</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>fractN_short</Name>             <!-- 0..5:1 -->
+#         <Start>2</Start>
+#         <Stop>4</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/MasterCode.xml>
+#
+
+   # ==================  Performance Report ================== #
+                        |     All    |    Long    |    Short   |
+     Initial Balance    : 10000000.00
+     N. of Trades       :      62            0           62
+     Net Profit         :  181820.00         0.00    181820.00
+     Net Profit %       :       1.8%         0.0%         1.8%
+     CAGR               :       0.2%         0.0%         0.2%
+     Avg Trade          :    2932.58         0.00      2932.58
+     Avg Ticks          :      14.44         0.00        14.44
+     Profit Factor      :       3.48         0.00         3.48
+     Win Percent        :      69.4%         0.0%        69.4%
+     Avg DrawDown       :   -3524.03         0.00     -3524.03
+     Avg DrawDown %     :      -0.0%         0.0%        -0.0%
+     Max DrawDown       :  -15840.00         0.00    -15840.00
+     Max DrawDown %     :      -0.2%         0.0%        -0.2%
+     Net PL/Max DD      :      11.48         0.00        11.48
+     CAGR/Max DD %      :       1.27         0.00         1.27
+     Expectancy         :       0.76         0.00         0.76
+     Z-score            :       3.16         0.00         3.16
+     R^2                :     0.8284       0.0000       0.8284
+   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+     Std.Dev. of P/L    :    7305.08         0.00      7305.08
+     Gross Profit       :  255100.00         0.00    255100.00
+     Gross Loss         :  -73280.00         0.00    -73280.00
+     Avg Profit         :    5932.56         0.00      5932.56
+     Avg Loss           :   -3856.84         0.00     -3856.84
+     Max Profit         :   29760.00         0.00     29760.00
+     Max Loss           :  -15840.00         0.00    -15840.00
+     Avg Bars in Win    :      36.67         0.00        36.67
+     Avg Bars in Loss   :      30.37         0.00        30.37
+     Max Consec. Wins   :       8            0            8
+     Max Consec. Losses :       2            0            2
+     Minimum Capital    :   25960.00         0.00     25960.00
+   # ========================================================= #

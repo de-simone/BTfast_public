@@ -1,0 +1,45 @@
+# TimeStamp   : 2020-04-18 09:42:18
+# Strategy    : NG6
+# Symbol      : NG
+# TimeFrame   : M10
+# Date Range  : 2009-10-01 --> 2019-12-30
+#
+#<Strategies/NG6.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#       <Name>MyStop</Name>
+#       <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>fractN_long</Name>             <!-- 0..5:1 -->
+#         <Value>3</Value>
+#     </Input>
+#     <Input>
+#         <Name>fractN_short</Name>             <!-- 0..5:1 -->
+#         <Value>2</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>VolatilityBin</Name>
+#         <Start>43</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/NG6.xml>
+#
+#  Ntrades,  AvgTicks,   WinPerc, PftFactor,    NP/MDD, Expectancy,   Z-score,    MyStop, fractN_long, fractN_short, VolatilityBin,   epsilon, 
+      328,     16.64,     57.93,      1.84,      8.33,      0.35,      3.37,           0,           3,           2,          50,           0, 
+      331,     15.57,     57.70,      1.79,      8.00,      0.34,      3.25,           0,           3,           2,          48,           0, 
+      321,     11.48,     57.01,      1.54,      5.52,      0.23,      2.74,           0,           3,           2,          46,           0, 
+      297,      8.15,     57.24,      1.45,      4.11,      0.19,      2.46,           0,           3,           2,          43,           0, 
+      105,     19.17,     56.19,      2.15,      6.41,      0.50,      1.80,           0,           3,           2,          45,           0, 
+      116,     17.16,     55.17,      1.81,      4.26,      0.36,      1.55,           0,           3,           2,          44,           0, 
+       35,     40.34,     45.71,      2.44,      2.47,      0.78,      1.54,           0,           3,           2,          47,           0, 
+       14,     42.07,     57.14,      2.16,      1.65,      0.50,      0.00,           0,           3,           2,          49,           0, 

@@ -1,0 +1,71 @@
+# TimeStamp   : 2020-04-29 08:42:21
+# Strategy    : NG6
+# Symbol      : NG
+# TimeFrame   : M15
+# Date Range  : 2009-10-01 --> 2019-12-30
+#
+#<Strategies/NG6.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#       <Name>MyStop</Name>
+#       <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>fractN_long</Name>             <!-- 0..5:1 -->
+#         <Value>3</Value>
+#     </Input>
+#     <Input>
+#         <Name>fractN_short</Name>             <!-- 0..5:1 -->
+#         <Value>2</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>VolatilityBin</Name>
+#         <Start>43</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/NG6.xml>
+#
+
+   # ==================  Performance Report ================== #
+                        |     All    |    Long    |    Short   |
+     Initial Balance    : 10000000.00
+     N. of Trades       :       0            0            0
+     Net Profit         :       0.00         0.00         0.00
+     Net Profit %       :       0.0%         0.0%         0.0%
+     CAGR               :       0.0%         0.0%         0.0%
+     Avg Trade          :       0.00         0.00         0.00
+     Avg Ticks          :       0.00         0.00         0.00
+     Profit Factor      :       0.00         0.00         0.00
+     Win Percent        :       0.0%         0.0%         0.0%
+     Avg DrawDown       :       0.00         0.00         0.00
+     Avg DrawDown %     :       0.0%         0.0%         0.0%
+     Max DrawDown       :       0.00         0.00         0.00
+     Max DrawDown %     :       0.0%         0.0%         0.0%
+     Net PL/Max DD      :       0.00         0.00         0.00
+     CAGR/Max DD %      :       0.00         0.00         0.00
+     Expectancy         :       0.00         0.00         0.00
+     Z-score            :       0.00         0.00         0.00
+     R^2                :     0.0000       0.0000       0.0000
+   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+     Std.Dev. of P/L    :       0.00         0.00         0.00
+     Gross Profit       :       0.00         0.00         0.00
+     Gross Loss         :       0.00         0.00         0.00
+     Avg Profit         :       0.00         0.00         0.00
+     Avg Loss           :       0.00         0.00         0.00
+     Max Profit         :       0.00         0.00         0.00
+     Max Loss           :       0.00         0.00         0.00
+     Avg Bars in Win    :       0.00         0.00         0.00
+     Avg Bars in Loss   :       0.00         0.00         0.00
+     Max Consec. Wins   :       0            0            0
+     Max Consec. Losses :       0            0            0
+     Minimum Capital    :       0.00         0.00         0.00
+   # ========================================================= #
