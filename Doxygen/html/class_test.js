@@ -1,0 +1,27 @@
+var class_test =
+[
+    [ "Test", "class_test.html#ad30ee74be743c5c20b5c7af1fda918f6", null ],
+    [ "compute_entry", "class_test.html#a2659c67188c59c2de6c0b090884bd192", null ],
+    [ "compute_exit", "class_test.html#ad316fdb6929b48ffe9109a033d1e1758", null ],
+    [ "compute_signals", "class_test.html#acd9d0f1bca8bf56b5871f3121140618f", null ],
+    [ "digits", "class_test.html#a052a934b05084df06d82ef81a6999013", null ],
+    [ "preliminaries", "class_test.html#af78f4252c4ee53e9a14cc5b409ca7fa9", null ],
+    [ "set_param_values", "class_test.html#aef2a4ab478da21e4a0d76631b18bf22b", null ],
+    [ "CloseD_", "class_test.html#af203deabd4d86a583ba99dd0a646e3c2", null ],
+    [ "CurrentDate_", "class_test.html#a15eaa8ce16b38603224dde159f92e1a8", null ],
+    [ "CurrentDOW_", "class_test.html#a9406d52832c7af5359a70a330ddf7bcf", null ],
+    [ "CurrentTime_", "class_test.html#a5d52a82edfae687683ec2d08e9ad939e", null ],
+    [ "digits_", "class_test.html#af6abf56ce65f7fe4ad0148b57d35b313", null ],
+    [ "fractN_", "class_test.html#abee0f1d94d78a1948ec77a3ecf6f082a", null ],
+    [ "HighD_", "class_test.html#a1d4d6aa2e590d3a402392b3ed9803cbb", null ],
+    [ "LowD_", "class_test.html#a5afb8f118cd8234bd4398578592cabd3", null ],
+    [ "MarketPosition_", "class_test.html#ab1aea3befeb06c5332163f05dfb9b601", null ],
+    [ "MyStop_", "class_test.html#a249c9f19aaadf6fff27d4a1a383037be", null ],
+    [ "Ncontracts_", "class_test.html#a5e2b008f7805df550eca9674d794b058", null ],
+    [ "NewSession_", "class_test.html#a1e09a7e07e5a413275c9e6395d14ab00", null ],
+    [ "OneBarBeforeClose_", "class_test.html#a8166fc6eb78e089529a6789ddf8c4f2b", null ],
+    [ "OpenD_", "class_test.html#a6979017ed5541abd4fb73ac93af574ce", null ],
+    [ "ROC_", "class_test.html#a89d514762f6af7b713e6ab2351a4534e", null ],
+    [ "SessionOpenPrice_", "class_test.html#a1620f3a056e5b0e9561a2940cc0e43ee", null ],
+    [ "TradingEnabled_", "class_test.html#ac4295b3b37ef3a755dc9ac941351fc94", null ]
+];

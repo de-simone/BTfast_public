@@ -1,0 +1,28 @@
+var class_n_g1 =
+[
+    [ "NG1", "class_n_g1.html#afd16e8729ca557e21002a4e838f3b198", null ],
+    [ "compute_entry", "class_n_g1.html#adfde57da2eb895cd5a2bc890772d2aa7", null ],
+    [ "compute_exit", "class_n_g1.html#aa5060fccab88422a48af5b13333f5309", null ],
+    [ "compute_signals", "class_n_g1.html#a0aa736fe9355c767d625926e68f2e9db", null ],
+    [ "digits", "class_n_g1.html#a031c7601c25af47a19e5ed40d07cef4d", null ],
+    [ "preliminaries", "class_n_g1.html#a70f14f0ec0db634c5641dab50c3ecabc", null ],
+    [ "set_param_values", "class_n_g1.html#a9c32c321e28362ea162cfce5490933dd", null ],
+    [ "CloseD_", "class_n_g1.html#a02baffeeb06c11150dbfb7b808748c8a", null ],
+    [ "CurrentDate_", "class_n_g1.html#abb18a6e926f46e4be78f45b38962fc6e", null ],
+    [ "CurrentDOW_", "class_n_g1.html#a99494ffbeaab2321e4a4415f61b6d9e5", null ],
+    [ "CurrentTime_", "class_n_g1.html#ab03c2aa81e215a5e1a5db3b8442c4f57", null ],
+    [ "digits_", "class_n_g1.html#aaece664f1a986eed1e6dff56cb96bd7b", null ],
+    [ "epsilon_", "class_n_g1.html#aeb57dffd4ebde7eb22026d676b8ae500", null ],
+    [ "fractN_", "class_n_g1.html#ab286a3f7b8aaf267e91eeff11504024c", null ],
+    [ "HighD_", "class_n_g1.html#a818de213b216b46f55497a1ebe23f843", null ],
+    [ "LowD_", "class_n_g1.html#ac62933d3842fad169f96e03b0c4362b8", null ],
+    [ "MarketPosition_", "class_n_g1.html#a5f672ea6529df71cbef05212417f8ce5", null ],
+    [ "MyStop_", "class_n_g1.html#a757f9bfe564d80433a653140b02d1ca8", null ],
+    [ "Ncontracts_", "class_n_g1.html#a0a8d0dfc987dc2fc20f1398955dc4db3", null ],
+    [ "NewSession_", "class_n_g1.html#a0b1ad18d20f5140427239d8ff5012f27", null ],
+    [ "OneBarBeforeClose_", "class_n_g1.html#ad648dc1657a2dc30dad22eba85bcb160", null ],
+    [ "OpenD_", "class_n_g1.html#a4e98939a718917ea20b00db14a3e809c", null ],
+    [ "SessionOpenPrice_", "class_n_g1.html#a84042e25f01ed60fd86760350e413100", null ],
+    [ "T_segment_duration_", "class_n_g1.html#a22365260d6fd1b1df7b89dc63100a628", null ],
+    [ "TradingEnabled_", "class_n_g1.html#a17c44bc3f0d09616726ef9cd58eba270", null ]
+];

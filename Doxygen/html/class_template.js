@@ -1,0 +1,27 @@
+var class_template =
+[
+    [ "Template", "class_template.html#a785ca3cdd77551fb303be2be9fcbeaf2", null ],
+    [ "compute_entry", "class_template.html#a680565b230550f595e303adfa825b8d4", null ],
+    [ "compute_exit", "class_template.html#a46d38f35af7d979041fb55c71549073a", null ],
+    [ "compute_signals", "class_template.html#a3d23263dfadb4239e85312abfe80b839", null ],
+    [ "digits", "class_template.html#a482714078371518892ff2e8878134db5", null ],
+    [ "preliminaries", "class_template.html#ad89189bcaeb2d6c657fe67b79eabd2db", null ],
+    [ "set_param_values", "class_template.html#af0aa9a4348d975deff0ef0ada90cc836", null ],
+    [ "CloseD_", "class_template.html#a71a5c2205bb50589e0c2670bbdb8c323", null ],
+    [ "CurrentDate_", "class_template.html#a2bf6048aec421352ad2a0f1ff697f847", null ],
+    [ "CurrentDOW_", "class_template.html#af2172270ca2e0097412c5c929702bbb7", null ],
+    [ "CurrentTime_", "class_template.html#abd23e9868dc68d5b9079120450237264", null ],
+    [ "digits_", "class_template.html#af213610e5c709ff9a5ea5c6451c878cf", null ],
+    [ "fractN_", "class_template.html#a9841a6e2ab5f80b51a38bcc6e7a74135", null ],
+    [ "HighD_", "class_template.html#a49c4376932f204c1526143eeea0e9569", null ],
+    [ "LowD_", "class_template.html#a943282ff16c72e5c6b478b5d9eba862c", null ],
+    [ "MarketPosition_", "class_template.html#a627a99ff615cc0dbea5adc0b8198bbed", null ],
+    [ "MyStop_", "class_template.html#a5e37727093fd209f8734f0e105c38770", null ],
+    [ "Ncontracts_", "class_template.html#af25462a75c7dcbfb1c61078a32b6e8c7", null ],
+    [ "NewSession_", "class_template.html#aeae0d7674305024156892f9876e1d446", null ],
+    [ "OneBarBeforeClose_", "class_template.html#a6b102d2869bfff32923cc35655b43b68", null ],
+    [ "OpenD_", "class_template.html#ae147deb6821c9dbeedd3fc1f46665527", null ],
+    [ "ROC_", "class_template.html#a37b466498e2d89e04d66c4a5020ce43a", null ],
+    [ "SessionOpenPrice_", "class_template.html#ab8303b62afec88494d8ab7ad2cf1ff76", null ],
+    [ "TradingEnabled_", "class_template.html#aeb45ff8ec3c6671a3cb531d18e27b7db", null ]
+];

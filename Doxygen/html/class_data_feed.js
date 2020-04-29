@@ -1,0 +1,26 @@
+var class_data_feed =
+[
+    [ "DataFeed", "class_data_feed.html#afca61a0e0d7ac5191e9a2d0fb5b7fffe", null ],
+    [ "~DataFeed", "class_data_feed.html#a7cd34f142f8be707effcd3ac0d00f94e", null ],
+    [ "clone", "class_data_feed.html#a1fcb8741599025557ba12858ee5c29da", null ],
+    [ "close_data_connection", "class_data_feed.html#ab26faea522924bd4abe181c04f862d5d", null ],
+    [ "continue_parsing", "class_data_feed.html#a75284c133f5fccdfb1d906a216be0789", null ],
+    [ "csv_format", "class_data_feed.html#a3083d653e20085bb35d83927895e7ca9", null ],
+    [ "data_file", "class_data_feed.html#a688b3ad1ea68fb71bcb2bb93a66af878", null ],
+    [ "end_date", "class_data_feed.html#ae4050999e406685a223baf34be6b7758", null ],
+    [ "events_queue", "class_data_feed.html#a84741d72bf6d1ba5d2d53b4e46619245", null ],
+    [ "open_data_connection", "class_data_feed.html#a9d81037dbe58c1614ad935773d318e49", null ],
+    [ "reset_cursor", "class_data_feed.html#ac2128e95cbee65f6a369f27f55d27f64", null ],
+    [ "set_data_file", "class_data_feed.html#a1c0bd64af03ff538ef03ccfdcc24ce1c", null ],
+    [ "set_end_date", "class_data_feed.html#ad8fe3edb485259409d8ac67b885fde27", null ],
+    [ "set_events_queue", "class_data_feed.html#afa6c84ba1b7414b3c00c76e231ad11a5", null ],
+    [ "set_start_date", "class_data_feed.html#a8adfe1587c9ee466532f50c51e34e065", null ],
+    [ "start_date", "class_data_feed.html#a7405523ccd78a10fa7aa7abf9df2bb86", null ],
+    [ "stream_next_bar", "class_data_feed.html#a05da5f39aa17e861446c35474220cf34", null ],
+    [ "symbol", "class_data_feed.html#a0c4fbab544e3573f9e53dbb340dc9ea2", null ],
+    [ "timeframe", "class_data_feed.html#aa82880458f2f8c2a7717df2860c2ec0c", null ],
+    [ "tot_bars", "class_data_feed.html#acd9c299be1c472999afd09c740ccdef0", null ],
+    [ "events_queue_", "class_data_feed.html#ae23bdffcd45a5ae7474880e979517c93", null ],
+    [ "symbol_", "class_data_feed.html#a00df33f3e99181910933e3cca8553b49", null ],
+    [ "timeframe_", "class_data_feed.html#ac7de51c0488497d20958abe1093879fa", null ]
+];

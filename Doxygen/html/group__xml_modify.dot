@@ -1,0 +1,21 @@
+digraph "Create or Update the XMLNode structure"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=box];
+  rankdir=LR;
+  Node6 [label="???_WOSD functions.",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__xml_w_o_s_d.html",tooltip=" "];
+  Node1 [label="Create or Update the\l XMLNode structure",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node8 [label="String Allocation/Free\l functions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___string_alloc.html",tooltip=" "];
+  Node7 [label="Position helper functions\l (use in conjunction with\l the update&add functions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__xml_position.html",tooltip=" "];
+  Node4 [label="Updating Nodes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__xml_update.html",tooltip=" "];
+  Node2 [label="The XML parser",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___x_m_l_parser_general.html",tooltip=" "];
+  Node5 [label="Deleting Nodes or Attributes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__xml_delete.html",tooltip=" "];
+  Node3 [label="Creating from scratch\l a XMLNode structure",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__creation.html",tooltip=" "];
+  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node4 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node5 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node6 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node7 [shape=plaintext, dir="back", style="solid"];
+  Node1->Node8 [shape=plaintext, dir="back", style="solid"];
+}
