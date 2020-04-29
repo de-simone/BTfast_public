@@ -18,7 +18,7 @@
 
  * Required files:
         - Configuration file: 'settings.xml'
-        - Data file, in BarData/ directory
+        - Data file, in 'data_dir' directory
         - Strategy files: 'Strategy/strategyname.cpp',
                           'Strategy/strategyname.h',
                           'Strategy/StrategyName.xml'
@@ -32,7 +32,7 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-04-29
+                                                        Last update: 2020-04-30
                                           -------------------------------------
 
  * TO DO:
