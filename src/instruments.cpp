@@ -80,8 +80,19 @@ void Instrument::set_digits(){
 */
 void Instrument::fill_members (){
 
+    // Soybean Oil - CBOT (Chicago)
+    if( name_ == "BO" ){
+        contract_unit_ = 60000; // pounds
+        margin_ = 848;
+        commission_ = 3.0;
+        tick_size_ = 0.01;
+        session_open_time_ = Time {19,0};
+        session_close_time_ = Time {13,20};
+        settlement_time_ = Time {13,15};
+    }
+
     // Gold - COMEX (NY)
-    if( name_ == "GC" ){
+    else if( name_ == "GC" ){
         contract_unit_ = 100; // troy ounces
         margin_ = 6600;
         commission_ = 3.0;
