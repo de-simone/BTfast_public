@@ -87,7 +87,7 @@ General Settings for BTfast
         </Value></Input>
     <Input>
         <Name>    DATAFEED_TYPE     </Name>
-        <Value>   CSV                  <!-- CSV, SQLite -->
+        <Value>   CSV                  <!-- CSV (SQLite) -->
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -114,7 +114,7 @@ General Settings for BTfast
         <!-- Write results on file and show plot (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    SHOW_PLOT     </Name>
-        <Value>   1
+        <Value>   0
         </Value></Input>
     <!-- ================================================================== -->
 

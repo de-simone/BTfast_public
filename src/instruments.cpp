@@ -86,6 +86,7 @@ void Instrument::fill_members (){
         margin_ = 848;
         commission_ = 3.0;
         tick_size_ = 0.01;
+        tick_value_ = 6.0;
         session_open_time_ = Time {19,0};
         session_close_time_ = Time {13,20};
         settlement_time_ = Time {13,15};

@@ -1,7 +1,7 @@
 #include "datafeed.h"
 
 #include "datafeed_csv.h"
-#include "datafeed_sqlite.h"
+//#include "datafeed_sqlite.h"
 
 
 //#include <cstdlib>      // exit
@@ -51,14 +51,14 @@ void select_datafeed( std::unique_ptr<DataFeed>& datafeed_ptr,
                                                     data_file, csv_format,
                                                     start_date, end_date);
     }
-
+    /*
     else if( datafeed_type == "SQLite" ){
         datafeed_ptr = std::make_unique<HistoricalBarsSQLite> (
                                                     symbol, timeframe,
                                                     data_file,
                                                     start_date, end_date);
     }
-
+    */
     else{
         std::cout << ">>> ERROR: invalid datafeed type (select_datafeed).\n";
         exit(1);
