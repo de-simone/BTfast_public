@@ -1,5 +1,6 @@
 #include "strategy.h"
 
+#include "botest.h"
 #include "mastercode.h"
 #include "ng1.h"
 #include "ng2.h"
@@ -71,6 +72,11 @@ void select_strategy( std::unique_ptr<Strategy>& strategy_ptr,
         strategy_ptr = std::make_unique<Template> ( strategy_name,
                                                     symbol, timeframe,
                                                     max_bars_back );
+    }
+    else if( strategy_name == "BOtest" ){
+        strategy_ptr = std::make_unique<BOtest> ( strategy_name,
+                                                      symbol, timeframe,
+                                                      max_bars_back );
     }
     else if( strategy_name == "MasterCode" ){
         strategy_ptr = std::make_unique<MasterCode> ( strategy_name,

@@ -1,5 +1,5 @@
-#ifndef TEMPLATE_H
-#define TEMPLATE_H
+#ifndef BOTEST_H
+#define BOTEST_H
 
 #include "../Strategies/strategy.h"
 #include <array>    // std::array
@@ -23,8 +23,6 @@ For a new strategy, follow these steps:
         3. edit method: preliminaries() (section 'Update Indicator Values')
         4. edit method: compute_entry()
         5. edit method: compute_exit()
-
-
 
     > copy template.xml -> StrategyName.xml and edit parameters.
       StrategyName should match name in settings.xml.
@@ -70,7 +68,7 @@ Strategy Parameters:
 
 */
 
-class Template : public Strategy {
+class BOtest : public Strategy {
 
     int digits_{1};
     int tf_mins_ {0};
@@ -87,24 +85,23 @@ class Template : public Strategy {
     std::array<double, 6> HighD_ {};
     std::array<double, 6> LowD_ {};
     std::array<double, 6> CloseD_ {};
-    int T_segment_duration_ {0};
 
     // ---     Indicators     --- //
     //std::deque<double> atr_ {};
-    std::deque<double> roc_ {};
+    //std::deque<double> roc_ {};
     // -------------------------- //
 
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
     int Ncontracts_ {1};
     int MyStop_ {0};
-    int fractN_ {2};
+    //int fractN_ {0};
     // ------------------------------------------ //
 
 
     public:
         // Constructor
-        Template( std::string name, Instrument symbol,
+        BOtest( std::string name, Instrument symbol,
                   std::string timeframe, int max_bars_back );
 
     private:
