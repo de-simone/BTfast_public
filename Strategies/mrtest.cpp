@@ -1,4 +1,4 @@
-#include "botest.h"
+#include "mrtest.h"
 
 #include "filters/TA_indicators.h"
 #include "utils_math.h" // round_double
@@ -7,7 +7,7 @@
 // ------------------------------------------------------------------------- //
 /*! Constructor
 */
-BOtest::BOtest( std::string name, Instrument symbol,
+MRtest::MRtest( std::string name, Instrument symbol,
                     std::string timeframe, int max_bars_back )
 : Strategy{ name, symbol, timeframe, max_bars_back },
   digits_ { symbol_.digits() }
@@ -33,7 +33,7 @@ BOtest::BOtest( std::string name, Instrument symbol,
     correspondence with the names appearing in XML param file.
     Recall: all parameters in XML are INTEGER.
 */
-void BOtest::set_param_values(
+void MRtest::set_param_values(
                         const std::vector< std::pair<std::string,int> >&
                                 parameter_set )
 {
@@ -54,7 +54,7 @@ void BOtest::set_param_values(
     Return: 1 if all OK; 0 if not enough session bars in history.
 */
 
-int BOtest::preliminaries( const std::deque<Event>& data1,
+int MRtest::preliminaries( const std::deque<Event>& data1,
                          const std::deque<Event>& data1D,
                          const PositionHandler& position_handler)
 {
@@ -121,7 +121,7 @@ int BOtest::preliminaries( const std::deque<Event>& data1,
 //-------------------------------------------------------------------------- //
 /*! Define Entry rules and fill 'signals' array
 */
-void BOtest::compute_entry( const std::deque<Event>& data1,
+void MRtest::compute_entry( const std::deque<Event>& data1,
                               const std::deque<Event>& data1D,
                               const PositionHandler& position_handler,
                               std::array<Event, 2> &signals )
@@ -150,8 +150,8 @@ void BOtest::compute_entry( const std::deque<Event>& data1,
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
     //double fract { fractN_ * 0.1 };
-    double level_long  = HighD_[1];
-    double level_short = LowD_[1];
+    double level_long  = LowD_[1];
+    double level_short = HighD_[1];
 
     // --------------------------------------------------------------------- //
 
@@ -170,14 +170,14 @@ void BOtest::compute_entry( const std::deque<Event>& data1,
     //////////////////////////     OPEN TRADES     ////////////////////////////
     if( EnterLong ){
         signals[0] = Event { symbol_, data1[0].timestamp(),
-                             "BUY", "STOP", level_long,
+                             "BUY", "LIMIT", level_long,
                              Ncontracts_, name_,
                              (double) MyStop_ * Ncontracts_, 0.0 };
     }
 
     if( EnterShort ){
         signals[1] = Event { symbol_, data1[0].timestamp(),
-                             "SELLSHORT", "STOP", level_short,
+                             "SELLSHORT", "LIMIT", level_short,
                              Ncontracts_, name_,
                              (double) MyStop_ * Ncontracts_, 0.0 };
     }
@@ -189,7 +189,7 @@ void BOtest::compute_entry( const std::deque<Event>& data1,
 //-------------------------------------------------------------------------- //
 /*! Define Exit rules and fill 'signals' array
 */
-void BOtest::compute_exit( const std::deque<Event>& data1,
+void MRtest::compute_exit( const std::deque<Event>& data1,
                              const std::deque<Event>& data1D,
                              const PositionHandler& position_handler,
                              std::array<Event, 2> &signals )
@@ -263,7 +263,7 @@ void BOtest::compute_exit( const std::deque<Event>& data1,
     Second entry of 'signals' array: entry/exit signals for SHORT trades
 */
 
-void BOtest::compute_signals( const PriceCollection& price_collection,
+void MRtest::compute_signals( const PriceCollection& price_collection,
                                 const PositionHandler& position_handler,
                                 std::array<Event, 2> &signals )
 {
