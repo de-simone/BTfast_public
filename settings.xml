@@ -34,7 +34,7 @@ General Settings for BTfast
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   GC
+        <Value>   BO
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
@@ -59,13 +59,13 @@ General Settings for BTfast
     <!-- ========================    INPUT DATA    ======================== -->
     <Input>
         <Name>    DATA_DIR    </Name>
-        <Value>   /Users/Andrea/Documents/PriceData/BarData
+        <Value>   /Users/Andrea/Documents/PriceData/
         <!--      /u/d/desimon/BTfast   -->
         </Value></Input>
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC_M15_2010-2014_2018-2019.csv
+        <Value>  BO/BO_M15_2010_2019.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -153,7 +153,7 @@ General Settings for BTfast
     <Input>
         <!-- Position size: fixed_size, fixed_notional, fixed_fractional  -->
         <Name>    POSITION_SIZE_TYPE     </Name>
-        <Value>   fixed_size
+        <Value>   fixed_notional
         </Value></Input>
     <Input>
         <!-- Number of contracts to use in "fixed_size" position size -->

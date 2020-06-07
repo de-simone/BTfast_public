@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-06-06 20:25:02
+# TimeStamp   : 2020-06-07 07:20:32
 # Strategy    : BOtest
 # Symbol      : GC
 # TimeFrame   : M15
