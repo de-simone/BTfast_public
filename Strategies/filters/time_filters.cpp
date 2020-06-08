@@ -32,10 +32,8 @@ bool TimeFilter_DOW( int filter_num, int CurrentDOW )
 
 
 // ------------------------------------------------------------------------- //
-bool TimeFilter_Intraday( int filter_num,
-                          const Date &CurrentDate, const Time &CurrentTime,
-                          int CurrentDOW, const Instrument &symbol,
-                          int T_segment_duration )
+bool TimeFilter_Intraday( int filter_num, const Time &CurrentTime, 
+                          const Instrument &symbol, int T_segment_duration )
 {
 
     Time session_open_time { symbol.session_open_time() };

@@ -212,10 +212,8 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
 
     // --------------------------    TIME FILTERS   ------------------------ //
     bool FilterT_DOW { TimeFilter_DOW( DOW_switch_, CurrentDOW_ ) };
-    bool FilterT_Intraday { TimeFilter_Intraday( Intraday_switch_,
-                                                 CurrentDate_, CurrentTime_,
-                                                 CurrentDOW_, symbol_,
-                                                 T_segment_duration_ ) };
+    bool FilterT_Intraday { TimeFilter_Intraday(Intraday_switch_, CurrentTime_,
+                                                symbol_, T_segment_duration_ )};
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
