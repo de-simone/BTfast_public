@@ -1,26 +1,26 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
-* === All parameters need to be INTEGER ===
-*
-* - Main node within <Inputs> and </Inputs>
-*
-* - Fixed-input parameters are with syntax:
-*
-*    <Input>
-*      <Name>parameter_name</Name>
-*      <Value>0.5</Value>
-*    </Input>
-*
-* - Optimizable parameter are with syntax:
-*
-*    <OptRange>
-*      <Name>parameter_name</Name>
-*      <Start>1</Start>
-*      <Stop>20</Stop>
-*      <Step>1</Step>
-*    </OptRange>
-*
-* For Backtest: only the <Start> value of <OptRange> parameters is read.
+=== All parameters need to be INTEGER ===
+
+ - Main node within <Inputs> and </Inputs>
+
+ - Fixed-input parameters are with syntax:
+
+    <Input>
+      <Name>parameter_name</Name>
+      <Value>0.5</Value>
+    </Input>
+
+ - Optimizable parameter are with syntax:
+
+    <OptRange>
+      <Name>parameter_name</Name>
+      <Start>1</Start>
+      <Stop>20</Stop>
+      <Step>1</Step>
+    </OptRange>
+
+For Backtest: only the <Start> value of <OptRange> parameters is read.
 -->
 <Inputs>
     <Input>
@@ -45,20 +45,20 @@
         <Name>Distance_switch</Name>    <!-- 1..3:1 -->
         <Value>1</Value>
     </Input>
-    <OptRange>
+    <Input>
         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
-        <Start>0</Start>
-        <Stop>5</Stop>
-        <Step>1</Step>
-    </OptRange>
+        <Value>0</Value>
+    </Input>
     <Input>
         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
-        <Value>0</Value>
+        <Value>4</Value>
     </Input>
-    <Input>
+    <OptRange>
         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
-        <Value>0</Value>
-    </Input>
+        <Start>0</Start>
+        <Stop>50</Stop>
+        <Step>1</Step>
+    </OptRange>
     <Input>
         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
         <Value>0</Value>
@@ -66,7 +66,7 @@
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..5:1 -->
         <Start>0</Start>
-        <Stop>4</Stop>
+        <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>
     <Input>

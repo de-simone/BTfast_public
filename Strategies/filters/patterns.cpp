@@ -21,7 +21,6 @@ bool Pattern ( int ptn_num,
     int vola_bin {0};
 
     // Require at least 100 days of ATR history (in strategy::preliminaries())
-
     if( !atrD.empty() ){
         // Max and Min of atrD over its full history (max_bars_back)
         double vola_max { *max_element(atrD.begin()+1, atrD.end()) };
@@ -46,7 +45,6 @@ bool Pattern ( int ptn_num,
         }
     }
     // --------------------------------------------------------------------- //
-
 
 
     switch( ptn_num ){
@@ -141,7 +139,7 @@ bool Pattern ( int ptn_num,
             result = (LowD[1]>LowD[2] && LowD[1]>LowD[3] && LowD[1]>LowD[4]);
             break;
         case 28:
-            result = (CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3] 
+            result = (CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3]
                         && OpenD[0]>CloseD[1]);
             break;
         case 29:
