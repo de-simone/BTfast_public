@@ -20,6 +20,7 @@ General Settings for BTfast
              4:   Strategy Factory (Exhaustive Generation + Validation)
              44:  Strategy Factory (Genetic Generation + Validation)
              444: Strategy Factory (Import Generation results + Validation)
+             5:   Market overview (no trades)
          -->
         <Value> 1
         </Value></Input>
