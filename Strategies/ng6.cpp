@@ -1,7 +1,7 @@
 #include "ng6.h"
 
 #include "filters/patterns.h"           // Pattern
-#include "filters/time_filter.h"        // TimeFilter
+//#include "filters/time_filters.h"        // TimeFilter
 #include "filters/TA_indicators.h"      // ATR
 #include "utils_math.h"                 // modulus, round_double
 #include "utils_trade.h"                // MarketPosition

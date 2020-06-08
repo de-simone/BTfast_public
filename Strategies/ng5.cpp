@@ -1,7 +1,7 @@
 #include "ng5.h"
 
 #include "filters/patterns.h"        // Pattern, OppositePattern
-#include "filters/time_filter.h"     // TimeFilter
+//#include "filters/time_filters.h"     // TimeFilter
 #include "filters/TA_indicators.h"
 #include "utils_math.h"                 // modulus, round_double
 #include "utils_trade.h"                // MarketPosition
@@ -161,7 +161,7 @@ void NG5::compute_entry( const std::deque<Event>& data1,
     // --------------------------    TIME FILTER    ------------------------ //
     /*
     int FilterT_switch = 14;
-    bool FilterT { TimeFilter( FilterT_switch,
+    bool FilterT { TimeFilter_DOW( FilterT_switch,
                                CurrentDate_, CurrentTime_, CurrentDOW_,
                                symbol_, T_segment_duration_ ) };
     */

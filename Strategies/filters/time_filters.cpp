@@ -1,13 +1,41 @@
-#include "time_filter.h"
-
+#include "time_filters.h"
 
 #include "utils_time.h"                 // CalcTime
 
 // ------------------------------------------------------------------------- //
-bool TimeFilter( int filter_num,
-                 const Date &CurrentDate, const Time &CurrentTime,
-                 int CurrentDOW,
-                 const Instrument &symbol, int T_segment_duration )
+bool TimeFilter_DOW( int filter_num, int CurrentDOW )
+{
+    bool result {false};
+    switch( filter_num ){
+        case 0:
+            result = true;
+            break;
+        case 1:        // Not Mondays
+            result = CurrentDOW != 1;
+            break;
+        case 2:        // Not Tuesdays
+            result = CurrentDOW != 2;
+            break;
+        case 3:        // Not Wednesdays
+            result = CurrentDOW != 3;
+            break;
+        case 4:        // Not Thursdays
+            result = CurrentDOW != 4;
+            break;
+        case 5:        // Not Fridays
+            result = CurrentDOW != 5;
+            break;
+    }
+
+    return(result);
+}
+
+
+// ------------------------------------------------------------------------- //
+bool TimeFilter_Intraday( int filter_num,
+                          const Date &CurrentDate, const Time &CurrentTime,
+                          int CurrentDOW, const Instrument &symbol,
+                          int T_segment_duration )
 {
 
     Time session_open_time { symbol.session_open_time() };
@@ -44,49 +72,34 @@ bool TimeFilter( int filter_num,
         case 0:
             result = true;
             break;
-        case 1:        // Not Mondays
-            result = CurrentDOW != 1;
-            break;
-        case 2:        // Not Tuesdays
-            result = CurrentDOW != 2;
-            break;
-        case 3:        // Not Wednesdays
-            result = CurrentDOW != 3;
-            break;
-        case 4:        // Not Thursdays
-            result = CurrentDOW != 4;
-            break;
-        case 5:        // Not Fridays
-            result = CurrentDOW != 5;
-            break;
-        case 6:        // T-segment 1
+        case 1:        // T-segment 1
             result = Tsegment == 1;
             break;
-        case 7:        // Not T-segment 1
+        case 2:        // Not T-segment 1
             result = Tsegment != 1;
             break;
-        case 8:        // T-segment 2
+        case 3:        // T-segment 2
             result = Tsegment == 2;
             break;
-        case 9:        // Not T-segment 2
+        case 4:        // Not T-segment 2
             result = Tsegment != 2;
             break;
-        case 10:       // T-segment 3
+        case 5:       // T-segment 3
             result = Tsegment == 3;
             break;
-        case 11:       // Not T-segment 3
+        case 6:       // Not T-segment 3
             result = Tsegment != 3;
             break;
-        case 12:       // Not T-segment 1 and before settlement
+        case 7:       // Not T-segment 1 and before settlement
             result = (Tsegment != 1) && !(after_settlement);
             break;
-        case 13:       // Not T-segment 2 and before settlement
+        case 8:       // Not T-segment 2 and before settlement
             result = (Tsegment != 2) && !(after_settlement);
             break;
-        case 14:       // T-segment 3 and before settlement
+        case 9:       // T-segment 3 and before settlement
             result = (Tsegment == 3) && !(after_settlement);
             break;
-        case 15:
+        case 10:
             result = CurrentTime >= Time(8,0)
                             && CurrentTime < settlement_time;
             break;

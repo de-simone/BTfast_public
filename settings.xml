@@ -6,8 +6,8 @@ General Settings for BTfast
 
     <Input>
         <Name>    MAIN_DIR    </Name>
-        <Value>   /u/d/desimon/BTfast
-        <!--      /Users/Andrea/GitHub/BTfast   -->
+        <Value>   /Users/Andrea/GitHub/BTfast
+        <!--    /u/d/desimon/BTfast     -->
         </Value></Input>
     <Input>
         <Name>    RUN_MODE    </Name>
@@ -59,8 +59,8 @@ General Settings for BTfast
     <!-- ========================    INPUT DATA    ======================== -->
     <Input>
         <Name>    DATA_DIR    </Name>
-        <Value>   /u/d/desimon/PriceData
-        <!--     /Users/Andrea/Documents/PriceData/   -->
+        <Value>   /Users/Andrea/Documents/PriceData/
+        <!--     /u/d/desimon/PriceData   -->
         </Value></Input>
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->

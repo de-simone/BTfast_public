@@ -2,7 +2,7 @@
 
 #include "filters/poi.h"                // PointOfInititation
 #include "filters/patterns.h"           // Pattern
-#include "filters/time_filter.h"        // TimeFilter
+#include "filters/time_filters.h"       // TimeFilter_DOW, TimeFilter_Intraday
 #include "filters/TA_indicators.h"      // ATR
 #include "utils_math.h"                 // modulus, round_double
 #include "utils_trade.h"                // MarketPosition
@@ -62,8 +62,9 @@ void MasterCode::set_param_values(
     POI_switch_ = find_param_value_by_name( "POI_switch", parameter_set );
     Distance_switch_ = find_param_value_by_name( "Distance_switch",
                                                 parameter_set );
-    FilterT_switch_ = find_param_value_by_name( "FilterT_switch",
-                                                parameter_set );
+    DOW_switch_ = find_param_value_by_name( "DOW_switch", parameter_set );
+    Intraday_switch_ = find_param_value_by_name( "Intraday_switch",
+                                                  parameter_set );
     Filter1L_switch_ = find_param_value_by_name( "Filter1L_switch",
                                                  parameter_set );
     Filter1S_switch_ = find_param_value_by_name( "Filter1S_switch",
@@ -209,10 +210,12 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     //std::cout<<"level_long = "<<level_long<<"\n";
     // --------------------------------------------------------------------- //
 
-    // --------------------------    TIME FILTER    ------------------------ //
-    bool FilterT { TimeFilter( FilterT_switch_,
-                               CurrentDate_, CurrentTime_, CurrentDOW_,
-                               symbol_, T_segment_duration_ ) };
+    // --------------------------    TIME FILTERS   ------------------------ //
+    bool FilterT_DOW { TimeFilter_DOW( DOW_switch_, CurrentDOW_ ) };
+    bool FilterT_Intraday { TimeFilter_Intraday( Intraday_switch_,
+                                                 CurrentDate_, CurrentTime_,
+                                                 CurrentDOW_, symbol_,
+                                                 T_segment_duration_ ) };
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
@@ -223,8 +226,8 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //
-    bool All_filters_long  { FilterT && Filter1_long };
-    bool All_filters_short { FilterT && Filter1_short };
+    bool All_filters_long  { FilterT_DOW && FilterT_Intraday && Filter1_long };
+    bool All_filters_short { FilterT_DOW && FilterT_Intraday && Filter1_short};
     // --------------------------------------------------------------------- //
 
     // ------------------------    ENTRY RULES    -------------------------- //

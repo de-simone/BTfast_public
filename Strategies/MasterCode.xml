@@ -48,7 +48,11 @@
         <Step>1</Step>
     </OptRange>
     <Input>
-        <Name>FilterT_switch</Name>     <!-- 0..14:1 -->
+        <Name>DOW_switch</Name>     <!-- 0..5:1 -->
+        <Value>0</Value>
+    </Input>
+    <Input>
+        <Name>Intraday_switch</Name>     <!-- 0..10:1 -->
         <Value>0</Value>
     </Input>
     <Input>

@@ -98,19 +98,20 @@ class MasterCode : public Strategy {
     //  (default values, may be replaced by XML)  //
     int Ncontracts_ {1};        // N. of contracts to trade
     int MyStop_ {0};
-    // Switches
+    //-- Switches
     int BOMR_switch_ {1};
     int Side_switch_ {3};
     int POI_switch_ {1};
     int Distance_switch_ {1};
-    int FilterT_switch_ {0};
-    //int Filter1_switch_ {0};
+    int DOW_switch_ {0};
+    int Intraday_switch_ {0};
     int Filter1L_switch_ {0};
     int Filter1S_switch_ {0};
-    // Parameters
-    //int fractN_ {1};            // fract = 2^fractN_ / 10
-    int fractN_long_ {1};
-    int fractN_short_ {1};
+    //--
+    //-- Parameters
+    int fractN_long_ {1};       // fract = 2^fractN_ / 10
+    int fractN_short_ {1};      
+    //--
     double epsilon_{0.0};       // used for stability test (5% variation)
     // ------------------------------------------ //
 
