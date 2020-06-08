@@ -20,14 +20,10 @@ void PointOfInititation( double &POI_long, double &POI_short,
             POI_short = POI_long;
             break;
         case 2:
-            POI_long  = 0.5*(HighD[0] + LowD[0]);
-            POI_short = POI_long;
-            break;
-        case 3:
             POI_long  = CloseD[1];
             POI_short = POI_long;
             break;
-        case 4:
+        case 3:
             if( BOMR_switch == 1 ){
                 POI_long  = HighD[1];
                 POI_short = LowD[1];
@@ -37,15 +33,15 @@ void PointOfInititation( double &POI_long, double &POI_short,
                 POI_short = HighD[1];
             }
             break;
-        case 5:        // 50% retracement
+        case 4:        // 50% retracement
             POI_long  = 0.5*(HighD[1] + LowD[1]);
             POI_short = POI_long;
             break;
-        case 6:        // average price of yesterday
+        case 5:        // average price of yesterday
             POI_long  = (CloseD[1] + HighD[1] + LowD[1])/3;
             POI_short = POI_long;
             break;
-        case 7:        // max/min of last 5 closes
+        case 6:        // max/min of last 5 closes
             if( BOMR_switch == 1 ){
                 POI_long  = *max_element( CloseD.begin()+1, CloseD.end() );
                 POI_short = *min_element( CloseD.begin()+1, CloseD.end() );
@@ -55,7 +51,7 @@ void PointOfInititation( double &POI_long, double &POI_short,
                 POI_short = *max_element( CloseD.begin()+1, CloseD.end() );
             }
             break;
-        case 8:       // highest/lowest of last 5 sessions
+        case 7:       // highest/lowest of last 5 sessions
             if( BOMR_switch == 1 ){
                 POI_long  = *max_element( HighD.begin()+1, HighD.end() );
                 POI_short = *min_element( LowD.begin()+1, LowD.end() );

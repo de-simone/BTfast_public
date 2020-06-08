@@ -36,7 +36,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
         <Value>0</Value>
     </Input>
     <OptRange>
-        <Name>POI_switch</Name>         <!-- 1..8:1 -->
+        <Name>POI_switch</Name>         <!-- 1..7:1 -->
         <Start>1</Start>
         <Stop>4</Stop>
         <Step>1</Step>
