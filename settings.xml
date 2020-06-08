@@ -20,17 +20,19 @@ General Settings for BTfast
              4:   Strategy Factory (Exhaustive Generation + Validation)
              44:  Strategy Factory (Genetic Generation + Validation)
              444: Strategy Factory (Import Generation results + Validation)
+             5:   Market overview (no trades)
          -->
-        <Value> 1
+        <Value> 5
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
     <Input>
         <!-- Available strategies (should match .xml filenames):
-             BOtest,MasterCode,template,test,NG1,NG2,NG3,NG4,NG5,NG6
+             BOtest,MasterCode,MktOverview, MRtest,
+             template,test,NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   MasterCode
+        <Value>   BOtest
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
@@ -65,7 +67,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC/GC_M15_2010-2014_2018-2019.csv
+        <Value>  GC/GC_M15_2015-2017.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -113,7 +115,7 @@ General Settings for BTfast
         <!-- Write results on file and show plot (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    SHOW_PLOT     </Name>
-        <Value>   1
+        <Value>   0
         </Value></Input>
     <!-- ================================================================== -->
 

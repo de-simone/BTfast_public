@@ -84,7 +84,8 @@
 #include "btfast.h"         // type aliases (parameters_t, strategy_t)
 #include "datafeed.h"
 #include "instruments.h"
-#include "run_modes.h"      // mode_notrade, mode_single_bt, mode_optimization
+#include "run_modes.h"      // mode_notrade, mode_single_bt, mode_optimization,
+                            // mode_factory, mode_overview
 
 #include "utils_fileio.h"   // read_config_file, read_param_file, read_strategies_from_file
 //#include "utils_math.h"
@@ -317,7 +318,12 @@ int main () {
         // ----------------------------------------------------------------- //
 
 
-
+        // ----------------------   MARKET OVERVIEW   ---------------------- //
+        case 5: {
+            mode_overview( btf, datafeed, parameter_ranges );
+            break;
+        }
+        // ----------------------------------------------------------------- //
 
         // --------------------------   NOISE TEST   ----------------------- //
         /*
@@ -328,7 +334,6 @@ int main () {
             break;
         */
         // ----------------------------------------------------------------- //
-
 
 
         default:

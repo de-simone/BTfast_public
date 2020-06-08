@@ -338,6 +338,29 @@ void mode_factory( BTfast &btf,
 
 
 
+// ------------------------------------------------------------------------- //
+/*! Overview of Market main features (no trade)
+*/
+void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
+                    const param_ranges_t &parameter_ranges )
+{
+    std::cout << utils_time::current_datetime_str() + " | "
+              << "Running Market Overview \n";
+
+    // Extract single parameter combination from parameter_ranges
+    // (only the <Start> value is taken)
+    parameters_t parameter_combination {
+        utils_params::single_parameter_combination(parameter_ranges) };
+
+    // Initialize Account
+    Account account { btf.initial_balance() };
+
+    // Parse dat without strategy signals
+    btf.run_notrade( account, datafeed, parameter_combination );
+
+}
+
+
 
 // ------------------------------------------------------------------------- //
 /*! Noise Test for Single Strategy (adding gaussian noise to price data)

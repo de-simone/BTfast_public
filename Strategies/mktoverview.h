@@ -1,8 +1,10 @@
-#ifndef TEMPLATE_H
-#define TEMPLATE_H
+#ifndef MKTOVERVIEW_H
+#define MKTOVERVIEW_H
 
 #include "../Strategies/strategy.h"
-#include <array>    // std::array
+#include <array>        // std::array
+#include <utility>      // std::pair
+#include <vector>      // std::vector
 
 /*
 For a new strategy, follow these steps:
@@ -68,7 +70,7 @@ Strategy Parameters:
 
 */
 
-class Template : public Strategy {
+class MktOverview : public Strategy {
 
     int digits_{1};
     int tf_mins_ {0};
@@ -77,33 +79,36 @@ class Template : public Strategy {
     Date CurrentDate_ {};
     Time CurrentTime_ {};
     int CurrentDOW_ {0};
-    int MarketPosition_ {0};
-    bool TradingEnabled_ {true};
     double SessionOpenPrice_ {0.0};
     bool NewSession_ {false};
-    std::array<double, 6> OpenD_ {};
-    std::array<double, 6> HighD_ {};
-    std::array<double, 6> LowD_ {};
-    std::array<double, 6> CloseD_ {};
+    std::array<double, 2> OpenD_ {};
+    std::array<double, 2> HighD_ {};
+    std::array<double, 2> LowD_ {};
+    std::array<double, 2> CloseD_ {};
     int T_segment_duration_ {0};
+
+    // Store Volume for each hour
+    std::array<int, 24> Volumes_ {};
+    // Vector of pairs ( Day of Week, Close-Open )
+    std::vector<std::pair<int, double>> DOWranges_ {};
 
     // ---     Indicators     --- //
     //std::deque<double> atr_ {};
-    std::deque<double> roc_ {};
+    //std::deque<double> roc_ {};
     // -------------------------- //
 
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
-    int Ncontracts_ {1};
-    int MyStop_ {0};
-    int fractN_ {2};
+    //int Ncontracts_ {1};
+    //int MyStop_ {0};
+    //int fractN_ {2};
     // ------------------------------------------ //
 
 
     public:
         // Constructor
-        Template( std::string name, Instrument symbol,
-                  std::string timeframe, int max_bars_back );
+        MktOverview( std::string name, Instrument symbol,
+                    std::string timeframe, int max_bars_back );
 
     private:
         // Functions overriding the base class virtual functions

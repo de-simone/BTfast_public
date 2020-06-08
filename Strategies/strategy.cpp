@@ -2,6 +2,7 @@
 
 #include "botest.h"
 #include "mastercode.h"
+#include "mktoverview.h"
 #include "mrtest.h"
 #include "ng1.h"
 #include "ng2.h"
@@ -83,6 +84,11 @@ void select_strategy( std::unique_ptr<Strategy>& strategy_ptr,
         strategy_ptr = std::make_unique<MasterCode> ( strategy_name,
                                                       symbol, timeframe,
                                                       max_bars_back );
+    }
+    else if( strategy_name == "MktOverview" ){
+        strategy_ptr = std::make_unique<MktOverview> ( strategy_name,
+                                                       symbol, timeframe,
+                                                       max_bars_back );
     }
     else if( strategy_name == "MRtest" ){
         strategy_ptr = std::make_unique<MRtest> ( strategy_name,

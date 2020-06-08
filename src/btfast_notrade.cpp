@@ -15,7 +15,7 @@
 //-------------------------------------------------------------------------- //
 /*! Parse data without strategy signals
     account: reference to a Account object initialized just before
-             running run_backtest().
+             running run_notrade().
     datafeed: smart pointer to DataFeed object
 
 */

@@ -71,6 +71,13 @@ void mode_factory( BTfast &btf,
                    const std::string &noise_file );
 
 
+// ------------------------------------------------------------------------- //
+// Overview of Market main features (no trade)
+void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
+                    const param_ranges_t &parameter_ranges);
+
+
+
 
 // ------------------------------------------------------------------------- //
 // Noise Test for Single Strategy
