@@ -139,6 +139,12 @@ class BTfast {
                                        std::unique_ptr<DataFeed> &datafeed,
                                        int population_size, int generations );
 
+       // Parse data and collect market info, without strategy signals
+       void run_overview( Account &account,
+                          std::unique_ptr<DataFeed> &datafeed,
+                          const parameters_t& strategy_params );
+                          
+
         // Getters
         const std::string& strategy_name() const { return(strategy_name_); }
         const Instrument& symbol() const { return(symbol_); }
