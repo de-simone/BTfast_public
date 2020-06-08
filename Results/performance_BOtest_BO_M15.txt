@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-06-07 07:22:11
+# TimeStamp   : 2020-06-08 09:09:35
 # Strategy    : BOtest
 # Symbol      : BO
 # TimeFrame   : M15
