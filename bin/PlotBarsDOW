@@ -1,0 +1,20 @@
+#!/bin/bash
+# input : "Results/overview_bars.csv"     (match in btfast_overview.cpp)
+# output: "Results/Bars_DOW.png"         (match in gnuplot script)
+
+if [ -e Results/overview_bars.csv ]
+then
+    # Generate plot
+    gnuplot < 'gnuplotting/Bars_DOW.gp'
+
+    # Open plot file
+    OS="`uname`"
+    if [ "$OS" == "Linux" ]
+        then eog Results/Bars_DOW.png &
+
+    elif [ "$OS" == "Darwin" ]
+        then open Results/Bars_DOW.png
+
+    else echo "OS" $OS "not recognized"
+    fi
+fi

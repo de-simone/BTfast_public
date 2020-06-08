@@ -12,6 +12,7 @@
 #include <utility>          // std::pair
 #include <vector>           // std::vector
 
+#include <cstdlib>          // std::system
 
 
 // ------------------------------------------------------------------------- //
@@ -74,8 +75,10 @@ void BTfast::run_overview( Account &account,
 
     // Store Volume for each hour
     std::array<int, 24> Volumes {};
+    // Store Number of C-O for each Day of Week
+    std::array<int, 7> DOWranges {};
     // Vector of pairs ( Day of Week, Close-Open )
-    std::vector<std::pair<int, double>> DOWranges {};
+    //std::vector<std::pair<int, double>> DOWranges {};
 
 
     //--- Start loop 
@@ -164,8 +167,14 @@ void BTfast::run_overview( Account &account,
 
                 if( NewSession ){
 
-                    DOWranges.push_back(std::make_pair( CurrentDOW,
-                                                         HighD[1] - LowD[1] ) );
+                    if( CloseD[1] >= OpenD[1] ){
+                        DOWranges.at( CurrentDOW-1 ) += 1;
+                    }
+                    else{
+                        DOWranges.at( CurrentDOW-1 ) -= 1;
+                    }
+                    //DOWranges.push_back(std::make_pair( CurrentDOW,
+                    //                                     CloseD[1] - OpenD[1]));
 
                 }
 
@@ -188,18 +197,39 @@ void BTfast::run_overview( Account &account,
     last_date_parsed_  = last_date_parsed;
 
     // Write market info to files
-    for( const auto& s: Volumes ){
-        std::cout << s << ' ';
+    std::string command {""};
+    std::string fname {""};
+    std::ofstream outfile;
+
+    // ---------------------------- //
+    fname = "Results/overview_volume.csv" ;
+    outfile.open(fname);
+    for( int i=0; i < Volumes.size(); i++ ){
+        outfile << i <<", " << Volumes[i]<<"\n";
     }
+    outfile.close();
+    std::cout<< "\nVolume per hour written on file: " << fname << "\n";
+    // Execute script for gnuplot and open the PNG file
+    command = "./bin/PlotVolumeHour";
+    std::system(command.c_str());
+
+    // ---------------------------- //
+    fname = "Results/overview_bars.csv" ;
+    outfile.open(fname);
+    for( int i=0; i < DOWranges.size(); i++ ){
+        outfile << i+1 <<", " << DOWranges[i]<<"\n";
+    }
+    outfile.close();
+    std::cout<< "\n Bars per DOW written on file: " << fname << "\n";
+    // Execute script for gnuplot and open the PNG file
+    command = "./bin/PlotBarsDOW";
+    std::system(command.c_str());
+
 
 
     /*
-    std::string fname { "Results/mkt_overview.txt" };
-    std::ofstream outfile;
-    outfile.open(fname);
     outfile << utils_math::modulus(CurrentDOW-1,7)
             <<", "<<HighD[1] - LowD[1]<<"\n";
-    outfile.close();
     */
 
     //<<< start testing

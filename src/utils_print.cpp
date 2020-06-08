@@ -144,6 +144,6 @@ void utils_print::show_backtest_results(
         account.write_equity_to_file( profits_file );
         // Execute script for gnuplot and open the PNG file
         std::string command = "./bin/PlotBalance";
-        system(command.c_str());
+        std::system(command.c_str());
     }
 }

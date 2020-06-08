@@ -1,0 +1,20 @@
+#!/bin/bash
+# input : "Results/overview_volume.csv"     (match in btfast_overview.cpp)
+# output: "Results/volume_hour.png"         (match in gnuplot script)
+
+if [ -e Results/overview_volume.csv ]
+then
+    # Generate plot
+    gnuplot < 'gnuplotting/Volume_hour.gp'
+
+    # Open plot file
+    OS="`uname`"
+    if [ "$OS" == "Linux" ]
+        then eog Results/volume_hour.png &
+
+    elif [ "$OS" == "Darwin" ]
+        then open Results/volume_hour.png
+
+    else echo "OS" $OS "not recognized"
+    fi
+fi

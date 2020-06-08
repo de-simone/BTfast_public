@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-06-07 07:20:32
+# TimeStamp   : 2020-06-08 22:58:38
 # Strategy    : BOtest
 # Symbol      : GC
 # TimeFrame   : M15
-# Date Range  : 2010-01-03 --> 2019-12-31
+# Date Range  : 2015-01-01 --> 2017-12-29
 #
 #<Strategies/BOtest.xml>
 # <?xml version='1.0' encoding='UTF-8'?>
@@ -20,34 +20,34 @@
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
-     N. of Trades       :    1816          945          871
-     Net Profit         :   49790.00     27410.00     22380.00
-     Net Profit %       :       0.5%         0.3%         0.2%
-     CAGR               :       0.0%         0.0%         0.0%
-     Avg Trade          :      27.42        29.01        25.69
-     Avg Ticks          :       2.74         2.90         2.57
-     Profit Factor      :       1.08         1.09         1.07
-     Win Percent        :      47.9%        47.5%        48.2%
-     Avg DrawDown       :  -10968.68     -7307.51     -9630.26
-     Avg DrawDown %     :      -0.1%        -0.1%        -0.1%
-     Max DrawDown       :  -34210.00    -17810.00    -29350.00
-     Max DrawDown %     :      -0.3%        -0.2%        -0.3%
-     Net PL/Max DD      :       1.46         1.54         0.76
-     CAGR/Max DD %      :       0.12         0.13         0.06
-     Expectancy         :       0.04         0.05         0.04
-     Z-score            :       1.12         0.99         0.64
-     R^2                :     0.8146       0.7464       0.7102
+     N. of Trades       :     551          273          278
+     Net Profit         :   86300.00      -250.00     86550.00
+     Net Profit %       :       0.9%        -0.0%         0.9%
+     CAGR               :       0.2%        -0.0%         0.2%
+     Avg Trade          :     156.62        -0.92       311.33
+     Avg Ticks          :       1.86        -0.20         3.88
+     Profit Factor      :       1.07         1.00         1.15
+     Win Percent        :      48.6%        46.5%        50.7%
+     Avg DrawDown       :  -50316.99    -46303.04    -37656.26
+     Avg DrawDown %     :      -0.5%        -0.5%        -0.4%
+     Max DrawDown       : -169210.00   -109260.00   -120380.00
+     Max DrawDown %     :      -1.7%        -1.1%        -1.2%
+     Net PL/Max DD      :       0.51        -0.00         0.72
+     CAGR/Max DD %      :       0.13        -0.00         0.18
+     Expectancy         :       0.04        -0.00         0.08
+     Z-score            :       0.62        -0.00         0.85
+     R^2                :     0.1282       0.0001       0.2387
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :    1045.69       898.22      1185.66
-     Gross Profit       :  672980.00    322020.00    350960.00
-     Gross Loss         : -623190.00   -294610.00   -328580.00
-     Avg Profit         :     774.43       717.19       835.62
-     Avg Loss           :    -658.07      -593.97      -728.56
-     Max Profit         :    6980.00      4030.00      6980.00
-     Max Loss           :   -7340.00     -3600.00     -7340.00
-     Avg Bars in Win    :      33.00        33.20        32.78
-     Avg Bars in Loss   :      32.78        32.73        32.84
-     Max Consec. Wins   :       9            7            7
-     Max Consec. Losses :      10           12           10
-     Minimum Capital    :   57915.00     33315.00     50625.00
+     Std.Dev. of P/L    :    5973.02      5840.54      6106.89
+     Gross Profit       : 1249620.00    602520.00    647100.00
+     Gross Loss         : -1163320.00   -602770.00   -560550.00
+     Avg Profit         :    4662.76      4744.25      4589.36
+     Avg Loss           :   -4110.67     -4128.56     -4091.61
+     Max Profit         :   27300.00     18830.00     27300.00
+     Max Loss           :  -25040.00    -16880.00    -25040.00
+     Avg Bars in Win    :      33.21        33.69        32.77
+     Avg Bars in Loss   :      32.86        33.02        32.69
+     Max Consec. Wins   :       7            7            7
+     Max Consec. Losses :       8            8            8
+     Minimum Capital    :  260415.00    170490.00    187170.00
    # ========================================================= #
