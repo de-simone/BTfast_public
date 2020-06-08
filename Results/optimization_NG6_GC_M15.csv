@@ -1,0 +1,45 @@
+# TimeStamp   : 2020-06-08 09:19:23
+# Strategy    : NG6
+# Symbol      : GC
+# TimeFrame   : M15
+# Date Range  : 2010-01-03 --> 2019-12-31
+#
+#<Strategies/NG6.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#       <Name>MyStop</Name>
+#       <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>fractN_long</Name>             <!-- 0..5:1 -->
+#         <Value>3</Value>
+#     </Input>
+#     <Input>
+#         <Name>fractN_short</Name>             <!-- 0..5:1 -->
+#         <Value>2</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>VolatilityBin</Name>
+#         <Start>43</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/NG6.xml>
+#
+#  Ntrades,  AvgTicks,   WinPerc, PftFactor,    NP/MDD, Expectancy,   Z-score,    MyStop, fractN_long, fractN_short, VolatilityBin,   epsilon, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          47,           0, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          43,           0, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          49,           0, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          45,           0, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          44,           0, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          50,           0, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          48,           0, 
+      477,      1.23,     49.06,      1.09,      0.57,      0.04,      0.67,           0,           3,           2,          46,           0, 
