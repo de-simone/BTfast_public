@@ -21,7 +21,7 @@ General Settings for BTfast
              44:  Strategy Factory (Genetic Generation + Validation)
              444: Strategy Factory (Import Generation results + Validation)
          -->
-        <Value> 2
+        <Value> 444
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
