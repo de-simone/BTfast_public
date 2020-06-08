@@ -136,9 +136,9 @@ int MasterCode::preliminaries( const std::deque<Event>& data1,
 
     //-- Update Indicator Values
     ///*
-    ATR( atr_, data1D, NewSession_, max_bars_back_, 10 );
+    ATR( atrD_, data1D, NewSession_, max_bars_back_, 10 );
     // Require at least 100 days of ATR history
-    if( atr_.size() < 100 ){
+    if( atrD_.size() < 100 ){
         return(0);
     }
     //*/
@@ -188,8 +188,8 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
         case 1:                // (High1-Low1)
             distance = (HighD_[1] - LowD_[1]);
             break;
-        case 2:                // ATR(10)
-            distance = atr_.front();
+        case 2:                // ATR(10 days)
+            distance = atrD_.front();
             break;
         case 3:                // HH(5)-LL(5)
             distance = ( *max_element( HighD_.begin()+1, HighD_.end() )
@@ -218,9 +218,9 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
 
     // ---------------------------    FILTER 1    -------------------------- //
     bool Filter1_long  { Pattern( Filter1L_switch_,
-                                  OpenD_, HighD_, LowD_, CloseD_, atr_ ) };
+                                  OpenD_, HighD_, LowD_, CloseD_, atrD_ ) };
     bool Filter1_short { Pattern( Filter1S_switch_,
-                                  OpenD_, HighD_, LowD_, CloseD_, atr_ ) };
+                                  OpenD_, HighD_, LowD_, CloseD_, atrD_ ) };
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //
