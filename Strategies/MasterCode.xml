@@ -38,7 +38,7 @@
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..8:1 -->
         <Start>1</Start>
-        <Stop>4</Stop>
+        <Stop>8</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
