@@ -92,6 +92,7 @@ bool TimeFilter( int filter_num,
             break;
 
         //<<< tests
+        /*
         case 16:
             result = //CurrentTime >= Time(8,0)
                     //     && CurrentTime < settlement_time &&
@@ -107,6 +108,7 @@ bool TimeFilter( int filter_num,
                          && CurrentTime < settlement_time
                          && (CurrentDOW != 5);
             break;
+        */
         //<<<
     }
 
