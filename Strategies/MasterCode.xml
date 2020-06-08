@@ -29,7 +29,7 @@
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-        <Value>1</Value>
+        <Value>2</Value>
     </Input>
     <Input>
         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
@@ -59,16 +59,16 @@
         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
         <Value>0</Value>
     </Input>
-    <OptRange>
+    <Input>
         <Name>fractN_long</Name>             <!-- 0..5:1 -->
+        <Value>0</Value>
+    </Input>
+    <OptRange>
+        <Name>fractN_short</Name>             <!-- 0..5:1 -->
         <Start>0</Start>
         <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
-    <Input>
-        <Name>fractN_short</Name>             <!-- 0..5:1 -->
-        <Value>0</Value>
-    </Input>
     <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
         <Value>0</Value>
