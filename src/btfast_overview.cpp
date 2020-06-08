@@ -196,7 +196,7 @@ void BTfast::run_overview( Account &account,
     /*
     std::string fname { "Results/mkt_overview.txt" };
     std::ofstream outfile;
-    outfile.open(fname, std::ios_base::app);
+    outfile.open(fname);
     outfile << utils_math::modulus(CurrentDOW-1,7)
             <<", "<<HighD[1] - LowD[1]<<"\n";
     outfile.close();
