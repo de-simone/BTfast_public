@@ -4,8 +4,8 @@
 
  \section intro_sec Introduction
 
- BTfast is a software written in C++ to do event-driven backtesting
- and optimization of trading systems.
+ BTfast is a software written in C++ to do event-driven backtesting,
+ optimization and validation of trading systems.
 
  @version     v1.0
  @author      Andrea De Simone
@@ -32,7 +32,7 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-06-07
+                                                        Last update: 2020-06-08
                                           -------------------------------------
 
  * TO DO:
