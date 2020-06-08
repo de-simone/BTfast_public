@@ -29,44 +29,44 @@
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-        <Value>2</Value>
+        <Value>1</Value>
     </Input>
     <Input>
         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
         <Value>0</Value>
     </Input>
-    <Input>
+    <OptRange>
         <Name>POI_switch</Name>         <!-- 1..8:1 -->
-        <Value>6</Value>
-    </Input>
-    <Input>
+        <Start>1</Start>
+        <Stop>8</Stop>
+        <Step>1</Step>
+    </OptRange>
+    <OptRange>
         <Name>Distance_switch</Name>    <!-- 1..3:1 -->
-        <Value>3</Value>
-    </Input>
+        <Start>1</Start>
+        <Stop>3</Stop>
+        <Step>1</Step>
+    </OptRange>
     <Input>
         <Name>FilterT_switch</Name>     <!-- 0..14:1 -->
-        <Value>17</Value>
+        <Value>0</Value>
     </Input>
     <Input>
         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
         <Value>0</Value>
     </Input>
-    <OptRange>
-        <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
-        <Start>6</Start>
-        <Stop>50</Stop>
-        <Step>1</Step>
-    </OptRange>
     <Input>
-        <Name>fractN_long</Name>             <!-- 0..5:1 -->
+        <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
         <Value>0</Value>
     </Input>
-    <OptRange>
+    <Input>
+        <Name>fractN_long</Name>             <!-- 0..5:1 -->
+        <Value>1</Value>
+    </Input>
+    <Input>
         <Name>fractN_short</Name>             <!-- 0..5:1 -->
-        <Start>2</Start>
-        <Stop>4</Stop>
-        <Step>1</Step>
-    </OptRange>
+        <Value>0</Value>
+    </Input>
     <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
         <Value>0</Value>

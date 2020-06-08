@@ -21,7 +21,7 @@ General Settings for BTfast
              44:  Strategy Factory (Genetic Generation + Validation)
              444: Strategy Factory (Import Generation results + Validation)
          -->
-        <Value> 1
+        <Value> 4
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -30,7 +30,7 @@ General Settings for BTfast
              BOtest,MasterCode,template,test,NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   NG6
+        <Value>   MasterCode
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
@@ -101,7 +101,7 @@ General Settings for BTfast
         <!-- Print performance report on stdout and on file -->
         <!-- 0: false, 1: true -->
         <Name>    PRINT_PERFORMANCE_REPORT     </Name>
-        <Value>   1
+        <Value>   0
         </Value></Input>
     <Input>
         <!-- Print list of transactions on stdout and on file -->
