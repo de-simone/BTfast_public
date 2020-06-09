@@ -353,29 +353,30 @@ void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
         utils_params::single_parameter_combination(parameter_ranges) };
     // Initialize Account
     Account account { btf.initial_balance() };
+
     // Parse data and collect market info, without strategy signals
     btf.run_overview( account, datafeed, parameter_combination );
 
-    // ---------------------------- //
+
+    // Write to overview_file
     std::ofstream outfile;
-    /*
     outfile.open( overview_file );
 
-    for( int i=0; i < Volumes.size(); i++ ){
-        outfile << i <<", " << Volumes[i]<<"\n";
+    for( int i=0; i < btf.volume_hour().size(); i++ ){
+        outfile << i <<", " << btf.volume_hour().at(i) <<"\n";
     }
     outfile << "\n\n";
 
-    // ---------------------------- //
-    for( int i=0; i < DOWranges.size(); i++ ){
-        outfile << i+1 <<", " << DOWranges[i]<<"\n";
+    for( int i=0; i < btf.range_dow().size(); i++ ){
+        outfile << i+1 <<", " << btf.range_dow().at(i) <<"\n";
     }
     outfile << "\n\n";
+
 
     outfile.close();
-    */
 
-    std::cout<< "\n Overview info written on file: " << overview_file << "\n";
+
+    std::cout<< "\nOverview info written on file: " << overview_file << "\n";
     // Execute script for gnuplot and open the PNG file
     std::string command { "./bin/PlotMktOverview" };
     std::system(command.c_str());

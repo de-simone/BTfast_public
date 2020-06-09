@@ -72,12 +72,6 @@ void BTfast::run_overview( Account &account,
     std::array<double, 2> LowD {};
     std::array<double, 2> CloseD {};
 
-    // Store Volume for each hour
-    std::array<int, 24> Volumes {};
-    // Store Number of C-O for each Day of Week
-    std::array<int, 7> DOWranges {};
-    // Vector of pairs ( Day of Week, Close-Open )
-    //std::vector<std::pair<int, double>> DOWranges {};
 
 
     //--- Start loop 
@@ -161,24 +155,25 @@ void BTfast::run_overview( Account &account,
                 }
 
                 // ------------   START COLLECTING MARKET INFO   ----------- //
-                // Collect
-                Volumes.at( CurrentTime.hour() ) += data1[0].volume();
+                // Collect volume for each hour
+                volume_hour_.at( CurrentTime.hour() ) += data1[0].volume();
 
                 if( NewSession ){
 
-                    if( CloseD[1] >= OpenD[1] ){
-                        DOWranges.at( CurrentDOW-1 ) += 1;
+                    int dow {0};
+                    if( symbol_.two_days_session() ){
+                        dow = data1D[0].timestamp().weekday();
                     }
                     else{
-                        DOWranges.at( CurrentDOW-1 ) -= 1;
+                        dow = data1D[1].timestamp().weekday();
                     }
+
+                    range_dow_.at( dow-1 ) += CloseD[1] - OpenD[1];
+
                     //DOWranges.push_back(std::make_pair( CurrentDOW,
                     //                                     CloseD[1] - OpenD[1]));
 
                 }
-
-
-
                 // -------------   END COLLECTING MARKET INFO   ------------ //
 
             }
@@ -195,31 +190,6 @@ void BTfast::run_overview( Account &account,
     first_date_parsed_ = first_date_parsed;
     last_date_parsed_  = last_date_parsed;
 
-    // Write market info to files
-    std::string command {""};
-    std::string fname {""};
-    std::ofstream outfile;
-
-    // ---------------------------- //
-    fname = "Results/Mkt_overview.csv" ;
-    outfile.open(fname);
-
-    for( int i=0; i < Volumes.size(); i++ ){
-        outfile << i <<", " << Volumes[i]<<"\n";
-    }
-    outfile << "\n\n";
-
-    // ---------------------------- //
-    for( int i=0; i < DOWranges.size(); i++ ){
-        outfile << i+1 <<", " << DOWranges[i]<<"\n";
-    }
-    outfile << "\n\n";
-    outfile.close();
-
-    /*
-    outfile << utils_math::modulus(CurrentDOW-1,7)
-            <<", "<<HighD[1] - LowD[1]<<"\n";
-    */
 
     //<<< start testing
     /*

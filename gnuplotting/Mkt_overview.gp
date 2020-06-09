@@ -46,7 +46,7 @@ plot datafile index 0 using 1:2  smooth unique with boxes lt 1
 # Plot (1,2): Up/Down bars per DOW
 
 set xlabel "Day of Week"
-set ylabel "Number of Up Bars - Number Down Bars"
+set ylabel "Sum of Close-Open"
 set xrange [0.5:7.5]
 set xtics ("Mon" 1, "Tue" 2, "Wed" 3, "Thu" 4, "Fri" 5, "Sat" 6, "Sun" 7)
 bin_width = 1                   # bin size in ticks
