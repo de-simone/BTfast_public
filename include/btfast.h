@@ -74,8 +74,14 @@ class BTfast {
     bool print_progress_{false};
     bool include_commissions_ {false};
     int slippage_ {0};
+
     bool random_noise_ {false};
 
+    // Member variables used for Market Overview
+    // Store Volume for each hour
+    std::array<int, 24> volume_hour_ {};
+    // Store Number of Up Bars-Number of Down bars for each Day of Week
+    std::array<int, 7> upbars_dow_ {};
 
 
     public:
@@ -143,7 +149,7 @@ class BTfast {
        void run_overview( Account &account,
                           std::unique_ptr<DataFeed> &datafeed,
                           const parameters_t& strategy_params );
-                          
+
 
         // Getters
         const std::string& strategy_name() const { return(strategy_name_); }
@@ -154,6 +160,7 @@ class BTfast {
         const Date& first_date_parsed() const { return(first_date_parsed_); }
         const Date& last_date_parsed() const { return(last_date_parsed_); }
         double initial_balance() const { return(initial_balance_); }
+        const std::array<int, 24>& volume_hour() const { return(volume_hour_); }
 
         // Setters
         void set_random_noise( bool value ) { random_noise_ = value; }

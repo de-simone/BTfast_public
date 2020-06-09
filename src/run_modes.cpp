@@ -10,7 +10,8 @@
 #include "utils_time.h"     // current_datetime_str
 #include "validation.h"
 
-
+#include <cstdlib>          // std::system
+#include <fstream>          // std::ofstream
 #include <iostream>         // std::cout
 
 // ------------------------------------------------------------------------- //
@@ -341,7 +342,8 @@ void mode_factory( BTfast &btf,
 /*! Overview of Market main features (no trade)
 */
 void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
-                    const param_ranges_t &parameter_ranges )
+                    const param_ranges_t &parameter_ranges,
+                    const std::string &overview_file )
 {
     std::cout << utils_time::current_datetime_str() + " | "
               << "Running Market Overview \n";
@@ -354,6 +356,29 @@ void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
     // Parse data and collect market info, without strategy signals
     btf.run_overview( account, datafeed, parameter_combination );
 
+    // ---------------------------- //
+    std::ofstream outfile;
+    /*
+    outfile.open( overview_file );
+
+    for( int i=0; i < Volumes.size(); i++ ){
+        outfile << i <<", " << Volumes[i]<<"\n";
+    }
+    outfile << "\n\n";
+
+    // ---------------------------- //
+    for( int i=0; i < DOWranges.size(); i++ ){
+        outfile << i+1 <<", " << DOWranges[i]<<"\n";
+    }
+    outfile << "\n\n";
+
+    outfile.close();
+    */
+
+    std::cout<< "\n Overview info written on file: " << overview_file << "\n";
+    // Execute script for gnuplot and open the PNG file
+    std::string command { "./bin/PlotMktOverview" };
+    std::system(command.c_str());
 }
 
 

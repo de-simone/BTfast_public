@@ -1,7 +1,7 @@
 # Run from command line: gnuplot < 'gnuplotting/Mkt_overview.gp'
 # or using script: ./bin/PlotMktOverview
 
-inputfile = "Results/overview.csv"    # (match in btfast_overview.cpp)
+inputfile = "Results/mkt_overview.csv"    # (match 'overview_file' in main)
 outputfile = "Results/Mkt_overview.png"
 
 reset

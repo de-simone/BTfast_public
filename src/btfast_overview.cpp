@@ -12,7 +12,6 @@
 #include <utility>          // std::pair
 #include <vector>           // std::vector
 
-#include <cstdlib>          // std::system
 
 
 // ------------------------------------------------------------------------- //
@@ -202,30 +201,20 @@ void BTfast::run_overview( Account &account,
     std::ofstream outfile;
 
     // ---------------------------- //
-    fname = "Results/overview_volume.csv" ;
+    fname = "Results/Mkt_overview.csv" ;
     outfile.open(fname);
+
     for( int i=0; i < Volumes.size(); i++ ){
         outfile << i <<", " << Volumes[i]<<"\n";
     }
-    outfile.close();
-    std::cout<< "\nVolume per hour written on file: " << fname << "\n";
-    // Execute script for gnuplot and open the PNG file
-    command = "./bin/PlotVolumeHour";
-    std::system(command.c_str());
+    outfile << "\n\n";
 
     // ---------------------------- //
-    fname = "Results/overview_bars.csv" ;
-    outfile.open(fname);
     for( int i=0; i < DOWranges.size(); i++ ){
         outfile << i+1 <<", " << DOWranges[i]<<"\n";
     }
+    outfile << "\n\n";
     outfile.close();
-    std::cout<< "\n Bars per DOW written on file: " << fname << "\n";
-    // Execute script for gnuplot and open the PNG file
-    command = "./bin/PlotBarsDOW";
-    std::system(command.c_str());
-
-
 
     /*
     outfile << utils_math::modulus(CurrentDOW-1,7)

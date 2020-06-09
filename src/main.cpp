@@ -171,6 +171,7 @@ int main () {
     std::string result_dir { main_dir + "/Results" }; ///< Path to directory containing results
     std::string profits_file { result_dir + "/profits.csv" };  ///< Path to profits file (needed by gnuplot)
     std::string noise_file { result_dir + "/noise.csv" };  ///< Path to file with noise test results (needed by gnuplot)
+    std::string overview_file { result_dir + "/mkt_overview.csv" };  ///< Path to file with overview results (needed by gnuplot)
     std::string trade_list_file { result_dir + "/transactions_"
                                     + strategy_name + "_" + symbol_name
                                     + "_" + timeframe + ".csv" }; ///< Path to transaction list file
@@ -320,7 +321,7 @@ int main () {
 
         // ----------------------   MARKET OVERVIEW   ---------------------- //
         case 5: {
-            mode_overview( btf, datafeed, parameter_ranges );
+            mode_overview( btf, datafeed, parameter_ranges, overview_file );
             break;
         }
         // ----------------------------------------------------------------- //

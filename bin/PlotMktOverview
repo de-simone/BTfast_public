@@ -1,8 +1,8 @@
 #!/bin/bash
-# input : "Results/overview.csv"     (match in btfast_overview.cpp)
-# output: "Results/overview.png"         (match in gnuplot script)
+# input : "Results/mkt_overview.csv"         (match 'overview_file' in main)
+# output: "Results/Mkt_overview.png"         (match in gnuplot script)
 
-if [ -e Results/overview.csv ]
+if [ -e Results/mkt_overview.csv ]
 then
     # Generate plot
     gnuplot < 'gnuplotting/Mkt_overview.gp'
@@ -10,6 +10,7 @@ then
     # Open plot file
     OS="`uname`"
     if [ "$OS" == "Linux" ]
+        then eog Results/Mkt_overview.png &
 
     elif [ "$OS" == "Darwin" ]
         then open Results/Mkt_overview.png

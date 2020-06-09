@@ -74,7 +74,8 @@ void mode_factory( BTfast &btf,
 // ------------------------------------------------------------------------- //
 // Overview of Market main features (no trade)
 void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
-                    const param_ranges_t &parameter_ranges);
+                    const param_ranges_t &parameter_ranges,
+                    const std::string &overview_file );
 
 
 
