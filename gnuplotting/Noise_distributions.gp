@@ -5,7 +5,6 @@ inputfile = "Results/noise.csv"    # (match 'noise_file' in main)
 #  Ntrades, AvgTicks, AvgTrade, PftFactor, WinPerc, NP/MDD, Expectancy, parameters...
 outputfile = "Results/noise_distributions.png"
 
-
 reset
 unset key
 

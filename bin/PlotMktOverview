@@ -1,0 +1,19 @@
+#!/bin/bash
+# input : "Results/overview.csv"     (match in btfast_overview.cpp)
+# output: "Results/overview.png"         (match in gnuplot script)
+
+if [ -e Results/overview.csv ]
+then
+    # Generate plot
+    gnuplot < 'gnuplotting/Mkt_overview.gp'
+
+    # Open plot file
+    OS="`uname`"
+    if [ "$OS" == "Linux" ]
+
+    elif [ "$OS" == "Darwin" ]
+        then open Results/Mkt_overview.png
+
+    else echo "OS" $OS "not recognized"
+    fi
+fi
