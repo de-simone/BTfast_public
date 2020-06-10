@@ -169,10 +169,11 @@ void BTfast::run_overview( Account &account,
                         dow = data1D[1].timestamp().weekday();
                     }
 
-                    range_dow_.at( dow-1 ) += (CloseD[1] - OpenD[1])/symbol_.tick_size() ;
+                    co_range_dow_.at( dow-1 ) += ( CloseD[1]-OpenD[1] )
+                                                    / symbol_.tick_size();
 
-                    //DOWranges.push_back(std::make_pair( CurrentDOW,
-                    //                                     CloseD[1] - OpenD[1]));
+                    hl_range_.push_back( (HighD[1]-LowD[1])
+                                            / symbol_.tick_size() );
 
                 }
                 // -------------   END COLLECTING MARKET INFO   ------------ //

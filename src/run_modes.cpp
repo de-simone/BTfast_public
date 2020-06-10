@@ -366,10 +366,16 @@ void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
     }
     outfile << "\n\n";
 
-    for( int i=0; i < btf.range_dow().size(); i++ ){
-        outfile << i+1 <<", " << btf.range_dow().at(i) <<"\n";
+    for( int i=0; i < btf.co_range_dow().size(); i++ ){
+        outfile << i+1 <<", " << btf.co_range_dow().at(i) <<"\n";
     }
     outfile << "\n\n";
+
+    for( auto r: btf.hl_range() ){
+        outfile << r <<"\n";
+    }
+    outfile << "\n\n";
+
     outfile.close();
     std::cout<< "\nOverview info written on file: " << overview_file << "\n";
     //---

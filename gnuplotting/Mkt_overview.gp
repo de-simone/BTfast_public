@@ -19,6 +19,7 @@ set label "[BTfast]" right at screen 0.98, 0.02 font "Courier,10"
 set style fill solid 1.0 noborder
 set linetype 1 lc rgb '#3399ff' # dodger blue
 set linetype 2 lc rgb '#00331A' # dark green
+set linetype 3 lc rgb '#FFA500' # orange
 #set style line 2 lw 1.5 dt '-'  linecolor rgb '#696969'
 
 set grid ytics
@@ -43,14 +44,24 @@ set boxwidth bin_width * 0.8    # box width is 80% of bin width
 plot datafile index 0 using 1:2  smooth unique with boxes lt 1
 
 
-# Plot (1,2): Up/Down bars per DOW
+# Plot (1,2): Close-Open range per DOW
 
 set xlabel "Day of Week"
-set ylabel "Sum of Close-Open"
+set ylabel "Sum of Close-Open (ticks)"
 set xrange [0.5:7.5]
 set xtics ("Mon" 1, "Tue" 2, "Wed" 3, "Thu" 4, "Fri" 5, "Sat" 6, "Sun" 7)
 bin_width = 1                   # bin size in ticks
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
 plot datafile index 1 using 1:2 smooth unique with boxes lt 2
+
+# Plot (2,1): High-Low daily range
+
+unset xrange
+unset ylabel
+set xtics auto
+set xlabel "High-Low range (ticks)"
+bin_width = 50                   # bin size in ticks
+set boxwidth bin_width * 0.8    # box width is 80% of bin width
+plot datafile index 2 using (bin($1, bin_width)):(1.0) smooth freq with boxes lt 3
 
 print "Market overview plotted on file: ", outputfile

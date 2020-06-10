@@ -78,12 +78,14 @@ class BTfast {
     bool random_noise_ {false};
 
     // Member variables used for Market Overview
-    // Store Volume for each hour
+    // Volume for each hour
     std::array<int, 24> volume_hour_ {};
-    // Store sum of Close-Open for each Day of Week
-    std::array<double, 7> range_dow_ {};
-    // Vector of pairs ( Day of Week, Close-Open )
+    // Sum of range Close-Open (in ticks) for each Day of Week
+    std::array<double, 7> co_range_dow_ {};
     //std::vector<std::pair<int, double>> DOWranges {};
+    // Daily range H-L (in ticks)
+    std::vector<double> hl_range_ {};
+
 
     public:
         // Consunique_ptr
@@ -162,7 +164,8 @@ class BTfast {
         const Date& last_date_parsed() const { return(last_date_parsed_); }
         double initial_balance() const { return(initial_balance_); }
         const std::array<int, 24>& volume_hour() const { return(volume_hour_); }
-        const std::array<double, 7>& range_dow() const { return(range_dow_); }
+        const std::array<double, 7>& co_range_dow() const { return(co_range_dow_); }
+        const std::vector<double>& hl_range() const { return(hl_range_); }
 
         // Setters
         void set_random_noise( bool value ) { random_noise_ = value; }
