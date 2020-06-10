@@ -28,6 +28,10 @@ set grid ytics
 bin(x,width)= width * floor(x/width) + width/2.0
 set style fill transparent solid 0.8 border rgb '#696969'
 
+# Statistics
+stats datafile index 2 using 1 name "AvgTicks" nooutput
+
+
 ### Start multiplot
 set multiplot layout 2,2 title \
     sprintf("Market Overview Features") font "Helvetica, 16"
@@ -62,6 +66,8 @@ set xtics auto
 set xlabel "High-Low range (ticks)"
 bin_width = 50                   # bin size in ticks
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
+unset label
+set label sprintf("   Median = %5.0f", AvgTicks_median) left at graph 0.7,0.90 front
 plot datafile index 2 using (bin($1, bin_width)):(1.0) smooth freq with boxes lt 3
 
 print "Market overview plotted on file: ", outputfile
