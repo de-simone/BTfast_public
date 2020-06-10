@@ -155,9 +155,10 @@ void BTfast::run_overview( Account &account,
                 }
 
                 // ------------   START COLLECTING MARKET INFO   ----------- //
-                // Collect volume for each hour
+                // Volume for each hour
                 volume_hour_.at( CurrentTime.hour() ) += data1[0].volume();
 
+                // Daily Range H-L for each day of week
                 if( NewSession ){
 
                     int dow {0};
@@ -168,7 +169,7 @@ void BTfast::run_overview( Account &account,
                         dow = data1D[1].timestamp().weekday();
                     }
 
-                    range_dow_.at( dow-1 ) += CloseD[1] - OpenD[1];
+                    range_dow_.at( dow-1 ) += (CloseD[1] - OpenD[1])/symbol_.tick_size() ;
 
                     //DOWranges.push_back(std::make_pair( CurrentDOW,
                     //                                     CloseD[1] - OpenD[1]));
