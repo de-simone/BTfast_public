@@ -36,12 +36,12 @@ General Settings for BTfast
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   GC
+        <Value>   NG
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
         <!-- Mx mins for x min bars, D for session -->
-        <Value>   M15
+        <Value>   M10
         </Value></Input>
 
     <Input>
@@ -61,13 +61,13 @@ General Settings for BTfast
     <!-- ========================    INPUT DATA    ======================== -->
     <Input>
         <Name>    DATA_DIR    </Name>
-        <Value>   /Users/Andrea/Documents/PriceData/
+        <Value>   /Users/Andrea/Documents/PriceData
         <!--      /u/d/desimon/PriceData  -->
         </Value></Input>
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC/GC_M15_2015-2017.csv
+        <Value>  N/NG_M10_2007-2019_DXT.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -84,7 +84,7 @@ General Settings for BTfast
              3 = intraday data exported from DXT (CSV)
         -->
         <Name>    CSV_FORMAT    </Name>
-        <Value>   1
+        <Value>   3
         </Value></Input>
     <Input>
         <Name>    DATAFEED_TYPE     </Name>

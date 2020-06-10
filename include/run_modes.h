@@ -49,7 +49,8 @@ void mode_single_validation( BTfast &btf,
                              const std::string &selected_file,
                              const std::string &validated_file,
                              const std::string &fitness_metric,
-                             const std::string &data_file_oos_path,
+                             const std::string &data_dir,
+                             const std::string &data_file_oos,
                              int max_variation_pct, int num_noise_tests,
                              const std::string &noise_file );
 
@@ -66,7 +67,8 @@ void mode_factory( BTfast &btf,
                    const std::string &validated_file,
                    const std::string &fitness_metric,
                    int population_size, int generations,
-                   const std::string &data_file_oos_path,
+                   const std::string &data_dir,
+                   const std::string &data_file_oos,
                    int max_variation_pct, int num_noise_tests,
                    const std::string &noise_file );
 

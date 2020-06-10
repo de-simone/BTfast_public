@@ -37,7 +37,7 @@
 
  * TO DO:
 
-    - market overview 
+    - market overview
     - sequential addition of filters (not simultaneous)
     - adaptive volatility bins (in NG6)
     - check implementation of LIMIT orders with TradeStation
@@ -143,8 +143,6 @@ int main () {
     std::string datafeed_type {""};             ///< Type of datafeed
     std::string data_file {""};                 ///< File containing data
     std::string data_file_oos {""};             ///< FIle containing out-of-sample data
-    std::string data_file_path {""};            ///< Complete path to data_file
-    std::string data_file_oos_path {""};        ///< Complete path to data_file_oos
     std::string position_size_type {""};        ///< Type of position size (money management)
     //--- End main program variables
 
@@ -167,8 +165,6 @@ int main () {
 
     //--- Define paths and result files
     //std::string data_dir { main_dir + "/BarData" } ; ///< Path to directory containing data
-    data_file_path = data_dir + "/" + data_file;            ///< Path to data file
-    data_file_oos_path = data_dir + "/" + data_file_oos;    ///< Path to OOS data file
     std::string result_dir { main_dir + "/Results" }; ///< Path to directory containing results
     std::string profits_file { result_dir + "/profits.csv" };  ///< Path to profits file (needed by gnuplot)
     std::string noise_file { result_dir + "/noise.csv" };  ///< Path to file with noise test results (needed by gnuplot)
@@ -221,7 +217,7 @@ int main () {
     // Instantiate DataFeed derived object corresponding to 'datafeed_type'
     // and wrap it into the smart pointer 'datafeed'
     select_datafeed( datafeed, datafeed_type, symbol, timeframe,
-                     data_file_path, csv_format, start_date, end_date );
+                     data_dir, data_file, csv_format, start_date, end_date );
 
     // Instantiate main class object
     BTfast btf { strategy_name, symbol, timeframe,
@@ -279,8 +275,8 @@ int main () {
         case 3:
             mode_single_validation( btf, datafeed, parameter_ranges, param_file,
                                     selected_file, validated_file,
-                                    fitness_metric,
-                                    data_file_oos_path, max_variation_pct,
+                                    fitness_metric, data_dir,
+                                    data_file_oos, max_variation_pct,
                                     num_noise_tests, noise_file );
 
             break;
@@ -294,7 +290,7 @@ int main () {
                           optim_file, param_file, selected_file,
                           validated_file, fitness_metric,
                           population_size, generations,
-                          data_file_oos_path, max_variation_pct,
+                          data_dir, data_file_oos, max_variation_pct,
                           num_noise_tests, noise_file );
             break;
 
@@ -304,7 +300,7 @@ int main () {
                           optim_file, param_file, selected_file,
                           validated_file, fitness_metric,
                           population_size, generations,
-                          data_file_oos_path, max_variation_pct,
+                          data_dir, data_file_oos, max_variation_pct,
                           num_noise_tests, noise_file );
             break;
 
@@ -314,7 +310,7 @@ int main () {
                           optim_file, param_file, selected_file,
                           validated_file, fitness_metric,
                           population_size, generations,
-                          data_file_oos_path, max_variation_pct,
+                          data_dir, data_file_oos, max_variation_pct,
                           num_noise_tests, noise_file );
             break;
         // ----------------------------------------------------------------- //

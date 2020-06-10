@@ -26,7 +26,6 @@ void BTfast::run_overview( Account &account,
                           const parameters_t& strategy_params )
 {
 
-
     // Initalize Events Queue
     std::deque<Event> events_queue;
     // Initialize smart pointer to object derived from DataFeed base class

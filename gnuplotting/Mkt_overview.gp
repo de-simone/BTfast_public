@@ -63,8 +63,10 @@ plot datafile index 1 using 1:2 smooth unique with boxes lt 2
 unset xrange
 unset ylabel
 set xtics auto
+
 set xlabel "High-Low range (ticks)"
 bin_width = 50                   # bin size in ticks
+set xtics 2*bin_width norangelimit nomirror
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
 unset label
 set label sprintf("   Median = %5.0f", AvgTicks_median) left at graph 0.7,0.90 front

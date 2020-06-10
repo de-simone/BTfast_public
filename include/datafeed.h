@@ -70,7 +70,8 @@ class DataFeed {
 void select_datafeed( std::unique_ptr<DataFeed>& datafeed_ptr,
                       std::string datafeed_type,
                       const Instrument &symbol, std::string timeframe,
-                      std::string data_file_path, int csv_format,
-                      Date start_date, Date end_date );
+                      const std::string &data_dir,
+                      const std::string &data_file,
+                      int csv_format, Date start_date, Date end_date );
 
 #endif

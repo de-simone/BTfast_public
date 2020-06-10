@@ -41,7 +41,9 @@ class Validation {
     const std::string &selected_file_;
     const std::string &validated_file_;
     const std::string &fitness_metric_;
-    const std::string &data_file_oos_path_;
+    const std::string &data_dir_;
+    const std::string &data_file_oos_;
+    //std::string data_file_oos_path_ {""};
     double max_variation_ { 0.3 };
     int num_noise_tests_;
     const std::string &noise_file_;
@@ -54,12 +56,13 @@ class Validation {
     public:
         // constructor
         Validation( BTfast &btf,
-                    std::unique_ptr<DataFeed> &datafeed,                    
+                    std::unique_ptr<DataFeed> &datafeed,
                     const std::vector<strategy_t> &strategies_to_validate,
                     const std::string &selected_file,
                     const std::string &validated_file,
                     const std::string &fitness_metric,
-                    const std::string &data_file_oos_path,
+                    const std::string &data_dir,
+                    const std::string &data_file_oos,
                     int max_variation_pct, int num_noise_tests,
                     const std::string &noise_file );
 

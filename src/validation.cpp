@@ -27,7 +27,8 @@ Validation::Validation( BTfast &btf,
                         const std::string &selected_file,
                         const std::string &validated_file,
                         const std::string &fitness_metric,
-                        const std::string &data_file_oos_path,
+                        const std::string &data_dir,
+                        const std::string &data_file_oos,
                         int max_variation_pct, int num_noise_tests,
                         const std::string &noise_file )
 
@@ -37,7 +38,8 @@ Validation::Validation( BTfast &btf,
   selected_file_ {selected_file},
   validated_file_ {validated_file},
   fitness_metric_ {fitness_metric},
-  data_file_oos_path_ {data_file_oos_path},
+  data_dir_ {data_dir},
+  data_file_oos_ {data_file_oos},
   max_variation_ { max_variation_pct / 100.0 },
   num_noise_tests_ {num_noise_tests},
   noise_file_ {noise_file}
@@ -340,7 +342,7 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
     // Instantiate DataFeed derived object corresponding to 'datafeed_type'
     // and wrap it into the smart pointer 'datafeed'
     select_datafeed( datafeed_oos, datafeed_->type(), btf_.symbol(),
-                     btf_.timeframe(), data_file_oos_path_,
+                     btf_.timeframe(), data_dir_, data_file_oos_,
                      datafeed_->csv_format(),
                      datafeed_->start_date(), datafeed_->end_date() );
 
@@ -407,7 +409,7 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
         if( ndays_oos > 0 ){
             trades_per_day_oos = performance_oos.ntrades()/(double) ndays_oos;
         }
-        
+
         //-- Selection Conditions
         bool condition1 {  trades_per_day_oos >= 0.5 * trades_per_day_is
                         && trades_per_day_oos <= 2.0 * trades_per_day_is };
@@ -455,7 +457,7 @@ void Validation::OOS_consistency_test( const std::vector<strategy_t>
     // Instantiate DataFeed derived object corresponding to 'datafeed_type'
     // and wrap it into the smart pointer 'datafeed'
     select_datafeed( datafeed_oos, datafeed_->type(), btf_.symbol(),
-                     btf_.timeframe(), data_file_oos_path_,
+                     btf_.timeframe(), data_dir_, data_file_oos_,
                      datafeed_->csv_format(),
                      datafeed_->start_date(), datafeed_->end_date() );
 

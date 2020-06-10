@@ -8,11 +8,13 @@ Read historical bars from a single CSV file,
 and stream them to the provided events queue.
 
 Member Variables:
+- data_dir_: dir to database
+- data_file_: name of CSV file
+- data_file_path_: complete path to data_file_
 - csv_format_: option to deal with different formats of input CSV file
     1 = intraday data exported from TradeStation
     2 = daily data exported from TradeStation
     3 = data exported from MatLab
-- csv_file_: name of csv file
 - start_date_: start date, included (from settings)
 - end_date_: end date, included (from settings)
 - continue_parsing_: switch to control parsing
@@ -28,7 +30,9 @@ Member Variables:
 class HistoricalBarsCSV : public DataFeed {
 
     std::string type_ {"CSV"};
-    std::string csv_file_ {""};
+    const std::string &data_dir_;
+    const std::string &data_file_;
+    std::string data_file_path_ {""};
     int csv_format_ {1};
     Date start_date_ {};
     Date end_date_ {};
@@ -40,15 +44,15 @@ class HistoricalBarsCSV : public DataFeed {
     public:
         // Constructor
         HistoricalBarsCSV(const Instrument &symbol,
-                          std::string timeframe,
-                          std::string data_file,
-                          int csv_format,
-                          Date start_date, Date end_date);
+                          const std::string &timeframe,
+                          const std::string &data_dir,
+                          const std::string &data_file,
+                          int csv_format, Date start_date, Date end_date);
 
     private:
         // Functions overriding the base class pure virtual functions
         std::string type() const override { return(type_); }
-        std::string data_file() const override { return(csv_file_); }
+        std::string data_file() const override { return(data_file_); }
         int csv_format() const override { return(csv_format_); }
         Date start_date() const override { return(start_date_); }
         Date end_date() const override { return(end_date_); }
@@ -61,7 +65,7 @@ class HistoricalBarsCSV : public DataFeed {
 
         void set_start_date(Date d) override { start_date_=d; }
         void set_end_date(Date d) override { end_date_=d; }
-        void set_data_file(std::string f) override { csv_file_ = f; }
+        void set_data_file(std::string f) override { data_file_path_ = f; }
 
         std::unique_ptr<DataFeed> clone() const override;
 };

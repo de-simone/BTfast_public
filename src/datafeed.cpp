@@ -42,14 +42,16 @@ void DataFeed::set_events_queue(std::deque<Event> *events_queue)
 void select_datafeed( std::unique_ptr<DataFeed>& datafeed_ptr,
                       std::string datafeed_type,
                       const Instrument &symbol, std::string timeframe,
-                      std::string data_file, int csv_format,
-                      Date start_date, Date end_date )
+                      const std::string &data_dir,
+                      const std::string &data_file,
+                      int csv_format, Date start_date, Date end_date )
 {
     if( datafeed_type == "CSV" ){
         datafeed_ptr = std::make_unique<HistoricalBarsCSV> (
                                                     symbol, timeframe,
-                                                    data_file, csv_format,
-                                                    start_date, end_date);
+                                                    data_dir, data_file,
+                                                    csv_format,
+                                                    start_date, end_date );
     }
     /*
     else if( datafeed_type == "SQLite" ){

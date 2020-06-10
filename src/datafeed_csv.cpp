@@ -1,6 +1,6 @@
 #include "datafeed_csv.h"
 
-
+#include <filesystem>   // std::filsystem
 #include <iostream>     // std::cout
 #include <unistd.h>     // access
 
@@ -11,14 +11,19 @@
 */
 
 HistoricalBarsCSV::HistoricalBarsCSV(const Instrument &symbol,
-                                     std::string timeframe,
-                                     std::string data_file_path,
+                                     const std::string &timeframe,
+                                     const std::string &data_dir,
+                                     const std::string &data_file,
                                      int csv_format,
                                      Date start_date, Date end_date)
 : DataFeed{ symbol, timeframe },
-  csv_file_{data_file_path}, csv_format_{csv_format},
+  data_dir_{data_dir}, data_file_{data_file},
+  csv_format_{csv_format},
   start_date_{start_date}, end_date_{end_date}
-{}
+{
+    // set complete path to data file
+    data_file_path_ = data_dir_ + "/" + data_file_;
+}
 
 
 
@@ -29,14 +34,28 @@ HistoricalBarsCSV::HistoricalBarsCSV(const Instrument &symbol,
 void HistoricalBarsCSV::open_data_connection()
 {
     // Check if csv_file exists
-    if( access( csv_file_.c_str(), F_OK ) != 0 ){
-        std::cout << ">>> ERROR: CSV file does not exist (datafeed): "
-             << csv_file_ << "\n";
+    if( access( data_file_path_.c_str(), F_OK ) != 0 ){
+
+        std::cout << "\nAvailable data files:\n";
+        for( const auto& entry:
+                std::filesystem::recursive_directory_iterator(data_dir_) ){
+
+            // extract filename from path
+            std::string fname { entry.path().string().erase(0,
+                                                    data_dir_.length()) };
+            // ignore filenames starting with '/.'
+            if( fname.rfind("/.", 0) != 0 ){
+                std::cout << fname << "\n";
+            }
+        }
+        std::cout << "\n>>> ERROR: CSV file does not exist (datafeed): "
+                  << data_file_path_ << "\nAvailable data files listed above.\n";
+
         exit(1);
     }
 
     // Open file stream in reading mode
-    infile_ = fopen(csv_file_.c_str(), "r");
+    infile_ = fopen(data_file_path_.c_str(), "r");
 
     // Count total number of lines
     /*
