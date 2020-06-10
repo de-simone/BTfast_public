@@ -34,7 +34,7 @@ stats datafile index 2 using 1 name "AvgTicks" nooutput
 
 ### Start multiplot
 set multiplot layout 2,2 title \
-    sprintf("Market Overview Features") font "Helvetica, 16"
+    sprintf("Market Overview") font "Helvetica, 16"
 
 
 # Plot (1,1): Volume per hour
