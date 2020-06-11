@@ -44,7 +44,7 @@
 
 
     [- large stoploss, trade to close not found]
-    - multiple comparison, benjamini-hochberg
+    [- multiple comparison, benjamini-hochberg]
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
       bars of up to 10 different symbols. Then PriceCollection runs over array
