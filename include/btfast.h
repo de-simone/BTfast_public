@@ -78,14 +78,15 @@ class BTfast {
     bool random_noise_ {false};
 
     // Member variables used for Market Overview
+    // End-of-Day prices (Date, Close price)
+    std::vector<std::pair<Date, double>> eod_prices_ {};
     // Volume for each hour
     std::array<int, 24> volume_hour_ {};
     // Sum of range Close-Open (in ticks) for each Day of Week
     std::array<double, 7> co_range_dow_ {};
     // Daily range H-L (in ticks)
     std::vector<double> hl_range_ {};
-    // End-of-Day prices (Date, Close price)
-    std::vector<std::pair<Date, double>> eod_prices_ {};
+
 
 
     public:
