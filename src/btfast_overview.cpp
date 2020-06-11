@@ -6,11 +6,11 @@
 
 #include <array>            // std::array
 #include <iostream>         // std::cout
-#include <fstream>          // std::ofstream
+//#include <fstream>          // std::ofstream
 //#include <stdexcept>        // std::invalid_argument
 #include <string>
-#include <utility>          // std::pair
-#include <vector>           // std::vector
+//#include <utility>          // std::make_pair
+//#include <vector>           // std::vector
 
 
 
@@ -161,11 +161,14 @@ void BTfast::run_overview( Account &account,
                 if( NewSession ){
 
                     int dow {0};
+                    Date date1 {};
                     if( symbol_.two_days_session() ){
                         dow = data1D[0].timestamp().weekday();
+                        date1 = data1D[0].timestamp().date();
                     }
                     else{
                         dow = data1D[1].timestamp().weekday();
+                        date1 = data1D[1].timestamp().date();
                     }
 
                     co_range_dow_.at( dow-1 ) += ( CloseD[1]-OpenD[1] )
@@ -174,6 +177,7 @@ void BTfast::run_overview( Account &account,
                     hl_range_.push_back( (HighD[1]-LowD[1])
                                             / symbol_.tick_size() );
 
+                    eod_prices_.push_back(std::make_pair( date1, CloseD[1] ));
                 }
                 // -------------   END COLLECTING MARKET INFO   ------------ //
 

@@ -82,9 +82,10 @@ class BTfast {
     std::array<int, 24> volume_hour_ {};
     // Sum of range Close-Open (in ticks) for each Day of Week
     std::array<double, 7> co_range_dow_ {};
-    //std::vector<std::pair<int, double>> DOWranges {};
     // Daily range H-L (in ticks)
     std::vector<double> hl_range_ {};
+    // End-of-Day prices (Date, Close price)
+    std::vector<std::pair<Date, double>> eod_prices_ {};
 
 
     public:
@@ -166,6 +167,7 @@ class BTfast {
         const std::array<int, 24>& volume_hour() const { return(volume_hour_); }
         const std::array<double, 7>& co_range_dow() const { return(co_range_dow_); }
         const std::vector<double>& hl_range() const { return(hl_range_); }
+        const std::vector<std::pair<Date, double>>& eod_prices() const { return(eod_prices_); }
 
         // Setters
         void set_random_noise( bool value ) { random_noise_ = value; }

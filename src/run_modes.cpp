@@ -363,6 +363,11 @@ void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
     std::ofstream outfile;
     outfile.open( overview_file );
 
+    for( auto p: btf.eod_prices() ){
+        outfile << p.first.tostring() <<", "<< p.second <<"\n";
+    }
+    outfile << "\n\n";
+
     for( int i=0; i < btf.volume_hour().size(); i++ ){
         outfile << i <<", " << btf.volume_hour().at(i) <<"\n";
     }

@@ -32,12 +32,12 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-06-10
+                                                        Last update: 2020-06-11
                                           -------------------------------------
 
  * TO DO:
 
-    - market overview
+    - market overview (eod prices)
     - sequential addition of filters (not simultaneous)
     - adaptive volatility bins (in NG6)
     - check implementation of LIMIT orders with TradeStation
