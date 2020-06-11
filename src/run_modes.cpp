@@ -339,6 +339,98 @@ void mode_factory( BTfast &btf,
 
 
 
+// ------------------------------------------------------------------------- //
+/*! Strategy Factory mode (Generation + Validation)
+*/
+void mode_factory_sequential( BTfast &btf,
+                              std::unique_ptr<DataFeed> &datafeed,
+                              param_ranges_t &parameter_ranges,
+                              //const std::string &optim_mode,
+                              const std::string &optim_file,
+                              const std::string &param_file,
+                              const std::string &selected_file,
+                              const std::string &validated_file,
+                              const std::string &fitness_metric,
+                              int population_size, int generations,
+                              const std::string &data_dir,
+                              const std::string &data_file_oos,
+                              int max_variation_pct, int num_noise_tests,
+                              const std::string &noise_file )
+{
+    // Check if strategy name is MasterCode
+    if( btf.strategy_name() != "MasterCode" ){
+        std::cout << ">>> ERROR: Sequential strategy generation available"
+                  << " only for MasterCode (mode_factory_sequential).\n";
+        exit(1);
+    }
+
+    for( auto elem: parameter_ranges ){
+        std::cout<<elem.first<<"\n";
+        for( auto p: elem.second ){
+            std::cout<< p<<"\n";
+        }
+    }
+
+    // Extract parameter combinations of POI_switch
+
+    // Combine 'parameter_ranges' into all parameter combinations
+    std::vector<parameters_t> search_space {
+                 utils_params::cartesian_product(parameter_ranges) };
+
+     for( auto v: search_space ){
+         for( auto elem: v ){
+             std::cout<<elem.first<<"   "<<elem.second<<"\n";
+         }
+         std::cout<<"\n";
+     }
+
+
+    // Initialize vectors storing strategies passing each selection step
+    // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
+    std::vector<strategy_t> passed_selection_1 {};
+    std::vector<strategy_t> passed_selection_2 {};
+    std::vector<strategy_t> passed_selection_3 {};
+    std::vector<strategy_t> passed_selection_4 {};
+    std::vector<strategy_t> generated_strategies {};
+
+    /*
+    // --------------------    STATEGY GENERATION    ------------------- //
+
+    // Exhaustive Parallel Optimization
+    bool sort_results {true};
+    bool verbose {true};
+    btf.run_parallel_optimization( search_space, generated_strategies,
+                                   optim_file,  param_file, fitness_metric,
+                                   datafeed, sort_results, verbose );
+
+    if( generated_strategies.empty() ){
+        std::cout << ">>> ERROR: Generation results not available"
+                  << " (mode_factory_sequential).\n";
+        exit(1);
+    }
+    // ----------------------------------------------------------------- //
+
+    // Remove duplicates strategies from generated_strategies
+    utils_optim::remove_duplicates( generated_strategies, fitness_metric );
+    std::cout<<"Unique strategies: " << generated_strategies.size() <<"\n";
+    */
+
+    // -------------------------    VALIDATION   ----------------------- //
+    // Instantiate Validation object
+    /*
+    Validation validation { btf, datafeed,
+                            generated_strategies, selected_file,
+                            validated_file, fitness_metric,
+                            data_dir, data_file_oos, max_variation_pct,
+                            num_noise_tests, noise_file };
+
+    // Run full validation process
+    validation.run_validation();
+    */
+    // ----------------------------------------------------------------- //
+}
+
+
 
 // ------------------------------------------------------------------------- //
 /*! Overview of Market main features (no trade)

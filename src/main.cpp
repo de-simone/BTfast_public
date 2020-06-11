@@ -38,6 +38,8 @@
  * TO DO:
 
     - sequential addition of filters (not simultaneous)
+      run_modes.cpp/ mode_factory_sequential()
+      
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)
       multiple times
@@ -311,11 +313,21 @@ int main () {
                           data_dir, data_file_oos, max_variation_pct,
                           num_noise_tests, noise_file );
             break;
+
+        case 5:
+            // Sequential Exhaustive Parallel Optimization
+            mode_factory_sequential( btf, datafeed, parameter_ranges,
+                                      optim_file, param_file, selected_file,
+                                      validated_file, fitness_metric,
+                                      population_size, generations,
+                                      data_dir, data_file_oos, max_variation_pct,
+                                      num_noise_tests, noise_file );
+            break;
         // ----------------------------------------------------------------- //
 
 
         // ----------------------   MARKET OVERVIEW   ---------------------- //
-        case 5: {
+        case 6: {
             mode_overview( btf, datafeed, parameter_ranges, overview_file );
             break;
         }

@@ -72,6 +72,23 @@ void mode_factory( BTfast &btf,
                    int max_variation_pct, int num_noise_tests,
                    const std::string &noise_file );
 
+// ------------------------------------------------------------------------- //
+// Strategy Factory (Sequential Exhaustive Generation + Validation)
+void mode_factory_sequential( BTfast &btf,
+                             std::unique_ptr<DataFeed> &datafeed,
+                             param_ranges_t &parameter_ranges,
+                             //const std::string &optim_mode,
+                             const std::string &optim_file,
+                             const std::string &param_file,
+                             const std::string &selected_file,
+                             const std::string &validated_file,
+                             const std::string &fitness_metric,
+                             int population_size, int generations,
+                             const std::string &data_dir,
+                             const std::string &data_file_oos,
+                             int max_variation_pct, int num_noise_tests,
+                             const std::string &noise_file );
+
 
 // ------------------------------------------------------------------------- //
 // Overview of Market main features (no trade)

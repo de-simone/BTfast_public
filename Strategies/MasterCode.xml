@@ -37,7 +37,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </Input>
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..7:1 -->
-        <Start>3</Start>
+        <Start>1</Start>
         <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
@@ -53,12 +53,10 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
         <Value>4</Value>
     </Input>
-    <OptRange>
+    <Input>
         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
-        <Start>22</Start>
-        <Stop>50</Stop>
-        <Step>1</Step>
-    </OptRange>
+        <Value>0</Value>
+    </Input>
     <Input>
         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
         <Value>0</Value>
@@ -66,7 +64,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..5:1 -->
         <Start>0</Start>
-        <Stop>5</Stop>
+        <Stop>2</Stop>
         <Step>1</Step>
     </OptRange>
     <Input>
