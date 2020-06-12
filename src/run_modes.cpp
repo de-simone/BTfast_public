@@ -433,8 +433,8 @@ void mode_factory_sequential( BTfast &btf,
                             num_noise_tests, noise_file };
 
     validation.intermediate_selection(passed_selection_1, passed_selection_2);
-    std::cout <<"number of strategies passed 1st selection: "
-              << passed_selection_1.size()<< "  "<<passed_selection_2.size() <<"\n";
+    std::cout << "Number of strategies passed 1st selection: "
+              << passed_selection_2.size() <<"\n";
     // --------------------------------------------------------------------- //
 
 
