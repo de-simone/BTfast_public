@@ -4,7 +4,8 @@
 #include "performance.h"
 #include "utils_fileio.h"   // read_strategies_from_file
 #include "utils_optim.h"    // append_to_optim_results
-#include "utils_params.h"   // single_parameter_combination, cartesian_product
+#include "utils_params.h"   // single_parameter_combination, cartesian_product,
+                            // first_param_from_range, replace_opt_range_by_name
 #include "utils_print.h"    // show_backtest_results
 #include "utils_math.h"
 #include "utils_time.h"     // current_datetime_str
@@ -364,70 +365,99 @@ void mode_factory_sequential( BTfast &btf,
         exit(1);
     }
 
-    for( auto elem: parameter_ranges ){
+    // Initial parameter set with just the first element of parameter_ranges
+    param_ranges_t p_ranges_first {
+                    utils_params::first_param_from_range(parameter_ranges) };
+
+    // Replace parameter combinations for specific parameters
+    utils_params::replace_opt_range_by_name( "POI_switch", parameter_ranges,
+                                             p_ranges_first );
+    utils_params::replace_opt_range_by_name( "fractN_long", parameter_ranges,
+                                             p_ranges_first );
+    // Combine parameter ranges into all parameter combinations
+    std::vector<parameters_t> search_space {
+                            utils_params::cartesian_product(p_ranges_first) };
+    /*for( auto elem: p_ranges_1 ){
         std::cout<<elem.first<<"\n";
         for( auto p: elem.second ){
             std::cout<< p<<"\n";
         }
     }
-
-    // Extract parameter combinations of POI_switch
-
-    // Combine 'parameter_ranges' into all parameter combinations
-    std::vector<parameters_t> search_space {
-                 utils_params::cartesian_product(parameter_ranges) };
-
-     for( auto v: search_space ){
+    for( auto v: search_space ){
          for( auto elem: v ){
              std::cout<<elem.first<<"   "<<elem.second<<"\n";
          }
          std::cout<<"\n";
-     }
-
+    }*/
 
     // Initialize vectors storing strategies passing each selection step
     // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
     std::vector<strategy_t> passed_selection_1 {};
     std::vector<strategy_t> passed_selection_2 {};
-    std::vector<strategy_t> passed_selection_3 {};
-    std::vector<strategy_t> passed_selection_4 {};
+    //std::vector<strategy_t> passed_selection_3 {};
+    //std::vector<strategy_t> passed_selection_4 {};
     std::vector<strategy_t> generated_strategies {};
 
-    /*
-    // --------------------    STATEGY GENERATION    ------------------- //
 
+    // ----------------------    STATEGY GENERATION    --------------------- //
+    ///*
     // Exhaustive Parallel Optimization
-    bool sort_results {true};
-    bool verbose {true};
-    btf.run_parallel_optimization( search_space, generated_strategies,
+    btf.run_parallel_optimization( search_space, passed_selection_1,
                                    optim_file,  param_file, fitness_metric,
-                                   datafeed, sort_results, verbose );
+                                   datafeed, true, true );
 
-    if( generated_strategies.empty() ){
+    if( passed_selection_1.empty() ){
         std::cout << ">>> ERROR: Generation results not available"
                   << " (mode_factory_sequential).\n";
         exit(1);
     }
-    // ----------------------------------------------------------------- //
+    // Selection
 
+    //*/
+
+    // --------------------------------------------------------------------- //
+
+
+    ///*
     // Remove duplicates strategies from generated_strategies
-    utils_optim::remove_duplicates( generated_strategies, fitness_metric );
+    utils_optim::remove_duplicates( passed_selection_1, fitness_metric );
     std::cout<<"Unique strategies: " << generated_strategies.size() <<"\n";
-    */
+    //*/
 
-    // -------------------------    VALIDATION   ----------------------- //
+    // ---------------------------    SELECTION   ------------------------- //
     // Instantiate Validation object
-    /*
     Validation validation { btf, datafeed,
-                            generated_strategies, selected_file,
+                            passed_selection_1, selected_file,
                             validated_file, fitness_metric,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };
 
+    validation.selection_conditions(passed_selection_1, passed_selection_2);
+    std::cout <<"number of strategies passed 1st selection: "
+              << passed_selection_2.size() <<"\n";
+    // --------------------------------------------------------------------- //
+
+
+
+
+
+
+
+
+    // ---------------------------    VALIDATION   ------------------------- //
+    /*
+    // Instantiate Validation object
+    Validation validation { btf, datafeed,
+                            passed_selection_1, selected_file,
+                            validated_file, fitness_metric,
+                            data_dir, data_file_oos, max_variation_pct,
+                            num_noise_tests, noise_file };
+
+
     // Run full validation process
-    validation.run_validation();
+    //validation.run_validation();
     */
-    // ----------------------------------------------------------------- //
+    // --------------------------------------------------------------------- //
 }
 
 

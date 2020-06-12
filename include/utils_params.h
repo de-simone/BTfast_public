@@ -55,6 +55,49 @@ namespace utils_params {
     void extract_parameters_from_single_strategy( const strategy_t &source,
                                                    parameters_t &dest );
 
+
+
+
+    // --------------------------------------------------------------------- //
+    /*!  From full range for all parameters 'source',
+
+            source =  [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
+
+         return param_ranges_t with just the first element of std::vector<int>:
+
+            [ ("p1", 10), ("p2", 2), ... ]
+    */
+    param_ranges_t first_param_from_range( const param_ranges_t &source );
+
+    // --------------------------------------------------------------------- //
+    /*!  Extract parameter range vector from 'source' corresponding to
+         name 'par_name' and replace parameter vector in 'dest'
+    */
+    void replace_opt_range_by_name( const std::string &par_name,
+                                    const param_ranges_t &source,
+                                    param_ranges_t &dest );
+
+
+    // --------------------------------------------------------------------- //
+    /*!  Extract parameter range vector from all strategies in 'source'
+         name 'par_name' and replace parameter vector in 'dest'
+    */
+    /*
+    void extract_parameter_ranges_from_all_strategies(
+                                    const std::vector<strategy_t> &source,
+                                    param_ranges_t &dest );
+    */
+    // --------------------------------------------------------------------- //
+    /*!  Extract parameter range vector from 'source' corresponding to
+         name 'par_name' and make a new parameter vector in 'dest' where
+         'par_name' is the only optimization parameter
+         (all others are initialized with their starting value)
+    */
+    /*
+    void extract_single_opt_range_by_name( const std::string &par_name,
+                                           const param_ranges_t &source,
+                                           param_ranges_t &dest );
+    */
 }
 
 

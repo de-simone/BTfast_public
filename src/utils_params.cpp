@@ -2,7 +2,7 @@
 
 #include <algorithm>    // std::reverse
 #include <numeric>      // std::accumulate
-
+#include <iostream>     // std::cout
 
 // ------------------------------------------------------------------------- //
 //  Extract first element of std::vector<int> in each pair of v
@@ -62,7 +62,7 @@ std::vector<parameters_t> utils_params::cartesian_product(param_ranges_t &v )
 
 
 // --------------------------------------------------------------------- //
-/*  Extract only the parameter values from  strategy  'source'
+/*  Extract only the parameter values from strategy 'source'
     (ignoring the entries with performance metrics)
     and cast them double -> int. Copy the result into 'dest'.
 
@@ -101,7 +101,7 @@ void utils_params::extract_parameters_from_single_strategy(
 
 
 // --------------------------------------------------------------------- //
-/*  Extract only the parameter values from  all stratgies in 'source'
+/*  Extract only the parameter values from  all strategies in 'source'
     (ignoring the entries with performance metrics)
     and cast them double -> int. Copy the result into 'dest'.
 
@@ -129,4 +129,68 @@ void utils_params::extract_parameters_from_all_strategies(
         std::cout<<"\n";
     }
     */
+}
+
+// --------------------------------------------------------------------- //
+/*!  From full range for all parameters 'source',
+
+        source =  [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
+
+     return param_ranges_t with just the first element of std::vector<int>:
+
+        [ ("p1", 10), ("p2", 2), ... ]
+*/
+param_ranges_t utils_params::first_param_from_range(const param_ranges_t &source)
+{
+    param_ranges_t result {};
+    for( const auto& elem: source){
+        if( !elem.second.empty() ){
+            // retrieve first element
+            std::vector<int> first_p {elem.second.at(0)};
+            result.push_back( std::make_pair(elem.first, first_p) );
+        }
+    }
+    return(result);
+}
+
+
+// --------------------------------------------------------------------- //
+/*!  Extract parameter range vector from 'source' corresponding to
+     name 'par_name' and replace parameter vector in 'dest'
+*/
+void utils_params::replace_opt_range_by_name( const std::string &par_name,
+                                              const param_ranges_t &source,
+                                              param_ranges_t &dest )
+{
+
+    // find 'par_name' in source and fill optrange vector
+    std::vector<int> optrange {};
+    for( const auto& elem: source ){
+        if( elem.first == par_name ){
+            optrange = elem.second;
+            break;
+        }
+    }
+    // check if 'par_name' was found in 'source'
+    if( optrange.empty() ){
+        std::cout<< ">>> ERROR: Invalid parameter name "
+                 << "(replace_opt_range_by_name)\n";
+        exit(1);
+    }
+    // replace parameter vector in 'dest' with 'optrange'
+    bool elem_found {false};
+    for( auto& elem: dest ){
+        if( elem.first == par_name){
+            elem_found = true;
+            elem.second = optrange;
+            break;
+        }
+    }
+    // check if 'par_name' was found in 'dest'
+    if( !elem_found ){
+        std::cout<< ">>> ERROR: Parameter name " << par_name
+                 << " not found in destination (replace_opt_range_by_name)\n";
+        exit(1);
+    }
+
 }
