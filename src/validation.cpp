@@ -283,7 +283,7 @@ void Validation::intermediate_selection(
             }
         }
         // Selection Conditions
-        /*
+
         bool condition1 { Ntrades > 100 };
         bool condition2 { AvgTicks > 8 };
         bool condition3 { NpMdd > 1.5 };
@@ -293,8 +293,7 @@ void Validation::intermediate_selection(
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
-        */
-        bool selection_conditions { Ntrades > 400 }; //<<< test 
+        //bool selection_conditions { Ntrades > 400 }; //<<< test 
         // Append selected strategies to output
         if( selection_conditions ){
             output_strategies.push_back(*it);

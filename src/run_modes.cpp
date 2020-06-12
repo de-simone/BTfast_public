@@ -367,13 +367,8 @@ void mode_factory_sequential( BTfast &btf,
     // Store value of Side switch (1=Long, 2=Short, 3=Both)
     int side_switch { utils_params::parameter_value_by_name("Side_switch",
                                                             parameter_ranges) };
-
-    // Initialize vectors storing strategies passing each generation step
-    // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
-    std::vector<strategy_t> passed_generation_1 {};
-    std::vector<strategy_t> passed_generation_2 {};
-    std::vector<strategy_t> passed_generation_3 {};
-    std::vector<strategy_t> generated_strategies {};
+    // Initialize vector of cartesian product
+    std::vector<parameters_t> search_space {};
 
     // ----------------------    STATEGY GENERATION    --------------------- //
 
@@ -383,7 +378,7 @@ void mode_factory_sequential( BTfast &btf,
     param_ranges_t p_ranges_1 {
                     utils_params::first_param_from_range(parameter_ranges) };
 
-    // Replace parameter combinations for specific parameters
+    // Add optimization parameters
     utils_params::replace_opt_range_by_name( "POI_switch", parameter_ranges,
                                              p_ranges_1 );
     utils_params::replace_opt_range_by_name( "Distance_switch",parameter_ranges,
@@ -414,8 +409,7 @@ void mode_factory_sequential( BTfast &btf,
     }
 
     // Combine parameter ranges into all parameter combinations
-    std::vector<parameters_t> search_space {
-                            utils_params::cartesian_product(p_ranges_1) };
+    search_space = utils_params::cartesian_product(p_ranges_1);
 
     /*for( auto elem: p_ranges_2 ){
         std::cout<<elem.first<<"\n";
@@ -431,56 +425,173 @@ void mode_factory_sequential( BTfast &btf,
     }*/
 
     // Exhaustive Parallel Optimization
-    btf.run_parallel_optimization( search_space, passed_generation_1,
+    std::vector<strategy_t> generated_1 {};
+    btf.run_parallel_optimization( search_space, generated_1,
                                    optim_file,  param_file, fitness_metric,
                                    datafeed, true, true );
-    if( passed_generation_1.empty() ){
+    if( generated_1.empty() ){
         std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
         exit(1);
     }
-    //utils_optim::remove_duplicates( passed_generation_1, fitness_metric );
     //---
-
     //--- SELECTION STEP 1
     // Instantiate Validation object
-    Validation validation { btf, datafeed, passed_generation_1, selected_file,
-                            validated_file, fitness_metric, data_dir,
-                            data_file_oos, max_variation_pct, num_noise_tests,
-                            noise_file };
-    // selected in passed_generation_1 -> passed_generation_2
-    validation.intermediate_selection(passed_generation_1, passed_generation_2);
+    Validation val1 { btf, datafeed, generated_1, selected_file,
+                      validated_file, fitness_metric, data_dir,
+                      data_file_oos, max_variation_pct, num_noise_tests,
+                      noise_file };
+    // selected in generated_1 -> selected_1
+    std::vector<strategy_t> selected_1 {};
+    val1.intermediate_selection(generated_1, selected_1);
     std::cout << "Number of strategies passing 1st generation step: "
-              << passed_generation_2.size() <<"\n";
+              << selected_1.size() <<"\n";
+    if( selected_1.empty() ){
+        exit(1);
+    }
     //---
 
-    // Extract parameter ranges from passed_generation_2
-    param_ranges_t p_ranges_2 {
-        utils_params::param_ranges_from_all_strategies(passed_generation_2) };
 
-    for( auto elem: p_ranges_2 ){
-        std::cout<<elem.first<<"\n";
-        for( auto p: elem.second ){
-            std::cout<< p<<"\n";
-        }
+    //--- GENERATION STEP 2
+    // Extract parameter ranges from selected_1
+    param_ranges_t p_ranges_2 {
+        utils_params::param_ranges_from_all_strategies(selected_1) };
+    // Add optimization parameter
+    utils_params::replace_opt_range_by_name( "DOW_switch", parameter_ranges,
+                                             p_ranges_2 );
+    // Combine parameter ranges into all parameter combinations
+    search_space = utils_params::cartesian_product(p_ranges_2);
+    // Exhaustive Parallel Optimization
+    std::vector<strategy_t> generated_2 {};
+    btf.run_parallel_optimization( search_space, generated_2,
+                                   optim_file,  param_file, fitness_metric,
+                                   datafeed, true, true );
+    if( generated_2.empty() ){
+         std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
+         exit(1);
     }
+    //---
+    //--- SELECTION STEP 2
+    // Instantiate Validation object
+    Validation val2 { btf, datafeed, generated_2, selected_file,
+                      validated_file, fitness_metric, data_dir,
+                      data_file_oos, max_variation_pct, num_noise_tests,
+                      noise_file };
+    // selected in generated_2 -> selected_2
+    std::vector<strategy_t> selected_2 {};
+    val2.intermediate_selection(generated_2, selected_2);
+    std::cout << "Number of strategies passing 2nd generation step: "
+              << selected_2.size() <<"\n";
+    if( selected_2.empty() ){
+       exit(1);
+    }
+    //---
+
+    //--- GENERATION STEP 3
+    // Extract parameter ranges from selected_1
+    param_ranges_t p_ranges_3 {
+        utils_params::param_ranges_from_all_strategies(selected_2) };
+    // Add optimization parameter
+    utils_params::replace_opt_range_by_name( "Intraday_switch", parameter_ranges,
+                                             p_ranges_3 );
+    // Combine parameter ranges into all parameter combinations
+    search_space = utils_params::cartesian_product(p_ranges_3);
+    // Exhaustive Parallel Optimization
+    std::vector<strategy_t> generated_3 {};
+    btf.run_parallel_optimization( search_space, generated_3,
+                                   optim_file,  param_file, fitness_metric,
+                                   datafeed, true, true );
+    if( generated_3.empty() ){
+         std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
+         exit(1);
+    }
+    //---
+    //--- SELECTION STEP 3
+    // Instantiate Validation object
+    Validation val3 { btf, datafeed, generated_3, selected_file,
+                      validated_file, fitness_metric, data_dir,
+                      data_file_oos, max_variation_pct, num_noise_tests,
+                      noise_file };
+    // selected in generated_3 -> selected_3
+    std::vector<strategy_t> selected_3 {};
+    val3.intermediate_selection(generated_3, selected_3);
+    std::cout << "Number of strategies passing 3rd generation step: "
+              << selected_3.size() <<"\n";
+    if( selected_3.empty() ){
+        exit(1);
+    }
+    //---
+
+
+    //--- GENERATION STEP 4
+    // Extract parameter ranges from selected_1
+    param_ranges_t p_ranges_4 {
+        utils_params::param_ranges_from_all_strategies(selected_3) };
+    // Add optimization parameter
+    switch( side_switch ){
+        case 1:
+            utils_params::replace_opt_range_by_name( "Filter1L_switch",
+                                                     parameter_ranges,
+                                                     p_ranges_4 );
+            break;
+        case 2:
+            utils_params::replace_opt_range_by_name( "Filter1S_switch",
+                                                     parameter_ranges,
+                                                     p_ranges_4 );
+            break;
+        case 3:
+            utils_params::replace_opt_range_by_name( "Filter1L_switch",
+                                                     parameter_ranges,
+                                                     p_ranges_4 );
+            utils_params::replace_opt_range_by_name( "Filter1S_switch",
+                                                     parameter_ranges,
+                                                     p_ranges_4 );
+            break;
+        default:
+            std::cout << ">>> ERROR: Invalid Side_switch parameter in XML"
+                      << " (mode_factory_sequential).\n";
+            exit(1);
+    }
+    // Combine parameter ranges into all parameter combinations
+    search_space = utils_params::cartesian_product(p_ranges_4);
+    // Exhaustive Parallel Optimization
+    std::vector<strategy_t> generated_4 {};
+    btf.run_parallel_optimization( search_space, generated_4,
+                                   optim_file,  param_file, fitness_metric,
+                                   datafeed, true, true );
+    if( generated_4.empty() ){
+         std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
+         exit(1);
+    }
+    //---
+    //--- SELECTION STEP 4
+    // Instantiate Validation object
+    Validation val4 { btf, datafeed, generated_4, selected_file,
+                      validated_file, fitness_metric, data_dir,
+                      data_file_oos, max_variation_pct, num_noise_tests,
+                      noise_file };
+    // selected in generated_4 -> selected_4
+    std::vector<strategy_t> selected_4 {};
+    val4.intermediate_selection(generated_4, selected_4);
+    std::cout << "Number of strategies passing 4th generation step: "
+              << selected_4.size() <<"\n";
+    if( selected_4.empty() ){
+        exit(1);
+    }
+    //---
 
     // --------------------------------------------------------------------- //
 
 
 
+
     // ---------------------------    VALIDATION   ------------------------- //
-    /*
     // Instantiate Validation object
-    Validation validation { btf, datafeed,
-                            generated_strategies, selected_file,
+    Validation validation { btf, datafeed, generated_4, selected_file,
                             validated_file, fitness_metric,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };
-
-
     // Run full validation process
-    //validation.run_validation();
-    */
+    validation.run_validation();
     // --------------------------------------------------------------------- //
 }
 
