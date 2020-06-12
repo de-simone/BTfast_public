@@ -1,6 +1,6 @@
 #include "utils_params.h"
 
-#include <algorithm>    // std::reverse
+#include <algorithm>    // std::reverse, std::sort, std::unique
 #include <numeric>      // std::accumulate
 #include <iostream>     // std::cout
 
@@ -133,6 +133,33 @@ void utils_params::extract_parameters_from_all_strategies(
 }
 
 // --------------------------------------------------------------------- //
+/*! Get first parameter value from 'source' corresponding to
+    name 'par_name'
+*/
+int utils_params::parameter_value_by_name( const std::string &par_name,
+                                           const param_ranges_t &source )
+{
+    int result {};
+    bool elem_found {false};
+    for( const auto& elem: source){
+        if( elem.first == par_name ){
+            // retrieve first parameter value
+            result =  elem.second.at(0);
+            elem_found = true;
+            break;
+        }
+    }
+    // check if 'par_name' was found in 'dest'
+    if( !elem_found ){
+        std::cout<< ">>> ERROR: Parameter name " << par_name
+                 << " not found in destination (replace_opt_range_by_name)\n";
+        exit(1);
+    }
+
+    return(result);
+}
+
+// --------------------------------------------------------------------- //
 /*!  From full range for all parameters 'source',
 
         source =  [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
@@ -194,4 +221,45 @@ void utils_params::replace_opt_range_by_name( const std::string &par_name,
         exit(1);
     }
 
+}
+
+
+// --------------------------------------------------------------------- //
+/*!  Extract the parameter values from all strategies in 'source'
+     (ignoring the entries with performance metrics)
+     and return parameter ranges.
+*/
+param_ranges_t utils_params::param_ranges_from_all_strategies(
+                                    const std::vector<strategy_t> &source )
+{
+    param_ranges_t result {};
+
+    // Fill vector of single parameters (one entry per strategy)
+    std::vector<parameters_t> single_params;
+    utils_params::extract_parameters_from_all_strategies(source,single_params);
+
+    for( const auto& strat: single_params ){
+        for( const auto& p: strat ){
+            // Check if parameter name is already present in result
+            auto it = std::find_if( result.begin(), result.end(),
+                [&p](const std::pair<std::string,std::vector<int>>& element){
+                                        return element.first == p.first;} );
+
+            if( it != result.end() ){   // parameter name already present
+                it->second.push_back( p.second );
+            }
+            else{                       // parameter name not present
+                std::vector<int> new_v { p.second };
+                result.push_back( std::make_pair( p.first, new_v ) );
+            }
+        }
+    }
+    // Remove duplicates in parameter values for each parameter
+    for( auto& param: result ){
+        std::sort( param.second.begin(), param.second.end() );
+        param.second.erase( std::unique( param.second.begin(),
+                                         param.second.end() ),
+                            param.second.end() );
+    }
+    return(result);
 }

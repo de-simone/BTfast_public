@@ -57,6 +57,12 @@ namespace utils_params {
 
 
 
+    // --------------------------------------------------------------------- //
+    /*! Get first parameter value from 'source' corresponding to
+        name 'par_name'
+    */
+    int parameter_value_by_name( const std::string &par_name,
+                                 const param_ranges_t &source );
 
     // --------------------------------------------------------------------- //
     /*!  From full range for all parameters 'source',
@@ -77,6 +83,13 @@ namespace utils_params {
                                     const param_ranges_t &source,
                                     param_ranges_t &dest );
 
+    // --------------------------------------------------------------------- //
+    /*!  Extract the parameter values from all strategies in 'source'
+         (ignoring the entries with performance metrics)
+         and return parameter ranges.
+    */
+    param_ranges_t param_ranges_from_all_strategies(
+                                        const std::vector<strategy_t> &source );
 
     // --------------------------------------------------------------------- //
     /*!  Extract parameter range vector from all strategies in 'source'

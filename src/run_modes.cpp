@@ -364,20 +364,60 @@ void mode_factory_sequential( BTfast &btf,
                   << " only for MasterCode (mode_factory_sequential).\n";
         exit(1);
     }
+    // Store value of Side switch (1=Long, 2=Short, 3=Both)
+    int side_switch { utils_params::parameter_value_by_name("Side_switch",
+                                                            parameter_ranges) };
 
-    // Initial parameter set with just the first element of parameter_ranges
-    param_ranges_t p_ranges_first {
+    // Initialize vectors storing strategies passing each generation step
+    // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
+    std::vector<strategy_t> passed_generation_1 {};
+    std::vector<strategy_t> passed_generation_2 {};
+    std::vector<strategy_t> passed_generation_3 {};
+    std::vector<strategy_t> generated_strategies {};
+
+    // ----------------------    STATEGY GENERATION    --------------------- //
+
+    //--- GENERATION STEP 1
+    // Initial parameter set with just the first element of each
+    // parameter in parameter_ranges
+    param_ranges_t p_ranges_1 {
                     utils_params::first_param_from_range(parameter_ranges) };
 
     // Replace parameter combinations for specific parameters
     utils_params::replace_opt_range_by_name( "POI_switch", parameter_ranges,
-                                             p_ranges_first );
-    utils_params::replace_opt_range_by_name( "fractN_long", parameter_ranges,
-                                             p_ranges_first );
+                                             p_ranges_1 );
+    utils_params::replace_opt_range_by_name( "Distance_switch",parameter_ranges,
+                                             p_ranges_1 );
+    switch( side_switch ){
+        case 1:
+            utils_params::replace_opt_range_by_name( "fractN_long",
+                                                     parameter_ranges,
+                                                     p_ranges_1 );
+            break;
+        case 2:
+            utils_params::replace_opt_range_by_name( "fractN_short",
+                                                     parameter_ranges,
+                                                     p_ranges_1 );
+            break;
+        case 3:
+            utils_params::replace_opt_range_by_name( "fractN_long",
+                                                     parameter_ranges,
+                                                     p_ranges_1 );
+            utils_params::replace_opt_range_by_name( "fractN_short",
+                                                     parameter_ranges,
+                                                     p_ranges_1 );
+            break;
+        default:
+            std::cout << ">>> ERROR: Invalid Side_switch parameter in XML"
+                      << " (mode_factory_sequential).\n";
+            exit(1);
+    }
+
     // Combine parameter ranges into all parameter combinations
     std::vector<parameters_t> search_space {
-                            utils_params::cartesian_product(p_ranges_first) };
-    /*for( auto elem: p_ranges_1 ){
+                            utils_params::cartesian_product(p_ranges_1) };
+
+    /*for( auto elem: p_ranges_2 ){
         std::cout<<elem.first<<"\n";
         for( auto p: elem.second ){
             std::cout<< p<<"\n";
@@ -390,57 +430,41 @@ void mode_factory_sequential( BTfast &btf,
          std::cout<<"\n";
     }*/
 
-    // Initialize vectors storing strategies passing each selection step
-    // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
-    std::vector<strategy_t> passed_selection_1 {};
-    std::vector<strategy_t> passed_selection_2 {};
-    //std::vector<strategy_t> passed_selection_3 {};
-    //std::vector<strategy_t> passed_selection_4 {};
-    std::vector<strategy_t> generated_strategies {};
-
-
-    // ----------------------    STATEGY GENERATION    --------------------- //
-    ///*
     // Exhaustive Parallel Optimization
-    btf.run_parallel_optimization( search_space, passed_selection_1,
+    btf.run_parallel_optimization( search_space, passed_generation_1,
                                    optim_file,  param_file, fitness_metric,
                                    datafeed, true, true );
-
-    if( passed_selection_1.empty() ){
-        std::cout << ">>> ERROR: Generation results not available"
-                  << " (mode_factory_sequential).\n";
+    if( passed_generation_1.empty() ){
+        std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
         exit(1);
     }
-    // Selection
+    //utils_optim::remove_duplicates( passed_generation_1, fitness_metric );
+    //---
 
-    //*/
-
-    // --------------------------------------------------------------------- //
-
-
-    /*
-    // Remove duplicates strategies from generated_strategies
-    utils_optim::remove_duplicates( passed_selection_1, fitness_metric );
-    std::cout<<"Unique strategies: " << passed_selection_1.size() <<"\n";
-    */
-
-    // ---------------------------    SELECTION   ------------------------- //
+    //--- SELECTION STEP 1
     // Instantiate Validation object
-    Validation validation { btf, datafeed,
-                            passed_selection_1, selected_file,
-                            validated_file, fitness_metric,
-                            data_dir, data_file_oos, max_variation_pct,
-                            num_noise_tests, noise_file };
+    Validation validation { btf, datafeed, passed_generation_1, selected_file,
+                            validated_file, fitness_metric, data_dir,
+                            data_file_oos, max_variation_pct, num_noise_tests,
+                            noise_file };
+    // selected in passed_generation_1 -> passed_generation_2
+    validation.intermediate_selection(passed_generation_1, passed_generation_2);
+    std::cout << "Number of strategies passing 1st generation step: "
+              << passed_generation_2.size() <<"\n";
+    //---
 
-    validation.intermediate_selection(passed_selection_1, passed_selection_2);
-    std::cout << "Number of strategies passed 1st selection: "
-              << passed_selection_2.size() <<"\n";
+    // Extract parameter ranges from passed_generation_2
+    param_ranges_t p_ranges_2 {
+        utils_params::param_ranges_from_all_strategies(passed_generation_2) };
+
+    for( auto elem: p_ranges_2 ){
+        std::cout<<elem.first<<"\n";
+        for( auto p: elem.second ){
+            std::cout<< p<<"\n";
+        }
+    }
+
     // --------------------------------------------------------------------- //
-
-
-
-
-
 
 
 

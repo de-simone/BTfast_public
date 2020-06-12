@@ -255,10 +255,9 @@ void Validation::intermediate_selection(
     double Expectancy {0};
     double Zscore {0};
 
-    //-- Loop over input_strategies strategies
+    //-- Loop over input_strategies
     for( auto it = input_strategies.begin();
               it != input_strategies.end(); it++ ){
-
         // Read metrics from optimization results
         for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
             if( optrun->first == "Ntrades" ){
@@ -283,25 +282,25 @@ void Validation::intermediate_selection(
                 Zscore = optrun->second;
             }
         }
-
-
         // Selection Conditions
-        bool condition1 { Ntrades > 100 };// 40 * (btf_.day_counter() / 252.0) };
-        bool condition2 { AvgTicks > 8 };//4*btf_.symbol().transaction_cost_ticks()};
-        bool condition3 { NpMdd > 2.0 };
+        /*
+        bool condition1 { Ntrades > 100 };
+        bool condition2 { AvgTicks > 8 };
+        bool condition3 { NpMdd > 1.5 };
         bool condition4 { PftFactor > 1.1 };
         bool condition5 { Expectancy > 0.05 };
-        bool condition6 { Zscore > 1.5  };
-
+        bool condition6 { Zscore > 1.1  };
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
+        */
+        bool selection_conditions { Ntrades > 400 }; //<<< test 
         // Append selected strategies to output
         if( selection_conditions ){
             output_strategies.push_back(*it);
         }
     }
-    //-- End loop over generated strategies
+    //-- End loop over input_strategies
 }
 
 // ------------------------------------------------------------------------- //
@@ -330,14 +329,12 @@ void Validation::selection_conditions(
     double NpMdd {0};
     double Expectancy {0};
     double Zscore {0};
-
     // number of optimization tests (unique strategies)
     size_t Ntests { input_strategies.size() };
 
-    //-- Loop over input_strategies strategies
+    //-- Loop over input_strategies
     for( auto it = input_strategies.begin();
               it != input_strategies.end(); it++ ){
-
         // Read metrics from optimization results
         for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
             if( optrun->first == "Ntrades" ){
@@ -368,11 +365,9 @@ void Validation::selection_conditions(
                 Zscore = optrun->second;
             }
         }
-
         // one-sided p-value
         // p = 1-Phi(Z) = Phi(-Z)=(1/2)Erfc[x/sqrt(2)],  Phi = CDF(N(0,1))
         double pvalue = 0.5*std::erfc( Zscore/std::sqrt(2.0) );
-
         // Selection Conditions
         bool condition1 { Ntrades > 60 };// 40 * (btf_.day_counter() / 252.0) };
         bool condition2 { AvgTicks > 12 };//4*btf_.symbol().transaction_cost_ticks()};
@@ -383,7 +378,6 @@ void Validation::selection_conditions(
         bool condition6 { pvalue < 0.1 / Ntests  }; // multiple comparison (bonferroni)
         //condition6 = pvalue<=0.01;
         condition6 = Zscore > 2.5;
-
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
@@ -392,7 +386,7 @@ void Validation::selection_conditions(
             output_strategies.push_back(*it);
         }
     }
-    //-- End loop over generated strategies
+    //-- End loop over input_strategies
 }
 
 
