@@ -370,6 +370,8 @@ void mode_factory_sequential( BTfast &btf,
     // Initialize vector of cartesian product
     std::vector<parameters_t> search_space {};
 
+    bool selection_conditions {false};
+
     // ----------------------    STATEGY GENERATION    --------------------- //
 
     //--- GENERATION STEP 1
@@ -435,13 +437,14 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
     //--- SELECTION STEP 1
+    double AvgTicks_1 {8};
+    double Zscore_1 {1.1};
+    std::vector<strategy_t> selected_1 {};
     // Instantiate Validation object
     Validation val1 { btf, datafeed, generated_1, selected_file,
                       validated_file, fitness_metric, data_dir,
                       data_file_oos, max_variation_pct, num_noise_tests,
                       noise_file };
-    // selected in generated_1 -> selected_1
-    std::vector<strategy_t> selected_1 {};
     val1.intermediate_selection(generated_1, selected_1);
     std::cout << "Number of strategies passing 1st generation step: "
               << selected_1.size() <<"\n";
@@ -471,14 +474,26 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
     //--- SELECTION STEP 2
-    // Instantiate Validation object
-    Validation val2 { btf, datafeed, generated_2, selected_file,
-                      validated_file, fitness_metric, data_dir,
-                      data_file_oos, max_variation_pct, num_noise_tests,
-                      noise_file };
-    // selected in generated_2 -> selected_2
     std::vector<strategy_t> selected_2 {};
-    val2.intermediate_selection(generated_2, selected_2);
+    double AvgTicks_2 {0};
+    double Zscore_2 {0};
+    for( auto it = generated_2.begin();
+              it != generated_2.end(); it++ ){
+        // Read metrics from optimization results
+        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
+            if( optrun->first == "AvgTicks" ){
+                AvgTicks_2 = optrun->second;
+            }
+            else if( optrun->first == "Z-score" ){
+                Zscore_2 = optrun->second;
+            }
+        }
+        selection_conditions = ( AvgTicks_2 > AvgTicks_1
+                                 && Zscore_2 > Zscore_1 );
+        if( selection_conditions ){
+            selected_2.push_back(*it);
+        }
+    }
     std::cout << "Number of strategies passing 2nd generation step: "
               << selected_2.size() <<"\n";
     if( selected_2.empty() ){
@@ -506,18 +521,30 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
     //--- SELECTION STEP 3
-    // Instantiate Validation object
-    Validation val3 { btf, datafeed, generated_3, selected_file,
-                      validated_file, fitness_metric, data_dir,
-                      data_file_oos, max_variation_pct, num_noise_tests,
-                      noise_file };
-    // selected in generated_3 -> selected_3
     std::vector<strategy_t> selected_3 {};
-    val3.intermediate_selection(generated_3, selected_3);
+    double AvgTicks_3 {0};
+    double Zscore_3 {0};
+    for( auto it = generated_3.begin();
+              it != generated_3.end(); it++ ){
+        // Read metrics from optimization results
+        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
+            if( optrun->first == "AvgTicks" ){
+                AvgTicks_3 = optrun->second;
+            }
+            else if( optrun->first == "Z-score" ){
+                Zscore_3 = optrun->second;
+            }
+        }
+        selection_conditions = ( AvgTicks_3 > AvgTicks_2
+                                 && Zscore_3 > Zscore_2 );
+        if( selection_conditions ){
+            selected_3.push_back(*it);
+        }
+    }
     std::cout << "Number of strategies passing 3rd generation step: "
               << selected_3.size() <<"\n";
     if( selected_3.empty() ){
-        exit(1);
+       exit(1);
     }
     //---
 
@@ -564,29 +591,39 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
     //--- SELECTION STEP 4
-    // Instantiate Validation object
-    Validation val4 { btf, datafeed, generated_4, selected_file,
-                      validated_file, fitness_metric, data_dir,
-                      data_file_oos, max_variation_pct, num_noise_tests,
-                      noise_file };
-    // selected in generated_4 -> selected_4
     std::vector<strategy_t> selected_4 {};
-    val4.intermediate_selection(generated_4, selected_4);
+    double AvgTicks_4 {0};
+    double Zscore_4 {0};
+    for( auto it = generated_3.begin();
+              it != generated_3.end(); it++ ){
+        // Read metrics from optimization results
+        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
+            if( optrun->first == "AvgTicks" ){
+                AvgTicks_4 = optrun->second;
+            }
+            else if( optrun->first == "Z-score" ){
+                Zscore_4 = optrun->second;
+            }
+        }
+        selection_conditions = ( AvgTicks_4 > AvgTicks_3
+                                 && Zscore_4 > Zscore_3 );
+        if( selection_conditions ){
+            selected_4.push_back(*it);
+        }
+    }
     std::cout << "Number of strategies passing 4th generation step: "
               << selected_4.size() <<"\n";
     if( selected_4.empty() ){
-        exit(1);
+       exit(1);
     }
     //---
 
     // --------------------------------------------------------------------- //
 
 
-
-
     // ---------------------------    VALIDATION   ------------------------- //
     // Instantiate Validation object
-    Validation validation { btf, datafeed, generated_4, selected_file,
+    Validation validation { btf, datafeed, selected_4, selected_file,
                             validated_file, fitness_metric,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };

@@ -38,8 +38,7 @@
  * TO DO:
 
     - sequential addition of filters (not simultaneous)
-      run_modes.cpp/ mode_factory_sequential()
-      Validation::intermediate_selection()
+      intermediate_selection -> initial_selection
 
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)
