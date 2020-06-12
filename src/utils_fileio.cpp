@@ -381,6 +381,7 @@ void utils_fileio::copy_file_to_file( std::string sourcefile,
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
         - utils_fileio::write_strategies_to_file
         - Individual::compute_individual_fitness
+        - Validation::intermediate_selection
         - Validation::selection_conditions
 
     Return 1 if OK, 0 otherwise

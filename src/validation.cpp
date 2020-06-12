@@ -239,6 +239,98 @@ void Validation::selection( const std::vector<strategy_t> &input_strategies,
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
         - utils_fileio::write_strategies_to_file
         - Individual::compute_individual_fitness
+        - Validation::intermediate_selection
+        - Validation::selection_conditions
+*/
+void Validation::intermediate_selection(
+                            const std::vector<strategy_t> &input_strategies,
+                            std::vector<strategy_t> &output_strategies )
+{
+    double Ntrades {0};
+    double AvgTicks {0};
+    double WinPerc {0};
+    //double NetPL {0};
+    //double AvgTrade {0};
+    double PftFactor {0};
+    double NpMdd {0};
+    double Expectancy {0};
+    double Zscore {0};
+
+    // number of optimization tests (unique strategies)
+    size_t Ntests { input_strategies.size() };
+
+    //-- Loop over generated strategies
+    for( auto it = input_strategies.begin();
+              it != input_strategies.end(); it++ ){
+
+        // Read metrics from optimization results
+        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
+            if( optrun->first == "Ntrades" ){
+                Ntrades = optrun->second;
+            }
+            //else if( optrun->first == "NetPL" ){
+            //    NetPL = optrun->second;
+            //}
+            else if( optrun->first == "AvgTicks" ){
+                AvgTicks = optrun->second;
+            }
+            else if( optrun->first == "WinPerc" ){
+                WinPerc = optrun->second;
+            }
+            //else if( optrun->first == "AvgTrade" ){
+            //    AvgTrade = optrun->second;
+            //}
+            else if( optrun->first == "PftFactor" ){
+                PftFactor = optrun->second;
+            }
+            else if( optrun->first == "NP/MDD" ){
+                NpMdd = optrun->second;
+            }
+            else if( optrun->first == "Expectancy" ){
+                Expectancy = optrun->second;
+            }
+            else if( optrun->first == "Z-score" ){
+                Zscore = optrun->second;
+            }
+        }
+
+        // one-sided p-value
+        // p = 1-Phi(Z) = Phi(-Z)=(1/2)Erfc[x/sqrt(2)],  Phi = CDF(N(0,1))
+        double pvalue = 0.5*std::erfc( Zscore/std::sqrt(2.0) );
+
+        // Selection Conditions
+        bool condition1 { Ntrades > 60 };// 40 * (btf_.day_counter() / 252.0) };
+        bool condition2 { AvgTicks > 12 };//4*btf_.symbol().transaction_cost_ticks()};
+        //bool condition2 { AvgTrade > 3 * btf_.symbol().transaction_cost() };
+        bool condition3 { NpMdd > 4.0 };
+        bool condition4 { PftFactor > 1.2 };
+        bool condition5 { Expectancy > 0.1 };
+        bool condition6 { pvalue < 0.1 / Ntests  }; // multiple comparison (bonferroni)
+        //condition6 = pvalue<=0.01;
+        condition6 = Zscore > 2.5;
+
+        // Combine all conditions
+        bool selection_conditions = ( condition1 && condition2 && condition3
+                                    && condition4 && condition5 && condition6 );
+        // Append selected strategies to output
+        if( selection_conditions ){
+            output_strategies.push_back(*it);
+        }
+    }
+    //-- End loop over generated strategies
+}
+
+// ------------------------------------------------------------------------- //
+/*! Apply selection conditions
+
+    Names/Number/Order of performance metrics must be matched among:
+        - utils_params::extract_parameters_from_single_strategy
+        - utils_optim::append_to_optim_results
+        - utils_optim::sort_by_metric
+        - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
+        - utils_fileio::write_strategies_to_file
+        - Individual::compute_individual_fitness
+        - Validation::intermediate_selection
         - Validation::selection_conditions
 */
 void Validation::selection_conditions(
@@ -318,7 +410,6 @@ void Validation::selection_conditions(
     }
     //-- End loop over generated strategies
 }
-
 
 
 // ------------------------------------------------------------------------- //

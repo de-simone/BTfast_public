@@ -71,10 +71,12 @@ class Validation {
 
         void selection( const std::vector<strategy_t> &input_strategies,
                         std::vector<strategy_t> &output_strategies );
+        void intermediate_selection(
+                        const std::vector<strategy_t> &input_strategies,
+                        std::vector<strategy_t> &output_strategies );
         void selection_conditions(
                             const std::vector<strategy_t> &input_strategies,
                             std::vector<strategy_t> &output_strategies );
-
         void OOS_metrics_test( const std::vector<strategy_t> &input_strategies,
                                std::vector<strategy_t> &output_strategies );
         void OOS_consistency_test( const std::vector<strategy_t> &input_strategies,

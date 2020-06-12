@@ -14,6 +14,7 @@
        - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
        - utils_fileio::write_strategies_to_file
        - Individual::compute_individual_fitness
+       - Validation::intermediate_selection
        - Validation::selection_conditions
 
 */
@@ -90,14 +91,15 @@ void utils_optim::remove_duplicates( std::vector<strategy_t> &strategies,
 // ------------------------------------------------------------------------- //
 /*! Binary functions for sorting in descending order of metrics
 
-    Names/Number/Order of performance metrics must be matched among:
-        - utils_params::extract_parameters_from_single_strategy
-        - utils_optim::append_to_optim_results
-        - utils_optim::sort_by_metric
-        - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
-        - utils_fileio::write_strategies_to_file
-        - Individual::compute_individual_fitness
-        - Validation::selection_conditions
+Names/Number/Order of performance metrics must be matched among:
+    - utils_params::extract_parameters_from_single_strategy
+    - utils_optim::append_to_optim_results
+    - utils_optim::sort_by_metric
+    - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
+    - utils_fileio::write_strategies_to_file
+    - Individual::compute_individual_fitness
+    - Validation::intermediate_selection
+    - Validation::selection_conditions
 */
 
 bool utils_optim::sort_by_ntrades(const strategy_t& a, const strategy_t& b)
@@ -149,6 +151,7 @@ bool utils_optim::sort_by_zscore(const strategy_t& a, const strategy_t& b)
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
         - utils_fileio::write_strategies_to_file
         - Individual::compute_individual_fitness
+        - Validation::intermediate_selection
         - Validation::selection_conditions
 */
 

@@ -52,6 +52,7 @@ bool operator<(const Individual &ind1, const Individual &ind2)
        - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
        - utils_fileio::write_strategies_to_file
        - Individual::compute_individual_fitness
+       - Validation::intermediate_selection
        - Validation::selection_conditions
 
 */

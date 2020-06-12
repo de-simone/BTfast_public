@@ -32,14 +32,15 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-06-11
+                                                        Last update: 2020-06-12
                                           -------------------------------------
 
  * TO DO:
 
     - sequential addition of filters (not simultaneous)
       run_modes.cpp/ mode_factory_sequential()
-      
+      Validation::intermediate_selection()
+
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)
       multiple times

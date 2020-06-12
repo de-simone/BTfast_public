@@ -418,11 +418,11 @@ void mode_factory_sequential( BTfast &btf,
     // --------------------------------------------------------------------- //
 
 
-    ///*
+    /*
     // Remove duplicates strategies from generated_strategies
     utils_optim::remove_duplicates( passed_selection_1, fitness_metric );
-    std::cout<<"Unique strategies: " << generated_strategies.size() <<"\n";
-    //*/
+    std::cout<<"Unique strategies: " << passed_selection_1.size() <<"\n";
+    */
 
     // ---------------------------    SELECTION   ------------------------- //
     // Instantiate Validation object
@@ -432,9 +432,9 @@ void mode_factory_sequential( BTfast &btf,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };
 
-    validation.selection_conditions(passed_selection_1, passed_selection_2);
+    validation.intermediate_selection(passed_selection_1, passed_selection_2);
     std::cout <<"number of strategies passed 1st selection: "
-              << passed_selection_2.size() <<"\n";
+              << passed_selection_1.size()<< "  "<<passed_selection_2.size() <<"\n";
     // --------------------------------------------------------------------- //
 
 
@@ -448,7 +448,7 @@ void mode_factory_sequential( BTfast &btf,
     /*
     // Instantiate Validation object
     Validation validation { btf, datafeed,
-                            passed_selection_1, selected_file,
+                            generated_strategies, selected_file,
                             validated_file, fitness_metric,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };

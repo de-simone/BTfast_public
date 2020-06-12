@@ -73,6 +73,7 @@ std::vector<parameters_t> utils_params::cartesian_product(param_ranges_t &v )
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
         - utils_fileio::write_strategies_to_file
         - Individual::compute_individual_fitness
+        - Validation::intermediate_selection
         - Validation::selection_conditions
 
 */
