@@ -39,6 +39,7 @@
 
     - sequential addition of filters (not simultaneous)
       intermediate_selection -> initial_selection
+      selection based on improving metrics of same strategy without new filter 
 
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)
