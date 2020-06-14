@@ -56,6 +56,12 @@ namespace utils_params {
                                                    parameters_t &dest );
 
 
+    // --------------------------------------------------------------------- //
+    /*! Extract attribute (metric or paramter) named 'attr_name'
+        from single strategy 'source'
+    */
+    double strategy_attribute_by_name( const std::string &attr_name,
+                                       const strategy_t &source );
 
     // --------------------------------------------------------------------- //
     /*! Get first parameter value from 'source' corresponding to
@@ -90,6 +96,15 @@ namespace utils_params {
     */
     param_ranges_t param_ranges_from_all_strategies(
                                         const std::vector<strategy_t> &source );
+
+    // --------------------------------------------------------------------- //
+    /*!  Find strategy in 'source' equal to 'ref_strat' except with filter
+        'filter_name' equal to 0.
+    */
+    strategy_t no_filter_strategy( std::string filter_name,
+                                   strategy_t ref_strat,
+                                   const std::vector<strategy_t> &source );
+
 
     // --------------------------------------------------------------------- //
     /*!  Extract parameter range vector from all strategies in 'source'

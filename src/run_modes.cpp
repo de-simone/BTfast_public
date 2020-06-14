@@ -341,7 +341,7 @@ void mode_factory( BTfast &btf,
 
 
 // ------------------------------------------------------------------------- //
-/*! Strategy Factory mode (Generation + Validation)
+/*! Strategy Factory mode (Sequential Generation + Validation)
 */
 void mode_factory_sequential( BTfast &btf,
                               std::unique_ptr<DataFeed> &datafeed,
@@ -370,7 +370,16 @@ void mode_factory_sequential( BTfast &btf,
     // Initialize vector of cartesian product
     std::vector<parameters_t> search_space {};
 
+
+    std::string filter_name_long {""};
+    std::string filter_name_short {""};
+    std::string filter_name_both {""};
     bool selection_conditions {false};
+    double avgticks_with_filter {0};
+    double avgticks_no_filter {0};
+    double zscore_with_filter {0};
+    double zscore_no_filter {0};
+    strategy_t no_filter_strat {};
 
     // ----------------------    STATEGY GENERATION    --------------------- //
 
@@ -381,26 +390,30 @@ void mode_factory_sequential( BTfast &btf,
                     utils_params::first_param_from_range(parameter_ranges) };
 
     // Add optimization parameters
-    utils_params::replace_opt_range_by_name( "POI_switch", parameter_ranges,
+    filter_name_both = "POI_switch";
+    utils_params::replace_opt_range_by_name( filter_name_both, parameter_ranges,
                                              p_ranges_1 );
-    utils_params::replace_opt_range_by_name( "Distance_switch",parameter_ranges,
+    filter_name_both = "Distance_switch";
+    utils_params::replace_opt_range_by_name( filter_name_both,parameter_ranges,
                                              p_ranges_1 );
+    filter_name_long = "fractN_long";
+    filter_name_short = "fractN_short";
     switch( side_switch ){
         case 1:
-            utils_params::replace_opt_range_by_name( "fractN_long",
+            utils_params::replace_opt_range_by_name( filter_name_long,
                                                      parameter_ranges,
                                                      p_ranges_1 );
             break;
         case 2:
-            utils_params::replace_opt_range_by_name( "fractN_short",
+            utils_params::replace_opt_range_by_name( filter_name_short,
                                                      parameter_ranges,
                                                      p_ranges_1 );
             break;
         case 3:
-            utils_params::replace_opt_range_by_name( "fractN_long",
+            utils_params::replace_opt_range_by_name( filter_name_long,
                                                      parameter_ranges,
                                                      p_ranges_1 );
-            utils_params::replace_opt_range_by_name( "fractN_short",
+            utils_params::replace_opt_range_by_name( filter_name_short,
                                                      parameter_ranges,
                                                      p_ranges_1 );
             break;
@@ -437,15 +450,13 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
     //--- SELECTION STEP 1
-    double AvgTicks_1 {8};
-    double Zscore_1 {1.1};
     std::vector<strategy_t> selected_1 {};
     // Instantiate Validation object
     Validation val1 { btf, datafeed, generated_1, selected_file,
                       validated_file, fitness_metric, data_dir,
                       data_file_oos, max_variation_pct, num_noise_tests,
                       noise_file };
-    val1.intermediate_selection(generated_1, selected_1);
+    val1.initial_generation_selection(generated_1, selected_1);
     std::cout << "Number of strategies passing 1st generation step: "
               << selected_1.size() <<"\n";
     if( selected_1.empty() ){
@@ -455,11 +466,12 @@ void mode_factory_sequential( BTfast &btf,
 
 
     //--- GENERATION STEP 2
+    filter_name_both = "DOW_switch";
     // Extract parameter ranges from selected_1
     param_ranges_t p_ranges_2 {
         utils_params::param_ranges_from_all_strategies(selected_1) };
     // Add optimization parameter
-    utils_params::replace_opt_range_by_name( "DOW_switch", parameter_ranges,
+    utils_params::replace_opt_range_by_name( filter_name_both, parameter_ranges,
                                              p_ranges_2 );
     // Combine parameter ranges into all parameter combinations
     search_space = utils_params::cartesian_product(p_ranges_2);
@@ -475,25 +487,33 @@ void mode_factory_sequential( BTfast &btf,
     //---
     //--- SELECTION STEP 2
     std::vector<strategy_t> selected_2 {};
-    double AvgTicks_2 {0};
-    double Zscore_2 {0};
-    for( auto it = generated_2.begin();
-              it != generated_2.end(); it++ ){
-        // Read metrics from optimization results
-        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
-            if( optrun->first == "AvgTicks" ){
-                AvgTicks_2 = optrun->second;
-            }
-            else if( optrun->first == "Z-score" ){
-                Zscore_2 = optrun->second;
-            }
-        }
-        selection_conditions = ( AvgTicks_2 > AvgTicks_1
-                                 && Zscore_2 > Zscore_1 );
+    for( const auto& strat: generated_2 ){
+        // Find strategy equal to 'strat' except without new filter
+        no_filter_strat  = utils_params::no_filter_strategy(filter_name_both,
+                                                            strat, generated_2);
+
+        // Metrics of strategy without new filter
+        avgticks_no_filter = utils_params::strategy_attribute_by_name(
+                                                "AvgTicks", no_filter_strat );
+        zscore_no_filter = utils_params::strategy_attribute_by_name(
+                                                 "Z-score", no_filter_strat );
+        // Metrics of strategy with new filter
+        avgticks_with_filter = utils_params::strategy_attribute_by_name(
+                                                "AvgTicks", strat );
+        zscore_with_filter = utils_params::strategy_attribute_by_name(
+                                                "Z-score", strat );
+        selection_conditions = ( avgticks_with_filter > avgticks_no_filter
+                                && zscore_with_filter > zscore_no_filter );
+
+        // Append strategy without new filter to selected vector
+        selected_2.push_back(no_filter_strat);
+        // Append strategy with new filter if improves metrics
         if( selection_conditions ){
-            selected_2.push_back(*it);
+            selected_2.push_back(strat);
         }
     }
+    // Remove duplicates strategies
+    utils_optim::remove_duplicates( selected_2, fitness_metric );
     std::cout << "Number of strategies passing 2nd generation step: "
               << selected_2.size() <<"\n";
     if( selected_2.empty() ){
@@ -502,11 +522,12 @@ void mode_factory_sequential( BTfast &btf,
     //---
 
     //--- GENERATION STEP 3
-    // Extract parameter ranges from selected_1
+    filter_name_both = "Intraday_switch";
+    // Extract parameter ranges from selected_2
     param_ranges_t p_ranges_3 {
         utils_params::param_ranges_from_all_strategies(selected_2) };
     // Add optimization parameter
-    utils_params::replace_opt_range_by_name( "Intraday_switch", parameter_ranges,
+    utils_params::replace_opt_range_by_name(filter_name_both, parameter_ranges,
                                              p_ranges_3 );
     // Combine parameter ranges into all parameter combinations
     search_space = utils_params::cartesian_product(p_ranges_3);
@@ -522,25 +543,33 @@ void mode_factory_sequential( BTfast &btf,
     //---
     //--- SELECTION STEP 3
     std::vector<strategy_t> selected_3 {};
-    double AvgTicks_3 {0};
-    double Zscore_3 {0};
-    for( auto it = generated_3.begin();
-              it != generated_3.end(); it++ ){
-        // Read metrics from optimization results
-        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
-            if( optrun->first == "AvgTicks" ){
-                AvgTicks_3 = optrun->second;
-            }
-            else if( optrun->first == "Z-score" ){
-                Zscore_3 = optrun->second;
-            }
-        }
-        selection_conditions = ( AvgTicks_3 > AvgTicks_2
-                                 && Zscore_3 > Zscore_2 );
+    for( const auto& strat: generated_3 ){
+        // Find strategy equal to 'strat' except without new filter
+        no_filter_strat  = utils_params::no_filter_strategy(filter_name_both,
+                                                            strat, generated_3);
+
+        // Metrics of strategy without new filter
+        avgticks_no_filter = utils_params::strategy_attribute_by_name(
+                                                "AvgTicks", no_filter_strat );
+        zscore_no_filter = utils_params::strategy_attribute_by_name(
+                                                 "Z-score", no_filter_strat );
+        // Metrics of strategy with new filter
+        avgticks_with_filter = utils_params::strategy_attribute_by_name(
+                                                "AvgTicks", strat );
+        zscore_with_filter = utils_params::strategy_attribute_by_name(
+                                                "Z-score", strat );
+        selection_conditions = ( avgticks_with_filter > avgticks_no_filter
+                                && zscore_with_filter > zscore_no_filter );
+
+        // Append strategy without new filter to selected vector
+        selected_3.push_back(no_filter_strat);
+        // Append strategy with new filter if improves metrics
         if( selection_conditions ){
-            selected_3.push_back(*it);
+            selected_3.push_back(strat);
         }
     }
+    // Remove duplicates strategies
+    utils_optim::remove_duplicates( selected_3, fitness_metric );
     std::cout << "Number of strategies passing 3rd generation step: "
               << selected_3.size() <<"\n";
     if( selected_3.empty() ){
@@ -550,26 +579,28 @@ void mode_factory_sequential( BTfast &btf,
 
 
     //--- GENERATION STEP 4
-    // Extract parameter ranges from selected_1
+    filter_name_long = "Filter1L_switch";
+    filter_name_short = "Filter1S_switch";
+    // Extract parameter ranges from selected_3
     param_ranges_t p_ranges_4 {
         utils_params::param_ranges_from_all_strategies(selected_3) };
     // Add optimization parameter
     switch( side_switch ){
         case 1:
-            utils_params::replace_opt_range_by_name( "Filter1L_switch",
+            utils_params::replace_opt_range_by_name( filter_name_long,
                                                      parameter_ranges,
                                                      p_ranges_4 );
             break;
         case 2:
-            utils_params::replace_opt_range_by_name( "Filter1S_switch",
+            utils_params::replace_opt_range_by_name( filter_name_short,
                                                      parameter_ranges,
                                                      p_ranges_4 );
             break;
         case 3:
-            utils_params::replace_opt_range_by_name( "Filter1L_switch",
+            utils_params::replace_opt_range_by_name( filter_name_long,
                                                      parameter_ranges,
                                                      p_ranges_4 );
-            utils_params::replace_opt_range_by_name( "Filter1S_switch",
+            utils_params::replace_opt_range_by_name( filter_name_short,
                                                      parameter_ranges,
                                                      p_ranges_4 );
             break;
@@ -592,25 +623,46 @@ void mode_factory_sequential( BTfast &btf,
     //---
     //--- SELECTION STEP 4
     std::vector<strategy_t> selected_4 {};
-    double AvgTicks_4 {0};
-    double Zscore_4 {0};
-    for( auto it = generated_3.begin();
-              it != generated_3.end(); it++ ){
-        // Read metrics from optimization results
-        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
-            if( optrun->first == "AvgTicks" ){
-                AvgTicks_4 = optrun->second;
-            }
-            else if( optrun->first == "Z-score" ){
-                Zscore_4 = optrun->second;
-            }
-        }
-        selection_conditions = ( AvgTicks_4 > AvgTicks_3
-                                 && Zscore_4 > Zscore_3 );
+    for( const auto& strat: generated_4 ){
+        // Find strategy equal to 'strat' except without new filter
+        strategy_t no_filter_strat_long { utils_params::no_filter_strategy(
+                                        filter_name_long, strat, generated_4) };
+        strategy_t no_filter_strat_short { utils_params::no_filter_strategy(
+                                        filter_name_short, strat, generated_4) };
+
+        // Metrics of strategy without new filter
+        double avgticks_no_filter_long {
+            utils_params::strategy_attribute_by_name(
+                                        "AvgTicks", no_filter_strat_long ) };
+        double avgticks_no_filter_short {
+            utils_params::strategy_attribute_by_name(
+                                        "AvgTicks", no_filter_strat_short ) };
+        double zscore_no_filter_long {
+            utils_params::strategy_attribute_by_name(
+                                        "Z-score", no_filter_strat_long ) };
+        double zscore_no_filter_short {
+            utils_params::strategy_attribute_by_name(
+                                        "Z-score", no_filter_strat_short ) };
+
+        // Metrics of strategy with new filter
+        avgticks_with_filter = utils_params::strategy_attribute_by_name(
+                                                "AvgTicks", strat );
+        zscore_with_filter = utils_params::strategy_attribute_by_name(
+                                                "Z-score", strat );
+        selection_conditions = ( avgticks_with_filter > avgticks_no_filter_long
+                            && avgticks_with_filter > avgticks_no_filter_short
+                            && zscore_with_filter > zscore_no_filter_long
+                            && zscore_with_filter > zscore_no_filter_short );
+
+        // Append strategy without new filter to selected vector
+        selected_4.push_back(no_filter_strat);
+        // Append strategy with new filter if improves metrics
         if( selection_conditions ){
-            selected_4.push_back(*it);
+            selected_4.push_back(strat);
         }
     }
+    // Remove duplicates strategies
+    utils_optim::remove_duplicates( selected_4, fitness_metric );
     std::cout << "Number of strategies passing 4th generation step: "
               << selected_4.size() <<"\n";
     if( selected_4.empty() ){

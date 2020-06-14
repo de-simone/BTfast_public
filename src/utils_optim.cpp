@@ -16,6 +16,7 @@
        - Individual::compute_individual_fitness
        - Validation::intermediate_selection
        - Validation::selection_conditions
+       - mode_factory_sequential (run_modes)
 
 */
 void utils_optim::append_to_optim_results( std::vector<strategy_t> &optim,
@@ -70,7 +71,7 @@ bool utils_optim::equal_strategies( const strategy_t &a, const strategy_t &b )
 
 // ------------------------------------------------------------------------- //
 /*! Remove duplicates from 'strategies'.
-    Strategies is modified in-place and sorted with 'fitness_metric'
+    Strategies is modified in-place and sorted by 'fitness_metric'
 */
 
 void utils_optim::remove_duplicates( std::vector<strategy_t> &strategies,
@@ -100,6 +101,7 @@ Names/Number/Order of performance metrics must be matched among:
     - Individual::compute_individual_fitness
     - Validation::intermediate_selection
     - Validation::selection_conditions
+    - mode_factory_sequential (run_modes)
 */
 
 bool utils_optim::sort_by_ntrades(const strategy_t& a, const strategy_t& b)
@@ -153,6 +155,7 @@ bool utils_optim::sort_by_zscore(const strategy_t& a, const strategy_t& b)
         - Individual::compute_individual_fitness
         - Validation::intermediate_selection
         - Validation::selection_conditions
+        - mode_factory_sequential (run_modes)
 */
 
 void utils_optim::sort_by_metric( std::vector<strategy_t> &optim,

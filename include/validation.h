@@ -71,7 +71,7 @@ class Validation {
 
         void selection( const std::vector<strategy_t> &input_strategies,
                         std::vector<strategy_t> &output_strategies );
-        void intermediate_selection(
+        void initial_generation_selection(
                         const std::vector<strategy_t> &input_strategies,
                         std::vector<strategy_t> &output_strategies );
         void selection_conditions(

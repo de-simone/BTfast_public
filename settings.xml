@@ -20,7 +20,7 @@ General Settings for BTfast
              4:   Strategy Factory (Exhaustive Generation + Validation)
              44:  Strategy Factory (Genetic Generation + Validation)
              444: Strategy Factory (Import Generation results + Validation)
-             5:   Strategy Factory (Sequential Exhaustive Generation + Validation)
+             5:   Strategy Factory (Sequential Generation + Validation)
              6:   Market overview (no trades)
          -->
         <Value> 5
@@ -68,7 +68,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC/GC_M15_2010-2014_2018-2019.csv
+        <Value>  GC/GC_M15_2015-2017.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->

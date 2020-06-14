@@ -54,6 +54,7 @@ bool operator<(const Individual &ind1, const Individual &ind2)
        - Individual::compute_individual_fitness
        - Validation::intermediate_selection
        - Validation::selection_conditions
+       - mode_factory_sequential (run_modes)
 
 */
 void Individual::compute_individual_fitness(BTfast &btf,

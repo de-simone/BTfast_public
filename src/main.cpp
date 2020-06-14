@@ -32,14 +32,13 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-06-12
+                                                        Last update: 2020-06-13
                                           -------------------------------------
 
  * TO DO:
 
     - sequential addition of filters (not simultaneous)
-      intermediate_selection -> initial_selection
-      selection based on improving metrics of same strategy without new filter 
+      selection based on improving metrics of same strategy without new filter
 
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)

@@ -229,7 +229,7 @@ void Validation::selection( const std::vector<strategy_t> &input_strategies,
 
 
 // ------------------------------------------------------------------------- //
-/*! Apply selection conditions for intermediate generated strategies
+/*! Apply selection conditions to initially generated strategies (1st step)
     in 'input_strategies' (during sequential generation)
     and fill 'output_strategies'
 
@@ -240,48 +240,32 @@ void Validation::selection( const std::vector<strategy_t> &input_strategies,
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
         - utils_fileio::write_strategies_to_file
         - Individual::compute_individual_fitness
-        - Validation::intermediate_selection
+        - Validation::initial_generation_selection
         - Validation::selection_conditions
+        - mode_factory_sequential (run_modes)
 */
-void Validation::intermediate_selection(
+void Validation::initial_generation_selection(
                             const std::vector<strategy_t> &input_strategies,
                             std::vector<strategy_t> &output_strategies )
 {
-    double Ntrades {0};
-    double AvgTicks {0};
-    double WinPerc {0};
-    double PftFactor {0};
-    double NpMdd {0};
-    double Expectancy {0};
-    double Zscore {0};
 
     //-- Loop over input_strategies
-    for( auto it = input_strategies.begin();
-              it != input_strategies.end(); it++ ){
+    for( const auto& strat: input_strategies ){
         // Read metrics from optimization results
-        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
-            if( optrun->first == "Ntrades" ){
-                Ntrades = optrun->second;
-            }
-            else if( optrun->first == "AvgTicks" ){
-                AvgTicks = optrun->second;
-            }
-            else if( optrun->first == "WinPerc" ){
-                WinPerc = optrun->second;
-            }
-            else if( optrun->first == "PftFactor" ){
-                PftFactor = optrun->second;
-            }
-            else if( optrun->first == "NP/MDD" ){
-                NpMdd = optrun->second;
-            }
-            else if( optrun->first == "Expectancy" ){
-                Expectancy = optrun->second;
-            }
-            else if( optrun->first == "Z-score" ){
-                Zscore = optrun->second;
-            }
-        }
+        double Ntrades { utils_params::strategy_attribute_by_name("Ntrades",
+                                                                    strat) };
+        double AvgTicks { utils_params::strategy_attribute_by_name("AvgTicks",
+                                                                    strat) };
+        //double WinPerc { utils_params::strategy_attribute_by_name("WinPerc",
+        //                                                            strat) };
+        double PftFactor { utils_params::strategy_attribute_by_name("PftFactor",
+                                                                    strat) };
+        double NpMdd { utils_params::strategy_attribute_by_name("NP/MDD",
+                                                                    strat) };
+        double Expectancy { utils_params::strategy_attribute_by_name("Expectancy",
+                                                                    strat) };
+        double Zscore { utils_params::strategy_attribute_by_name("Z-score",
+                                                                    strat) };
         // Selection Conditions
 
         bool condition1 { Ntrades > 100 };
@@ -293,10 +277,10 @@ void Validation::intermediate_selection(
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
-        //bool selection_conditions { Ntrades > 400 }; //<<< test 
+        //bool selection_conditions { Ntrades > 400 }; //<<< test
         // Append selected strategies to output
         if( selection_conditions ){
-            output_strategies.push_back(*it);
+            output_strategies.push_back(strat);
         }
     }
     //-- End loop over input_strategies
@@ -312,58 +296,40 @@ void Validation::intermediate_selection(
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
         - utils_fileio::write_strategies_to_file
         - Individual::compute_individual_fitness
-        - Validation::intermediate_selection
+        - Validation::initial_generation_selection
         - Validation::selection_conditions
+        - mode_factory_sequential (run_modes)
 */
 void Validation::selection_conditions(
                             const std::vector<strategy_t> &input_strategies,
                             std::vector<strategy_t> &output_strategies )
 {
-    double Ntrades {0};
-    double AvgTicks {0};
-    double WinPerc {0};
-    //double NetPL {0};
-    //double AvgTrade {0};
-    double PftFactor {0};
-    double NpMdd {0};
-    double Expectancy {0};
-    double Zscore {0};
+
     // number of optimization tests (unique strategies)
     size_t Ntests { input_strategies.size() };
 
     //-- Loop over input_strategies
-    for( auto it = input_strategies.begin();
-              it != input_strategies.end(); it++ ){
+    for( const auto& strat: input_strategies ){
         // Read metrics from optimization results
-        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
-            if( optrun->first == "Ntrades" ){
-                Ntrades = optrun->second;
-            }
-            //else if( optrun->first == "NetPL" ){
-            //    NetPL = optrun->second;
-            //}
-            else if( optrun->first == "AvgTicks" ){
-                AvgTicks = optrun->second;
-            }
-            else if( optrun->first == "WinPerc" ){
-                WinPerc = optrun->second;
-            }
-            //else if( optrun->first == "AvgTrade" ){
-            //    AvgTrade = optrun->second;
-            //}
-            else if( optrun->first == "PftFactor" ){
-                PftFactor = optrun->second;
-            }
-            else if( optrun->first == "NP/MDD" ){
-                NpMdd = optrun->second;
-            }
-            else if( optrun->first == "Expectancy" ){
-                Expectancy = optrun->second;
-            }
-            else if( optrun->first == "Z-score" ){
-                Zscore = optrun->second;
-            }
-        }
+        double Ntrades { utils_params::strategy_attribute_by_name("Ntrades",
+                                                                    strat) };
+        double AvgTicks { utils_params::strategy_attribute_by_name("AvgTicks",
+                                                                    strat) };
+        //double WinPerc { utils_params::strategy_attribute_by_name("WinPerc",
+        //                                                            strat) };
+        double PftFactor { utils_params::strategy_attribute_by_name("PftFactor",
+                                                                    strat) };
+        double NpMdd { utils_params::strategy_attribute_by_name("NP/MDD",
+                                                                    strat) };
+        double Expectancy { utils_params::strategy_attribute_by_name("Expectancy",
+                                                                    strat) };
+        double Zscore { utils_params::strategy_attribute_by_name("Z-score",
+                                                                    strat) };
+        //double NetPL { utils_params::strategy_attribute_by_name("NetPL",
+        //                                                            strat) };
+        //double AvgTrade { utils_params::strategy_attribute_by_name("AvgTrade",
+        //                                                            strat) };
+
         // one-sided p-value
         // p = 1-Phi(Z) = Phi(-Z)=(1/2)Erfc[x/sqrt(2)],  Phi = CDF(N(0,1))
         double pvalue = 0.5*std::erfc( Zscore/std::sqrt(2.0) );
@@ -382,7 +348,7 @@ void Validation::selection_conditions(
                                     && condition4 && condition5 && condition6 );
         // Append selected strategies to output
         if( selection_conditions ){
-            output_strategies.push_back(*it);
+            output_strategies.push_back(strat);
         }
     }
     //-- End loop over input_strategies
@@ -415,16 +381,14 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
                      datafeed_->start_date(), datafeed_->end_date() );
 
     //--- Loop over input_strategies
-    for( auto strat = input_strategies.begin();
-              strat < input_strategies.end(); ++strat ){
-
+    for( const auto& strat: input_strategies ){
         printf( "%25s Strategy %lu / %lu ","",
-                std::distance(input_strategies.begin(), strat) + 1,
-                input_strategies.size() );
+                &strat - &input_strategies[0] + 1, input_strategies.size() );
+                //std::distance(input_strategies.begin(), &strat) + 1
 
-        // Extract parameters from *strat and store them into strat_params
+        // Extract parameters from strat and store them into strat_params
         parameters_t strat_params {};
-        utils_params::extract_parameters_from_single_strategy( *strat,
+        utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
         //-- In-Sample Backtest
         // Initialize Account for IS
@@ -490,7 +454,7 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
         if( condition1 && condition2 && condition3 && condition4 ){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
-            output_strategies.push_back( *strat );
+            output_strategies.push_back( strat );
         }
         else{
             printf("-failed-\n");
@@ -530,16 +494,15 @@ void Validation::OOS_consistency_test( const std::vector<strategy_t>
                      datafeed_->start_date(), datafeed_->end_date() );
 
     //--- Loop over input_strategies
-    for( auto strat = input_strategies.begin();
-              strat < input_strategies.end(); ++strat ){
+    for( const auto& strat: input_strategies ){
 
         printf( "%25s Strategy %lu / %lu ","",
-                std::distance(input_strategies.begin(), strat) + 1,
-                input_strategies.size() );
+                                        &strat - &input_strategies[0] + 1,
+                                        input_strategies.size() );
 
-        // Extract parameters from *strat and store them into strat_params
+        // Extract parameters from strat and store them into strat_params
         parameters_t strat_params {};
-        utils_params::extract_parameters_from_single_strategy( *strat,
+        utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
         //-- In-Sample Backtest
         // Initialize Account for IS
@@ -577,7 +540,7 @@ void Validation::OOS_consistency_test( const std::vector<strategy_t>
         if( pvalue >= 0.05 ){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
-            output_strategies.push_back( *strat );
+            output_strategies.push_back( strat );
         }
         else{
             printf("-failed-\n");
@@ -639,16 +602,14 @@ void Validation::profitability_test( const std::vector<strategy_t>
     */
 
     //--- Loop over input_strategies
-    for( auto strat = input_strategies.begin();
-              strat < input_strategies.end(); ++strat ){
+    for( const auto& strat: input_strategies ){
 
         printf( "%25s Strategy %lu / %lu ","",
-                std::distance(input_strategies.begin(), strat) + 1,
-                input_strategies.size() );
+                &strat - &input_strategies[0] + 1, input_strategies.size() );
 
-        // Extract parameters from *strat and store them into strat_params
+        // Extract parameters from strat and store them into strat_params
         parameters_t strat_params {};
-        utils_params::extract_parameters_from_single_strategy( *strat,
+        utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
 
         param_ranges_t param_ranges {};
@@ -708,7 +669,7 @@ void Validation::profitability_test( const std::vector<strategy_t>
         if( profitable_runs >= 0.8 * metric.size() ){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
-            output_strategies.push_back( *strat );
+            output_strategies.push_back( strat );
         }
         else{
             printf("-failed-\n");
@@ -751,16 +712,14 @@ void Validation::stability_test( const std::vector<strategy_t>
     }
 
     //--- Loop over input_strategies
-    for( auto strat = input_strategies.begin();
-              strat < input_strategies.end(); ++strat ){
+    for( const auto& strat: input_strategies ){
 
         printf( "%25s Strategy %lu / %lu ","",
-                std::distance(input_strategies.begin(), strat) + 1,
-                input_strategies.size() );
+                &strat - &input_strategies[0] + 1, input_strategies.size() );
 
-        // Extract parameters from *strat and store them into strat_params
+        // Extract parameters from strat and store them into strat_params
         parameters_t strat_params {};
-        utils_params::extract_parameters_from_single_strategy( *strat,
+        utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
 
         param_ranges_t parameter_ranges {};
@@ -826,7 +785,7 @@ void Validation::stability_test( const std::vector<strategy_t>
         if( min_metric >= (1-max_variation_) * max_metric ){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
-            output_strategies.push_back( *strat );
+            output_strategies.push_back( strat );
         }
         else{
             printf("-failed-\n");
@@ -859,22 +818,20 @@ void Validation::noise_test( const std::vector<strategy_t>
               << "Running Noise Test\n";
 
     //--- Loop over input_strategies
-    for( auto strat = input_strategies.begin();
-              strat < input_strategies.end(); ++strat ){
+    for( const auto& strat: input_strategies ){
 
         printf( "%25s Strategy %lu / %lu ","",
-                std::distance(input_strategies.begin(), strat) + 1,
-                input_strategies.size() );
+                &strat - &input_strategies[0] + 1, input_strategies.size() );
 
         // Initialize vector where storing optimization results of running
         std::vector<strategy_t> noise_results {};
 
         // Add original strategy as first entry of noise_results
-        noise_results.push_back( *strat );
+        noise_results.push_back( strat );
 
-        // Extract parameters from *strat and store them into strat_params
+        // Extract parameters from strat and store them into strat_params
         parameters_t strat_params {};
-        utils_params::extract_parameters_from_single_strategy( *strat,
+        utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
 
         //-- Backtest with noised data
@@ -898,7 +855,7 @@ void Validation::noise_test( const std::vector<strategy_t>
         std::string perf_metric_name { "NP/MDD" };
         std::vector<double> perf_metric {};
         /*
-        for( auto el: *strat ){
+        for( auto el: strat ){
             if( el.first == perf_metric_name ){
                 perf_metric.push_back( el.second );
             }
@@ -934,7 +891,7 @@ void Validation::noise_test( const std::vector<strategy_t>
          && original_metric <= upper_level ){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
-            output_strategies.push_back( *strat );
+            output_strategies.push_back( strat );
         }
         else{
             printf("-failed-\n");
@@ -984,24 +941,24 @@ void Validation::selection_conditions_OOS( const std::vector<strategy_t>
     for( auto it = OOS_run.begin(); it != OOS_run.end(); it++ ){
 
         // Read metrics from optimization results
-        for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
-            if( optrun->first == "Ntrades" ){
-                Ntrades = optrun->second;
+        for( auto elem = it->begin(); elem != it->end(); elem++ ){
+            if( elem->first == "Ntrades" ){
+                Ntrades = elem->second;
             }
-            else if( optrun->first == "NetPL" ){
-                NetPL = optrun->second;
+            else if( elem->first == "NetPL" ){
+                NetPL = elem->second;
             }
-            else if( optrun->first == "AvgTrade" ){
-                AvgTrade = optrun->second;
+            else if( elem->first == "AvgTrade" ){
+                AvgTrade = elem->second;
             }
-            else if( optrun->first == "PftFactor" ){
-                PftFactor = optrun->second;
+            else if( elem->first == "PftFactor" ){
+                PftFactor = elem->second;
             }
-            else if( optrun->first == "NP/MDD" ){
-                NpMdd = optrun->second;
+            else if( elem->first == "NP/MDD" ){
+                NpMdd = elem->second;
             }
-            else if( optrun->first == "Expectancy" ){
-                Expectancy = optrun->second;
+            else if( elem->first == "Expectancy" ){
+                Expectancy = elem->second;
             }
         }
 

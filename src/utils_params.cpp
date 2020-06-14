@@ -75,6 +75,7 @@ std::vector<parameters_t> utils_params::cartesian_product(param_ranges_t &v )
         - Individual::compute_individual_fitness
         - Validation::intermediate_selection
         - Validation::selection_conditions
+        - mode_factory_sequential (run_modes)
 
 */
 void utils_params::extract_parameters_from_single_strategy(
@@ -130,6 +131,21 @@ void utils_params::extract_parameters_from_all_strategies(
         std::cout<<"\n";
     }
     */
+}
+
+// --------------------------------------------------------------------- //
+/*! Extract attribute (metric or paramter) named 'attr_name'
+    from single strategy 'source'
+*/
+double utils_params::strategy_attribute_by_name( const std::string &attr_name,
+                                                 const strategy_t &source )
+{
+    for( const auto& elem : source ){
+        if( elem.first == attr_name ){
+            return(elem.second);
+        }
+    }
+    return(0.0);    // returned value if 'attr_name' is not found
 }
 
 // --------------------------------------------------------------------- //
@@ -261,5 +277,60 @@ param_ranges_t utils_params::param_ranges_from_all_strategies(
                                          param.second.end() ),
                             param.second.end() );
     }
+    return(result);
+}
+
+// --------------------------------------------------------------------- //
+/*!  Find strategy in 'source' equal to 'ref_strat' except with filter
+    'filter_name' equal to 0.
+*/
+strategy_t utils_params::no_filter_strategy( std::string filter_name,
+                                             strategy_t ref_strat,
+                                        const std::vector<strategy_t> &source )
+{
+    strategy_t result {};
+    // Parameters of reference strategy
+    parameters_t ref_strat_params {};
+    utils_params::extract_parameters_from_single_strategy( ref_strat,
+                                                           ref_strat_params);
+    for( const auto& strat : source ){
+
+        // Parameters of 'strat'
+        parameters_t strat_params {};
+        utils_params::extract_parameters_from_single_strategy( strat,
+                                                               strat_params);
+
+        // Check if 'strat_params' has same size as 'ref_strat_params'
+        if( strat_params.size() != ref_strat_params.size() ){
+            return(result);
+        }
+
+        bool is_equal {false};
+
+        for( int i = 0; i < strat_params.size(); i++ ){
+            if( ( strat_params.at(i).first == filter_name
+                    && strat_params.at(i).second == 0 )
+              || strat_params.at(i).second == ref_strat_params.at(i).second ){
+                is_equal = true;
+            }
+            else{
+                is_equal = false;
+                break;
+            }
+        }
+
+        if( is_equal ){
+            result = strat;
+            break;
+        }
+    }
+    for( auto el: ref_strat ){
+        std::cout<< el.second<<"  ";
+    }
+    std::cout<<"\n";
+    for( auto el: result ){
+        std::cout<<el.second<<"  ";
+    }
+    std::cout<<"\n\n";
     return(result);
 }

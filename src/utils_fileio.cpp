@@ -383,6 +383,7 @@ void utils_fileio::copy_file_to_file( std::string sourcefile,
         - Individual::compute_individual_fitness
         - Validation::intermediate_selection
         - Validation::selection_conditions
+        - mode_factory_sequential (run_modes)
 
     Return 1 if OK, 0 otherwise
 */
