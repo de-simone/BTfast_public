@@ -377,8 +377,10 @@ void mode_factory_sequential( BTfast &btf,
     bool selection_conditions {false};
     double avgticks_with_filter {0};
     double avgticks_no_filter {0};
+    double avgticks_improvement {1.0};
     double zscore_with_filter {0};
     double zscore_no_filter {0};
+    double zscore_improvement {0.5};
     strategy_t no_filter_strat {};
 
     // ----------------------    STATEGY GENERATION    --------------------- //
@@ -502,8 +504,9 @@ void mode_factory_sequential( BTfast &btf,
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
-        selection_conditions = ( avgticks_with_filter > avgticks_no_filter
-                                && zscore_with_filter > zscore_no_filter );
+        selection_conditions =
+            ( avgticks_with_filter >= avgticks_no_filter + avgticks_improvement
+            && zscore_with_filter >= zscore_no_filter + zscore_improvement );
 
         // Append strategy without new filter to selected vector
         selected_2.push_back(no_filter_strat);
@@ -557,8 +560,9 @@ void mode_factory_sequential( BTfast &btf,
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
-        selection_conditions = ( avgticks_with_filter > avgticks_no_filter
-                                && zscore_with_filter > zscore_no_filter );
+        selection_conditions =
+            ( avgticks_with_filter >= avgticks_no_filter + avgticks_improvement
+            && zscore_with_filter >= zscore_no_filter + zscore_improvement );
 
         // Append strategy without new filter to selected vector
         selected_3.push_back(no_filter_strat);
@@ -647,10 +651,11 @@ void mode_factory_sequential( BTfast &btf,
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
-        selection_conditions = ( avgticks_with_filter > avgticks_no_filter_long
-                            && avgticks_with_filter > avgticks_no_filter_short
-                            && zscore_with_filter > zscore_no_filter_long
-                            && zscore_with_filter > zscore_no_filter_short );
+        selection_conditions =
+        ( avgticks_with_filter >= avgticks_no_filter_long + avgticks_improvement
+        && avgticks_with_filter >= avgticks_no_filter_short + avgticks_improvement
+        && zscore_with_filter >= zscore_no_filter_long + zscore_improvement
+        && zscore_with_filter >= zscore_no_filter_short + zscore_improvement );
 
         // Append strategy without new filter to selected vector
         selected_4.push_back(no_filter_strat);
