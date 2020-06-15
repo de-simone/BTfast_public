@@ -512,7 +512,6 @@ void mode_factory_sequential( BTfast &btf,
             selected_2.push_back(strat);
         }
     }
-    // Remove duplicates strategies
     utils_optim::remove_duplicates( selected_2, fitness_metric );
     std::cout << "Number of strategies passing 2nd generation step: "
               << selected_2.size() <<"\n";
@@ -568,7 +567,6 @@ void mode_factory_sequential( BTfast &btf,
             selected_3.push_back(strat);
         }
     }
-    // Remove duplicates strategies
     utils_optim::remove_duplicates( selected_3, fitness_metric );
     std::cout << "Number of strategies passing 3rd generation step: "
               << selected_3.size() <<"\n";
@@ -661,7 +659,6 @@ void mode_factory_sequential( BTfast &btf,
             selected_4.push_back(strat);
         }
     }
-    // Remove duplicates strategies
     utils_optim::remove_duplicates( selected_4, fitness_metric );
     std::cout << "Number of strategies passing 4th generation step: "
               << selected_4.size() <<"\n";

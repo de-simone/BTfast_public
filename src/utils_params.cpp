@@ -305,8 +305,10 @@ strategy_t utils_params::no_filter_strategy( std::string filter_name,
             return(result);
         }
 
-        bool is_equal {false};
 
+        // Check whether 'strat_params' and 'ref_strat_params' are equal
+        // (except for the filter set to 0)
+        bool is_equal {false};
         for( int i = 0; i < strat_params.size(); i++ ){
             if( ( strat_params.at(i).first == filter_name
                     && strat_params.at(i).second == 0 )
@@ -324,6 +326,7 @@ strategy_t utils_params::no_filter_strategy( std::string filter_name,
             break;
         }
     }
+    /*
     for( auto el: ref_strat ){
         std::cout<< el.second<<"  ";
     }
@@ -332,5 +335,6 @@ strategy_t utils_params::no_filter_strategy( std::string filter_name,
         std::cout<<el.second<<"  ";
     }
     std::cout<<"\n\n";
+    */
     return(result);
 }
