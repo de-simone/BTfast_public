@@ -16,10 +16,10 @@ General Settings for BTfast
              2:   Exhaustive Parallel Optimization
              22:  Genetic Parallel Optimization
              222: Exhaustive Serial Optimizationw
-             3:   Validation for single strategy (Backtest + Validation)
+             3:   Validation for Single Strategy (Backtest + Validation)
              4:   Strategy Factory (Exhaustive Generation + Validation)
              44:  Strategy Factory (Genetic Generation + Validation)
-             444: Strategy Factory (Import Generation results + Validation)
+             444: Strategy Factory (Import Generation Results + Validation)
              5:   Strategy Factory (Sequential Generation + Validation)
              6:   Market overview (no trades)
          -->

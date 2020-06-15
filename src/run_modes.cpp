@@ -21,6 +21,7 @@
 void mode_notrade( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
                    const param_ranges_t &parameter_ranges )
 {
+    std::cout<< "    Run Mode   : No trade\n\n";
     std::cout << utils_time::current_datetime_str() + " | "
               << "Running in no-trade mode \n";
     // Extract single parameter combination from parameter_ranges
@@ -54,6 +55,7 @@ void mode_single_bt( BTfast &btf,
                      const std::string &performance_file,
                      const std::string &profits_file )
 {
+    std::cout<< "    Run Mode   : Single Backtest\n\n";
     std::cout << utils_time::current_datetime_str() + " | "
               << "Running Backtest \n";
 
@@ -123,6 +125,7 @@ void mode_optimization( BTfast &btf,
 
     if( optim_mode == "parallel" ){     // Exhaustive Parallel Optimization
 
+        std::cout<< "    Run Mode   : Exhaustive Parallel Optimization\n\n";
         bool sort_results {true};
         bool verbose {true};
         btf.run_parallel_optimization( search_space, optim_results, optim_file,
@@ -131,14 +134,14 @@ void mode_optimization( BTfast &btf,
     }
 
     else if( optim_mode == "genetic" ){ // Genetic Parallel Optimization
-
+        std::cout<< "    Run Mode   : Genetic Parallel Optimization\n\n";
         btf.run_genetic_optimization( search_space, optim_results, optim_file,
                                       param_file, fitness_metric,
                                       datafeed, population_size, generations );
     }
 
     else if( optim_mode == "serial" ){  // Exhaustive Serial Optimization
-
+        std::cout<< "    Run Mode   : Exhaustive Serial Optimization\n\n";
         bool sort_results {true};
         bool verbose {true};
         btf.run_optimization( search_space, optim_results, optim_file,
@@ -169,6 +172,7 @@ void mode_single_validation( BTfast &btf,
                              int max_variation_pct, int num_noise_tests,
                              const std::string &noise_file )
 {
+    std::cout<< "    Run Mode   : Validation for Single Strategy\n\n";
     // ----------------------------    BACKTEST   -------------------------- //
     std::cout << utils_time::current_datetime_str() + " | "
               << "Running Backtest \n";
@@ -258,6 +262,7 @@ void mode_factory( BTfast &btf,
         // --------------------    STATEGY GENERATION    ------------------- //
         // ----------------    (optimization or from file)    -------------- //
         if( optim_mode == "parallel" ){
+            std::cout<< "    Run Mode   : Strategy Factory (Exhaustive Generation + Validation)\n\n";
             // Exhaustive Parallel Optimization
             bool sort_results {true};
             bool verbose {true};
@@ -268,6 +273,7 @@ void mode_factory( BTfast &btf,
                                            sort_results, verbose );
         }
         else if( optim_mode == "genetic" ){
+            std::cout<< "    Run Mode   : Strategy Factory (Genetic Generation + Validation)\n\n";
             std::cout<<"\n--- Strategy Generation N. " << i + 1
                      << " / "<< max_num_generations <<" ---\n";
             // Genetic Parallel Optimization
@@ -278,6 +284,7 @@ void mode_factory( BTfast &btf,
                                           population_size, generations );
         }
         else if( optim_mode == "import" ){
+            std::cout<< "    Run Mode   : Strategy Factory (Import Generation Results + Validation)\n\n";
             // Import Generation Results from 'optim_file'
 
             // input START_DATE/END_DATE in settings should not be "0"
@@ -358,6 +365,7 @@ void mode_factory_sequential( BTfast &btf,
                               int max_variation_pct, int num_noise_tests,
                               const std::string &noise_file )
 {
+    std::cout<< "    Run Mode   : Strategy Factory (Sequential Generation + Validation)\n\n";
     // Check if strategy name is MasterCode
     if( btf.strategy_name() != "MasterCode" ){
         std::cout << ">>> ERROR: Sequential strategy generation available"
@@ -700,6 +708,7 @@ void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
                     const param_ranges_t &parameter_ranges,
                     const std::string &overview_file )
 {
+    std::cout<< "    Run Mode   : Market overview\n\n";
     std::cout << utils_time::current_datetime_str() + " | "
               << "Running Market Overview \n";
     // Extract single parameter combination from parameter_ranges

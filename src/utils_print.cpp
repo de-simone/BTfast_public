@@ -39,7 +39,7 @@ void utils_print::print_header( std::string strategy_name, std::string symbol_na
     printf("    Strategy   : %s\n", strategy_name.c_str());
     printf("    Symbol     : %s\n", symbol_name.c_str());
     printf("    TimeFrame  : %s\n", timeframe.c_str());
-    printf("    Data File  : %s\n\n", data_file.c_str());
+    printf("    Data File  : %s\n", data_file.c_str());
 }
 
 // ------------------------------------------------------------------------- //
