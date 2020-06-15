@@ -385,7 +385,7 @@ void mode_factory_sequential( BTfast &btf,
     bool selection_conditions {false};
     double avgticks_with_filter {0};
     double avgticks_no_filter {0};
-    double avgticks_improvement {1.0};
+    double avgticks_improvement {2.0};
     double zscore_with_filter {0};
     double zscore_no_filter {0};
     double zscore_improvement {0.5};
