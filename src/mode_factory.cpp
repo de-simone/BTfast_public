@@ -398,10 +398,20 @@ void mode_factory_sequential( BTfast &btf,
     for( const auto& strat: generated_4 ){
         switch( side_switch ){
             case 1:
+                no_filter_strat_long = utils_params::no_filter_strategy(
+                                        filter_name_long, strat, generated_4 );
+                zscore_no_filter_long = utils_params::strategy_attribute_by_name(
+                                         "Z-score", no_filter_strat_long );
                 break;
             case 2:
+                no_filter_strat_short = utils_params::no_filter_strategy(
+                                        filter_name_short, strat, generated_4 );
                 break;
             case 3:
+                no_filter_strat_long = utils_params::no_filter_strategy(
+                                        filter_name_long, strat, generated_4 );
+                no_filter_strat_short = utils_params::no_filter_strategy(
+                                        filter_name_short, strat, generated_4 );
                 break;
         }
         // Find strategy equal to 'strat' except without new filter
