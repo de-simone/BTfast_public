@@ -170,10 +170,16 @@ void mode_factory_sequential( BTfast &btf,
     bool selection_conditions {false};
     double avgticks_with_filter {0};
     double avgticks_no_filter {0};
+    double avgticks_no_filter_long {0};
+    double avgticks_no_filter_short {0};
     double zscore_with_filter {0};
     double zscore_no_filter {0};
+    double zscore_no_filter_long {0};
+    double zscore_no_filter_short {0};
     double perf_relative_improvement {0.2};
     strategy_t no_filter_strat {};
+    strategy_t no_filter_strat_long {};
+    strategy_t no_filter_strat_short {};
     //utils_params::print_param_ranges_t(parameter_ranges);
 
     // ----------------------    STATEGY GENERATION    --------------------- //
@@ -390,24 +396,28 @@ void mode_factory_sequential( BTfast &btf,
     //--- SELECTION STEP 4
     std::vector<strategy_t> selected_4 {};
     for( const auto& strat: generated_4 ){
+        switch( side_switch ){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
         // Find strategy equal to 'strat' except without new filter
-        strategy_t no_filter_strat_long { utils_params::no_filter_strategy(
-                                        filter_name_long, strat, generated_4) };
-        strategy_t no_filter_strat_short { utils_params::no_filter_strategy(
-                                        filter_name_short, strat, generated_4)};
+        no_filter_strat_long = utils_params::no_filter_strategy(
+                                        filter_name_long, strat, generated_4 );
+        no_filter_strat_short = utils_params::no_filter_strategy(
+                                        filter_name_short, strat, generated_4);
         // Metrics of strategy without new filter
-        double avgticks_no_filter_long {
-            utils_params::strategy_attribute_by_name(
-                                        "AvgTicks", no_filter_strat_long ) };
-        double avgticks_no_filter_short {
-            utils_params::strategy_attribute_by_name(
-                                        "AvgTicks", no_filter_strat_short ) };
-        double zscore_no_filter_long {
-            utils_params::strategy_attribute_by_name(
-                                        "Z-score", no_filter_strat_long ) };
-        double zscore_no_filter_short {
-            utils_params::strategy_attribute_by_name(
-                                        "Z-score", no_filter_strat_short ) };
+        avgticks_no_filter_long = utils_params::strategy_attribute_by_name(
+                                        "AvgTicks", no_filter_strat_long );
+        avgticks_no_filter_short = utils_params::strategy_attribute_by_name(
+                                        "AvgTicks", no_filter_strat_short );
+        zscore_no_filter_long = utils_params::strategy_attribute_by_name(
+                                        "Z-score", no_filter_strat_long );
+        zscore_no_filter_short = utils_params::strategy_attribute_by_name(
+                                        "Z-score", no_filter_strat_short );
         // Metrics of strategy with new filter
         avgticks_with_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", strat );
