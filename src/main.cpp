@@ -39,8 +39,7 @@
 
     - sequential addition of filters (not simultaneous)
       selection based on improving metrics of same strategy without new filter
-    - split run_modes.cpp into several files
-
+    
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)
       multiple times
@@ -87,7 +86,7 @@
 #include "datafeed.h"
 #include "instruments.h"
 #include "run_modes.h"      // mode_notrade, mode_single_bt, mode_optimization,
-                            // mode_factory, mode_overview
+                            // mode_factory, mode_factory_sequential, mode_overview
 
 #include "utils_fileio.h"   // read_config_file, read_param_file, read_strategies_from_file
 //#include "utils_math.h"
@@ -129,7 +128,6 @@ int main () {
     bool include_commissions {false};       ///< Include or not commissions
     double initial_balance {100000.0};      ///< Initial account balance
     double risk_fraction {0.1};             ///< Fraction to use in "fixed-fractional", "fixed-notional" position size
-
 
     std::string config_file {"settings.xml"};   ///<< XML configuration file
     std::string strategy_name {""};             ///< Name of the strategy

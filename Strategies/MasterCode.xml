@@ -29,7 +29,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-        <Value>1</Value>
+        <Value>3</Value>
     </Input>
     <Input>
         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->

@@ -1,232 +1,17 @@
 #include "run_modes.h"
 
-#include "account.h"
-#include "performance.h"
 #include "utils_fileio.h"   // read_strategies_from_file
-#include "utils_optim.h"    // append_to_optim_results
-#include "utils_params.h"   // single_parameter_combination, cartesian_product
+#include "utils_optim.h"    // remove_duplicates
+#include "utils_params.h"   // cartesian_product,
+                            // extract_parameters_from_all_strategies
                             // expand_strategies_with_opt_range,
-                            // first_parameters_from_range
-
-#include "utils_print.h"    // show_backtest_results
-#include "utils_math.h"
-#include "utils_time.h"     // current_datetime_str
+                            // first_parameters_from_range,
+                            // parameter_value_by_name,
+                            // no_filter_strategy
+                            // strategy_attribute_by_name
 #include "validation.h"
 
-#include <cstdlib>          // std::system
-#include <fstream>          // std::ofstream
 #include <iostream>         // std::cout
-
-// ------------------------------------------------------------------------- //
-/*! No trade
-*/
-void mode_notrade( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
-                   const param_ranges_t &parameter_ranges )
-{
-    std::cout<< "    Run Mode   : No trade\n\n";
-    std::cout << utils_time::current_datetime_str() + " | "
-              << "Running in no-trade mode \n";
-    // Extract single parameter combination from parameter_ranges
-    // (only the <Start> value is taken)
-    parameters_t parameter_combination {
-        utils_params::single_parameter_combination(parameter_ranges) };
-    // Initialize Account
-    Account account { btf.initial_balance() };
-    // Parse data without strategy signals
-    btf.run_notrade( account, datafeed, parameter_combination );
-
-    //<<< tests
-    //std::vector<double> v({1,2,3,4,5,6,7,8,9,10});
-    //std::vector<double> w({1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10.1});
-    //utils_math::mannwhitney(v, w);
-    //<<<
-}
-
-
-
-// ------------------------------------------------------------------------- //
-/*! Single Backtest
-*/
-void mode_single_bt( BTfast &btf,
-                     std::unique_ptr<DataFeed> &datafeed,
-                     const param_ranges_t &parameter_ranges,
-                     bool print_trade_list, bool print_performance_report,
-                     bool show_plot,
-                     const std::string &param_file,
-                     const std::string &trade_list_file,
-                     const std::string &performance_file,
-                     const std::string &profits_file )
-{
-    std::cout<< "    Run Mode   : Single Backtest\n\n";
-    std::cout << utils_time::current_datetime_str() + " | "
-              << "Running Backtest \n";
-
-    // Extract single parameter combination from parameter_ranges
-    // (only the <Start> value is taken)
-    parameters_t parameter_combination {
-        utils_params::single_parameter_combination(parameter_ranges) };
-
-    // Initialize Account
-    Account account { btf.initial_balance() };
-
-    // Run single backtest
-    btf.run_backtest( account, datafeed, parameter_combination );
-
-    std::cout<<"\n";
-
-    // Initialize Performance object
-    Performance performance { btf.initial_balance(), btf.day_counter(),
-                              std::vector<Transaction> {} };
-
-    // Load transaction history into performance object
-    performance.set_transactions( account.transactions() );
-
-    // Print results on stdout and on file
-    utils_print::show_backtest_results( account, performance,
-                               btf.strategy_name(), btf.symbol().name(),
-                               btf.timeframe(),
-                               btf.first_date_parsed(), btf.last_date_parsed(),
-                               print_trade_list, print_performance_report,
-                               show_plot, param_file, trade_list_file,
-                               performance_file, profits_file );
-
-}
-
-
-
-
-
-// ------------------------------------------------------------------------- //
-/*! Optimization, with mode specified by 'optim_mode'
-    possible values of 'optim_mode':
-      - "parallel"
-      - "genetic"
-      - "serial"
-*/
-void mode_optimization( BTfast &btf,
-                        std::unique_ptr<DataFeed> &datafeed,
-                        param_ranges_t &parameter_ranges,
-                        const std::string &optim_mode,
-                        const std::string &optim_file,
-                        const std::string &param_file,
-                        const std::string &fitness_metric,
-                        int population_size, int generations )
-{
-
-    // Combine 'parameter_ranges' into all parameter combinations
-    // [ [("p1", 10), ("p2", 2), ...], [("p1", 10), ("p2", 4), ...] ]
-    std::vector<parameters_t> search_space {
-                    utils_params::cartesian_product(parameter_ranges) };
-
-    // Initialize vector where storing results of optimization:
-    // performance metrics and parameter values of each run, e.g.
-    // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
-    //  [("metric1", 121.3), ("metric2", 1.7), ("p1", 4.0), ("p2", 10.0), ...],
-    //  ... ]
-    std::vector<strategy_t> optim_results {};
-
-    if( optim_mode == "parallel" ){     // Exhaustive Parallel Optimization
-
-        std::cout<< "    Run Mode   : Exhaustive Parallel Optimization\n\n";
-        bool sort_results {true};
-        bool verbose {true};
-        btf.run_parallel_optimization( search_space, optim_results, optim_file,
-                                       param_file, fitness_metric,
-                                       datafeed, sort_results, verbose );
-    }
-
-    else if( optim_mode == "genetic" ){ // Genetic Parallel Optimization
-        std::cout<< "    Run Mode   : Genetic Parallel Optimization\n\n";
-        btf.run_genetic_optimization( search_space, optim_results, optim_file,
-                                      param_file, fitness_metric,
-                                      datafeed, population_size, generations );
-    }
-
-    else if( optim_mode == "serial" ){  // Exhaustive Serial Optimization
-        std::cout<< "    Run Mode   : Exhaustive Serial Optimization\n\n";
-        bool sort_results {true};
-        bool verbose {true};
-        btf.run_optimization( search_space, optim_results, optim_file,
-                              param_file, fitness_metric,
-                              datafeed, sort_results, verbose );
-    }
-
-    else{
-        std::cout<<">>>ERROR: invalid optim_mode (mode_optimization).\n";
-        exit(1);
-    }
-}
-
-
-
-// ------------------------------------------------------------------------- //
-/*! Validation for Single Strategy
-*/
-void mode_single_validation( BTfast &btf,
-                             std::unique_ptr<DataFeed> &datafeed,
-                             const param_ranges_t &parameter_ranges,
-                             const std::string &param_file,
-                             const std::string &selected_file,
-                             const std::string &validated_file,
-                             const std::string &fitness_metric,
-                             const std::string &data_dir,
-                             const std::string &data_file_oos,
-                             int max_variation_pct, int num_noise_tests,
-                             const std::string &noise_file )
-{
-    std::cout<< "    Run Mode   : Validation for Single Strategy\n\n";
-    // ----------------------------    BACKTEST   -------------------------- //
-    std::cout << utils_time::current_datetime_str() + " | "
-              << "Running Backtest \n";
-
-    // Extract single parameter combination from parameter_ranges
-    // (only the <Start> value is taken)
-    parameters_t parameter_combination {
-        utils_params::single_parameter_combination(parameter_ranges) };
-
-    // Backtest of single strategy
-    Account account { btf.initial_balance() };
-
-    btf.run_backtest( account, datafeed, parameter_combination );
-
-    Performance performance { btf.initial_balance(), btf.day_counter(),
-                              std::vector<Transaction> {} };
-
-    performance.set_transactions( account.transactions() );
-
-    // Print results on stdout and on file
-    utils_print::show_backtest_results( account, performance,
-                               btf.strategy_name(), btf.symbol().name(),
-                               btf.timeframe(),
-                               btf.first_date_parsed(), btf.last_date_parsed(),
-                               false, true,
-                               false, param_file, "", "", "" );
-
-    // Initialize vector to store results of backtest
-    std::vector<strategy_t> strategy_to_validate {};
-    // Fill 'strategy_to_validate' with performance metrics and parameters
-    utils_optim::append_to_optim_results( strategy_to_validate,
-                                          performance,
-                                          parameter_combination );
-    // --------------------------------------------------------------------- //
-
-    // ---------------------------    VALIDATION   ------------------------- //
-    // Instantiate Validation object
-    Validation validation { btf, datafeed,
-                            strategy_to_validate, selected_file,
-                            validated_file, fitness_metric,
-                            data_dir, data_file_oos, max_variation_pct,
-                            num_noise_tests, noise_file };
-
-    // Run full validation process
-    validation.run_validation();
-    // --------------------------------------------------------------------- //
-}
-
-
-
-
-
 
 // ------------------------------------------------------------------------- //
 /*! Strategy Factory mode (Generation + Validation)
@@ -397,19 +182,17 @@ void mode_factory_sequential( BTfast &btf,
     // Initial parameter set with just the first element of each
     // parameter in parameter_ranges
     search_space = utils_params::first_parameters_from_range(parameter_ranges);
-
-    // Add optimization parameters
+    // Add optimization parameter range to each strategy in search space
     filter_name_both = "POI_switch";
-    // Add optimization parameter range to each selected strategy
     utils_params::expand_strategies_with_opt_range(
                             filter_name_both, parameter_ranges, search_space);
-
+    // Add optimization parameter range to each strategy in search space
     filter_name_both = "Distance_switch";
     utils_params::expand_strategies_with_opt_range(
                             filter_name_both, parameter_ranges, search_space);
+    // Add optimization parameter range to each strategy in search space
     filter_name_long = "fractN_long";
     filter_name_short = "fractN_short";
-
     switch( side_switch ){
         case 1:
             utils_params::expand_strategies_with_opt_range(
@@ -425,7 +208,6 @@ void mode_factory_sequential( BTfast &btf,
                         filter_name_long, parameter_ranges, search_space);
             utils_params::expand_strategies_with_opt_range(
                         filter_name_short, parameter_ranges, search_space);
-
             break;
         default:
             std::cout << ">>> ERROR: Invalid Side_switch parameter in XML"
@@ -451,7 +233,7 @@ void mode_factory_sequential( BTfast &btf,
                       validated_file, fitness_metric, data_dir,
                       data_file_oos, max_variation_pct, num_noise_tests,
                       noise_file };
-    val1.initial_generation_selection(generated_1, selected_1);
+    val1.initial_generation_selection( generated_1, selected_1 );
     std::cout << "Number of strategies passing 1st generation step: "
               << selected_1.size() <<"\n";
     if( selected_1.empty() ){
@@ -459,36 +241,14 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
 
-    /*
     //--- GENERATION STEP 2
-    filter_name_both = "DOW_switch";
-    // Extract strategy parameters from selected_1
+    // Extract strategy parameters from selected_1 to search space
     utils_params::extract_parameters_from_all_strategies( selected_1,
                                                           search_space );
-    // Add optimization parameter range to each selected strategy
+    // Add optimization parameter range to each strategy in search space
+    filter_name_both = "DOW_switch";
     utils_params::expand_strategies_with_opt_range(
                             filter_name_both, parameter_ranges, search_space);
-    */
-    /*
-    //<<<
-    parameters_t sel1 {};
-    for(auto s: selected_1 ){
-        utils_params::extract_parameters_from_single_strategy(s, sel1);
-        for( auto el: sel1){
-            std::cout<< el.second <<"  ";
-        }
-        std::cout<<"\n";
-    }
-    std::cout<<"\n";
-    for(auto s: search_space ){
-        for( auto el: s){
-            std::cout<< el.second <<"  ";
-        }
-        std::cout<<"\n";
-    }
-    //<<<
-    */
-    /*
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_2 {};
     btf.run_parallel_optimization( search_space, generated_2,
@@ -499,14 +259,12 @@ void mode_factory_sequential( BTfast &btf,
          exit(1);
     }
     //---
-
     //--- SELECTION STEP 2
     std::vector<strategy_t> selected_2 {};
     for( const auto& strat: generated_2 ){
         // Find strategy equal to 'strat' except without new filter
         no_filter_strat  = utils_params::no_filter_strategy(filter_name_both,
                                                             strat, generated_2);
-
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", no_filter_strat );
@@ -522,10 +280,9 @@ void mode_factory_sequential( BTfast &btf,
                                         * ( 1 + perf_relative_improvement )
             && zscore_with_filter >= zscore_no_filter
                                         * ( 1 + perf_relative_improvement ) );
-
         // Append strategy without new filter to selected vector
         selected_2.push_back(no_filter_strat);
-        // Append strategy with new filter if improves metrics
+        // Append strategy with new filter if it improves metrics
         if( selection_conditions ){
             selected_2.push_back(strat);
         }
@@ -539,14 +296,13 @@ void mode_factory_sequential( BTfast &btf,
     //---
 
     //--- GENERATION STEP 3
-    filter_name_both = "Intraday_switch";
-    // Extract strategy parameters from selected_2
+    // Extract strategy parameters from selected_1 to search space
     utils_params::extract_parameters_from_all_strategies( selected_2,
                                                           search_space );
-    // Add optimization parameter range to each selected strategy
+    filter_name_both = "Intraday_switch";
+    // Add optimization parameter range to each strategy in search space
     utils_params::expand_strategies_with_opt_range(
                         filter_name_both, parameter_ranges, search_space);
-
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_3 {};
     btf.run_parallel_optimization( search_space, generated_3,
@@ -563,7 +319,6 @@ void mode_factory_sequential( BTfast &btf,
         // Find strategy equal to 'strat' except without new filter
         no_filter_strat  = utils_params::no_filter_strategy(filter_name_both,
                                                             strat, generated_3);
-
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", no_filter_strat );
@@ -579,10 +334,9 @@ void mode_factory_sequential( BTfast &btf,
                                         * ( 1 + perf_relative_improvement )
             && zscore_with_filter >= zscore_no_filter
                                         * ( 1 + perf_relative_improvement ) );
-
         // Append strategy without new filter to selected vector
         selected_3.push_back(no_filter_strat);
-        // Append strategy with new filter if improves metrics
+        // Append strategy with new filter if it improves metrics
         if( selection_conditions ){
             selected_3.push_back(strat);
         }
@@ -595,35 +349,23 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
 
-
     //--- GENERATION STEP 4
+    // Extract strategy parameters from selected_3 to search space
+    utils_params::extract_parameters_from_all_strategies( selected_3,
+                                                          search_space );
+    // Add optimization parameter range to each strategy in search space
     filter_name_long = "Filter1L_switch";
     filter_name_short = "Filter1S_switch";
-    std::vector<parameters_t> selected_3_params {};
     switch( side_switch ){
         case 1:
-            // Extract strategy parameters from selected_3
-            utils_params::extract_parameters_from_all_strategies(
-                                            selected_3, search_space );
-            // Add optimization parameter range to each selected strategy
             utils_params::expand_strategies_with_opt_range(
                         filter_name_long, parameter_ranges, search_space);
-
             break;
-
         case 2:
-            // Extract strategy parameters from selected_3
-            utils_params::extract_parameters_from_all_strategies(
-                                            selected_3, search_space );
-            // Add optimization parameter range to each selected strategy
             utils_params::expand_strategies_with_opt_range(
                         filter_name_short, parameter_ranges, search_space);
             break;
         case 3:
-            // Extract strategy parameters from selected_3
-            utils_params::extract_parameters_from_all_strategies(
-                                            selected_3, search_space );
-            // Add optimization parameter range to each selected strategy
             utils_params::expand_strategies_with_opt_range(
                         filter_name_long, parameter_ranges, search_space);
             utils_params::expand_strategies_with_opt_range(
@@ -635,7 +377,6 @@ void mode_factory_sequential( BTfast &btf,
                       << " (mode_factory_sequential).\n";
             exit(1);
     }
-
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_4 {};
     btf.run_parallel_optimization( search_space, generated_4,
@@ -654,7 +395,6 @@ void mode_factory_sequential( BTfast &btf,
                                         filter_name_long, strat, generated_4) };
         strategy_t no_filter_strat_short { utils_params::no_filter_strategy(
                                         filter_name_short, strat, generated_4)};
-
         // Metrics of strategy without new filter
         double avgticks_no_filter_long {
             utils_params::strategy_attribute_by_name(
@@ -668,25 +408,23 @@ void mode_factory_sequential( BTfast &btf,
         double zscore_no_filter_short {
             utils_params::strategy_attribute_by_name(
                                         "Z-score", no_filter_strat_short ) };
-
         // Metrics of strategy with new filter
         avgticks_with_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
         selection_conditions =
-        ( avgticks_with_filter >= avgticks_no_filter_long
-                                    * ( 1 + perf_relative_improvement )
-        && avgticks_with_filter >= avgticks_no_filter_short
-                                    * ( 1 + perf_relative_improvement )
-        && zscore_with_filter >= zscore_no_filter_long
-                                    * ( 1 + perf_relative_improvement )
-        && zscore_with_filter >= zscore_no_filter_short
-                                    * ( 1 + perf_relative_improvement ) );
-
+            ( avgticks_with_filter >= avgticks_no_filter_long
+                                        * ( 1 + perf_relative_improvement )
+            && avgticks_with_filter >= avgticks_no_filter_short
+                                        * ( 1 + perf_relative_improvement )
+            && zscore_with_filter >= zscore_no_filter_long
+                                        * ( 1 + perf_relative_improvement )
+            && zscore_with_filter >= zscore_no_filter_short
+                                        * ( 1 + perf_relative_improvement ) );
         // Append strategy without new filter to selected vector
         selected_4.push_back(no_filter_strat);
-        // Append strategy with new filter if improves metrics
+        // Append strategy with new filter if it improves metrics
         if( selection_conditions ){
             selected_4.push_back(strat);
         }
@@ -698,10 +436,9 @@ void mode_factory_sequential( BTfast &btf,
        exit(1);
     }
     //---
-    */
+
     // --------------------------------------------------------------------- //
 
-    /*
     // ---------------------------    VALIDATION   ------------------------- //
     // Instantiate Validation object
     Validation validation { btf, datafeed, selected_4, selected_file,
@@ -711,128 +448,4 @@ void mode_factory_sequential( BTfast &btf,
     // Run full validation process
     validation.run_validation();
     // --------------------------------------------------------------------- //
-    */
-}
-
-
-
-
-
-
-
-
-// ------------------------------------------------------------------------- //
-/*! Overview of Market main features (no trade)
-*/
-void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
-                    const param_ranges_t &parameter_ranges,
-                    const std::string &overview_file )
-{
-    std::cout<< "    Run Mode   : Market overview\n\n";
-    std::cout << utils_time::current_datetime_str() + " | "
-              << "Running Market Overview \n";
-    // Extract single parameter combination from parameter_ranges
-    // (only the <Start> value is taken)
-    parameters_t parameter_combination {
-        utils_params::single_parameter_combination(parameter_ranges) };
-    // Initialize Account
-    Account account { btf.initial_balance() };
-
-    // Parse data and collect market info, without strategy signals
-    btf.run_overview( account, datafeed, parameter_combination );
-
-    //--- Write to overview_file
-    std::ofstream outfile;
-    outfile.open( overview_file );
-
-    for( auto p: btf.eod_prices() ){
-        outfile << p.first.tostring() <<", "<< p.second <<"\n";
-    }
-    outfile << "\n\n";
-
-    for( int i=0; i < btf.volume_hour().size(); i++ ){
-        outfile << i <<", " << btf.volume_hour().at(i) <<"\n";
-    }
-    outfile << "\n\n";
-
-    for( int i=0; i < btf.co_range_dow().size(); i++ ){
-        outfile << i+1 <<", " << btf.co_range_dow().at(i) <<"\n";
-    }
-    outfile << "\n\n";
-
-    for( auto r: btf.hl_range() ){
-        outfile << r <<"\n";
-    }
-    outfile << "\n\n";
-
-    outfile.close();
-    std::cout<< "\nOverview info written on file: " << overview_file << "\n";
-    //---
-
-    // Execute script for gnuplot and open the PNG file
-    std::string command { "./bin/PlotMktOverview" };
-    std::system(command.c_str());
-}
-
-
-
-// ------------------------------------------------------------------------- //
-/*! Noise Test for Single Strategy (adding gaussian noise to price data)
-*/
-void mode_noise( BTfast &btf,
-                 std::unique_ptr<DataFeed> &datafeed,
-                 const param_ranges_t &parameter_ranges,
-                 int num_noise_tests, bool show_plot,
-                 const std::string &noise_file,
-                 const std::string &param_file,
-                 const std::string &fitness_metric )
-{
-    // Extract single parameter combination from parameter_ranges
-    // (only the <Start> value is taken)
-    parameters_t parameter_combination {
-        utils_params::single_parameter_combination(parameter_ranges) };
-
-    // Initialize vector to store results of noise test
-    std::vector<strategy_t> noise_results {};
-
-    //-- Backtest on original price data (without noise)
-    Account account { btf.initial_balance() };
-    btf.run_backtest( account, datafeed,
-                      parameter_combination );
-    Performance performance { btf.initial_balance(), btf.day_counter(),
-                              std::vector<Transaction> {} };
-    performance.set_transactions( account.transactions() );
-    performance.compute_metrics();
-    utils_optim::append_to_optim_results( noise_results,
-                                          performance,
-                                          parameter_combination );
-    //--
-
-    //-- Backtest with noised data
-    // Replicate the same 'parameter_combination' for
-    // ('num_noise_tests'-1) times, since 1 run is on original data
-    std::vector<parameters_t> search_space {};
-
-    for( int i = 0; i < num_noise_tests - 1; i++ ){
-        search_space.push_back(parameter_combination);
-    }
-
-    // Each run is with same strategy parameters but with
-    // random noise added to price data
-    bool sort_results {false};
-    bool verbose {false};
-    btf.set_random_noise(true);
-    btf.run_parallel_optimization( search_space, noise_results, noise_file,
-                                   param_file, fitness_metric,
-                                   datafeed,
-                                   //btf.start_date(),btf.end_date(),
-                                   sort_results, verbose );
-    //--
-
-    // Plot distributions of performance metrics under noise test
-    if( show_plot ){
-        // Execute script for gnuplot and open the PNG file
-        std::string command = "./bin/PlotNoiseDistributions";
-        system(command.c_str());
-    }
 }
