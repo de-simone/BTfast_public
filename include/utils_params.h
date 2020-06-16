@@ -13,6 +13,25 @@
 namespace utils_params {
 
     // --------------------------------------------------------------------- //
+    /*!  Print content of parameters_t type
+        [ ("p1", 2), ("p2", 7), ... ]
+    */
+    void print_parameters_t( const parameters_t& p );
+
+    // --------------------------------------------------------------------- //
+    /*!  Print content of vector of parameters_t type
+        [ [ ("p1", 2), ("p2", 7), ... ],
+          [ ("p1", 4), ("p2", 11), ... ], ... ]
+    */
+    void print_parameters_t_vector( const std::vector<parameters_t>& v );
+
+    // --------------------------------------------------------------------- //
+    /*!  Print content of param_ranges_t type
+        [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
+    */
+    void print_param_ranges_t( const param_ranges_t& par_range );
+
+    // --------------------------------------------------------------------- //
     /*!  From vector v (as returned by utils_fileio::read_param_file() ),
 
             v =  [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
@@ -57,11 +76,29 @@ namespace utils_params {
 
 
     // --------------------------------------------------------------------- //
+    /*!  Extract parameter range vector from 'par_range' corresponding to
+         name 'par_name' and expand strategy 'source' with
+         'par_name' replaced by optimization range.
+         Output vector replaces 'base_strats'
+    */
+    void expand_strategies_with_opt_range(
+                                    const std::string &par_name,
+                                    const param_ranges_t &par_range,
+                                    std::vector<parameters_t> &base_strats);
+
+    // --------------------------------------------------------------------- //
     /*! Extract attribute (metric or paramter) named 'attr_name'
         from single strategy 'source'
     */
     double strategy_attribute_by_name( const std::string &attr_name,
                                        const strategy_t &source );
+
+    // --------------------------------------------------------------------- //
+    /*! Set parameter value in 'parameters' corresponding to name 'par_name'
+        to value 'new_value'
+    */
+    void set_parameter_value_by_name( const std::string &par_name,
+                                      parameters_t& parameters, int new_value );
 
     // --------------------------------------------------------------------- //
     /*! Get first parameter value from 'source' corresponding to
@@ -77,9 +114,21 @@ namespace utils_params {
 
          return param_ranges_t with just the first element of std::vector<int>:
 
-            [ ("p1", 10), ("p2", 2), ... ]
+            [ ("p1", [10]), ("p2", [2]), ... ]
     */
-    param_ranges_t first_param_from_range( const param_ranges_t &source );
+    //param_ranges_t first_param_from_range( const param_ranges_t &source );
+
+    // --------------------------------------------------------------------- //
+    /*!  From full range for all parameters 'source',
+
+            source =  [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
+
+         fill 'dest' with just the first element of std::vector<int>:
+
+            [ [ ("p1", 10), ("p2", 2), ... ] ]
+    */
+    std::vector<parameters_t> first_parameters_from_range(
+                                            const param_ranges_t &par_range );
 
     // --------------------------------------------------------------------- //
     /*!  Extract parameter range vector from 'source' corresponding to

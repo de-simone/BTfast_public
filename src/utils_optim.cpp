@@ -57,7 +57,25 @@ void utils_optim::append_to_optim_results( std::vector<strategy_t> &optim,
 bool utils_optim::equal_strategies( const strategy_t &a, const strategy_t &b )
 {
     bool cond {true};
+    if( a.size() != b.size() ){
+        return(false);
+    }
+    else{
+        for( int i=0; i<a.size(); i++ ){
+             cond = cond && ( a.at(i).second == b.at(i).second );
+        }
+        return( cond );
+    }
+}
 
+// ------------------------------------------------------------------------- //
+/*! Binary predicate function to compare two parameters_t objects
+*/
+
+bool utils_optim::equal_strategy_params( const parameters_t &a,
+                                         const parameters_t &b )
+{
+    bool cond {true};
     if( a.size() != b.size() ){
         return(false);
     }
@@ -80,13 +98,28 @@ void utils_optim::remove_duplicates( std::vector<strategy_t> &strategies,
     if( strategies.empty() ){
         return;
     }
-
     utils_optim::sort_by_metric( strategies, metric );
 
     strategies.erase( std::unique( strategies.begin(), strategies.end(),
                                     utils_optim::equal_strategies ),
                       strategies.end() );
 
+}
+
+// ------------------------------------------------------------------------- //
+/*! Remove duplicates from parameters (modified in-place)
+*/
+
+void utils_optim::remove_duplicates( std::vector<parameters_t> &parameters )
+{
+    /*
+    if( parameters.empty() ){
+        return;
+    }
+    parameters.erase( std::unique( parameters.begin(), parameters.end(),
+                                    utils_optim::equal_strategy_params ),
+                      parameters.end() );
+    */
 }
 
 // ------------------------------------------------------------------------- //

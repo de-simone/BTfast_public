@@ -1,8 +1,55 @@
 #include "utils_params.h"
 
+#include "utils_optim.h"    // remove_duplicates
+
 #include <algorithm>    // std::reverse, std::sort, std::unique
 #include <numeric>      // std::accumulate
 #include <iostream>     // std::cout
+#include <utility>      // std::make_pair
+
+// --------------------------------------------------------------------- //
+/*!  Print content of parameters_t type
+    [ ("p1", 2), ("p2", 7), ... ]
+*/
+void utils_params::print_parameters_t( const parameters_t& p )
+{
+    for( const auto& elem: p ){
+        std::cout<< elem.first<<": "<< elem.second<<"\n";
+    }
+    std::cout<<"\n";
+}
+// --------------------------------------------------------------------- //
+/*!  Print content of vector of parameters_t type
+    [ [ ("p1", 2), ("p2", 7), ... ],
+      [ ("p1", 4), ("p2", 11), ... ], ... ]
+*/
+void utils_params::print_parameters_t_vector( const std::vector<parameters_t>& v )
+{
+    for( const auto& p: v ){
+        std::cout<<"\n";
+        for( const auto& elem: p){
+            //std::cout<< elem.first<<": "<< elem.second<<"\n";
+            std::cout<<elem.second<<", ";
+        }        
+    }
+    std::cout<<"\n";
+}
+
+// --------------------------------------------------------------------- //
+/*!  Print content of param_ranges_t type
+    [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
+*/
+void utils_params::print_param_ranges_t( const param_ranges_t& par_range )
+{
+    for( const auto& p: par_range ){
+        std::cout<<"\n"<<p.first<<": ";
+        for( const auto& elem: p.second){
+            std::cout<< elem <<", ";
+        }
+    }
+    std::cout<<"\n";
+}
+
 
 // ------------------------------------------------------------------------- //
 //  Extract first element of std::vector<int> in each pair of v
@@ -60,6 +107,37 @@ std::vector<parameters_t> utils_params::cartesian_product(param_ranges_t &v )
     return(result);
 }
 
+// --------------------------------------------------------------------- //
+/*  Extract only the parameter values from  all strategies in 'source'
+    (ignoring the entries with performance metrics)
+    and cast them double -> int. Copy the result into 'dest'.
+
+    Names of performance metrics must match those in:
+    utils_optim::append_to_optim_results
+*/
+void utils_params::extract_parameters_from_all_strategies(
+                                    const std::vector<strategy_t> &source,
+                                    std::vector<parameters_t> &dest )
+{
+    // clear destination vector
+    dest.clear();
+    // loop over source strategies
+    for( strategy_t el: source ){
+        parameters_t row;
+        utils_params::extract_parameters_from_single_strategy( el, row);
+        dest.push_back(row);
+    }
+    /*
+    // print dest
+    for( auto el: dest){
+        for(auto p : el){
+            std::cout<<p.first<<", " << p.second<<"  ";
+        }
+        std::cout<<"\n";
+    }
+    */
+}
+
 
 // --------------------------------------------------------------------- //
 /*  Extract only the parameter values from strategy 'source'
@@ -102,35 +180,55 @@ void utils_params::extract_parameters_from_single_strategy(
 }
 
 
-// --------------------------------------------------------------------- //
-/*  Extract only the parameter values from  all strategies in 'source'
-    (ignoring the entries with performance metrics)
-    and cast them double -> int. Copy the result into 'dest'.
 
-    Names of performance metrics must match those in:
-    utils_optim::append_to_optim_results
+
+// --------------------------------------------------------------------- //
+/*!  Extract parameter range vector from 'par_range' corresponding to
+     name 'par_name' and expand base strategies 'base_strats' with
+     'par_name' replaced by optimization range.
+     Output vector replaces 'base_strats'.
 */
-void utils_params::extract_parameters_from_all_strategies(
-                                    const std::vector<strategy_t> &source,
-                                    std::vector<parameters_t> &dest )
+
+void utils_params::expand_strategies_with_opt_range(
+                                    const std::string &par_name,
+                                    const param_ranges_t &par_range,
+                                    std::vector<parameters_t> &base_strats)
 {
-    // clear destination vector
-    dest.clear();
-    // loop over source strategies
-    for( strategy_t el: source ){
-        parameters_t row;
-        utils_params::extract_parameters_from_single_strategy( el, row);
-        dest.push_back(row);
-    }
-    /*
-    // print dest
-    for( auto el: dest){
-        for(auto p : el){
-            std::cout<<p.first<<", " << p.second<<"  ";
+    std::vector<parameters_t> result;
+
+    // find 'par_name' in 'par_range' and fill optrange vector
+    std::vector<int> optrange {};
+    for( const auto& param: par_range ){
+        if( param.first == par_name ){
+            optrange = param.second;
+            break;
         }
-        std::cout<<"\n";
     }
-    */
+    // check if 'par_name' was found in 'par_range'
+    if( optrange.empty() ){
+        std::cout<< ">>> ERROR: Invalid parameter name "
+                 << "(replace_opt_range_by_name)\n";
+        exit(1);
+    }
+
+    // Fill result vector
+    for( const auto& elem: base_strats ){
+        //parameters_t elem_parameters {};
+        //utils_params::extract_parameters_from_single_strategy(elem, elem_parameters);
+        // append original base strategy
+        result.push_back(elem);
+        // append strategy with modified value of  'par_name'
+        for( const auto& param: optrange ){
+            parameters_t new_entry { elem };
+            set_parameter_value_by_name( par_name, new_entry, param );
+            result.push_back(new_entry);
+        }
+
+    }
+
+    utils_optim::remove_duplicates( result );
+    //base_strats.clear(); //<<< ??
+    base_strats = result;
 }
 
 // --------------------------------------------------------------------- //
@@ -149,11 +247,26 @@ double utils_params::strategy_attribute_by_name( const std::string &attr_name,
 }
 
 // --------------------------------------------------------------------- //
+/*! Set parameter value in 'parameters' corresponding to name 'par_name'
+    to value 'new_value'
+*/
+void utils_params::set_parameter_value_by_name( const std::string &par_name,
+                                    parameters_t& parameters, int new_value )
+{
+    for( auto& elem: parameters){
+        if( elem.first == par_name ){
+            elem.second = new_value;
+            break;
+        }
+    }
+}
+
+// --------------------------------------------------------------------- //
 /*! Get first parameter value from 'source' corresponding to
     name 'par_name'
 */
 int utils_params::parameter_value_by_name( const std::string &par_name,
-                                           const param_ranges_t &source )
+                                        const param_ranges_t &source )
 {
     int result {};
     bool elem_found {false};
@@ -182,12 +295,13 @@ int utils_params::parameter_value_by_name( const std::string &par_name,
 
      return param_ranges_t with just the first element of std::vector<int>:
 
-        [ ("p1", 10), ("p2", 2), ... ]
+        [ ("p1", [10]), ("p2", [2]), ... ]
 */
+/*
 param_ranges_t utils_params::first_param_from_range(const param_ranges_t &source)
 {
     param_ranges_t result {};
-    for( const auto& elem: source){
+    for( const auto& elem: source ){
         if( !elem.second.empty() ){
             // retrieve first element
             std::vector<int> first_p {elem.second.at(0)};
@@ -196,8 +310,31 @@ param_ranges_t utils_params::first_param_from_range(const param_ranges_t &source
     }
     return(result);
 }
+*/
 
+// --------------------------------------------------------------------- //
+/*!  From full range for all parameters 'source',
 
+        source =  [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
+
+     return std::vector<parameters_t> with just the first
+     element of std::vector<int>:
+
+        [ [ ("p1", 10), ("p2", 2), ... ] ]
+*/
+std::vector<parameters_t> utils_params::first_parameters_from_range(
+                                            const param_ranges_t &par_range )
+{
+    parameters_t pars {};
+    for( const auto& elem: par_range ){
+        if( !elem.second.empty() ){
+            // retrieve first element
+            pars.push_back( std::make_pair(elem.first, elem.second.at(0)) );
+        }
+    }
+    return( std::vector<parameters_t> {pars} );
+
+}
 // --------------------------------------------------------------------- //
 /*!  Extract parameter range vector from 'source' corresponding to
      name 'par_name' and replace parameter vector in 'dest'

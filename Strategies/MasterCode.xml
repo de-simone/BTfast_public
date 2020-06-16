@@ -38,49 +38,49 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..7:1 -->
         <Start>1</Start>
-        <Stop>7</Stop>
+        <Stop>3</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Distance_switch</Name>    <!-- 1..3:1 -->
-        <Start>1</Start>
+        <Start>2</Start>
         <Stop>3</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
         <Start>0</Start>
-        <Stop>5</Stop>
+        <Stop>2</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
         <Start>0</Start>
-        <Stop>10</Stop>
+        <Stop>3</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
-        <Start>0</Start>
-        <Stop>50</Stop>
+        <Start>12</Start>
+        <Stop>15</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
-        <Start>0</Start>
-        <Stop>50</Stop>
+        <Start>22</Start>
+        <Stop>25</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..5:1 -->
         <Start>0</Start>
-        <Stop>5</Stop>
+        <Stop>2</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>fractN_short</Name>       <!-- 0..5:1 -->
-        <Start>0</Start>
-        <Stop>5</Stop>
+        <Start>2</Start>
+        <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
     <Input>

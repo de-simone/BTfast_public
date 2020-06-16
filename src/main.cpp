@@ -32,13 +32,14 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-06-13
+                                                        Last update: 2020-06-16
                                           -------------------------------------
 
  * TO DO:
 
     - sequential addition of filters (not simultaneous)
       selection based on improving metrics of same strategy without new filter
+    - split run_modes.cpp into several files
 
     - check implementation of LIMIT orders with TradeStation
     - genetic optim: avoid computing the fitness of the same strategy (individual)

@@ -21,9 +21,13 @@ namespace utils_optim {
 
     // Binary predicate function to compare two strategy_t objects
     bool equal_strategies( const strategy_t &a, const strategy_t &b );
+    // Binary predicate function to compare two parameters_t objects
+    bool equal_strategy_params( const parameters_t &a, const parameters_t &b );
     // Remove duplicates from 'strategies' vector (in-place), sort by metric
     void remove_duplicates( std::vector<strategy_t> &strategies,
                             const std::string &metric );
+    // Remove duplicates from parameters (modified in-place)
+    void remove_duplicates( std::vector<parameters_t> &parameters );
 
     // --------------------------------------------------------------------- //
     // Binary functions for sorting optimization results in descending order

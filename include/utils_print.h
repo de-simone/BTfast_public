@@ -50,6 +50,10 @@ namespace utils_print {
                     std::string trade_list_file,
                     std::string performance_file, std::string profits_file );
 
+    // --------------------------------------------------------------------- //
+    /*! Print strategy parameters
+    */
+    //void print_strategy_params(strategy_t strat);
 }
 
 
