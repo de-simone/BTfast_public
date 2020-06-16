@@ -400,9 +400,16 @@ void mode_factory_sequential( BTfast &btf,
             case 1:
                 no_filter_strat_long = utils_params::no_filter_strategy(
                                         filter_name_long, strat, generated_4 );
+                avgticks_no_filter_long = utils_params::strategy_attribute_by_name(
+                                        "AvgTicks", no_filter_strat_long );
                 zscore_no_filter_long = utils_params::strategy_attribute_by_name(
-                                         "Z-score", no_filter_strat_long );
-                break;
+                                         "Z-score", no_filter_strat_long );                
+                selection_conditions =
+                     ( avgticks_with_filter >= avgticks_no_filter_long
+                                            * ( 1 + perf_relative_improvement )
+                     && zscore_with_filter >= zscore_no_filter_long
+                                            * ( 1 + perf_relative_improvement );
+                    break;
             case 2:
                 no_filter_strat_short = utils_params::no_filter_strategy(
                                         filter_name_short, strat, generated_4 );
