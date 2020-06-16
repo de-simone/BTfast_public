@@ -30,7 +30,7 @@ void utils_params::print_parameters_t_vector( const std::vector<parameters_t>& v
         for( const auto& elem: p){
             //std::cout<< elem.first<<": "<< elem.second<<"\n";
             std::cout<<elem.second<<", ";
-        }        
+        }
     }
     std::cout<<"\n";
 }
@@ -195,7 +195,6 @@ void utils_params::expand_strategies_with_opt_range(
                                     std::vector<parameters_t> &base_strats)
 {
     std::vector<parameters_t> result;
-
     // find 'par_name' in 'par_range' and fill optrange vector
     std::vector<int> optrange {};
     for( const auto& param: par_range ){
@@ -211,23 +210,20 @@ void utils_params::expand_strategies_with_opt_range(
         exit(1);
     }
 
-    // Fill result vector
     for( const auto& elem: base_strats ){
-        //parameters_t elem_parameters {};
-        //utils_params::extract_parameters_from_single_strategy(elem, elem_parameters);
-        // append original base strategy
+        /// append original base strategy
         result.push_back(elem);
-        // append strategy with modified value of  'par_name'
+        // append strategy with modified value of 'par_name'
         for( const auto& param: optrange ){
-            parameters_t new_entry { elem };
-            set_parameter_value_by_name( par_name, new_entry, param );
-            result.push_back(new_entry);
+            // avoid duplication by checking if param value already exists
+            if( utils_params::parameter_by_name(par_name, elem) != param ){
+                parameters_t new_entry { elem };
+                set_parameter_value_by_name( par_name, new_entry, param );
+                result.push_back(new_entry);
+            }
         }
-
     }
-
-    utils_optim::remove_duplicates( result );
-    //base_strats.clear(); //<<< ??
+    //utils_optim::remove_duplicates( result );
     base_strats = result;
 }
 
@@ -259,6 +255,20 @@ void utils_params::set_parameter_value_by_name( const std::string &par_name,
             break;
         }
     }
+}
+
+// --------------------------------------------------------------------- //
+/*! Extract value of parameter  named 'par_name' from parameters_t  'source'
+*/
+int utils_params::parameter_by_name( const std::string &par_name,
+                                     const parameters_t &source )
+{
+    for( const auto& elem : source ){
+        if( elem.first == par_name ){
+            return(elem.second);
+        }
+    }
+    return(0);    // returned value if 'par_name' is not found
 }
 
 // --------------------------------------------------------------------- //

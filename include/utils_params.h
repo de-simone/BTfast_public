@@ -87,7 +87,7 @@ namespace utils_params {
                                     std::vector<parameters_t> &base_strats);
 
     // --------------------------------------------------------------------- //
-    /*! Extract attribute (metric or paramter) named 'attr_name'
+    /*! Extract attribute (metric or parameter) named 'attr_name'
         from single strategy 'source'
     */
     double strategy_attribute_by_name( const std::string &attr_name,
@@ -99,6 +99,12 @@ namespace utils_params {
     */
     void set_parameter_value_by_name( const std::string &par_name,
                                       parameters_t& parameters, int new_value );
+
+    // --------------------------------------------------------------------- //
+    /*! Extract value of parameter  named 'par_name' from parameters_t  'source'
+    */
+    int parameter_by_name( const std::string &par_name,
+                            const parameters_t &source );
 
     // --------------------------------------------------------------------- //
     /*! Get first parameter value from 'source' corresponding to

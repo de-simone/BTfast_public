@@ -389,8 +389,7 @@ void mode_factory_sequential( BTfast &btf,
     double zscore_no_filter {0};
     double perf_relative_improvement {0.2};
     strategy_t no_filter_strat {};
-
-    utils_params::print_param_ranges_t(parameter_ranges);
+    //utils_params::print_param_ranges_t(parameter_ranges);
 
     // ----------------------    STATEGY GENERATION    --------------------- //
 
@@ -405,17 +404,12 @@ void mode_factory_sequential( BTfast &btf,
     utils_params::expand_strategies_with_opt_range(
                             filter_name_both, parameter_ranges, search_space);
 
-    //utils_params::replace_opt_range_by_name( filter_name_both, parameter_ranges,
-    //                                         p_ranges_1 );
     filter_name_both = "Distance_switch";
     utils_params::expand_strategies_with_opt_range(
                             filter_name_both, parameter_ranges, search_space);
-    utils_params::print_parameters_t_vector( search_space ); //<<<
-    //utils_params::replace_opt_range_by_name( filter_name_both,parameter_ranges,
-    //                                         p_ranges_1 );
     filter_name_long = "fractN_long";
     filter_name_short = "fractN_short";
-    /*
+
     switch( side_switch ){
         case 1:
             utils_params::expand_strategies_with_opt_range(
@@ -438,38 +432,7 @@ void mode_factory_sequential( BTfast &btf,
                       << " (mode_factory_sequential).\n";
             exit(1);
     }
-
-    switch( side_switch ){
-        case 1:
-            utils_params::replace_opt_range_by_name( filter_name_long,
-                                                     parameter_ranges,
-                                                     p_ranges_1 );
-            break;
-        case 2:
-            utils_params::replace_opt_range_by_name( filter_name_short,
-                                                     parameter_ranges,
-                                                     p_ranges_1 );
-            break;
-        case 3:
-            utils_params::replace_opt_range_by_name( filter_name_long,
-                                                     parameter_ranges,
-                                                     p_ranges_1 );
-            utils_params::replace_opt_range_by_name( filter_name_short,
-                                                     parameter_ranges,
-                                                     p_ranges_1 );
-            break;
-        default:
-            std::cout << ">>> ERROR: Invalid Side_switch parameter in XML"
-                      << " (mode_factory_sequential).\n";
-            exit(1);
-    }
-
-    // Combine parameter ranges into all parameter combinations
-    search_space = utils_params::cartesian_product(p_ranges_1);
-
-    //<<<
-    utils_params::print_parameters_t_vector( search_space );
-    //<<<
+    //utils_params::print_parameters_t_vector( search_space );
 
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_1 {};
@@ -496,7 +459,7 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
 
-
+    /*
     //--- GENERATION STEP 2
     filter_name_both = "DOW_switch";
     // Extract strategy parameters from selected_1
