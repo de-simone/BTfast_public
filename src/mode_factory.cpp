@@ -378,9 +378,9 @@ void mode_factory_sequential( BTfast &btf,
         }
         // Metrics of strategy without new filter(s)
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
-                                    "AvgTicks", no_filter_strat );
+                                                "AvgTicks", no_filter_strat );
         zscore_no_filter = utils_params::strategy_attribute_by_name(
-                                     "Z-score", no_filter_strat );
+                                                "Z-score", no_filter_strat );
         // Metrics of strategy with new filter(s)
         avgticks_with_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", strat );
