@@ -18,12 +18,43 @@ void utils_params::print_parameters_t( const parameters_t& p )
     }
     std::cout<<"\n";
 }
+
+// --------------------------------------------------------------------- //
+/*!  Print content of strategy_t type
+    [ ("metric1", 2.3), ..., ("p1", 2), ("p2", 7), ... ]
+*/
+void utils_params::print_strategy_t( const strategy_t& s )
+{
+    for( const auto& elem: s ){
+        //std::cout<< elem.first<<": "<< elem.second<<"\n";
+        std::cout<<elem.second<<", ";
+    }
+    std::cout<<"\n";
+}
+
 // --------------------------------------------------------------------- //
 /*!  Print content of vector of parameters_t type
     [ [ ("p1", 2), ("p2", 7), ... ],
       [ ("p1", 4), ("p2", 11), ... ], ... ]
 */
-void utils_params::print_parameters_t_vector( const std::vector<parameters_t>& v )
+void utils_params::print_parameters_t_vector(const std::vector<parameters_t>& v)
+{
+    for( const auto& p: v ){
+        std::cout<<"\n";
+        for( const auto& elem: p){
+            //std::cout<< elem.first<<": "<< elem.second<<"\n";
+            std::cout<<elem.second<<", ";
+        }
+    }
+    std::cout<<"\n";
+}
+
+// --------------------------------------------------------------------- //
+/*!  Print content of vector of strategy_t type
+    [ [ ("p1", 2), ("p2", 7), ... ],
+      [ ("p1", 4), ("p2", 11), ... ], ... ]
+*/
+void utils_params::print_strategy_t_vector( const std::vector<strategy_t>& v )
 {
     for( const auto& p: v ){
         std::cout<<"\n";
@@ -276,7 +307,7 @@ int utils_params::parameter_by_name( const std::string &par_name,
     name 'par_name'
 */
 int utils_params::parameter_value_by_name( const std::string &par_name,
-                                        const param_ranges_t &source )
+                                           const param_ranges_t &source )
 {
     int result {};
     bool elem_found {false};
@@ -441,26 +472,24 @@ strategy_t utils_params::no_filter_strategy( std::string filter_name,
     utils_params::extract_parameters_from_single_strategy( ref_strat,
                                                            ref_strat_params);
     for( const auto& strat : source ){
-
         // Parameters of 'strat'
         parameters_t strat_params {};
         utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params);
-
         // Check if 'strat_params' has same size as 'ref_strat_params'
         if( strat_params.size() != ref_strat_params.size() ){
             return(result);
         }
 
-
         // Check whether 'strat_params' and 'ref_strat_params' are equal
         // (except for the filter set to 0)
         bool is_equal {false};
         for( int i = 0; i < strat_params.size(); i++ ){
-            if( ( strat_params.at(i).first == filter_name
-                    && strat_params.at(i).second == 0 )
-              || strat_params.at(i).second == ref_strat_params.at(i).second ){
-                is_equal = true;
+            if(  ( strat_params.at(i).first == filter_name
+                && strat_params.at(i).second == 0 )
+              || ( strat_params.at(i).first != filter_name
+                && strat_params.at(i).second == ref_strat_params.at(i).second)){
+                is_equal =  true;
             }
             else{
                 is_equal = false;
@@ -484,4 +513,55 @@ strategy_t utils_params::no_filter_strategy( std::string filter_name,
     std::cout<<"\n\n";
     */
     return(result);
+}
+
+// --------------------------------------------------------------------- //
+/*!  Find strategy in 'source' equal to 'ref_strat' except with two filters
+    'filter_name_1', 'filter_name_2' equal to 0.
+*/
+strategy_t utils_params::no_two_filters_strategy( std::string filter_name_1,
+                                                  std::string filter_name_2,
+                                                  strategy_t ref_strat,
+                                       const std::vector<strategy_t> &source )
+{
+   strategy_t result {};
+   // Parameters of reference strategy
+   parameters_t ref_strat_params {};
+   utils_params::extract_parameters_from_single_strategy( ref_strat,
+                                                          ref_strat_params);
+   for( const auto& strat : source ){
+       // Parameters of 'strat'
+       parameters_t strat_params {};
+       utils_params::extract_parameters_from_single_strategy( strat,
+                                                              strat_params);
+       // Check if 'strat_params' has same size as 'ref_strat_params'
+       if( strat_params.size() != ref_strat_params.size() ){
+           return(result);
+       }
+
+       // Check whether 'strat_params' and 'ref_strat_params' are equal
+       // (except for the filter set to 0)
+       bool is_equal {false};
+       for( int i = 0; i < strat_params.size(); i++ ){
+           if(  ( strat_params.at(i).first == filter_name_1
+               && strat_params.at(i).second == 0 )
+             || ( strat_params.at(i).first == filter_name_2
+               && strat_params.at(i).second == 0 )
+             || ( strat_params.at(i).first != filter_name_1
+               && strat_params.at(i).first != filter_name_2
+               && strat_params.at(i).second == ref_strat_params.at(i).second)){
+               is_equal =  true;
+           }
+           else{
+               is_equal = false;
+               break;
+           }
+       }
+
+       if( is_equal ){
+           result = strat;
+           break;
+       }
+   }
+   return(result);
 }

@@ -19,11 +19,24 @@ namespace utils_params {
     void print_parameters_t( const parameters_t& p );
 
     // --------------------------------------------------------------------- //
+    /*!  Print content of strategy_t type
+        [ ("metric1", 2.3), ..., ("p1", 2), ("p2", 7), ... ]
+    */
+    void print_strategy_t( const strategy_t& s );
+
+    // --------------------------------------------------------------------- //
     /*!  Print content of vector of parameters_t type
         [ [ ("p1", 2), ("p2", 7), ... ],
           [ ("p1", 4), ("p2", 11), ... ], ... ]
     */
     void print_parameters_t_vector( const std::vector<parameters_t>& v );
+
+    // --------------------------------------------------------------------- //
+    /*!  Print content of vector of strategy_t type
+        [ [ ("p1", 2), ("p2", 7), ... ],
+          [ ("p1", 4), ("p2", 11), ... ], ... ]
+    */
+    void print_strategy_t_vector( const std::vector<strategy_t>& v );
 
     // --------------------------------------------------------------------- //
     /*!  Print content of param_ranges_t type
@@ -160,7 +173,15 @@ namespace utils_params {
                                    strategy_t ref_strat,
                                    const std::vector<strategy_t> &source );
 
-
+    // --------------------------------------------------------------------- //
+    /*!  Find strategy in 'source' equal to 'ref_strat' except with two filters
+        'filter_name_1', 'filter_name_2' equal to 0.
+    */
+    strategy_t no_two_filters_strategy( std::string filter_name_1,
+                                        std::string filter_name_2,
+                                        strategy_t ref_strat,
+                                        const std::vector<strategy_t> &source );
+                                        
     // --------------------------------------------------------------------- //
     /*!  Extract parameter range vector from all strategies in 'source'
          name 'par_name' and replace parameter vector in 'dest'

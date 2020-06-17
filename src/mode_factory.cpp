@@ -164,22 +164,13 @@ void mode_factory_sequential( BTfast &btf,
                                                             parameter_ranges) };
     // Initialize variables
     std::vector<parameters_t> search_space {};
-    std::string filter_name_long {""};
-    std::string filter_name_short {""};
-    std::string filter_name_both {""};
     bool selection_conditions {false};
     double avgticks_with_filter {0};
     double avgticks_no_filter {0};
-    double avgticks_no_filter_long {0};
-    double avgticks_no_filter_short {0};
     double zscore_with_filter {0};
     double zscore_no_filter {0};
-    double zscore_no_filter_long {0};
-    double zscore_no_filter_short {0};
     double perf_relative_improvement {0.2};
     strategy_t no_filter_strat {};
-    strategy_t no_filter_strat_long {};
-    strategy_t no_filter_strat_short {};
     //utils_params::print_param_ranges_t(parameter_ranges);
 
     // ----------------------    STATEGY GENERATION    --------------------- //
@@ -189,36 +180,24 @@ void mode_factory_sequential( BTfast &btf,
     // parameter in parameter_ranges
     search_space = utils_params::first_parameters_from_range(parameter_ranges);
     // Add optimization parameter range to each strategy in search space
-    filter_name_both = "POI_switch";
     utils_params::expand_strategies_with_opt_range(
-                            filter_name_both, parameter_ranges, search_space);
+                            "POI_switch", parameter_ranges, search_space);
     // Add optimization parameter range to each strategy in search space
-    filter_name_both = "Distance_switch";
     utils_params::expand_strategies_with_opt_range(
-                            filter_name_both, parameter_ranges, search_space);
+                            "Distance_switch", parameter_ranges, search_space);
     // Add optimization parameter range to each strategy in search space
-    filter_name_long = "fractN_long";
-    filter_name_short = "fractN_short";
-    switch( side_switch ){
-        case 1:
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_long, parameter_ranges, search_space);
-            break;
-        case 2:
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_short, parameter_ranges, search_space);
-            break;
-        case 3:
-            // Extract strategy parameters from selected_3
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_long, parameter_ranges, search_space);
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_short, parameter_ranges, search_space);
-            break;
-        default:
-            std::cout << ">>> ERROR: Invalid Side_switch parameter in XML"
-                      << " (mode_factory_sequential).\n";
-            exit(1);
+    if( side_switch == 1 || side_switch == 3 ){
+        utils_params::expand_strategies_with_opt_range(
+                            "fractN_long", parameter_ranges, search_space);
+    }
+    if( side_switch == 2 || side_switch == 3 ){
+        utils_params::expand_strategies_with_opt_range(
+                            "fractN_short", parameter_ranges, search_space);
+    }
+    if( side_switch != 1 && side_switch != 2 && side_switch != 3 ){
+        std::cout << ">>> ERROR: Invalid Side_switch parameter in XML"
+                  << " (mode_factory_sequential).\n";
+        exit(1);
     }
     //utils_params::print_parameters_t_vector( search_space );
 
@@ -252,9 +231,8 @@ void mode_factory_sequential( BTfast &btf,
     utils_params::extract_parameters_from_all_strategies( selected_1,
                                                           search_space );
     // Add optimization parameter range to each strategy in search space
-    filter_name_both = "DOW_switch";
     utils_params::expand_strategies_with_opt_range(
-                            filter_name_both, parameter_ranges, search_space);
+                                "DOW_switch", parameter_ranges, search_space);
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_2 {};
     btf.run_parallel_optimization( search_space, generated_2,
@@ -269,7 +247,7 @@ void mode_factory_sequential( BTfast &btf,
     std::vector<strategy_t> selected_2 {};
     for( const auto& strat: generated_2 ){
         // Find strategy equal to 'strat' except without new filter
-        no_filter_strat  = utils_params::no_filter_strategy(filter_name_both,
+        no_filter_strat  = utils_params::no_filter_strategy("DOW_switch",
                                                             strat, generated_2);
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
@@ -305,10 +283,9 @@ void mode_factory_sequential( BTfast &btf,
     // Extract strategy parameters from selected_1 to search space
     utils_params::extract_parameters_from_all_strategies( selected_2,
                                                           search_space );
-    filter_name_both = "Intraday_switch";
     // Add optimization parameter range to each strategy in search space
     utils_params::expand_strategies_with_opt_range(
-                        filter_name_both, parameter_ranges, search_space);
+                        "Intraday_switch", parameter_ranges, search_space);
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_3 {};
     btf.run_parallel_optimization( search_space, generated_3,
@@ -323,7 +300,7 @@ void mode_factory_sequential( BTfast &btf,
     std::vector<strategy_t> selected_3 {};
     for( const auto& strat: generated_3 ){
         // Find strategy equal to 'strat' except without new filter
-        no_filter_strat  = utils_params::no_filter_strategy(filter_name_both,
+        no_filter_strat  = utils_params::no_filter_strategy("Intraday_switch",
                                                             strat, generated_3);
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
@@ -360,28 +337,13 @@ void mode_factory_sequential( BTfast &btf,
     utils_params::extract_parameters_from_all_strategies( selected_3,
                                                           search_space );
     // Add optimization parameter range to each strategy in search space
-    filter_name_long = "Filter1L_switch";
-    filter_name_short = "Filter1S_switch";
-    switch( side_switch ){
-        case 1:
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_long, parameter_ranges, search_space);
-            break;
-        case 2:
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_short, parameter_ranges, search_space);
-            break;
-        case 3:
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_long, parameter_ranges, search_space);
-            utils_params::expand_strategies_with_opt_range(
-                        filter_name_short, parameter_ranges, search_space);
-
-            break;
-        default:
-            std::cout << ">>> ERROR: Invalid Side_switch parameter in XML"
-                      << " (mode_factory_sequential).\n";
-            exit(1);
+    if( side_switch == 1 || side_switch == 3 ){
+        utils_params::expand_strategies_with_opt_range(
+                        "Filter1L_switch", parameter_ranges, search_space);
+    }
+    if( side_switch == 2 || side_switch == 3 ){
+        utils_params::expand_strategies_with_opt_range(
+                        "Filter1S_switch", parameter_ranges, search_space);
     }
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_4 {};
@@ -398,56 +360,36 @@ void mode_factory_sequential( BTfast &btf,
     for( const auto& strat: generated_4 ){
         switch( side_switch ){
             case 1:
-                no_filter_strat_long = utils_params::no_filter_strategy(
-                                        filter_name_long, strat, generated_4 );
-                avgticks_no_filter_long = utils_params::strategy_attribute_by_name(
-                                        "AvgTicks", no_filter_strat_long );
-                zscore_no_filter_long = utils_params::strategy_attribute_by_name(
-                                         "Z-score", no_filter_strat_long );                
-                selection_conditions =
-                     ( avgticks_with_filter >= avgticks_no_filter_long
-                                            * ( 1 + perf_relative_improvement )
-                     && zscore_with_filter >= zscore_no_filter_long
-                                            * ( 1 + perf_relative_improvement );
-                    break;
+                // Find strategy equal to 'strat' except without new filter
+                no_filter_strat = utils_params::no_filter_strategy(
+                                        "Filter1L_switch", strat, generated_4 );
+                break;
             case 2:
-                no_filter_strat_short = utils_params::no_filter_strategy(
-                                        filter_name_short, strat, generated_4 );
+                // Find strategy equal to 'strat' except without new filter
+                no_filter_strat = utils_params::no_filter_strategy(
+                                        "Filter1S_switch", strat, generated_4 );
                 break;
             case 3:
-                no_filter_strat_long = utils_params::no_filter_strategy(
-                                        filter_name_long, strat, generated_4 );
-                no_filter_strat_short = utils_params::no_filter_strategy(
-                                        filter_name_short, strat, generated_4 );
+                // Find strategy equal to 'strat' except without two new filters
+                no_filter_strat = utils_params::no_two_filters_strategy(
+                                        "Filter1L_switch", "Filter1S_switch",
+                                        strat, generated_4 );
                 break;
         }
-        // Find strategy equal to 'strat' except without new filter
-        no_filter_strat_long = utils_params::no_filter_strategy(
-                                        filter_name_long, strat, generated_4 );
-        no_filter_strat_short = utils_params::no_filter_strategy(
-                                        filter_name_short, strat, generated_4);
-        // Metrics of strategy without new filter
-        avgticks_no_filter_long = utils_params::strategy_attribute_by_name(
-                                        "AvgTicks", no_filter_strat_long );
-        avgticks_no_filter_short = utils_params::strategy_attribute_by_name(
-                                        "AvgTicks", no_filter_strat_short );
-        zscore_no_filter_long = utils_params::strategy_attribute_by_name(
-                                        "Z-score", no_filter_strat_long );
-        zscore_no_filter_short = utils_params::strategy_attribute_by_name(
-                                        "Z-score", no_filter_strat_short );
-        // Metrics of strategy with new filter
+        // Metrics of strategy without new filter(s)
+        avgticks_no_filter = utils_params::strategy_attribute_by_name(
+                                    "AvgTicks", no_filter_strat );
+        zscore_no_filter = utils_params::strategy_attribute_by_name(
+                                     "Z-score", no_filter_strat );
+        // Metrics of strategy with new filter(s)
         avgticks_with_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
         selection_conditions =
-            ( avgticks_with_filter >= avgticks_no_filter_long
+            ( avgticks_with_filter >= avgticks_no_filter
                                         * ( 1 + perf_relative_improvement )
-            && avgticks_with_filter >= avgticks_no_filter_short
-                                        * ( 1 + perf_relative_improvement )
-            && zscore_with_filter >= zscore_no_filter_long
-                                        * ( 1 + perf_relative_improvement )
-            && zscore_with_filter >= zscore_no_filter_short
+            && zscore_with_filter >= zscore_no_filter
                                         * ( 1 + perf_relative_improvement ) );
         // Append strategy without new filter to selected vector
         selected_4.push_back(no_filter_strat);
