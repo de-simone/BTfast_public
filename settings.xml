@@ -23,7 +23,7 @@ General Settings for BTfast
              5:   Strategy Factory (Sequential Generation + Validation)
              6:   Market overview (no trades)
          -->
-        <Value> 5
+        <Value> 1
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -37,7 +37,7 @@ General Settings for BTfast
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   GC
+        <Value>   BO
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
@@ -49,13 +49,13 @@ General Settings for BTfast
         <!-- Start date (included). Format: YYYY-MM-DD
             (0 for first date on file)  -->
         <Name>  START_DATE      </Name>
-        <Value>  2015-01-01        <!-- 2014-01-01 2007-10-29 -->
+        <Value>  2010-01-01        <!-- 2014-01-01 2007-10-29 -->
         </Value></Input>
     <Input>
         <!-- End date (included). Format: YYYY-MM-DD
             (0 for last date on file)  -->
         <Name>  END_DATE        </Name>
-        <Value> 2016-12-31      <!-- 2014-02-03 2007-11-06 -->
+        <Value> 2019-12-31      <!-- 2014-02-03 2007-11-06 -->
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -68,7 +68,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC/GC_M15_2015-2017.csv
+        <Value>  BO/BO_M15_2010-2014_2018-2019.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -116,7 +116,7 @@ General Settings for BTfast
         <!-- Write results on file and show plot (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    SHOW_PLOT     </Name>
-        <Value>   0
+        <Value>   1
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -183,7 +183,7 @@ General Settings for BTfast
         <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
              (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
         <Name>    DATA_FILE_OOS     </Name>
-        <Value>   GC/GC_M15_2015-2017.csv
+        <Value>   BO/BO_M15_2015-2017.csv
         </Value></Input>
     <Input>
         <!-- Percentage of max variation (stability test) -->

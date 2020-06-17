@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-06-08 09:09:35
+# TimeStamp   : 2020-06-17 15:15:21
 # Strategy    : BOtest
 # Symbol      : BO
 # TimeFrame   : M15
@@ -20,34 +20,34 @@
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
-     N. of Trades       :     494          226          268
-     Net Profit         :     588.00     -3000.00      3588.00
-     Net Profit %       :       0.0%        -0.0%         0.0%
-     CAGR               :       0.0%        -0.0%         0.0%
-     Avg Trade          :       1.19       -13.27        13.39
-     Avg Ticks          :       0.20        -2.21         2.23
-     Profit Factor      :       1.01         0.88         1.13
-     Win Percent        :      48.8%        46.5%        50.7%
-     Avg DrawDown       :   -1274.94     -1170.08      -724.37
+     N. of Trades       :     434          199          235
+     Net Profit         :    7800.00       102.00      7698.00
+     Net Profit %       :       0.1%         0.0%         0.1%
+     CAGR               :       0.0%         0.0%         0.0%
+     Avg Trade          :      17.97         0.51        32.76
+     Avg Ticks          :       3.00         0.09         5.46
+     Profit Factor      :       1.19         1.01         1.33
+     Win Percent        :      48.2%        46.2%        49.8%
+     Avg DrawDown       :   -1241.65     -1064.05      -748.49
      Avg DrawDown %     :      -0.0%        -0.0%        -0.0%
-     Max DrawDown       :   -8874.00     -5940.00     -3894.00
-     Max DrawDown %     :      -0.1%        -0.1%        -0.0%
-     Net PL/Max DD      :       0.07        -0.51         0.92
-     CAGR/Max DD %      :       0.01        -0.04         0.08
-     Expectancy         :       0.01        -0.07         0.06
-     Z-score            :       0.06        -0.54         0.48
-     R^2                :     0.7384       0.0000       0.8835
+     Max DrawDown       :   -3258.00     -3306.00     -3126.00
+     Max DrawDown %     :      -0.0%        -0.0%        -0.0%
+     Net PL/Max DD      :       2.39         0.03         2.46
+     CAGR/Max DD %      :       0.30         0.00         0.31
+     Expectancy         :       0.10         0.00         0.17
+     Z-score            :       0.96         0.03         1.08
+     R^2                :     0.6445       0.0000       0.7721
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :     420.65       372.47       457.70
-     Gross Profit       :   52878.00     21162.00     31716.00
-     Gross Loss         :  -52290.00    -24162.00    -28128.00
-     Avg Profit         :     219.41       201.54       233.21
-     Avg Loss           :    -206.68      -199.69      -213.09
-     Max Profit         :    3054.00      1080.00      3054.00
-     Max Loss           :   -3552.00     -3510.00     -3552.00
-     Avg Bars in Win    :     244.41       194.28       283.12
-     Avg Bars in Loss   :     172.48       241.43       109.27
+     Std.Dev. of P/L    :     389.24       271.06       466.60
+     Gross Profit       :   48636.00     17940.00     30696.00
+     Gross Loss         :  -40836.00    -17838.00    -22998.00
+     Avg Profit         :     232.71       195.00       262.36
+     Avg Loss           :    -181.49      -166.71      -194.90
+     Max Profit         :    3444.00      1080.00      3444.00
+     Max Loss           :   -2412.00     -1806.00     -2412.00
+     Avg Bars in Win    :     196.95       129.88       249.69
+     Avg Bars in Loss   :      74.46        89.35        60.97
      Max Consec. Wins   :       7            4            7
      Max Consec. Losses :      10            8            8
-     Minimum Capital    :   14159.00      9758.00      6689.00
+     Minimum Capital    :    5735.00      5807.00      5537.00
    # ========================================================= #
