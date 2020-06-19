@@ -37,14 +37,8 @@
 
  * TO DO:
 
-    - sequential strategy factor with run_mode = 4
+    - position size factor (double) in signals, controlling dynamic position sizing
     - check implementation of LIMIT orders with TradeStation
-    - genetic optim: avoid computing the fitness of the same strategy (individual)
-      multiple times
-
-
-    [- large stoploss, trade to close not found]
-    [- multiple comparison, benjamini-hochberg]
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
       bars of up to 10 different symbols. Then PriceCollection runs over array
@@ -55,7 +49,10 @@
                           out of building blocks )
    - add commission/slippage to execution
 
-
+   [- large stoploss, trade to close not found]
+   [- multiple comparison, benjamini-hochberg]
+   [- genetic optim: avoid computing the fitness of the same strategy (individual)
+     multiple times]
     [- fix IS/OOS dates. define:
         initial_date_IS (=input_start_date), final_date_IS,
         initial_date_OOS1, final_date_OOS1,
