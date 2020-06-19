@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-06-17 15:15:21
+# TimeStamp   : 2020-06-19 16:03:51
 # Strategy    : BOtest
 # Symbol      : BO
 # TimeFrame   : M15
-# Date Range  : 2010-01-03 --> 2019-12-31
+# Date Range  : 2015-01-02 --> 2017-12-29
 #
 #<Strategies/BOtest.xml>
 # <?xml version='1.0' encoding='UTF-8'?>
@@ -20,34 +20,34 @@
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
-     N. of Trades       :     434          199          235
-     Net Profit         :    7800.00       102.00      7698.00
-     Net Profit %       :       0.1%         0.0%         0.1%
+     N. of Trades       :      58           24           34
+     Net Profit         :    3600.00       252.00      3348.00
+     Net Profit %       :       0.0%         0.0%         0.0%
      CAGR               :       0.0%         0.0%         0.0%
-     Avg Trade          :      17.97         0.51        32.76
-     Avg Ticks          :       3.00         0.09         5.46
-     Profit Factor      :       1.19         1.01         1.33
-     Win Percent        :      48.2%        46.2%        49.8%
-     Avg DrawDown       :   -1241.65     -1064.05      -748.49
+     Avg Trade          :      62.07        10.50        98.47
+     Avg Ticks          :       5.17         0.88         8.21
+     Profit Factor      :       1.23         1.04         1.33
+     Win Percent        :      56.9%        50.0%        61.8%
+     Avg DrawDown       :   -1125.52      -613.50      -671.65
      Avg DrawDown %     :      -0.0%        -0.0%        -0.0%
-     Max DrawDown       :   -3258.00     -3306.00     -3126.00
-     Max DrawDown %     :      -0.0%        -0.0%        -0.0%
-     Net PL/Max DD      :       2.39         0.03         2.46
-     CAGR/Max DD %      :       0.30         0.00         0.31
-     Expectancy         :       0.10         0.00         0.17
-     Z-score            :       0.96         0.03         1.08
-     R^2                :     0.6445       0.0000       0.7721
+     Max DrawDown       :  -10740.00     -3804.00     -7104.00
+     Max DrawDown %     :      -0.1%        -0.0%        -0.1%
+     Net PL/Max DD      :       0.34         0.07         0.47
+     CAGR/Max DD %      :       0.08         0.02         0.12
+     Expectancy         :       0.10         0.02         0.13
+     Z-score            :       0.35         0.00         0.36
+     R^2                :     0.4225       0.3595       0.2409
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :     389.24       271.06       466.60
-     Gross Profit       :   48636.00     17940.00     30696.00
-     Gross Loss         :  -40836.00    -17838.00    -22998.00
-     Avg Profit         :     232.71       195.00       262.36
-     Avg Loss           :    -181.49      -166.71      -194.90
-     Max Profit         :    3444.00      1080.00      3444.00
-     Max Loss           :   -2412.00     -1806.00     -2412.00
-     Avg Bars in Win    :     196.95       129.88       249.69
-     Avg Bars in Loss   :      74.46        89.35        60.97
-     Max Consec. Wins   :       7            4            7
-     Max Consec. Losses :      10            8            8
-     Minimum Capital    :    5735.00      5807.00      5537.00
+     Std.Dev. of P/L    :    1347.95       872.82      1613.74
+     Gross Profit       :   19440.00      6060.00     13380.00
+     Gross Loss         :  -15840.00     -5808.00    -10032.00
+     Avg Profit         :     589.09       505.00       637.14
+     Avg Loss           :    -633.60      -484.00      -771.69
+     Max Profit         :    5064.00      1620.00      5064.00
+     Max Loss           :   -7104.00     -3288.00     -7104.00
+     Avg Bars in Win    :     798.79       696.75       857.10
+     Avg Bars in Loss   :     720.28       898.50       555.77
+     Max Consec. Wins   :       4            3            4
+     Max Consec. Losses :       6            3            4
+     Minimum Capital    :   16958.00      6554.00     11504.00
    # ========================================================= #
