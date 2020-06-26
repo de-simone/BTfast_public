@@ -1,0 +1,53 @@
+# TimeStamp   : 2020-06-26 12:00:29
+# Strategy    : BOtest
+# Symbol      : RTY
+# TimeFrame   : M10
+# Date Range  : 2010-01-04 --> 2019-12-31
+#
+#<Strategies/BOtest.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>    
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/BOtest.xml>
+#
+
+   # ==================  Performance Report ================== #
+                        |     All    |    Long    |    Short   |
+     Initial Balance    : 10000000.00
+     N. of Trades       :    1692          967          725
+     Net Profit         : -478980.00   -240015.00   -238965.00
+     Net Profit %       :      -4.8%        -2.4%        -2.4%
+     CAGR               :      -0.5%        -0.2%        -0.2%
+     Avg Trade          :    -283.09      -248.21      -329.61
+     Avg Ticks          :      -3.83        -2.70        -5.35
+     Profit Factor      :       0.91         0.91         0.90
+     Win Percent        :      47.6%        48.2%        46.9%
+     Avg DrawDown       : -388123.22   -207135.54   -194477.24
+     Avg DrawDown %     :      -3.8%        -2.1%        -1.9%
+     Max DrawDown       : -821415.00   -417875.00   -431565.00
+     Max DrawDown %     :      -8.0%        -4.1%        -4.2%
+     Net PL/Max DD      :      -0.58        -0.57        -0.55
+     CAGR/Max DD %      :      -0.06        -0.06        -0.06
+     Expectancy         :      -0.05        -0.05        -0.05
+     Z-score            :      -1.46        -1.06        -1.01
+     R^2                :     0.0000       0.0000       0.0000
+   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+     Std.Dev. of P/L    :    7964.89      7284.62      8795.71
+     Gross Profit       : 4664820.00   2482515.00   2182305.00
+     Gross Loss         : -5143800.00  -2722530.00  -2421270.00
+     Avg Profit         :    5787.62      5327.29      6418.54
+     Avg Loss           :   -5805.64     -5434.19     -6289.01
+     Max Profit         :   39930.00     25920.00     39930.00
+     Max Loss           :  -56100.00    -30690.00    -56100.00
+     Avg Bars in Win    :      49.21        48.69        49.94
+     Avg Bars in Loss   :      48.26        47.78        48.88
+     Max Consec. Wins   :      11            6            8
+     Max Consec. Losses :      13           10           10
+     Minimum Capital    : 1239162.50    633852.50    654387.50
+   # ========================================================= #
