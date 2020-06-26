@@ -29,7 +29,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-        <Value>2</Value>
+        <Value>1</Value>
     </Input>
     <Input>
         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
@@ -37,7 +37,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </Input>
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..7:1 -->
-        <Start>6</Start>
+        <Start>1</Start>
         <Stop>7</Stop>
         <Step>1</Step>
     </OptRange>
@@ -49,7 +49,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </OptRange>
     <OptRange>
         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
-        <Start>3</Start>
+        <Start>0</Start>
         <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>
@@ -67,7 +67,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </OptRange>
     <OptRange>
         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
-        <Start>13</Start>
+        <Start>0</Start>
         <Stop>50</Stop>
         <Step>1</Step>
     </OptRange>
@@ -79,7 +79,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </OptRange>
     <OptRange>
         <Name>fractN_short</Name>       <!-- 0..5:1 -->
-        <Start>1</Start>
+        <Start>0</Start>
         <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>
