@@ -23,7 +23,7 @@ General Settings for BTfast
              5:   Strategy Factory (Sequential Generation + Validation)
              6:   Market overview (no trades)
          -->
-        <Value> 5
+        <Value> 1
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -110,13 +110,13 @@ General Settings for BTfast
         <!-- Print list of transactions on stdout and on file -->
         <!-- 0: false, 1: true -->
         <Name>    PRINT_TRADE_LIST     </Name>
-        <Value>   0
+        <Value>   1
         </Value></Input>
     <Input>
         <!-- Write results on file and show plot (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    SHOW_PLOT     </Name>
-        <Value>   0
+        <Value>   1
         </Value></Input>
     <!-- ================================================================== -->
 

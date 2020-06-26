@@ -37,7 +37,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </Input>
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..7:1 -->
-        <Start>1</Start>
+        <Start>6</Start>
         <Stop>7</Stop>
         <Step>1</Step>
     </OptRange>
@@ -49,7 +49,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </OptRange>
     <OptRange>
         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
-        <Start>0</Start>
+        <Start>3</Start>
         <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>
@@ -73,7 +73,7 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
     </OptRange>
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..5:1 -->
-        <Start>0</Start>
+        <Start>2</Start>
         <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>

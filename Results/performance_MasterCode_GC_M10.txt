@@ -1,0 +1,134 @@
+# TimeStamp   : 2020-06-26 20:34:55
+# Strategy    : MasterCode
+# Symbol      : GC
+# TimeFrame   : M10
+# Date Range  : 2010-01-04 --> 2019-12-31
+#
+#<Strategies/MasterCode.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# === All parameters need to be INTEGER ===
+# 
+#  - Main node within <Inputs> and </Inputs>
+# 
+#  - Fixed-input parameters are with syntax:
+# 
+#     <Input>
+#       <Name>parameter_name</Name>
+#       <Value>0.5</Value>
+#     </Input>
+# 
+#  - Optimizable parameter are with syntax:
+# 
+#     <OptRange>
+#       <Name>parameter_name</Name>
+#       <Start>1</Start>
+#       <Stop>20</Stop>
+#       <Step>1</Step>
+#     </OptRange>
+# 
+# For Backtest: only the <Start> value of <OptRange> parameters is read.
+# -->
+# <Inputs>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>1</Value>
+#     </Input>
+#     <Input>
+#         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
+#         <Value>1</Value>
+#     </Input>
+#     <Input>
+#         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
+#         <Value>0</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>POI_switch</Name>         <!-- 1..7:1 -->
+#         <Start>6</Start>
+#         <Stop>7</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Distance_switch</Name>    <!-- 1..3:1 -->
+#         <Start>1</Start>
+#         <Stop>3</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
+#         <Start>3</Start>
+#         <Stop>5</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
+#         <Start>0</Start>
+#         <Stop>10</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
+#         <Start>0</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
+#         <Start>0</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>fractN_long</Name>        <!-- 0..5:1 -->
+#         <Start>2</Start>
+#         <Stop>5</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>fractN_short</Name>       <!-- 0..5:1 -->
+#         <Start>0</Start>
+#         <Stop>5</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/MasterCode.xml>
+#
+
+   # ==================  Performance Report ================== #
+                        |     All    |    Long    |    Short   |
+     Initial Balance    : 10000000.00
+     N. of Trades       :     367          367            0
+     Net Profit         :  319620.00    319620.00         0.00
+     Net Profit %       :       3.2%         3.2%         0.0%
+     CAGR               :       0.5%         0.5%         0.0%
+     Avg Trade          :     870.90       870.90         0.00
+     Avg Ticks          :      14.80        14.80         0.00
+     Profit Factor      :       1.48         1.48         0.00
+     Win Percent        :      53.7%        53.7%         0.0%
+     Avg DrawDown       :  -13161.44    -13161.44         0.00
+     Avg DrawDown %     :      -0.1%        -0.1%         0.0%
+     Max DrawDown       :  -73930.00    -73930.00         0.00
+     Max DrawDown %     :      -0.7%        -0.7%         0.0%
+     Net PL/Max DD      :       4.32         4.32         0.00
+     CAGR/Max DD %      :       0.63         0.63         0.00
+     Expectancy         :       0.22         0.22         0.00
+     Z-score            :       2.79         2.79         0.00
+     R^2                :     0.9049       0.9049       0.0000
+   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+     Std.Dev. of P/L    :    5988.80      5988.80         0.00
+     Gross Profit       :  987430.00    987430.00         0.00
+     Gross Loss         : -667810.00   -667810.00         0.00
+     Avg Profit         :    5012.34      5012.34         0.00
+     Avg Loss           :   -3928.29     -3928.29         0.00
+     Max Profit         :   19250.00     19250.00         0.00
+     Max Loss           :  -24050.00    -24050.00         0.00
+     Avg Bars in Win    :      71.97        71.97         0.00
+     Avg Bars in Loss   :      70.96        70.96         0.00
+     Max Consec. Wins   :       8            8            0
+     Max Consec. Losses :       8            8            0
+     Minimum Capital    :  117495.00    117495.00         0.00
+   # ========================================================= #
