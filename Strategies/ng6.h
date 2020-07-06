@@ -65,7 +65,6 @@ Member Variables:
 
 Strategy Parameters:
 
-- Ncontracts_: Number of contracts to trade
 - MyStop_: Stop-Loss in USD per contract
 - fractN_: Fraction for breakout = 2^fractN_ / 10
 */
@@ -95,7 +94,6 @@ class NG6 : public Strategy {
 
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
-    int Ncontracts_ {1};        // N. of contracts to trade
     int MyStop_ {0};            // Stop-Loss in USD per contract
     // Parameters
     //int fractN_ {1};            // fract = 2^fractN_ / 10

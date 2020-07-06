@@ -244,13 +244,13 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     if( EnterLong ){
         if( BOMR_switch_ == 1 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
-                                 "BUY", "STOP", level_long, 1.0, Ncontracts_,
-                                 name_, (double) MyStop_ * Ncontracts_ , 0.0 };
+                                 "BUY", "STOP", level_long, 1.0, 0,
+                                 name_, (double) MyStop_ , 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
-                                 "BUY", "LIMIT", level_long, 1.0, Ncontracts_,
-                                 name_, (double) MyStop_ * Ncontracts_ , 0.0 };
+                                 "BUY", "LIMIT", level_long, 1.0, 0,
+                                 name_, (double) MyStop_ , 0.0 };
         }
 
     }
@@ -258,13 +258,13 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     if( EnterShort ){
         if( BOMR_switch_ == 1 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
-                                 "SELLSHORT", "STOP", level_short, 1.0, Ncontracts_,
-                                 name_, (double) MyStop_ * Ncontracts_, 0.0 };
+                                 "SELLSHORT", "STOP", level_short, 1.0, 0,
+                                 name_, (double) MyStop_, 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
-                                 "SELLSHORT", "LIMIT", level_short, 1.0, Ncontracts_,
-                                 name_, (double) MyStop_ * Ncontracts_, 0.0 };
+                                 "SELLSHORT", "LIMIT", level_short, 1.0, 0,
+                                 name_, (double) MyStop_, 0.0 };
         }
     }
     ///////////////////////////////////////////////////////////////////////////

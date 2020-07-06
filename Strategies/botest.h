@@ -62,7 +62,6 @@ Member Variables:
 
 Strategy Parameters:
 
-- Ncontracts_: Number of contracts to trade
 - MyStop_: Stop-Loss in USD per contract
 - fract_: Fraction for breakout
 
@@ -93,7 +92,6 @@ class BOtest : public Strategy {
 
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
-    int Ncontracts_ {1};
     int MyStop_ {0};
     //int fractN_ {0};
     // ------------------------------------------ //

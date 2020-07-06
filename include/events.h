@@ -32,7 +32,7 @@ Member variable for SIGNAL/ORDER event
 Member variable for SIGNAL event
 - position_size_factor_: factor controlling scaling up/dn the position dynamically
                             (used by PositionSizer)
-- quantity_to_close_: quantity of contracts for exit signals
+- quantity_to_close_: quantity of contracts to close on exit signals
 
 Member variable for ORDER/FILL event
 - quantity_: the quantity of contracts (lots/shares) to transact.
@@ -161,6 +161,8 @@ class Event {
         void set_close( double cl ) { close_ = cl; }
         void set_volume( int vol ) { volume_ = vol; }
         void set_timestamp( DateTime t ) { timestamp_ = t; }
+        void set_stoploss( double sl ) { stoploss_ = sl; }
+        void set_takeprofit( double tp ) { takeprofit_ = tp; }
 };
 
 

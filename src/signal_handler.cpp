@@ -221,22 +221,27 @@ void SignalHandler::signal_to_order( const Event &bar, const Event &signal,
                                      double order_price )
 {
     int quantity {0};
-    // Compute position size for entry signal
+    // Compute position size for ENTRY signal
     if( signal.action() == "BUY" || signal.action() == "SELLSHORT" ){
         quantity = position_sizer_.compute_quantity( bar.close(),
                                                 signal.position_size_factor(),
                                                 position_handler_.account() );
     }
-    // Retrieve quantity to close from exit signal
+    // Quantity to close carried by EXIT signal
     else if( signal.action() == "SELL" || signal.action() == "BUYTOCOVER" ){
         quantity = signal.quantity_to_close();
     }
+
+    // Adjust full stop loss and take profit based on quantity
+    // ( signal only carries SL/TP per single contract )
+    double stoploss { signal.stoploss() * quantity };
+    double takeprofit { signal.takeprofit() * quantity };
 
     // Create order event
     Event new_order { signal.symbol(), bar.timestamp(),
                       signal.action(), signal.order_type(),
                       order_price, quantity, signal.strategy_name(),
-                      signal.stoploss(), signal.takeprofit(), 0 };
+                      stoploss, takeprofit, 0 };
 
     // Append order to events queue
     events_queue_->push_back( new_order );

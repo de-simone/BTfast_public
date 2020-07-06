@@ -183,15 +183,13 @@ void Template::compute_entry( const std::deque<Event>& data1,
     if( EnterLong ){
         signals[0] = Event { symbol_, data1[0].timestamp(),
                              "BUY", "STOP", BO_level_long,
-                             1.0, Ncontracts_, name_,
-                             (double) MyStop_ * Ncontracts_, 0.0 };
+                             1.0, 0, name_, (double) MyStop_, 0.0 };
     }
 
     if( EnterShort ){
         signals[1] = Event { symbol_, data1[0].timestamp(),
                              "SELLSHORT", "STOP", BO_level_short,
-                             1.0, Ncontracts_, name_,
-                             (double) MyStop_ * Ncontracts_, 0.0 };
+                             1.0, 0, name_, (double) MyStop_, 0.0 };
     }
     ///////////////////////////////////////////////////////////////////////////
 }
