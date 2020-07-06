@@ -23,6 +23,10 @@
 * For Backtest: only the <Start> value of <OptRange> parameters is read.
 -->
 <Inputs>
+    <Input>
+      <Name>MyStop</Name>
+      <Value>700</Value>
+    </Input>
     <OptRange>
         <Name>fractN</Name>
         <Start>2</Start>

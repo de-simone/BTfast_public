@@ -32,15 +32,12 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-06-17
+                                                        Last update: 2020-07-06
                                           -------------------------------------
 
  * TO DO:
 
-    - position size factor (double) in signals, controlling dynamic position sizing
-      (in place of dummy Ncontracts_ variable in strategies)
-    - set stoploss of signal after computing the actual position size
-      
+
     - check implementation of LIMIT orders with TradeStation
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
@@ -52,7 +49,7 @@
                           out of building blocks )
    - add commission/slippage to execution
 
-   [- large stoploss, trade to close not found]
+   [- check large stoploss, possible error: trade to close not found]
    [- multiple comparison, benjamini-hochberg]
    [- genetic optim: avoid computing the fitness of the same strategy (individual)
      multiple times]
