@@ -39,6 +39,8 @@
 
     - position size factor (double) in signals, controlling dynamic position sizing
       (in place of dummy Ncontracts_ variable in strategies)
+    - set stoploss of signal after computing the actual position size
+      
     - check implementation of LIMIT orders with TradeStation
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous

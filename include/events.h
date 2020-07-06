@@ -30,8 +30,9 @@ Member variable for SIGNAL/ORDER event
 - suggested_price_: price at which ideally place market order
 
 Member variable for SIGNAL event
-- suggested_quantity_: suggested number of contracts to
-                        transact, which may be modififed by the PositionSizer.
+- position_size_factor_: factor controlling scaling up/dn the position dynamically
+                            (used by PositionSizer)
+- quantity_to_close_: quantity of contracts for exit signals
 
 Member variable for ORDER/FILL event
 - quantity_: the quantity of contracts (lots/shares) to transact.
@@ -78,7 +79,8 @@ class Event {
     // Member variable for SIGNAL/ORDER event
     double suggested_price_{0.0};
     // Member variable for SIGNAL event
-    int suggested_quantity_{0};
+    double position_size_factor_ {0.0};
+    int quantity_to_close_ {0};
     // Member variable for ORDER/FILL event
     int quantity_{0};
     int ticket_{0};
@@ -97,12 +99,13 @@ class Event {
                std::string timeframe, double open, double high, double low,
                double close, int volume );
 
-        // SIGNAL event constructor (9 arguments)
+        // SIGNAL event constructor (10 arguments)
         Event( Instrument symbol, DateTime timestamp,
                std::string action, std::string order_type,
-               double suggested_price, int suggested_quantity,
+               double suggested_price, double position_size_factor,
+               int quantity_to_close,
                std::string strategy_name, double stoploss, double takeprofit );
-        
+
         // ORDER event constructor (10 arguments)
         Event( Instrument symbol, DateTime timestamp,
                std::string action, std::string order_type,
@@ -144,7 +147,8 @@ class Event {
         double stoploss() const { return(stoploss_) ; }
         double takeprofit() const { return(takeprofit_); }
         double suggested_price() const { return(suggested_price_); }
-        int suggested_quantity() const { return(suggested_quantity_); }
+        int quantity_to_close() const { return(quantity_to_close_); }
+        double position_size_factor() const { return(position_size_factor_); }
         int quantity() const { return(quantity_); }
         int ticket() const { return(ticket_); }
         double fill_price() const { return(fill_price_); }

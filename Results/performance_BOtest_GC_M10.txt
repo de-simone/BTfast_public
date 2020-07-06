@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-06-26 12:34:16
+# TimeStamp   : 2020-07-06 14:50:33
 # Strategy    : BOtest
 # Symbol      : GC
 # TimeFrame   : M10
@@ -21,33 +21,33 @@
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
      N. of Trades       :    1121          606          515
-     Net Profit         :  153560.00   -223740.00    377300.00
-     Net Profit %       :       1.5%        -2.2%         3.8%
-     CAGR               :       0.2%        -0.3%         0.5%
-     Avg Trade          :     136.98      -369.21       732.62
+     Net Profit         :   25080.00    -36440.00     61520.00
+     Net Profit %       :       0.3%        -0.4%         0.6%
+     CAGR               :       0.0%        -0.1%         0.1%
+     Avg Trade          :      22.37       -60.13       119.46
      Avg Ticks          :       2.24        -6.01        11.95
-     Profit Factor      :       1.06         0.84         1.31
+     Profit Factor      :       1.06         0.84         1.32
      Win Percent        :      49.0%        47.5%        50.7%
-     Avg DrawDown       :  -65126.75   -154816.78    -29571.90
-     Avg DrawDown %     :      -0.6%        -1.5%        -0.3%
-     Max DrawDown       : -158100.00   -304020.00   -103520.00
-     Max DrawDown %     :      -1.5%        -3.0%        -1.0%
-     Net PL/Max DD      :       0.97        -0.74         3.64
-     CAGR/Max DD %      :       0.14        -0.11         0.54
-     Expectancy         :       0.03        -0.08         0.15
-     Z-score            :       0.67        -1.57         2.09
-     R^2                :     0.5259       0.0000       0.7909
+     Avg DrawDown       :   -9881.02    -26720.43     -4333.28
+     Avg DrawDown %     :      -0.1%        -0.3%        -0.0%
+     Max DrawDown       :  -24070.00    -50100.00    -15130.00
+     Max DrawDown %     :      -0.2%        -0.5%        -0.2%
+     Net PL/Max DD      :       1.04        -0.73         4.07
+     CAGR/Max DD %      :       0.15        -0.10         0.58
+     Expectancy         :       0.03        -0.08         0.16
+     Z-score            :       0.68        -1.57         2.14
+     R^2                :     0.5581       0.0000       0.7866
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :    6885.95      5789.17      7950.73
-     Gross Profit       : 2801690.00   1203410.00   1598280.00
-     Gross Loss         : -2648130.00  -1427150.00  -1220980.00
-     Avg Profit         :    5103.26      4178.51      6123.68
-     Avg Loss           :   -4629.60     -4487.89     -4807.01
-     Max Profit         :   54460.00     20720.00     54460.00
-     Max Loss           :  -37320.00    -27350.00    -37320.00
+     Std.Dev. of P/L    :    1106.69       940.94      1268.53
+     Gross Profit       :  442130.00    190880.00    251250.00
+     Gross Loss         : -417050.00   -227320.00   -189730.00
+     Avg Profit         :     805.34       662.78       962.64
+     Avg Loss           :    -729.11      -714.84      -746.97
+     Max Profit         :    7780.00      3920.00      7780.00
+     Max Loss           :   -6220.00     -5470.00     -6220.00
      Avg Bars in Win    :      49.05        49.95        48.07
      Avg Bars in Loss   :      48.66        48.38        49.01
      Max Consec. Wins   :      10            7            9
      Max Consec. Losses :       9            8           10
-     Minimum Capital    :  243750.00    462630.00    161880.00
+     Minimum Capital    :   42705.00     81750.00     29295.00
    # ========================================================= #

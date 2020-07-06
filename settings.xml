@@ -33,16 +33,16 @@ General Settings for BTfast
              template,test,NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   MasterCode
+        <Value>   test
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   GC
+        <Value>   NG
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
         <!-- Mx mins for x min bars, D for session -->
-        <Value>   M10
+        <Value>   M15
         </Value></Input>
 
     <Input>
@@ -68,7 +68,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC/GC_M10_2010-2014_2018-2019.csv
+        <Value>  NG/NG_M15_2007-2017.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -116,7 +116,7 @@ General Settings for BTfast
         <!-- Write results on file and show plot (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    SHOW_PLOT     </Name>
-        <Value>   1
+        <Value>   0
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -155,7 +155,7 @@ General Settings for BTfast
     <Input>
         <!-- Position size: fixed_size, fixed_notional, fixed_fractional  -->
         <Name>    POSITION_SIZE_TYPE     </Name>
-        <Value>   fixed_notional
+        <Value>   fixed_size
         </Value></Input>
     <Input>
         <!-- Number of contracts to use in "fixed_size" position size -->
@@ -183,7 +183,7 @@ General Settings for BTfast
         <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
              (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
         <Name>    DATA_FILE_OOS     </Name>
-        <Value>   GC/GC_M10_2015-2017.csv
+        <Value>   NG/NG_M15_2014.csv
         </Value></Input>
     <Input>
         <!-- Percentage of max variation (stability test) -->

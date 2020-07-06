@@ -244,12 +244,12 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     if( EnterLong ){
         if( BOMR_switch_ == 1 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
-                                 "BUY", "STOP", level_long, Ncontracts_,
+                                 "BUY", "STOP", level_long, 1.0, Ncontracts_,
                                  name_, (double) MyStop_ * Ncontracts_ , 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
-                                 "BUY", "LIMIT", level_long, Ncontracts_,
+                                 "BUY", "LIMIT", level_long, 1.0, Ncontracts_,
                                  name_, (double) MyStop_ * Ncontracts_ , 0.0 };
         }
 
@@ -258,12 +258,12 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     if( EnterShort ){
         if( BOMR_switch_ == 1 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
-                                 "SELLSHORT", "STOP", level_short, Ncontracts_,
+                                 "SELLSHORT", "STOP", level_short, 1.0, Ncontracts_,
                                  name_, (double) MyStop_ * Ncontracts_, 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
-                                 "SELLSHORT", "LIMIT", level_short, Ncontracts_,
+                                 "SELLSHORT", "LIMIT", level_short, 1.0, Ncontracts_,
                                  name_, (double) MyStop_ * Ncontracts_, 0.0 };
         }
     }
@@ -312,7 +312,7 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
         if( long_pos_to_close.quantity() > 0 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
                                  "SELL", "MARKET", data1[0].close(),
-                                 long_pos_to_close.quantity(),
+                                 1.0, long_pos_to_close.quantity(),
                                  name_, 0.0, 0.0 };
         }
     }
@@ -330,7 +330,7 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
         if( short_pos_to_close.quantity() > 0 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
                                  "BUYTOCOVER", "MARKET", data1[0].close(),
-                                 short_pos_to_close.quantity(),
+                                 1.0, short_pos_to_close.quantity(),
                                  name_, 0.0, 0.0 };
         }
     }

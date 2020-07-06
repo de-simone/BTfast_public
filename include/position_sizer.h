@@ -39,7 +39,8 @@ class PositionSizer {
         PositionSizer( const std::string &ps_type, const Instrument &symbol,
                        int num_contracts, double risk_fraction );
 
-        int compute_quantity( double price, const Account &account ) const;
+        int compute_quantity( double price, double position_size_factor,
+                              const Account &account ) const;
 
 };
 

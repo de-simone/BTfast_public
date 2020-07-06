@@ -22,10 +22,11 @@ Event::Event( Instrument symbol, DateTime timestamp,
 {}
 
 
-// SIGNAL event constructor (9 arguments)
+// SIGNAL event constructor (10 arguments)
 Event::Event( Instrument symbol, DateTime timestamp,
               std::string action, std::string order_type,
-              double suggested_price, int suggested_quantity,
+              double suggested_price, double position_size_factor,
+              int quantity_to_close,
               std::string strategy_name, double stoploss, double takeprofit)
 
 : event_type_{"SIGNAL"},
@@ -33,7 +34,8 @@ Event::Event( Instrument symbol, DateTime timestamp,
   action_{action}, order_type_{order_type},
   strategy_name_{strategy_name},
   stoploss_{stoploss},takeprofit_{takeprofit},
-  suggested_price_{suggested_price}, suggested_quantity_{suggested_quantity}
+  suggested_price_{suggested_price}, position_size_factor_{position_size_factor},
+  quantity_to_close_{quantity_to_close}
 {}
 
 
@@ -128,7 +130,7 @@ bool Event::operator==(const Event& ev) const
         && (symbol_.name() == ev.symbol().name())
         && (order_type_ == ev.order_type())
         && (action_ == ev.action())
-        && (suggested_quantity_ == ev.suggested_quantity())
+        && (position_size_factor_ == ev.position_size_factor())
         && (suggested_price_ == ev.suggested_price())
     ){
         return(true);

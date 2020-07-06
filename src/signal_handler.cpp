@@ -220,10 +220,17 @@ void SignalHandler::handle_first_signal( const Event &barevent,
 void SignalHandler::signal_to_order( const Event &bar, const Event &signal,
                                      double order_price )
 {
-    //int quantity { std::min(1, signal.suggested_quantity()) };
-
-    int quantity { position_sizer_.compute_quantity( bar.close(),
-                                                position_handler_.account()) };
+    int quantity {0};
+    // Compute position size for entry signal
+    if( signal.action() == "BUY" || signal.action() == "SELLSHORT" ){
+        quantity = position_sizer_.compute_quantity( bar.close(),
+                                                signal.position_size_factor(),
+                                                position_handler_.account() );
+    }
+    // Retrieve quantity to close from exit signal
+    else if( signal.action() == "SELL" || signal.action() == "BUYTOCOVER" ){
+        quantity = signal.quantity_to_close();
+    }
 
     // Create order event
     Event new_order { signal.symbol(), bar.timestamp(),

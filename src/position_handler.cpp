@@ -140,7 +140,8 @@ void PositionHandler::on_fill( const Event &fillevent ) {
             // Define new trade
             Transaction new_trade { pos_to_close.strategy_name(),
                                     pos_to_close.symbol(),
-                                    pos_to_close.side(), fillevent.quantity(),
+                                    pos_to_close.side(),
+                                    fillevent.quantity(),
                                     pos_to_close.entry_time(),
                                     pos_to_close.entry_price(),
                                     fillevent.timestamp(),      // exit time
@@ -152,7 +153,7 @@ void PositionHandler::on_fill( const Event &fillevent ) {
                                     pos_to_close.bars_in_trade(),
                                     pos_pl,
                                     account_.balance()
-                                    -account_.initial_balance() };
+                                                - account_.initial_balance() };
 
             // Add new trade to history of closed transactions
             account_.add_transaction_to_history( new_trade );

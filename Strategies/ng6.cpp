@@ -232,7 +232,7 @@ void NG6::compute_entry( const std::deque<Event>& data1,
         signals[0] = Event { symbol_, data1[0].timestamp(),
                              "BUY", "STOP", level_long,
                              //"BUY", "MARKET", level_long,
-                             Ncontracts_, name_,
+                             1.0, Ncontracts_, name_,
                              (double) MyStop_ * Ncontracts_, 0.0 };
     }
 
@@ -240,7 +240,7 @@ void NG6::compute_entry( const std::deque<Event>& data1,
         signals[1] = Event { symbol_, data1[0].timestamp(),
                              "SELLSHORT", "STOP", level_short,
                              //"SELLSHORT", "MARKET", level_short,
-                             Ncontracts_, name_,
+                             1.0, Ncontracts_, name_,
                              (double) MyStop_ * Ncontracts_, 0.0 };
     }
     ///////////////////////////////////////////////////////////////////////////
@@ -288,7 +288,7 @@ void NG6::compute_exit( const std::deque<Event>& data1,
         if( long_pos_to_close.quantity() > 0 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
                                  "SELL", "MARKET", data1[0].close(),
-                                 long_pos_to_close.quantity(),
+                                 1.0, long_pos_to_close.quantity(),
                                  name_, 0.0, 0.0 };
         }
     }
@@ -306,7 +306,7 @@ void NG6::compute_exit( const std::deque<Event>& data1,
         if( short_pos_to_close.quantity() > 0 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
                                  "BUYTOCOVER", "MARKET", data1[0].close(),
-                                 short_pos_to_close.quantity(),
+                                 1.0, short_pos_to_close.quantity(),
                                  name_, 0.0, 0.0 };
         }
     }
