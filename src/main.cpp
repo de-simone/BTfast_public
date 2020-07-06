@@ -43,12 +43,13 @@
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
       bars of up to 10 different symbols. Then PriceCollection runs over array
       to update all bar lists.
-   - does the call to append_to_optim_results (in run_parallel_optimization)
-       need #pragma omp critical (as in genetic) ?
    - genetic programming ( create bool nodes like HighD[1] > LowD[5],
                           out of building blocks )
    - add commission/slippage to execution
 
+   [- does the call to append_to_optim_results (in run_parallel_optimization)
+       need #pragma omp critical (as in genetic) ?
+   ]
    [- check large stoploss, possible error: trade to close not found]
    [- multiple comparison, benjamini-hochberg]
    [- genetic optim: avoid computing the fitness of the same strategy (individual)
