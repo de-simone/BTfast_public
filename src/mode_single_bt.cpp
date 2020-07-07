@@ -17,7 +17,7 @@ void mode_single_bt( BTfast &btf,
                      std::unique_ptr<DataFeed> &datafeed,
                      const param_ranges_t &parameter_ranges,
                      bool print_trade_list, bool print_performance_report,
-                     bool show_plot,
+                     bool write_trades_to_file,
                      const std::string &param_file,
                      const std::string &trade_list_file,
                      const std::string &performance_file,
@@ -53,7 +53,7 @@ void mode_single_bt( BTfast &btf,
                                btf.timeframe(),
                                btf.first_date_parsed(), btf.last_date_parsed(),
                                print_trade_list, print_performance_report,
-                               show_plot, param_file, trade_list_file,
+                               write_trades_to_file, param_file, trade_list_file,
                                performance_file, profits_file );
 
 }

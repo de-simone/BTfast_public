@@ -2,7 +2,7 @@
 # or using script: ./bin/PlotYearTicks
 
 inputfile = "Results/profits.csv"    # (match 'profit_file' in main)
-# Trade,    Entry Date,    DOW,    Exit Date,   Qty, Ticks,  PL,    Equity
+# Trade    Entry Date    DOW     Exit Date    Qty    Ticks    MAE    MFE    PL    Equity
 outputfile = "Results/Year_ticks.png"
 
 reset

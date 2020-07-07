@@ -4,6 +4,7 @@
 
 #include <iomanip>     // std::setw
 #include <iostream>     // std::cout
+//#include <ios>     // std::fixed
 #include <fstream>     // std::ofstream
 
 
@@ -110,33 +111,38 @@ void Account::write_transaction_history_pl_to_file( std::string fname ) const
 }
 
 //-------------------------------------------------------------------------- //
-/*! Write trade number and cumulative profit/loss to file
+/*! Write transactions to file
 */
 void Account::write_equity_to_file( std::string fname ) const
 {
     std::ofstream outfile;
     outfile.open(fname);
-    outfile << "# Trade    Entry Date    DOW     Exit Date    Qty    Ticks    PL    Equity\n";
-    outfile << "     0,    0000-00-00,     0,   0000-00-00,    0,    0,    0,    0,\n";
+    outfile << "# Trade    Entry Date    DOW     Exit Date    Qty    Ticks    MAE    MFE    PL    Equity\n";
+    outfile << "     0,    0000-00-00,     0,   0000-00-00,    0,    0,    0,    0,    0,    0,\n";
     //outfile << "# Trade      Balance\n"<< ",        " << initial_balance_ << "\n";
 
     // Iterate over transaction vector
     int i {1};
     for( Transaction tr : transactions_ ) {
-        outfile << "     " << i
+        outfile << std::fixed << std::setprecision(1)
+                << "     " << i
                 << ",    " << tr.entry_time().date().tostring()
                 << ",    " << tr.entry_time().date().weekday()
                 << ",    " << tr.exit_time().date().tostring()
                 << ",    " << tr.quantity()
-                << ",    " << tr.ticks()
+                //<< ",    "
+                << "," << std::setw(8) << tr.ticks()
+                << ",    " << tr.mae()
+                << ",    " << tr.mfe()
                 << ",    " << tr.net_pl()
-                << ",    " << tr.cumul_pl() << ",\n";
+                << ",    " << tr.cumul_pl()
+                << ",\n";
                 // << ",        " <<(initial_balance_ + tr.cumul_pl()) << "\n";
         i++;
     }
 
     outfile.close();
-    std::cout<< "\nCumulative profits written on file: " << fname << "\n";
+    std::cout<< "\nTrade history written on file: " << fname << "\n";
 }
 
 //-------------------------------------------------------------------------- //

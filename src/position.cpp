@@ -36,8 +36,8 @@ void Position::update_position( Event barevent ) {
     bool isSL { (stoploss_ != 0.0) };       // true if StopLoss is defined
     bool isTP { (takeprofit_ != 0.0) };     // true if TakeProfit is defined
 
-    // update LONG position (if either SL or TP is defined)
-    if( side_ == "LONG" && (isSL || isTP) ){
+    // update LONG position
+    if( side_ == "LONG" ){
         // pl_ = ( (barvent.close() - entry_price_) * quantity_
         //           * barevent.symbol().big_point_value() )
 
@@ -49,23 +49,27 @@ void Position::update_position( Event barevent ) {
                             * quantity_
                             * barevent.symbol().big_point_value()) );
 
-        // Long position hits SL
-        bool SLlong = isSL && (mae_ >= stoploss_);
-        // Long position hits TP
-        bool TPlong = isTP && (mfe_ >= takeprofit_);
-        // if SL or TP is hit, close position
-        if( SLlong || TPlong ){
-            keep_open_ = false;
-        }
-        else{
-            keep_open_ = true;
+        // Check if either SL or TP is defined
+        if( isSL || isTP ){
+            // Long position hits SL
+            bool SLlong = isSL && (mae_ >= stoploss_);
+            // Long position hits TP
+            bool TPlong = isTP && (mfe_ >= takeprofit_);
+            // if SL or TP is hit, close position
+            if( SLlong || TPlong ){
+                keep_open_ = false;
+            }
+            else{
+                keep_open_ = true;
+            }
         }
     }
 
-    // update SHORT position (if either SL or TP is defined)
-    if( side_ == "SHORT" && (isSL || isTP) ){
+    // update SHORT position
+    if( side_ == "SHORT" ){
         // pl_ = ( (entry_price_-barvent.close()) * quantity_
         //           * barevent.symbol().big_point_value() )
+        
         mae_ = std::max( mae_, ((barevent.high()-entry_price_)
                                 * quantity_
                                 * barevent.symbol().big_point_value()) );
@@ -74,16 +78,19 @@ void Position::update_position( Event barevent ) {
                                 * quantity_
                                 * barevent.symbol().big_point_value()) );
 
-        // Short position hits SL
-        bool SLshort = isSL && (mae_ >= stoploss_);
-        // Short position hits TP
-        bool TPshort = isTP && (mfe_ >= takeprofit_);
-        // if SL or TP is hit, close position
-        if( SLshort || TPshort ){
-            keep_open_ = false;
-        }
-        else{
-            keep_open_ = true;
+        // Check if either SL or TP is defined
+        if( isSL || isTP ){
+            // Short position hits SL
+            bool SLshort = isSL && (mae_ >= stoploss_);
+            // Short position hits TP
+            bool TPshort = isTP && (mfe_ >= takeprofit_);
+            // if SL or TP is hit, close position
+            if( SLshort || TPshort ){
+                keep_open_ = false;
+            }
+            else{
+                keep_open_ = true;
+            }
         }
     }
 

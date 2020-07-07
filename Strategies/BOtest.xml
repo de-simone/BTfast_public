@@ -22,7 +22,11 @@
 *
 * For Backtest: only the <Start> value of <OptRange> parameters is read.
 -->
-<Inputs>    
+<Inputs>
+    <Input>
+        <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
+        <Value>0</Value>
+    </Input>
     <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
         <Value>0</Value>

@@ -40,6 +40,7 @@ void BOtest::set_param_values(
     // Find parameter value in parameter_set by its name
     // (as it appears in XML file)
     //fractN_ = find_param_value_by_name( "fractN", parameter_set );
+    MyStop_ = find_param_value_by_name( "MyStop", parameter_set );
 
 }
 

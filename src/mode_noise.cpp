@@ -13,7 +13,7 @@
 void mode_noise( BTfast &btf,
                  std::unique_ptr<DataFeed> &datafeed,
                  const param_ranges_t &parameter_ranges,
-                 int num_noise_tests, bool show_plot,
+                 int num_noise_tests, bool write_trades_to_file,
                  const std::string &noise_file,
                  const std::string &param_file,
                  const std::string &fitness_metric )
@@ -61,7 +61,7 @@ void mode_noise( BTfast &btf,
     //--
 
     // Plot distributions of performance metrics under noise test
-    if( show_plot ){
+    if( write_trades_to_file ){
         // Execute script for gnuplot and open the PNG file
         std::string command = "./bin/PlotNoiseDistributions";
         system(command.c_str());

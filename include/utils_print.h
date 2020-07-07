@@ -46,7 +46,7 @@ namespace utils_print {
                     std::string strategy_name, std::string symbol_name,
                     std::string timeframe, Date date_i, Date date_f,
                     bool print_trade_list, bool print_performance_report,
-                    bool show_plot, std::string paramfile,
+                    bool write_trades_to_file, std::string paramfile,
                     std::string trade_list_file,
                     std::string performance_file, std::string profits_file );
 

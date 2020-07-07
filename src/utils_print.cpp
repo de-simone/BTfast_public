@@ -114,7 +114,7 @@ void utils_print::show_backtest_results(
                 std::string strategy_name, std::string symbol_name,
                 std::string timeframe, Date date_i, Date date_f,
                 bool print_trade_list, bool print_performance_report,
-                bool show_plot, std::string paramfile,
+                bool write_trades_to_file, std::string paramfile,
                 std::string trade_list_file,
                 std::string performance_file, std::string profits_file ){
 
@@ -130,7 +130,7 @@ void utils_print::show_backtest_results(
         //<<<
     }
 
-    //Compute performance metrics and print performance report on stdout
+    // Compute performance metrics and print performance report on stdout
     if( print_performance_report ){
         performance.compute_and_print_performance();
         performance.write_performance_to_file( performance_file, paramfile,
@@ -138,9 +138,9 @@ void utils_print::show_backtest_results(
                                                timeframe, date_i, date_f );
     }
 
-    // Plot equity curve
-    if( show_plot ){
-        // Write balance to file
+    // Write trade history to file and show equity curve
+    if( write_trades_to_file ){
+        // Write transactions to file
         account.write_equity_to_file( profits_file );
         // Execute script for gnuplot and open the PNG file
         std::string command = "./bin/PlotBalance";

@@ -67,8 +67,8 @@ int PositionSizer::compute_quantity(double price, double position_size_factor,
         exit(1);
     }
 
-    // Scale by position size factor
+    // Scale quantity by position size factor
     result = utils_math::nearest_int( result * position_size_factor );
-    
+
     return(result);
 }

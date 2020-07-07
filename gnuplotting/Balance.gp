@@ -2,7 +2,7 @@
 # or using script: ./bin/PlotBalance
 
 inputfile = "Results/profits.csv"    # (match 'profit_file' in main)
-# Trade,    Entry Date,    DOW,    Exit Date,   Qty, Ticks,  PL,    Equity
+# Trade    Entry Date    DOW     Exit Date    Qty    Ticks    MAE    MFE    PL    Equity
 outputfile = "Results/equity_line.png"
 
 
@@ -31,7 +31,7 @@ set y2tics nomirror font "Helvetica, 12"
 #set style fill transparent solid 0.1
 
 plot \
-    datafile using 1:8 with lines ls 1
+    datafile using 1:10 with lines ls 1
     #datafile using 1:($0 == 0 ? InitialValue = $2 : InitialValue) with lines ls 2
 
 print "Equity line plotted on file: ", outputfile

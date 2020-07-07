@@ -1,0 +1,20 @@
+#!/bin/bash
+# input : "Results/profits.csv"     (match 'profit_file' in main)
+# output: "Results/max_excursions.png" (match in gnuplot script)
+
+if [ -e Results/profits.csv ]
+then
+    # Generate plot
+    gnuplot < 'gnuplotting/MaxExcursions.gp'
+
+    # Open plot file
+    OS="`uname`"
+    if [ "$OS" == "Linux" ]
+        then eog Results/max_excursions.png &
+
+    elif [ "$OS" == "Darwin" ]
+        then open Results/max_excursions.png
+
+    else echo "OS" $OS "not recognized"
+    fi
+fi

@@ -26,7 +26,7 @@ namespace utils_fileio {
                         int &csv_format, std::string &datafeed_type,
                         bool &print_progress,
                         bool &print_performance_report, bool &print_trade_list,
-                        bool &show_plot, std::string &fitness_metric,
+                        bool &write_trades_to_file, std::string &fitness_metric,
                         int &population_size, int &generations,
                         int &max_bars_back, double &initial_balance,
                         std::string &position_size_type,

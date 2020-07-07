@@ -10,7 +10,7 @@
  @version     v1.0
  @author      Andrea De Simone
 
- Copyright (c) 2019, Andrea De Simone - All rights reserved.<br/>
+ Copyright (c) 2019-2020, Andrea De Simone - All rights reserved.<br/>
 
  \subsection Data Storage
         - CSV files
@@ -27,17 +27,21 @@
         - Input settings        (in 'settings.xml')
         - Strategy parameters   (in 'Strategies/StrategyName.xml')
 
+        Contract specs in 'instruments.cpp'.
+
 
                                           -------------------------------------
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-06
+                                                        Last update: 2020-07-07
                                           -------------------------------------
 
  * TO DO:
 
-
+    - check large stoploss, possible error: position to close not found
+      (position_handler)
+    - dynamic position sizing in mastercode
     - check implementation of LIMIT orders with TradeStation
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
@@ -50,7 +54,7 @@
    [- does the call to append_to_optim_results (in run_parallel_optimization)
        need #pragma omp critical (as in genetic) ?
    ]
-   [- check large stoploss, possible error: trade to close not found]
+
    [- multiple comparison, benjamini-hochberg]
    [- genetic optim: avoid computing the fitness of the same strategy (individual)
      multiple times]
@@ -120,7 +124,7 @@ int main () {
     bool print_progress {true};             ///< Print backtest progress on stdout
     bool print_performance_report {false};  ///< Print perf report on stdout
     bool print_trade_list {false};          ///< Print list of trades on stdout
-    bool show_plot {false};                 ///< Show Plot
+    bool write_trades_to_file {false};      ///< Write trade history to file and show plot
     bool include_commissions {false};       ///< Include or not commissions
     double initial_balance {100000.0};      ///< Initial account balance
     double risk_fraction {0.1};             ///< Fraction to use in "fixed-fractional", "fixed-notional" position size
@@ -151,7 +155,7 @@ int main () {
                     symbol_name, timeframe, input_start_date, input_end_date,
                     data_dir, data_file, csv_format, datafeed_type,
                     print_progress, print_performance_report, print_trade_list,
-                    show_plot, fitness_metric,
+                    write_trades_to_file, fitness_metric,
                     population_size, generations,
                     max_bars_back, initial_balance,
                     position_size_type, num_contracts, risk_fraction,
@@ -236,7 +240,7 @@ int main () {
         case 1: {
             mode_single_bt( btf, datafeed, parameter_ranges,
                             print_trade_list, print_performance_report,
-                            show_plot, param_file, trade_list_file,
+                            write_trades_to_file, param_file, trade_list_file,
                             performance_file, profits_file );
             break;
         }
@@ -332,7 +336,7 @@ int main () {
         /*
         case 5:
             mode_noise( btf, datafeed, parameter_ranges,
-                        num_noise_tests, show_plot,
+                        num_noise_tests, write_trades_to_file,
                         noise_file, param_file, fitness_metric );
             break;
         */

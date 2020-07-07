@@ -2,7 +2,7 @@
 # or using script: ./bin/PlotDOWTicks
 
 inputfile = "Results/profits.csv"    # (match 'profit_file' in main)
-# Trade,    Entry Date,    DOW,    Exit Date,   Qty, Ticks,  PL,    Equity
+# Trade    Entry Date    DOW     Exit Date    Qty    Ticks    MAE    MFE    PL    Equity
 outputfile = "Results/DOW_ticks.png"
 
 reset

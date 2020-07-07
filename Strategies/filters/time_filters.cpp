@@ -32,7 +32,7 @@ bool TimeFilter_DOW( int filter_num, int CurrentDOW )
 
 
 // ------------------------------------------------------------------------- //
-bool TimeFilter_Intraday( int filter_num, const Time &CurrentTime, 
+bool TimeFilter_Intraday( int filter_num, const Time &CurrentTime,
                           const Instrument &symbol, int T_segment_duration )
 {
 
@@ -99,10 +99,16 @@ bool TimeFilter_Intraday( int filter_num, const Time &CurrentTime,
             break;
         case 10:
             result = CurrentTime >= Time(8,0)
-                            && CurrentTime < settlement_time;
+                    && CurrentTime < settlement_time;
             break;
 
+
+
         //<<< tests
+        case 16:
+            result = CurrentTime >= Time(1,40)
+                    && CurrentTime < settlement_time;
+            break;
         /*
         case 16:
             result = //CurrentTime >= Time(8,0)

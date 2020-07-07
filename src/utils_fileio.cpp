@@ -24,7 +24,7 @@ void utils_fileio::read_config_file(
                         int &csv_format, std::string &datafeed_type,
                         bool &print_progress,
                         bool &print_performance_report, bool &print_trade_list,
-                        bool &show_plot, std::string &fitness_metric,
+                        bool &write_trades_to_file, std::string &fitness_metric,
                         int &population_size, int &generations,
                         int &max_bars_back, double &initial_balance,
                         std::string &position_size_type,
@@ -133,12 +133,12 @@ void utils_fileio::read_config_file(
                 exit(1);
             }
         }
-        else if( node_name == "SHOW_PLOT" ){
+        else if( node_name == "WRITE_TRADES_TO_FILE" ){
             try{
-                show_plot = std::stoi( node_value );                // int
+                write_trades_to_file = std::stoi( node_value );     // int
             }
             catch (const std::invalid_argument& er) {
-                std::cerr << ">>> ERROR: invalid input for SHOW_PLOT\n";
+                std::cerr << ">>> ERROR: invalid input for WRITE_TRADES_TO_FILE\n";
                 exit(1);
             }
         }

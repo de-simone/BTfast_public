@@ -29,7 +29,7 @@ void SignalHandler::set_events_queue(std::deque<Event> *events_queue)
 
 
 // ------------------------------------------------------------------------- //
-/*! Append new incoming signals from signals to signals vectors
+/*! Append new incoming signals from signals array to signals vectors
     'long_signals_', 'short_signals_'.
 
     signals is an array of size=2, of the form
@@ -41,7 +41,7 @@ void SignalHandler::set_events_queue(std::deque<Event> *events_queue)
    right after an Exit, or an Exit comes right after an Entry.
 
    Check if first signal of 'long_signals_' and 'short_signals_' is triggered,
-   and, if yes, convert it into an order sent to the queue.
+   and, if yes, convert it into an order event and send it to the queue.
 
    'barevent' is already 'next bar' after strategy generated the signal.
 */
@@ -213,6 +213,9 @@ void SignalHandler::handle_first_signal( const Event &barevent,
     }
 }
 
+
+
+
 //-------------------------------------------------------------------------- //
 /*! Convert the signal event 'signal' to an Order event at 'order_price'
     and append the order to the events queue.
@@ -232,20 +235,27 @@ void SignalHandler::signal_to_order( const Event &bar, const Event &signal,
         quantity = signal.quantity_to_close();
     }
 
-    // Adjust full stop loss and take profit based on quantity
-    // ( signal only carries SL/TP per single contract )
-    double stoploss { signal.stoploss() * quantity };
-    double takeprofit { signal.takeprofit() * quantity };
+    // Convert signal to order if quantity is >0
+    if( quantity > 0 ){
+        // Adjust full stop loss and take profit based on quantity
+        // ( signal only carries SL/TP per single contract )
+        double stoploss { signal.stoploss() * quantity };
+        double takeprofit { signal.takeprofit() * quantity };
 
-    // Create order event
-    Event new_order { signal.symbol(), bar.timestamp(),
-                      signal.action(), signal.order_type(),
-                      order_price, quantity, signal.strategy_name(),
-                      stoploss, takeprofit, 0 };
+        // Create order event
+        Event new_order { signal.symbol(), bar.timestamp(),
+                          signal.action(), signal.order_type(),
+                          order_price, quantity, signal.strategy_name(),
+                          stoploss, takeprofit, 0 };
 
-    // Append order to events queue
-    events_queue_->push_back( new_order );
+        // Append order to events queue
+        events_queue_->push_back( new_order );
+    }
 }
+
+
+
+
 
 //-------------------------------------------------------------------------- //
 /*! Check whether signal is triggered by new bar event.

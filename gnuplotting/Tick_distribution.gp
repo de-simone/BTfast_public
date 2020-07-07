@@ -2,7 +2,7 @@
 # or using script: ./bin/PlotTickdistribution
 
 inputfile = "Results/profits.csv"    # (match 'profit_file' in main)
-# Trade,    Entry Date,    DOW,    Exit Date,    PL,    Equity,
+# Trade    Entry Date    DOW     Exit Date    Qty    Ticks    MAE    MFE    PL    Equity
 outputfile = "Results/Tick_distribution.png"
 
 reset

@@ -1,0 +1,34 @@
+# TimeStamp   : 2020-07-07 14:26:31
+# Strategy    : test
+# Symbol      : GC
+# TimeFrame   : M10
+# Date Range  : 2015-01-02 --> 2017-12-29
+#
+#<Strategies/test.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#       <Name>MyStop</Name>
+#       <Value>700</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>fractN</Name>
+#         <Start>2</Start>
+#         <Stop>11</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>fract2</Name>
+#         <Value>2</Value>
+#     </Input>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/test.xml>
+#
+# ------------------- >>> Transaction List <<< ------------------- #
+# Trade   Side  Qty      TimeStamp       Price    NetPL/Cumulative
