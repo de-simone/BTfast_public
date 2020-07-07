@@ -47,7 +47,7 @@ void PositionHandler::on_bar( const Event &barevent ) {
 
             // if SL or TP is hit, send to queue the order to close position
             if( !pos.keep_open() ){
-
+                                
                 if( pos.side() == "LONG") {
                     Event oev {pos.symbol().name(), barevent.timestamp(),
                                 "SELL", "MARKET", barevent.close(),

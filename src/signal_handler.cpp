@@ -232,7 +232,13 @@ void SignalHandler::signal_to_order( const Event &bar, const Event &signal,
     }
     // Quantity to close carried by EXIT signal
     else if( signal.action() == "SELL" || signal.action() == "BUYTOCOVER" ){
-        quantity = signal.quantity_to_close();
+        // Check whether there are positions open by the strategy generating the signal
+        for( auto pos : position_handler_.open_positions() ){
+            if( pos.strategy_name() == signal.strategy_name() ){
+                quantity = signal.quantity_to_close();
+                break;
+            }
+        }
     }
 
     // Convert signal to order if quantity is >0

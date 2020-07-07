@@ -33,7 +33,7 @@ General Settings for BTfast
              template,test,NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   NG2
+        <Value>   MasterCode
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
@@ -55,7 +55,7 @@ General Settings for BTfast
         <!-- End date (included). Format: YYYY-MM-DD
             (0 for last date on file)  -->
         <Name>  END_DATE        </Name>
-        <Value> 2018-02-01      <!-- 2014-02-03 2007-11-06 -->
+        <Value> 2019-12-31      <!-- 2014-02-03 2007-11-06 -->
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -110,7 +110,7 @@ General Settings for BTfast
         <!-- Print list of transactions on stdout and on file -->
         <!-- 0: false, 1: true -->
         <Name>    PRINT_TRADE_LIST     </Name>
-        <Value>   1
+        <Value>   0
         </Value></Input>
     <Input>
         <!-- Write trade history to file and show equity line (via gnuplot) -->

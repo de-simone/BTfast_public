@@ -304,7 +304,7 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
         Position long_pos_to_close {};
         for( Position pos : position_handler.open_positions() ){
             if( pos.side() == "LONG" ){
-                long_pos_to_close = pos;
+                long_pos_to_close = pos;                
                 break;
             }
         }

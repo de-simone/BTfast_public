@@ -39,8 +39,6 @@
 
  * TO DO:
 
-    - check large stoploss, possible error: position to close not found
-      (position_handler)
     - dynamic position sizing in mastercode
     - check implementation of LIMIT orders with TradeStation
     - deal with more than 1 symbol (e.g. market breadth).

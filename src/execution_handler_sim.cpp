@@ -35,11 +35,26 @@ void SimulatedExecution::on_order( const Event &order ) const
     }
     // Exit order
     else if( order.action() == "SELL" || order.action() == "BUYTOCOVER" ){
+
         // ticket of position to close (carried by order event)
         ticket = order.ticket();
+        if( events_queue_->front().event_type()=="ORDER" ){
+            events_queue_->pop_front();
+        }
+        // erase from queue other exit orders for same strategy
+        for(auto it = events_queue_->begin(); it!=events_queue_->end(); ++it){
+            std::cout<<"> "<< it->tostring()<<"\n";
+            if( it->event_type()=="ORDER"
+                && it->action() == order.action()
+                && it->strategy_name() == order.strategy_name() ){
+
+                events_queue_->erase(it);
+            }
+        }
+
     }
     else{
-        std::cout << ">>>ERROR: order event action " << order.action()
+        std::cout << ">>> ERROR: order event action " << order.action()
                     << " not recognized (execution)" << std::endl;
         exit(1);
     }

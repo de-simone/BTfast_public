@@ -113,9 +113,9 @@ General Settings for BTfast
         <Value>   0
         </Value></Input>
     <Input>
-        <!-- Write results on file and show plot (via gnuplot) -->
+        <!-- Write trade history to file and show equity line (via gnuplot) -->
         <!-- 0: false, 1: true -->
-        <Name>    SHOW_PLOT     </Name>
+        <Name>    WRITE_TRADES_TO_FILE  </Name>
         <Value>   0
         </Value></Input>
     <!-- ================================================================== -->
