@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-07-06 14:50:33
+# TimeStamp   : 2020-07-09 12:44:05
 # Strategy    : BOtest
 # Symbol      : GC
 # TimeFrame   : M10
@@ -8,7 +8,11 @@
 # <?xml version='1.0' encoding='UTF-8'?>
 # <!--
 # -->
-# <Inputs>    
+# <Inputs>
+#     <Input>
+#         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
+#         <Value>0</Value>
+#     </Input>
 #     <Input>
 #         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
 #         <Value>0</Value>

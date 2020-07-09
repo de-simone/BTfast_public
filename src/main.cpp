@@ -34,6 +34,7 @@
 
  * TO DO:
 
+    - seg fault when entry at 17:00
     - dynamic position sizing in mastercode
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).

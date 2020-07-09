@@ -38,12 +38,10 @@ void SimulatedExecution::on_order( const Event &order ) const
 
         // ticket of position to close (carried by order event)
         ticket = order.ticket();
-        if( events_queue_->front().event_type()=="ORDER" ){
-            events_queue_->pop_front();
-        }
+
         // erase from queue other exit orders for same strategy
         for(auto it = events_queue_->begin(); it!=events_queue_->end(); ++it){
-            std::cout<<"> "<< it->tostring()<<"\n";
+            //std::cout<<"> "<< it->tostring()<<"\n";
             if( it->event_type()=="ORDER"
                 && it->action() == order.action()
                 && it->strategy_name() == order.strategy_name() ){

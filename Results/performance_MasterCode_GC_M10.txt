@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-07-07 12:53:14
+# TimeStamp   : 2020-07-09 12:43:56
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10
@@ -40,7 +40,7 @@
 #     </Input>
 #     <Input>
 #         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
-#         <Value>1000</Value>
+#         <Value>0</Value>
 #     </Input>
 #     <OptRange>
 #         <Name>POI_switch</Name>         <!-- 1..7:1 -->
@@ -102,33 +102,33 @@
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
      N. of Trades       :     151          151            0
-     Net Profit         :   32740.00     32740.00         0.00
-     Net Profit %       :       0.3%         0.3%         0.0%
-     CAGR               :       0.0%         0.0%         0.0%
-     Avg Trade          :     216.82       216.82         0.00
-     Avg Ticks          :      21.68        21.68         0.00
-     Profit Factor      :       1.82         1.82         0.00
-     Win Percent        :      57.6%        57.6%         0.0%
-     Avg DrawDown       :   -1301.13     -1301.13         0.00
+     Net Profit         :   40660.00     40660.00         0.00
+     Net Profit %       :       0.4%         0.4%         0.0%
+     CAGR               :       0.1%         0.1%         0.0%
+     Avg Trade          :     269.27       269.27         0.00
+     Avg Ticks          :      26.93        26.93         0.00
+     Profit Factor      :       2.06         2.06         0.00
+     Win Percent        :      61.6%        61.6%         0.0%
+     Avg DrawDown       :    -857.95      -857.95         0.00
      Avg DrawDown %     :      -0.0%        -0.0%         0.0%
-     Max DrawDown       :   -4980.00     -4980.00         0.00
-     Max DrawDown %     :      -0.0%        -0.0%         0.0%
-     Net PL/Max DD      :       6.57         6.57         0.00
-     CAGR/Max DD %      :       0.94         0.94         0.00
-     Expectancy         :       0.35         0.35         0.00
-     Z-score            :       2.86         2.86         0.00
-     R^2                :     0.9046       0.9046       0.0000
+     Max DrawDown       :   -5390.00     -5390.00         0.00
+     Max DrawDown %     :      -0.1%        -0.1%         0.0%
+     Net PL/Max DD      :       7.54         7.54         0.00
+     CAGR/Max DD %      :       1.08         1.08         0.00
+     Expectancy         :       0.41         0.41         0.00
+     Z-score            :       3.27         3.27         0.00
+     R^2                :     0.9253       0.9253       0.0000
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :     931.39       931.39         0.00
-     Gross Profit       :   72570.00     72570.00         0.00
-     Gross Loss         :  -39830.00    -39830.00         0.00
-     Avg Profit         :     834.14       834.14         0.00
-     Avg Loss           :    -622.34      -622.34         0.00
+     Std.Dev. of P/L    :    1013.37      1013.37         0.00
+     Gross Profit       :   79070.00     79070.00         0.00
+     Gross Loss         :  -38410.00    -38410.00         0.00
+     Avg Profit         :     850.22       850.22         0.00
+     Avg Loss           :    -662.24      -662.24         0.00
      Max Profit         :    3330.00      3330.00         0.00
-     Max Loss           :   -1510.00     -1510.00         0.00
-     Avg Bars in Win    :      74.37        74.37         0.00
-     Avg Bars in Loss   :      59.38        59.38         0.00
-     Max Consec. Wins   :      11           11            0
-     Max Consec. Losses :       6            6            0
-     Minimum Capital    :   14070.00     14070.00         0.00
+     Max Loss           :   -3310.00     -3310.00         0.00
+     Avg Bars in Win    :      74.35        74.35         0.00
+     Avg Bars in Loss   :      71.43        71.43         0.00
+     Max Consec. Wins   :      14           14            0
+     Max Consec. Losses :       4            4            0
+     Minimum Capital    :   14685.00     14685.00         0.00
    # ========================================================= #

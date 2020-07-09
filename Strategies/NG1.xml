@@ -25,7 +25,7 @@
 <Inputs>
     <Input>
       <Name>MyStop</Name>
-      <Value>30</Value>
+      <Value>0</Value>
     </Input>
     <OptRange>
         <Name>fractN</Name>
