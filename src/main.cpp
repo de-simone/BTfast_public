@@ -22,24 +22,21 @@
         - Strategy files: 'Strategy/strategyname.cpp',
                           'Strategy/strategyname.h',
                           'Strategy/StrategyName.xml'
-
- * EDIT:
-        - Input settings        (in 'settings.xml')
-        - Strategy parameters   (in 'Strategies/StrategyName.xml')
-
-        Contract specs in 'instruments.cpp'.
+        - Contract specifications: 'src/instruments.cpp'
 
 
                                           -------------------------------------
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-07
+                                                        Last update: 2020-07-09
                                           -------------------------------------
 
  * TO DO:
 
     - dynamic position sizing in mastercode
+    - trade management: form of dynamic position sizing increasing/decreasing
+      position during the trade (not before entry).
     - check implementation of LIMIT orders with TradeStation
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
