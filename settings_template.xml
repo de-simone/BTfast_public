@@ -11,16 +11,17 @@ General Settings for BTfast
         </Value></Input>
     <Input>
         <Name>    RUN_MODE    </Name>
-        <!-- 0:   No trade (for debugging)
-             1:   Single Backtest
-             2:   Exhaustive Parallel Optimization
-             22:  Genetic Parallel Optimization
-             222: Exhaustive Serial Optimizationw
-             3:   Validation for single strategy (Backtest + Validation)
-             4:   Strategy Factory (Exhaustive Generation + Validation)
-             44:  Strategy Factory (Genetic Generation + Validation)
-             444: Strategy Factory (Import Generation results + Validation)
-             5:   Market overview (no trades)
+        <!-- 0:    No trade (for debugging)
+             1:    Single Backtest
+             2:    Optimization (Exhaustive Parallel)
+             22:   Optimization (Genetic Parallel)
+             222:  Optimization (Exhaustive Serial)
+             3:    Validation for Single Strategy (Backtest + Validation)
+             4:    Strategy Factory (Sequential Generation + Validation)
+             44:   Strategy Factory (Exhaustive Generation + Validation)
+             444:  Strategy Factory (Genetic Generation + Validation)
+             4444: Strategy Factory (Import Generation Results + Validation)
+             6:    Market overview (no trades)
          -->
         <Value> 1
         </Value></Input>
@@ -113,7 +114,7 @@ General Settings for BTfast
         <Value>   0
         </Value></Input>
     <Input>
-        <!-- Write trade history to file and show equity line (via gnuplot) -->
+        <!-- Write trade history to file (profits.csv) and show equity line (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    WRITE_TRADES_TO_FILE  </Name>
         <Value>   0

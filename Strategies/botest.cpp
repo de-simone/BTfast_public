@@ -1,8 +1,9 @@
 #include "botest.h"
 
+#include "filters/exits.h"      // ExitCondition
 #include "filters/TA_indicators.h"
 #include "utils_math.h" // round_double
-#include "utils_trade.h"      // MarketPosition
+#include "utils_trade.h"        // MarketPosition
 
 // ------------------------------------------------------------------------- //
 /*! Constructor
@@ -197,16 +198,14 @@ void BOtest::compute_exit( const std::deque<Event>& data1,
     // Exit one bar before close of session,
     // or at open of next session if session ends earlier than usual
     bool ExitLong   = ( MarketPosition_> 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( 1, data1, CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, tf_mins_,
+                                          co_mins_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( 1, data1, CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, tf_mins_,
+                                          co_mins_ ) );
     // --------------------------------------------------------------------- //
 
 

@@ -34,7 +34,6 @@
 
  * TO DO:
 
-    - seg fault when entry at 17:00
     - dynamic position sizing in mastercode
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).
@@ -280,6 +279,16 @@ int main () {
 
         // ---------------------   STRATEGY FACTORY   ---------------------- //
         case 4:
+            // Sequential Exhaustive Parallel Optimization
+            mode_factory_sequential( btf, datafeed, parameter_ranges,
+                                      optim_file, param_file, selected_file,
+                                      validated_file, fitness_metric,
+                                      population_size, generations,
+                                      data_dir, data_file_oos, max_variation_pct,
+                                      num_noise_tests, noise_file );
+            break;
+
+        case 44:
             // Exhaustive Parallel Optimization
             mode_factory( btf, datafeed, parameter_ranges, "parallel",
                           optim_file, param_file, selected_file,
@@ -289,7 +298,7 @@ int main () {
                           num_noise_tests, noise_file );
             break;
 
-        case 44:
+        case 444:
             // Genetic Parallel Optimization
             mode_factory( btf, datafeed, parameter_ranges, "genetic",
                           optim_file, param_file, selected_file,
@@ -299,7 +308,7 @@ int main () {
                           num_noise_tests, noise_file );
             break;
 
-        case 444:
+        case 4444:
             // Import generation results from file
             mode_factory( btf, datafeed, parameter_ranges, "import",
                           optim_file, param_file, selected_file,
@@ -307,16 +316,6 @@ int main () {
                           population_size, generations,
                           data_dir, data_file_oos, max_variation_pct,
                           num_noise_tests, noise_file );
-            break;
-
-        case 5:
-            // Sequential Exhaustive Parallel Optimization
-            mode_factory_sequential( btf, datafeed, parameter_ranges,
-                                      optim_file, param_file, selected_file,
-                                      validated_file, fitness_metric,
-                                      population_size, generations,
-                                      data_dir, data_file_oos, max_variation_pct,
-                                      num_noise_tests, noise_file );
             break;
         // ----------------------------------------------------------------- //
 

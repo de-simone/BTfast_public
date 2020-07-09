@@ -1,5 +1,6 @@
 #include "mastercode.h"
 
+#include "filters/exits.h"              // ExitCondition
 #include "filters/poi.h"                // PointOfInititation
 #include "filters/patterns.h"           // Pattern
 #include "filters/time_filters.h"       // TimeFilter_DOW, TimeFilter_Intraday
@@ -284,16 +285,14 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
     // or at open of next session if session ends earlier than usual
 
     bool ExitLong   = ( MarketPosition_> 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( 1, data1, CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, tf_mins_,
+                                          co_mins_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( 1, data1, CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, tf_mins_,
+                                          co_mins_ ) );
     // --------------------------------------------------------------------- //
 
 
@@ -304,7 +303,7 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
         Position long_pos_to_close {};
         for( Position pos : position_handler.open_positions() ){
             if( pos.side() == "LONG" ){
-                long_pos_to_close = pos;                
+                long_pos_to_close = pos;
                 break;
             }
         }
