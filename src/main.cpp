@@ -29,12 +29,12 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-09
+                                                        Last update: 2020-07-12
                                           -------------------------------------
 
  * TO DO:
 
-    - dynamic position sizing in mastercode
+    - sequential factory to include mkt regime (for DPS)
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).
     - check implementation of LIMIT orders with TradeStation

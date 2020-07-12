@@ -17,6 +17,7 @@ bool Pattern ( int ptn_num,
 
     bool result {false};
 
+    /*
     // -----------------------    VOLATILITY BINS    ----------------------- //
     int vola_bin {0};
 
@@ -27,7 +28,6 @@ bool Pattern ( int ptn_num,
         double vola_min { *min_element(atrD.begin()+1, atrD.end()) };
         // Split volatility range into 4 bins
         double vola_bin_size { (vola_max-vola_min) / 4.0 };
-
 
         if( atrD.front() <= vola_min + vola_bin_size ){
                 vola_bin = 1;
@@ -45,7 +45,7 @@ bool Pattern ( int ptn_num,
         }
     }
     // --------------------------------------------------------------------- //
-
+    */
 
     switch( ptn_num ){
         case 0:
@@ -187,6 +187,7 @@ bool Pattern ( int ptn_num,
         case 42:
             result = ( CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3] );
             break;
+        /*
         case 43:    // Volatility bin 1
             result = vola_bin == 1;
             break;
@@ -211,6 +212,7 @@ bool Pattern ( int ptn_num,
         case 50:    // Not Volatility bin 4
             result = vola_bin != 4;
             break;
+        */
     }
 
     return(result);

@@ -116,7 +116,7 @@ General Settings for BTfast
         <!-- Write trade history to file (profits.csv) and show equity line (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    WRITE_TRADES_TO_FILE  </Name>
-        <Value>   1
+        <Value>   0
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -155,7 +155,7 @@ General Settings for BTfast
     <Input>
         <!-- Position size: fixed_size, fixed_notional, fixed_fractional  -->
         <Name>    POSITION_SIZE_TYPE     </Name>
-        <Value>   fixed_size
+        <Value>   fixed_notional
         </Value></Input>
     <Input>
         <!-- Number of contracts to use in "fixed_size" position size -->

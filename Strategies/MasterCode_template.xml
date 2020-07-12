@@ -60,17 +60,33 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
+        <Name>Filter1L_switch</Name>    <!-- 0..42:1 -->
         <Start>0</Start>
-        <Stop>50</Stop>
+        <Stop>42</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
+        <Name>Filter1S_switch</Name>    <!-- 0..42:1 -->
         <Start>0</Start>
-        <Stop>50</Stop>
+        <Stop>42</Stop>
         <Step>1</Step>
     </OptRange>
+    <OptRange>
+        <Name>MktRegimeL_switch</Name>  <!-- 1..8:1 -->
+        <Start>1</Start>
+        <Stop>8</Stop>
+        <Step>1</Step>
+    </OptRange>
+    <OptRange>
+        <Name>MktRegimeS_switch</Name>  <!-- 1..8:1 -->
+        <Start>1</Start>
+        <Stop>8</Stop>
+        <Step>1</Step>
+    </OptRange>
+    <Input>
+        <Name>DPS_switch</Name>         <!--  0 (false) or 1 (true) -->
+        <Value>0</Value>
+    </Input>
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..5:1 -->
         <Start>0</Start>

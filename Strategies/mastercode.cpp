@@ -3,6 +3,7 @@
 #include "filters/exits.h"              // ExitCondition
 #include "filters/poi.h"                // PointOfInititation
 #include "filters/patterns.h"           // Pattern
+#include "filters/regimes.h"            // MktRegime
 #include "filters/time_filters.h"       // TimeFilter_DOW, TimeFilter_Intraday
 #include "filters/TA_indicators.h"      // ATR
 #include "utils_math.h"                 // modulus, round_double
@@ -70,6 +71,12 @@ void MasterCode::set_param_values(
                                                  parameter_set );
     Filter1S_switch_ = find_param_value_by_name( "Filter1S_switch",
                                                  parameter_set );
+    MktRegimeL_switch_ = find_param_value_by_name( "MktRegimeL_switch",
+                                                   parameter_set );
+    MktRegimeS_switch_ = find_param_value_by_name( "MktRegimeS_switch",
+                                                   parameter_set );
+    DPS_switch_ = find_param_value_by_name( "DPS_switch", parameter_set );
+
     //fractN_ = find_param_value_by_name( "fractN", parameter_set );
     fractN_long_  = find_param_value_by_name( "fractN_long", parameter_set );
     fractN_short_ = find_param_value_by_name( "fractN_short", parameter_set );
@@ -229,42 +236,95 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     bool All_filters_short { FilterT_DOW && FilterT_Intraday && Filter1_short};
     // --------------------------------------------------------------------- //
 
+    // --------------------    MARKET REGIME FILTER     -------------------- //
+    bool FilterRegime_long { MktRegime( MktRegimeL_switch_,
+                                       OpenD_, HighD_, LowD_, CloseD_, atrD_ )};
+    bool FilterRegime_short { MktRegime( MktRegimeS_switch_,
+                                       OpenD_, HighD_, LowD_, CloseD_, atrD_ )};
+    // --------------------------------------------------------------------- //
+
     // ------------------------    ENTRY RULES    -------------------------- //
+    double position_size_factor {1.0};
+
     bool EnterLong  = ( TradingEnabled_
                         && ( Side_switch_ == 1 || Side_switch_ == 3 )
                         && All_filters_long );
+    //--- Dynamic Position Sizing for Long Entries
+    if( EnterLong ){
+        if( DPS_switch_ == 0 ){     // used to test FilterDPS
+            if( FilterRegime_long ){
+                position_size_factor = 1.0;
+            }
+            else{
+                EnterLong = false;  // cancel the entry
+            }
+        }
+        if( DPS_switch_ == 1 ){     // used in production
+            if( FilterRegime_long ){
+                position_size_factor = 2.0;
+            }
+            else{
+                position_size_factor = 1.0;
+            }
+        }
+    }
+    //---
 
     bool EnterShort = ( TradingEnabled_
                         && ( Side_switch_ == 2 || Side_switch_ == 3 )
                         && All_filters_short );
+    //--- Dynamic Position Sizing for Long Entries
+    if( EnterShort ){
+        if( DPS_switch_ == 0 ){     // used to test FilterDPS
+            if( FilterRegime_short ){
+                position_size_factor = 1.0;
+            }
+            else{
+                EnterShort = false; // cancel the entry
+            }
+        }
+        if( DPS_switch_ == 1 ){     // used in production
+            if( FilterRegime_short ){
+                position_size_factor = 2.0;
+            }
+            else{
+                position_size_factor = 1.0;
+            }
+        }
+    }
+    //---
     // --------------------------------------------------------------------- //
 
 
     ////////////////////////  DO NOT EDIT THIS BLOCK  /////////////////////////
     //////////////////////////     OPEN TRADES     ////////////////////////////
     if( EnterLong ){
-        if( BOMR_switch_ == 1 ){
+
+        if( BOMR_switch_ == 1 ){            
             signals[0] = Event { symbol_, data1[0].timestamp(),
-                                 "BUY", "STOP", level_long, 1.0, 0,
+                                 "BUY", "STOP", level_long,
+                                 position_size_factor, 0,
                                  name_, (double) MyStop_ , 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
-                                 "BUY", "LIMIT", level_long, 1.0, 0,
+                                 "BUY", "LIMIT", level_long,
+                                 position_size_factor, 0,
                                  name_, (double) MyStop_ , 0.0 };
         }
-
     }
 
     if( EnterShort ){
         if( BOMR_switch_ == 1 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
-                                 "SELLSHORT", "STOP", level_short, 1.0, 0,
+                                 "SELLSHORT", "STOP", level_short,
+                                 position_size_factor, 0,
                                  name_, (double) MyStop_, 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
-                                 "SELLSHORT", "LIMIT", level_short, 1.0, 0,
+                                 "SELLSHORT", "LIMIT", level_short,
+                                 position_size_factor, 0,
                                  name_, (double) MyStop_, 0.0 };
         }
     }
