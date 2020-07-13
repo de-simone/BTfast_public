@@ -317,6 +317,7 @@ void utils_params::set_parameter_value_by_name( const std::string &par_name,
 /*! Set parameter value in 'strategies' corresponding to name 'par_name'
     to value 'new_value'
 */
+/*
 void utils_params::set_strategy_parameter_value_by_name(
                                     const std::string &par_name,
                                     strategy_t& strategies, int new_value )
@@ -328,6 +329,7 @@ void utils_params::set_strategy_parameter_value_by_name(
         }
     }
 }
+*/
 
 // --------------------------------------------------------------------- //
 /*! Extract value of parameter  named 'par_name' from parameters_t  'source'

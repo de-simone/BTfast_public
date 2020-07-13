@@ -7,7 +7,7 @@
                             // expand_strategies_with_opt_range,
                             // first_parameters_from_range,
                             // parameter_value_by_name,
-                            // set_strategy_parameter_value_by_name,
+                            // set_parameter_value_by_name,
                             // no_filter_strategy,
                             // strategy_attribute_by_name,
                             // max_strategy_metric_by_name
@@ -484,13 +484,15 @@ void mode_factory_sequential( BTfast &btf,
                                     * ( 1 + 0.5 * perf_relative_improvement ) );
 
             if( selection_conditions ){
+
+
                 // Activate DPS
-                utils_params::set_strategy_parameter_value_by_name( "DPS_switch",
-                                                                    strat, 1);
-                // Backtest strategy with DPS
                 parameters_t strat_params {};
                 utils_params::extract_parameters_from_single_strategy(strat,
                                                                  strat_params);
+                utils_params::set_parameter_value_by_name( "DPS_switch",
+                                                           strat_params, 1);
+                // Backtest strategy with DPS
                 Account account_dps { btf.initial_balance() };
                 btf.run_backtest( account_dps, datafeed, strat_params );
                 Performance performance_dps { btf.initial_balance(),

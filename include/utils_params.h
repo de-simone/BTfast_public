@@ -43,7 +43,7 @@ namespace utils_params {
         [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
     */
     void print_param_ranges_t( const param_ranges_t& par_range );
-    
+
 
     // --------------------------------------------------------------------- //
     /*!  From vector v (as returned by utils_fileio::read_param_file() ),
@@ -125,8 +125,8 @@ namespace utils_params {
     /*! Set parameter value in 'strategies' corresponding to name 'par_name'
         to value 'new_value'
     */
-    void set_strategy_parameter_value_by_name( const std::string &par_name,
-                                      strategy_t& strategies, int new_value );
+    //void set_strategy_parameter_value_by_name( const std::string &par_name,
+    //                                  strategy_t& strategies, int new_value );
 
     // --------------------------------------------------------------------- //
     /*! Extract value of parameter  named 'par_name' from parameters_t  'source'
