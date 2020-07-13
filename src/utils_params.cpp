@@ -2,7 +2,7 @@
 
 #include "utils_optim.h"    // remove_duplicates
 
-#include <algorithm>    // std::reverse, std::sort, std::unique
+#include <algorithm>    // std::reverse, std::sort, std::unique, std::max_element
 #include <numeric>      // std::accumulate
 #include <iostream>     // std::cout
 #include <utility>      // std::make_pair
@@ -274,6 +274,30 @@ double utils_params::strategy_attribute_by_name( const std::string &attr_name,
 }
 
 // --------------------------------------------------------------------- //
+/*! Extract maximum value of the metric named 'metric_name'
+    over vector of strategies 'source'
+*/
+double utils_params::max_strategy_metric_by_name(
+                                    const std::string &metric_name,
+                                    const std::vector<strategy_t> &source )
+{
+    std::vector<double> metric_vec {};
+    for( const auto& strat: source ){
+        for( const auto& elem : strat ){
+            if( elem.first == metric_name ){
+                metric_vec.push_back(elem.second);
+            }
+        }
+    }
+    double result {0.0};
+    if( !metric_vec.empty() ){
+        result = *std::max_element( metric_vec.begin()+1, metric_vec.end() );
+    }
+    return(result);
+}
+
+
+// --------------------------------------------------------------------- //
 /*! Set parameter value in 'parameters' corresponding to name 'par_name'
     to value 'new_value'
 */
@@ -283,6 +307,22 @@ void utils_params::set_parameter_value_by_name( const std::string &par_name,
     for( auto& elem: parameters){
         if( elem.first == par_name ){
             elem.second = new_value;
+            break;
+        }
+    }
+}
+
+// --------------------------------------------------------------------- //
+/*! Set parameter value in 'strategies' corresponding to name 'par_name'
+    to value 'new_value'
+*/
+void utils_params::set_strategy_parameter_value_by_name(
+                                    const std::string &par_name,
+                                    strategy_t& strategies, int new_value )
+{
+    for( auto& elem: strategies){
+        if( elem.first == par_name ){
+            elem.second = (double) new_value;
             break;
         }
     }

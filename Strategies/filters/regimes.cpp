@@ -46,6 +46,10 @@ bool MktRegime ( int reg_num,
     // --------------------------------------------------------------------- //
 
     switch( reg_num ){
+        
+        case 0:
+            result = true;
+            break;
 
         case 1:    // Volatility bin 1
             result = vola_bin == 1;

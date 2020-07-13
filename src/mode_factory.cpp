@@ -3,12 +3,14 @@
 #include "utils_fileio.h"   // read_strategies_from_file
 #include "utils_optim.h"    // remove_duplicates
 #include "utils_params.h"   // cartesian_product,
-                            // extract_parameters_from_all_strategies
+                            // extract_parameters_from_all_strategies,
                             // expand_strategies_with_opt_range,
                             // first_parameters_from_range,
                             // parameter_value_by_name,
-                            // no_filter_strategy
-                            // strategy_attribute_by_name
+                            // set_strategy_parameter_value_by_name,
+                            // no_filter_strategy,
+                            // strategy_attribute_by_name,
+                            // max_strategy_metric_by_name
 #include "validation.h"
 
 #include <iostream>         // std::cout
@@ -45,6 +47,7 @@ void mode_factory( BTfast &btf,
         // (new optimization or imported from file)
         // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
         std::vector<strategy_t> generated_strategies {};
+
 
         // --------------------    STATEGY GENERATION    ------------------- //
         // ----------------    (optimization or from file)    -------------- //
@@ -134,6 +137,9 @@ void mode_factory( BTfast &btf,
 
 
 
+
+
+
 // ------------------------------------------------------------------------- //
 /*! Strategy Factory mode (Sequential Generation + Validation)
 */
@@ -172,6 +178,7 @@ void mode_factory_sequential( BTfast &btf,
     double perf_relative_improvement {0.2};
     strategy_t no_filter_strat {};
     //utils_params::print_param_ranges_t(parameter_ranges);
+
 
     // ----------------------    STATEGY GENERATION    --------------------- //
 
@@ -280,7 +287,7 @@ void mode_factory_sequential( BTfast &btf,
     //---
 
     //--- GENERATION STEP 3
-    // Extract strategy parameters from selected_1 to search space
+    // Extract strategy parameters from selected_2 to search space
     utils_params::extract_parameters_from_all_strategies( selected_2,
                                                           search_space );
     // Add optimization parameter range to each strategy in search space
@@ -406,11 +413,101 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
 
+
+    //--- GENERATION + SELECTION STEP 5
+    std::vector<strategy_t> selected_5 {};
+    for( const auto& selected_strat: selected_4 ){   // loop over selected strategies
+
+        // GENERATION STEP 5
+        parameters_t selected_strat_params {};
+        // Extract parameters from each strategy in selected_4 to search space
+        utils_params::extract_parameters_from_single_strategy(
+                                        selected_strat, selected_strat_params);
+        search_space.clear();
+        search_space.push_back(selected_strat_params);
+
+        // Add optimization parameter range to each strategy in search space
+        if( side_switch == 1 || side_switch == 3 ){
+            utils_params::expand_strategies_with_opt_range(
+                        "MktRegimeL_switch", parameter_ranges, search_space);
+        }
+        if( side_switch == 2 || side_switch == 3 ){
+            utils_params::expand_strategies_with_opt_range(
+                        "MktRegimeS_switch", parameter_ranges, search_space);
+        }
+        // Exhaustive Parallel Optimization
+        std::vector<strategy_t> generated_5 {};
+        btf.run_parallel_optimization( search_space, generated_5,
+                                       optim_file,  param_file, fitness_metric,
+                                       datafeed, true, true );
+        if( generated_5.empty() ){
+             std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
+             exit(1);
+        }
+
+        // SELECTION STEP 5
+        for( auto& strat: generated_5 ){
+            switch( side_switch ){
+                case 1:
+                    // Find strategy equal to 'strat' except without new filter
+                    no_filter_strat = utils_params::no_filter_strategy(
+                                        "MktRegimeL_switch", strat, generated_5);
+                    break;
+                case 2:
+                    // Find strategy equal to 'strat' except without new filter
+                    no_filter_strat = utils_params::no_filter_strategy(
+                                        "MktRegimeS_switch", strat, generated_5);
+                    break;
+                case 3:
+                    // Find strategy equal to 'strat' except without two new filters
+                    no_filter_strat = utils_params::no_two_filters_strategy(
+                                        "MktRegimeL_switch", "MktRegimeS_switch",
+                                        strat, generated_5 );
+                    break;
+            }
+            // Metric of strategy without new filter(s)
+            avgticks_no_filter = utils_params::strategy_attribute_by_name(
+                                                "AvgTicks", no_filter_strat );
+            // Metric of strategy with new filter(s)
+            avgticks_with_filter = utils_params::strategy_attribute_by_name(
+                                                    "AvgTicks", strat );
+            // Maximum value of metric over genedated strategies
+            double max_avgticks { utils_params::max_strategy_metric_by_name(
+                                                    "AvgTicks", generated_5 ) };
+
+            selection_conditions = ( max_avgticks > 0.0
+                                && avgticks_with_filter == max_avgticks
+                                && max_avgticks >= avgticks_no_filter
+                                        * ( 1 + perf_relative_improvement ) );
+
+            if( selection_conditions ){
+                // Append strategy with new filter and DPS activated
+                utils_params::set_strategy_parameter_value_by_name( "DPS_switch",
+                                                                    strat, 1);
+                selected_5.push_back(strat);
+            }
+            else{
+                // Append strategy without new filter to selected vector
+                selected_5.push_back(no_filter_strat);
+            }
+        }
+    } // end loop over selected_4 strategies
+
+    utils_optim::remove_duplicates( selected_5, fitness_metric );
+    std::cout << "Number of strategies passing 5th generation step: "
+              << selected_5.size() <<"\n";
+    if( selected_5.empty() ){
+       exit(1);
+    }
+    //---
+
     // --------------------------------------------------------------------- //
+
+
 
     // ---------------------------    VALIDATION   ------------------------- //
     // Instantiate Validation object
-    Validation validation { btf, datafeed, selected_4, selected_file,
+    Validation validation { btf, datafeed, selected_5, selected_file,
                             validated_file, fitness_metric,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };

@@ -21,6 +21,8 @@
     </OptRange>
 
 For Backtest: only the <Start> value of <OptRange> parameters is read.
+
+Names of input variables must match those in 'mode_factory_sequential'
 -->
 <Inputs>
     <Input>
@@ -72,14 +74,14 @@ For Backtest: only the <Start> value of <OptRange> parameters is read.
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>MktRegimeL_switch</Name>  <!-- 1..8:1 -->
-        <Start>1</Start>
+        <Name>MktRegimeL_switch</Name>  <!-- 0..8:1 -->
+        <Start>0</Start>
         <Stop>8</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>MktRegimeS_switch</Name>  <!-- 1..8:1 -->
-        <Start>1</Start>
+        <Name>MktRegimeS_switch</Name>  <!-- 0..8:1 -->
+        <Start>0</Start>
         <Stop>8</Stop>
         <Step>1</Step>
     </OptRange>

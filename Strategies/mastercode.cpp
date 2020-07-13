@@ -52,6 +52,8 @@ MasterCode::MasterCode( std::string name, Instrument symbol,
 /*! Set values of the input parameters, by setting the
     correspondence with the names appearing in XML param file.
     Recall: all parameters in XML are INTEGER.
+
+    Names of input variables must match those in 'mode_factory_sequential'
 */
 void MasterCode::set_param_values(
                         const std::vector< std::pair<std::string,int> >&
@@ -244,16 +246,17 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     // --------------------------------------------------------------------- //
 
     // ------------------------    ENTRY RULES    -------------------------- //
-    double position_size_factor {1.0};
-
+    //--- LONG entry
     bool EnterLong  = ( TradingEnabled_
                         && ( Side_switch_ == 1 || Side_switch_ == 3 )
                         && All_filters_long );
-    //--- Dynamic Position Sizing for Long Entries
+
+    // Dynamic Position Sizing for Long Entries
+    double ps_factor_long {1.0};
     if( EnterLong ){
         if( DPS_switch_ == 0 ){     // used to test FilterDPS
             if( FilterRegime_long ){
-                position_size_factor = 1.0;
+                ps_factor_long = 1.0;
             }
             else{
                 EnterLong = false;  // cancel the entry
@@ -261,23 +264,26 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
         }
         if( DPS_switch_ == 1 ){     // used in production
             if( FilterRegime_long ){
-                position_size_factor = 2.0;
+                ps_factor_long = 2.0;
             }
             else{
-                position_size_factor = 1.0;
+                ps_factor_long = 1.0;
             }
         }
     }
     //---
 
+    //--- SHORT entry
     bool EnterShort = ( TradingEnabled_
                         && ( Side_switch_ == 2 || Side_switch_ == 3 )
                         && All_filters_short );
-    //--- Dynamic Position Sizing for Long Entries
+
+    // Dynamic Position Sizing for Short Entries
+    double ps_factor_short {1.0};
     if( EnterShort ){
         if( DPS_switch_ == 0 ){     // used to test FilterDPS
             if( FilterRegime_short ){
-                position_size_factor = 1.0;
+                ps_factor_short = 1.0;
             }
             else{
                 EnterShort = false; // cancel the entry
@@ -285,10 +291,10 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
         }
         if( DPS_switch_ == 1 ){     // used in production
             if( FilterRegime_short ){
-                position_size_factor = 2.0;
+                ps_factor_short = 2.0;
             }
             else{
-                position_size_factor = 1.0;
+                ps_factor_short = 1.0;
             }
         }
     }
@@ -300,16 +306,16 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     //////////////////////////     OPEN TRADES     ////////////////////////////
     if( EnterLong ){
 
-        if( BOMR_switch_ == 1 ){            
+        if( BOMR_switch_ == 1 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
                                  "BUY", "STOP", level_long,
-                                 position_size_factor, 0,
+                                 ps_factor_long, 0,
                                  name_, (double) MyStop_ , 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
                                  "BUY", "LIMIT", level_long,
-                                 position_size_factor, 0,
+                                 ps_factor_long, 0,
                                  name_, (double) MyStop_ , 0.0 };
         }
     }
@@ -318,13 +324,13 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
         if( BOMR_switch_ == 1 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
                                  "SELLSHORT", "STOP", level_short,
-                                 position_size_factor, 0,
+                                 ps_factor_short, 0,
                                  name_, (double) MyStop_, 0.0 };
         }
         else if( BOMR_switch_ == 2 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
                                  "SELLSHORT", "LIMIT", level_short,
-                                 position_size_factor, 0,
+                                 ps_factor_short, 0,
                                  name_, (double) MyStop_, 0.0 };
         }
     }

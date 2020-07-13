@@ -107,11 +107,25 @@ namespace utils_params {
                                        const strategy_t &source );
 
     // --------------------------------------------------------------------- //
+    /*! Extract maximum value of the metric named 'metric_name'
+        over vector of strategies 'source'
+    */
+    double max_strategy_metric_by_name( const std::string &metric_name,
+                                        const std::vector<strategy_t> &source );
+                                        
+    // --------------------------------------------------------------------- //
     /*! Set parameter value in 'parameters' corresponding to name 'par_name'
         to value 'new_value'
     */
     void set_parameter_value_by_name( const std::string &par_name,
                                       parameters_t& parameters, int new_value );
+
+    // --------------------------------------------------------------------- //
+    /*! Set parameter value in 'strategies' corresponding to name 'par_name'
+        to value 'new_value'
+    */
+    void set_strategy_parameter_value_by_name( const std::string &par_name,
+                                      strategy_t& strategies, int new_value );
 
     // --------------------------------------------------------------------- //
     /*! Extract value of parameter  named 'par_name' from parameters_t  'source'
@@ -181,7 +195,7 @@ namespace utils_params {
                                         std::string filter_name_2,
                                         strategy_t ref_strat,
                                         const std::vector<strategy_t> &source );
-                                        
+
     // --------------------------------------------------------------------- //
     /*!  Extract parameter range vector from all strategies in 'source'
          name 'par_name' and replace parameter vector in 'dest'
