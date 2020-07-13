@@ -481,7 +481,7 @@ void mode_factory_sequential( BTfast &btf,
             selection_conditions = ( max_avgticks > 0.0
                                 && avgticks_with_filter == max_avgticks
                                 && max_avgticks >= avgticks_no_filter
-                                        * ( 1 + 0.5*perf_relative_improvement ) );
+                                    * ( 1 + 0.5 * perf_relative_improvement ) );
 
             if( selection_conditions ){
                 // Activate DPS
