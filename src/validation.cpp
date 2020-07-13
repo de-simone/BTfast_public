@@ -268,12 +268,12 @@ void Validation::initial_generation_selection(
                                                                     strat) };
         // Selection Conditions
 
-        bool condition1 { Ntrades > 100 };
-        bool condition2 { AvgTicks > 8 };
+        bool condition1 { Ntrades > 40 * (btf_.day_counter() / 252.0) };
+        bool condition2 { AvgTicks > 6 };
         bool condition3 { NpMdd > 1.5 };
-        bool condition4 { PftFactor > 1.1 };
+        bool condition4 { PftFactor > 1.05 };
         bool condition5 { Expectancy > 0.05 };
-        bool condition6 { Zscore > 1.1  };
+        bool condition6 { Zscore > 1.0  };
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
@@ -334,7 +334,7 @@ void Validation::selection_conditions(
         // p = 1-Phi(Z) = Phi(-Z)=(1/2)Erfc[x/sqrt(2)],  Phi = CDF(N(0,1))
         double pvalue = 0.5*std::erfc( Zscore/std::sqrt(2.0) );
         // Selection Conditions
-        bool condition1 { Ntrades > 60 };// 40 * (btf_.day_counter() / 252.0) };
+        bool condition1 { Ntrades > 200 };// 40 * (btf_.day_counter() / 252.0) };
         bool condition2 { AvgTicks > 12 };//4*btf_.symbol().transaction_cost_ticks()};
         //bool condition2 { AvgTrade > 3 * btf_.symbol().transaction_cost() };
         bool condition3 { NpMdd > 4.0 };
@@ -342,7 +342,7 @@ void Validation::selection_conditions(
         bool condition5 { Expectancy > 0.1 };
         bool condition6 { pvalue < 0.1 / Ntests  }; // multiple comparison (bonferroni)
         //condition6 = pvalue<=0.01;
-        condition6 = Zscore > 2.5;
+        condition6 = Zscore > 2.0;
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );

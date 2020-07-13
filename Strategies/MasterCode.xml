@@ -40,13 +40,13 @@ Names of input variables must match those in 'mode_factory_sequential'
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..7:1 -->
         <Start>1</Start>
-        <Stop>2</Stop>
+        <Stop>7</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Distance_switch</Name>    <!-- 1..3:1 -->
         <Start>1</Start>
-        <Stop>2</Stop>
+        <Stop>3</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>

@@ -227,7 +227,7 @@ void mode_factory_sequential( BTfast &btf,
                       noise_file };
     val1.initial_generation_selection( generated_1, selected_1 );
     std::cout << "Number of strategies passing 1st generation step: "
-              << selected_1.size() <<"\n";
+              << selected_1.size() <<"\n\n";
     if( selected_1.empty() ){
         exit(1);
     }
@@ -280,7 +280,7 @@ void mode_factory_sequential( BTfast &btf,
     }
     utils_optim::remove_duplicates( selected_2, fitness_metric );
     std::cout << "Number of strategies passing 2nd generation step: "
-              << selected_2.size() <<"\n";
+              << selected_2.size() <<"\n\n";
     if( selected_2.empty() ){
        exit(1);
     }
@@ -333,7 +333,7 @@ void mode_factory_sequential( BTfast &btf,
     }
     utils_optim::remove_duplicates( selected_3, fitness_metric );
     std::cout << "Number of strategies passing 3rd generation step: "
-              << selected_3.size() <<"\n";
+              << selected_3.size() <<"\n\n";
     if( selected_3.empty() ){
        exit(1);
     }
@@ -407,7 +407,7 @@ void mode_factory_sequential( BTfast &btf,
     }
     utils_optim::remove_duplicates( selected_4, fitness_metric );
     std::cout << "Number of strategies passing 4th generation step: "
-              << selected_4.size() <<"\n";
+              << selected_4.size() <<"\n\n";
     if( selected_4.empty() ){
        exit(1);
     }
@@ -418,6 +418,9 @@ void mode_factory_sequential( BTfast &btf,
     std::vector<strategy_t> selected_5 {};
     for( const auto& selected_strat: selected_4 ){   // loop over selected strategies
 
+        std::cout << "Analyzing Market Regime filters for strategy "
+                  << &selected_strat-&selected_4[0] + 1
+                  << " / " << selected_4.size() <<"\n";
         // GENERATION STEP 5
         parameters_t selected_strat_params {};
         // Extract parameters from each strategy in selected_4 to search space
@@ -478,13 +481,29 @@ void mode_factory_sequential( BTfast &btf,
             selection_conditions = ( max_avgticks > 0.0
                                 && avgticks_with_filter == max_avgticks
                                 && max_avgticks >= avgticks_no_filter
-                                        * ( 1 + perf_relative_improvement ) );
+                                        * ( 1 + 0.5*perf_relative_improvement ) );
 
             if( selection_conditions ){
-                // Append strategy with new filter and DPS activated
+                // Activate DPS
                 utils_params::set_strategy_parameter_value_by_name( "DPS_switch",
                                                                     strat, 1);
-                selected_5.push_back(strat);
+                // Backtest strategy with DPS
+                parameters_t strat_params {};
+                utils_params::extract_parameters_from_single_strategy(strat,
+                                                                 strat_params);
+                Account account_dps { btf.initial_balance() };
+                btf.run_backtest( account_dps, datafeed, strat_params );
+                Performance performance_dps { btf.initial_balance(),
+                                              btf.day_counter(),
+                                              std::vector<Transaction> {} };
+                performance_dps.set_transactions( account_dps.transactions() );
+                performance_dps.compute_metrics();
+                std::vector<strategy_t> optim_results {};
+                utils_optim::append_to_optim_results( optim_results,
+                                                      performance_dps,
+                                                      strat_params );
+                // Append strategy with new filter and DPS activated
+                selected_5.push_back( optim_results.at(0) );
             }
             else{
                 // Append strategy without new filter to selected vector
@@ -495,7 +514,7 @@ void mode_factory_sequential( BTfast &btf,
 
     utils_optim::remove_duplicates( selected_5, fitness_metric );
     std::cout << "Number of strategies passing 5th generation step: "
-              << selected_5.size() <<"\n";
+              << selected_5.size() <<"\n\n";
     if( selected_5.empty() ){
        exit(1);
     }

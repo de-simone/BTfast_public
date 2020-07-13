@@ -29,15 +29,15 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-12
+                                                        Last update: 2020-07-13
                                           -------------------------------------
 
  * TO DO:
 
-    - sequential factory to include mkt regime (for DPS)
+    - seq generation: run strategy with DPS=1 before including it into selected ones
+    - check implementation of LIMIT orders with TradeStation
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).
-    - check implementation of LIMIT orders with TradeStation
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
       bars of up to 10 different symbols. Then PriceCollection runs over array

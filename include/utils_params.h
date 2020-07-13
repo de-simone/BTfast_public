@@ -43,6 +43,7 @@ namespace utils_params {
         [ ("p1", [10]), ("p2", [2,4,6,8]), ... ]
     */
     void print_param_ranges_t( const param_ranges_t& par_range );
+    
 
     // --------------------------------------------------------------------- //
     /*!  From vector v (as returned by utils_fileio::read_param_file() ),
@@ -112,7 +113,7 @@ namespace utils_params {
     */
     double max_strategy_metric_by_name( const std::string &metric_name,
                                         const std::vector<strategy_t> &source );
-                                        
+
     // --------------------------------------------------------------------- //
     /*! Set parameter value in 'parameters' corresponding to name 'par_name'
         to value 'new_value'
