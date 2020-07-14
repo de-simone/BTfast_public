@@ -34,6 +34,7 @@
 
  * TO DO:
 
+    - optimization: control print on file with switch 
     - seq generation: run strategy with DPS=1 before including it into selected ones
     - check implementation of LIMIT orders with TradeStation
     - trade management: form of dynamic position sizing increasing/decreasing

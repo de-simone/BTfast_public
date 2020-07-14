@@ -7,6 +7,7 @@ General Settings for BTfast
     <Input>
         <Name>    MAIN_DIR    </Name>
         <Value>   /Users/Andrea/GitHub/BTfast
+        <!--    /Users/Andrea/GitHub/BTfast     -->
         <!--    /u/d/desimon/BTfast     -->
         </Value></Input>
     <Input>
@@ -63,6 +64,7 @@ General Settings for BTfast
     <Input>
         <Name>    DATA_DIR    </Name>
         <Value>   /Users/Andrea/Documents/PriceData
+        <!--      /Users/Andrea/Documents/PriceData  -->
         <!--      /u/d/desimon/PriceData  -->
         </Value></Input>
     <Input>

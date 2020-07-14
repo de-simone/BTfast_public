@@ -233,6 +233,7 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
 
+
     //--- GENERATION STEP 2
     // Extract strategy parameters from selected_1 to search space
     utils_params::extract_parameters_from_all_strategies( selected_1,
@@ -484,8 +485,6 @@ void mode_factory_sequential( BTfast &btf,
                                     * ( 1 + 0.5 * perf_relative_improvement ) );
 
             if( selection_conditions ){
-
-
                 // Activate DPS
                 parameters_t strat_params {};
                 utils_params::extract_parameters_from_single_strategy(strat,

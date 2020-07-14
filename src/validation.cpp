@@ -268,12 +268,12 @@ void Validation::initial_generation_selection(
                                                                     strat) };
         // Selection Conditions
 
-        bool condition1 { Ntrades > 40 * (btf_.day_counter() / 252.0) };
-        bool condition2 { AvgTicks > 6 };
+        bool condition1 { Ntrades > 50 * (btf_.day_counter() / 252.0) };
+        bool condition2 { AvgTicks > 7 };
         bool condition3 { NpMdd > 1.5 };
-        bool condition4 { PftFactor > 1.05 };
+        bool condition4 { PftFactor > 1.1 };
         bool condition5 { Expectancy > 0.05 };
-        bool condition6 { Zscore > 1.0  };
+        bool condition6 { Zscore > 1.1  };
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
