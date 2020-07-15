@@ -29,12 +29,11 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-15
+                                                        Last update: 2020-07-16
                                           -------------------------------------
 
  * TO DO:
 
-    - seq generation: run strategy with DPS=1 before including it into selected ones
     - check implementation of LIMIT orders with TradeStation
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).
