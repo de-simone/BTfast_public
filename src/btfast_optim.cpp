@@ -237,7 +237,7 @@ void BTfast::run_optimization( const std::vector<parameters_t> &search_space,
         utils_optim::sort_by_metric( optim_results, fitness_metric );
     }
 
-    // Write optimization results to file 'optim_file'
+    // Write optimization results to file 'optim_file' and on stdout 
     int control = utils_fileio::write_strategies_to_file(
                                             optim_file, paramfile,
                                             optim_results, strategy_name_,

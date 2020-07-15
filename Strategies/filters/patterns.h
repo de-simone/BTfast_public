@@ -16,7 +16,7 @@ bool Pattern ( int ptn_num,
 /*! Number of Opposite pattern with respect to input pattern number,
     to symmetrize long/short entries.
 */
-int OppositePattern ( int ptn_num );
+//int OppositePattern ( int ptn_num );
 
 
 

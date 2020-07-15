@@ -271,9 +271,9 @@ void Validation::initial_generation_selection(
         bool condition1 { Ntrades > 50 * (btf_.day_counter() / 252.0) };
         bool condition2 { AvgTicks > 7 };
         bool condition3 { NpMdd > 1.5 };
-        bool condition4 { PftFactor > 1.1 };
+        bool condition4 { PftFactor > 1.0 };
         bool condition5 { Expectancy > 0.05 };
-        bool condition6 { Zscore > 1.1  };
+        bool condition6 { Zscore > 0.5  };
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
@@ -880,7 +880,7 @@ void Validation::noise_test( const std::vector<strategy_t>
         double original_metric { perf_metric.at(0) };
 
         //double percentile_low  { utils_math::percentile( perf_metric, 0.15 ) };
-        //double percentile_high { utils_math::percentile( perf_metric, 0.85 ) };
+        //double percentile_high { utils_math::percentile( perf_metric, 0.85 ) };        
         double lower_level { utils_math::mean( perf_metric )
                              - 2 * utils_math::stdev( perf_metric ) };
         double upper_level { utils_math::mean( perf_metric )

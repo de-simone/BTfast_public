@@ -1,0 +1,53 @@
+# TimeStamp   : 2020-07-14 11:52:59
+# Strategy    : MRtest
+# Symbol      : W
+# TimeFrame   : M10
+# Date Range  : 2010-01-04 --> 2019-12-31
+#
+#<Strategies/MRtest.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>    
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/MRtest.xml>
+#
+
+   # ==================  Performance Report ================== #
+                        |     All    |    Long    |    Short   |
+     Initial Balance    : 10000000.00
+     N. of Trades       :    2004         1042          962
+     Net Profit         :  -21450.00    -13887.50     -7562.50
+     Net Profit %       :      -0.2%        -0.1%        -0.1%
+     CAGR               :      -0.0%        -0.0%        -0.0%
+     Avg Trade          :     -10.70       -13.33        -7.86
+     Avg Ticks          :      -0.86        -1.07        -0.63
+     Profit Factor      :       0.85         0.82         0.90
+     Win Percent        :      44.6%        43.2%        46.0%
+     Avg DrawDown       :  -12591.79     -8531.45     -4960.78
+     Avg DrawDown %     :      -0.1%        -0.1%        -0.0%
+     Max DrawDown       :  -22575.00    -15825.00     -8475.00
+     Max DrawDown %     :      -0.2%        -0.2%        -0.1%
+     Net PL/Max DD      :      -0.95        -0.88        -0.89
+     CAGR/Max DD %      :      -0.10        -0.09        -0.09
+     Expectancy         :      -0.08        -0.11        -0.06
+     Z-score            :      -2.28        -2.16        -1.10
+     R^2                :     0.0000       0.0000       0.0000
+   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+     Std.Dev. of P/L    :     209.96       199.50       220.80
+     Gross Profit       :  125950.00     61237.50     64712.50
+     Gross Loss         : -147400.00    -75125.00    -72275.00
+     Avg Profit         :     141.04       136.08       146.08
+     Avg Loss           :    -132.67      -126.90      -139.26
+     Max Profit         :    1975.00       887.50      1975.00
+     Max Loss           :   -1637.50     -1462.50     -1637.50
+     Avg Bars in Win    :      30.27        30.16        30.37
+     Avg Bars in Loss   :      28.23        29.13        27.20
+     Max Consec. Wins   :       9            7            8
+     Max Consec. Losses :      11            8           11
+     Minimum Capital    :   35347.50     25222.50     14197.50
+   # ========================================================= #

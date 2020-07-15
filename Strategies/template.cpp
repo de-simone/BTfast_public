@@ -86,10 +86,11 @@ int Template::preliminaries( const std::deque<Event>& data1,
     }
     else{
         for( int j = 0; j < OpenD_.size(); j++ ){
-            OpenD_[j]  = data1D[j].open();
-            HighD_[j]  = data1D[j].high();
-            LowD_[j]   = data1D[j].low();
-            CloseD_[j] = data1D[j].close();
+            OpenD_[j]   = data1D[j].open();
+            HighD_[j]   = data1D[j].high();
+            LowD_[j]    = data1D[j].low();
+            CloseD_[j]  = data1D[j].close();
+            VolumeD_[j] = data1D[j].volume();
         }
     }
     //--

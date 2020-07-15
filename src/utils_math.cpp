@@ -90,9 +90,12 @@ double utils_math::mean( const std::vector<double> &v )
     }
 
     double sum { std::accumulate(v.begin(), v.end(), 0.0) };
-    double mean = sum / v.size();
+    double mean { sum / v.size() };
     return( mean );
 }
+
+
+
 
 // ------------------------------------------------------------------------- //
 // Standard deviation of vector (unbiased sample std, with 1/(N-1))
@@ -102,8 +105,8 @@ double utils_math::stdev( const std::vector<double> &v )
         return(0);
     }
 
-    double sum = std::accumulate(v.begin(), v.end(), 0.0);
-    double mean =  sum / v.size();
+    double sum { std::accumulate(v.begin(), v.end(), 0.0) };
+    double mean { sum / v.size() };
 
     double accum = 0.0;
     std::for_each( v.begin(), v.end(),

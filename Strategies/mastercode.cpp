@@ -6,12 +6,13 @@
 #include "filters/regimes.h"            // MktRegime
 #include "filters/time_filters.h"       // TimeFilter_DOW, TimeFilter_Intraday
 #include "filters/TA_indicators.h"      // ATR
-#include "utils_math.h"                 // modulus, round_double
+#include "utils_math.h"                 // modulus, round_double, mean
 #include "utils_trade.h"                // MarketPosition
 
 #include <algorithm>                    // std::max_element, std::min_element
 #include <cmath>                        // std::abs,std::pow
 #include <iostream>                     // std::cout
+#include <numeric>                      // std::accumulate
 
 using std::max_element;
 using std::min_element;
@@ -120,10 +121,11 @@ int MasterCode::preliminaries( const std::deque<Event>& data1,
     }
     else{
         for( int j = 0; j < OpenD_.size(); j++ ){
-            OpenD_[j]  = data1D[j].open();
-            HighD_[j]  = data1D[j].high();
-            LowD_[j]   = data1D[j].low();
-            CloseD_[j] = data1D[j].close();
+            OpenD_[j]   = data1D[j].open();
+            HighD_[j]   = data1D[j].high();
+            LowD_[j]    = data1D[j].low();
+            CloseD_[j]  = data1D[j].close();
+            VolumeD_[j] = data1D[j].volume();
         }
     }
     //--
@@ -196,14 +198,19 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     double distance {0.0};
     switch( Distance_switch_ ){
         case 1:                // (High1-Low1)
-            distance = (HighD_[1] - LowD_[1]);
+            distance = ( HighD_[1] - LowD_[1] );
             break;
-        case 2:                // ATR(10 days)
-            distance = atrD_.front();
+        case 2:                // avg of (H-L) over last 5 sessions
+            distance = ( std::accumulate(HighD_.begin(), HighD_.end(), 0.0)
+                         - std::accumulate(LowD_.begin(), LowD_.end(), 0.0)
+                       ) / HighD_.size();
             break;
         case 3:                // HH(5)-LL(5)
             distance = ( *max_element( HighD_.begin()+1, HighD_.end() )
                          - *min_element( LowD_.begin()+1, LowD_.end() ) );
+            break;
+        case 4:                // ATR(10 days)
+            distance = atrD_.front();
             break;
     }
 

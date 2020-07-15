@@ -55,7 +55,7 @@ Member Variables:
                     E.g. forbids multiple trades in same session.
 - SessionOpenPrice_: opening price of the current session
 - NewSession_: true at the start of a new session (day), otherwise false
-- OpenD_, ... , CloseD_: array of OHLC of current and previous 5 sessions
+- OpenD_, ... , CloseD_, VolumeD_: array of OHLCV of current and previous 5 sessions
 - T_segment_duration: duration of T-segment window (in minutes)
 
 -----
@@ -84,6 +84,7 @@ class Template : public Strategy {
     std::array<double, 6> HighD_ {};
     std::array<double, 6> LowD_ {};
     std::array<double, 6> CloseD_ {};
+    std::array<int, 6> VolumeD_ {};
     int T_segment_duration_ {0};
 
     // ---     Indicators     --- //

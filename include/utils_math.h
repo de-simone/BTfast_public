@@ -44,6 +44,7 @@ namespace utils_math {
     */
     double mean( const std::vector<double> &v );
 
+    
     // --------------------------------------------------------------------- //
     /*! Standard deviation of vector (unbiased sample std, with 1/(N-1))
     */

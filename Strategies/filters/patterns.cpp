@@ -17,40 +17,12 @@ bool Pattern ( int ptn_num,
 
     bool result {false};
 
-    /*
-    // -----------------------    VOLATILITY BINS    ----------------------- //
-    int vola_bin {0};
-
-    // Require at least 100 days of ATR history (in strategy::preliminaries())
-    if( !atrD.empty() ){
-        // Max and Min of atrD over its full history (max_bars_back)
-        double vola_max { *max_element(atrD.begin()+1, atrD.end()) };
-        double vola_min { *min_element(atrD.begin()+1, atrD.end()) };
-        // Split volatility range into 4 bins
-        double vola_bin_size { (vola_max-vola_min) / 4.0 };
-
-        if( atrD.front() <= vola_min + vola_bin_size ){
-                vola_bin = 1;
-        }
-        else if( atrD.front() > vola_min + vola_bin_size
-                && atrD.front() <= vola_min + 2*vola_bin_size ){
-                vola_bin = 2;
-        }
-        else if( atrD.front() > vola_min + 2*vola_bin_size
-                 && atrD.front() <= vola_min + 3*vola_bin_size ){
-                vola_bin = 3;
-        }
-        else if( atrD.front() > vola_min + 3*vola_bin_size ){
-                vola_bin = 4;
-        }
-    }
-    // --------------------------------------------------------------------- //
-    */
-
     switch( ptn_num ){
         case 0:
             result = true;
             break;
+
+        // ---------------------   UNGER's PATTERNS   ---------------------- //
         case 1:
             result =  abs(OpenD[1]-CloseD[1]) < 0.5 * (HighD[1]-LowD[1]);
             break;
@@ -74,11 +46,11 @@ bool Pattern ( int ptn_num,
         case 7:
             result = (OpenD[0]-LowD[0])> ((OpenD[1]-LowD[1]) * 1.5);
             break;
-        case 8:
+        case 8:         // 3 up-closes
             result = (CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3]
                         && CloseD[3]>CloseD[4]);
             break;
-        case 9:
+        case 9:         // 3 down-closes
             result = (CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3]
                         && CloseD[3]<CloseD[4]);
             break;
@@ -187,32 +159,57 @@ bool Pattern ( int ptn_num,
         case 42:
             result = ( CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3] );
             break;
-        /*
-        case 43:    // Volatility bin 1
-            result = vola_bin == 1;
+
+
+
+        // -----------------------   MY PATTERNS   ------------------------- //
+        case 43:        // 3 bars up
+            result = ( CloseD[1]>OpenD[1]  && CloseD[2]>OpenD[2]
+                        && CloseD[3]>OpenD[3] );
             break;
-        case 44:    // Not Volatility bin 1
-            result = vola_bin != 1;
+        case 44:        // 3 bars down
+            result = ( CloseD[1]<OpenD[1]  && CloseD[2]<OpenD[2]
+                        && CloseD[3]<OpenD[3] );
             break;
-        case 45:    // Volatility bin 2
-            result = vola_bin == 2;
+
+        case 45:        // 3 bars up, ascending
+            result = ( CloseD[1]>OpenD[1]  && CloseD[2]>OpenD[2]
+                        && CloseD[3]>OpenD[3]
+                        && CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3] );
             break;
-        case 46:    // Not Volatility bin 2
-            result = vola_bin != 2;
+        case 46:        // 3 bars down, descending
+            result = ( CloseD[1]<OpenD[1]  && CloseD[2]<OpenD[2]
+                        && CloseD[3]<OpenD[3]
+                        && CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3] );
             break;
-        case 47:    // Volatility bin 3
-            result = vola_bin == 3;
+
+        case 47:       // 1 bar retracing up
+            result = ( CloseD[1]>OpenD[1] && CloseD[2]<OpenD[2]
+                        && OpenD[1]<=CloseD[2] && CloseD[1]<OpenD[2]
+                        && CloseD[1]>CloseD[2] );
             break;
-        case 48:    // Not Volatility bin 3
-            result = vola_bin != 3;
+        case 48:        // 1 bar retracing down
+            result = ( CloseD[1]<OpenD[1] && CloseD[2]>OpenD[2]
+                        && OpenD[1]>=CloseD[2] && CloseD[1]>OpenD[2]
+                        && CloseD[1]<CloseD[2] );
             break;
-        case 49:    // Volatility bin 4
-            result = vola_bin == 4;
+
+        case 49:        // 2 bars retracing up
+            result = ( CloseD[1]>OpenD[1] && CloseD[2]>OpenD[2]
+                        && CloseD[3]<OpenD[3]
+                        && OpenD[1]<=CloseD[2] && OpenD[2]<=CloseD[3]
+                        && CloseD[1]<OpenD[3]  && CloseD[1]>CloseD[3]
+                        && CloseD[2]<OpenD[3]  && CloseD[2]>CloseD[3] );
             break;
-        case 50:    // Not Volatility bin 4
-            result = vola_bin != 4;
+        case 50:        // 2 bars retracing down
+            result = ( CloseD[1]<OpenD[1] && CloseD[2]<OpenD[2]
+                        && CloseD[3]>OpenD[3]
+                        && OpenD[1]>=CloseD[2] && OpenD[2]>=CloseD[3]
+                        && CloseD[1]>OpenD[3]  && CloseD[1]<CloseD[3]
+                        && CloseD[2]>OpenD[3]  && CloseD[2]<CloseD[3] );
             break;
-        */
+
+
     }
 
     return(result);
@@ -313,7 +310,7 @@ switch( Filter1S_switch_ ){
 }
 */
 
-
+/*
 // ------------------------------------------------------------------------- //
 // Number of Opposite pattern with respect to input pattern number
 int OppositePattern ( int ptn_num )
@@ -447,3 +444,4 @@ int OppositePattern ( int ptn_num )
 
     return(opposite);
 }
+*/
