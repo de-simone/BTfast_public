@@ -79,6 +79,7 @@ void MasterCode::set_param_values(
     MktRegimeS_switch_ = find_param_value_by_name( "MktRegimeS_switch",
                                                    parameter_set );
     DPS_switch_ = find_param_value_by_name( "DPS_switch", parameter_set );
+    Exit_switch_ = find_param_value_by_name( "Exit_switch", parameter_set );
 
     //fractN_ = find_param_value_by_name( "fractN", parameter_set );
     fractN_long_  = find_param_value_by_name( "fractN_long", parameter_set );
@@ -358,14 +359,14 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
     // or at open of next session if session ends earlier than usual
 
     bool ExitLong   = ( MarketPosition_> 0
-                        && ExitCondition( 1, data1, CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_, tf_mins_,
-                                          co_mins_ ) );
+                        && ExitCondition( Exit_switch_, data1, CurrentTime_,
+                                          CurrentDOW_, OneBarBeforeClose_,
+                                          tf_mins_, co_mins_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                        && ExitCondition( 1, data1, CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_, tf_mins_,
-                                          co_mins_ ) );
+                        && ExitCondition( Exit_switch_, data1, CurrentTime_,
+                                          CurrentDOW_, OneBarBeforeClose_,
+                                          tf_mins_, co_mins_ ) );
     // --------------------------------------------------------------------- //
 
 

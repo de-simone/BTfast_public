@@ -1,14 +1,10 @@
-# TimeStamp   : 2020-06-26 17:28:57
+# TimeStamp   : 2020-07-15 11:48:10
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10
 # Date Range  : 2010-01-04 --> 2019-12-31
 #
-#  Ntrades,  AvgTicks,   WinPerc, PftFactor,    NP/MDD, Expectancy,   Z-score, BOMR_switch, Side_switch,    MyStop, POI_switch, Distance_switch, DOW_switch, Intraday_switch, Filter1L_switch, Filter1S_switch, fractN_long, fractN_short,   epsilon,
-      112,     29.96,     64.29,      2.47,      5.51,      0.52,      3.42,           1,           1,           0,           6,           1,           3,           0,          16,           0,           2,           0,           0,
-       87,     39.67,     67.82,      2.43,      7.56,      0.46,      3.21,           1,           1,           0,           1,           1,           1,           3,           1,           0,           3,           0,           0,
->      151,     26.93,     61.59,      1.96,      6.86,      0.37,      3.08,           1,           1,           0,           1,           1,           0,           3,           0,           0,           3,           0,           0,
-       367,     14.80,     53.68,      1.48,      4.32,      0.22,      2.79,           1,           1,           0,           6,           1,           3,           0,           0,           0,           2,           0,           0,
-       81,     35.80,     55.56,      2.33,      6.50,      0.59,      2.77,           1,           1,           0,           6,           2,           3,           0,          36,           0,           3,           0,           0,
-       83,     29.78,     63.86,      2.29,      9.14,      0.47,      2.77,           1,           1,           0,           6,           1,           0,           0,          36,           0,           3,           0,           0,
-      113,     29.64,     64.60,      1.94,      4.82,      0.33,      2.66,           1,           1,           0,           1,           1,           1,           3,           0,           0,           3,           0,           0,
+#  Ntrades,  AvgTicks,   WinPerc, PftFactor,    NP/MDD, Expectancy,   Z-score, BOMR_switch, Side_switch,    MyStop, POI_switch, Distance_switch, DOW_switch, Intraday_switch, Filter1L_switch, Filter1S_switch, MktRegimeL_switch, MktRegimeS_switch, DPS_switch, fractN_long, fractN_short,   epsilon,
+367,     14.80,     53.68,      1.51,      4.59,      0.24,      2.93,           1,           1,           0,           6,           1,           3,           0,           0,           0,           7,           0,           1,           2,           0,           0,
+367,     14.80,     53.68,      1.50,      4.45,      0.23,      2.88,           1,           1,           0,           6,           1,           3,           0,           0,           0,           0,           0,           0,           2,           0,           0,
+257,     18.70,     53.31,      1.62,      4.24,      0.29,      2.84,           1,           1,           0,           6,           2,           0,           0,           1,           0,           0,           0,           0,           2,           0,           0,

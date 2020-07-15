@@ -24,7 +24,7 @@ General Settings for BTfast
              4444: Strategy Factory (Import Generation Results + Validation)
              6:    Market overview (no trades)
          -->
-        <Value> 4
+        <Value> 1
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -38,7 +38,7 @@ General Settings for BTfast
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   C
+        <Value>   GC
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
@@ -50,13 +50,13 @@ General Settings for BTfast
         <!-- Start date (included). Format: YYYY-MM-DD
             (0 for first date on file)  -->
         <Name>  START_DATE      </Name>
-        <Value>  0        <!-- 2014-01-01 2007-10-29 -->
+        <Value>  2010-01-01        <!-- 2014-01-01 2007-10-29 -->
         </Value></Input>
     <Input>
         <!-- End date (included). Format: YYYY-MM-DD
             (0 for last date on file)  -->
         <Name>  END_DATE        </Name>
-        <Value> 0      <!-- 2014-02-03 2007-11-06 -->
+        <Value> 2019-12-31      <!-- 2014-02-03 2007-11-06 -->
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -70,7 +70,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  C/C_M10_2010-2014_2018-2019_DXT.csv
+        <Value>  GC/GC_M10_2010-2014_2018-2019.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -87,7 +87,7 @@ General Settings for BTfast
              3 = intraday data exported from DXT (CSV)
         -->
         <Name>    CSV_FORMAT    </Name>
-        <Value>   3
+        <Value>   1
         </Value></Input>
     <Input>
         <Name>    DATAFEED_TYPE     </Name>
@@ -106,7 +106,7 @@ General Settings for BTfast
         <!-- Print performance report on stdout and on file -->
         <!-- 0: false, 1: true -->
         <Name>    PRINT_PERFORMANCE_REPORT     </Name>
-        <Value>   0
+        <Value>   1
         </Value></Input>
     <Input>
         <!-- Print list of transactions on stdout and on file -->
@@ -118,7 +118,7 @@ General Settings for BTfast
         <!-- Write trade history to file (profits.csv) and show equity line (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    WRITE_TRADES_TO_FILE  </Name>
-        <Value>   0
+        <Value>   1
         </Value></Input>
     <!-- ================================================================== -->
 
@@ -157,7 +157,7 @@ General Settings for BTfast
     <Input>
         <!-- Position size: fixed_size, fixed_notional, fixed_fractional  -->
         <Name>    POSITION_SIZE_TYPE     </Name>
-        <Value>   fixed_notional
+        <Value>   fixed_size
         </Value></Input>
     <Input>
         <!-- Number of contracts to use in "fixed_size" position size -->
@@ -185,7 +185,7 @@ General Settings for BTfast
         <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
              (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
         <Name>    DATA_FILE_OOS     </Name>
-        <Value>   W/W_M10_2015-2017.csv
+        <Value>   GC/GC_M10_2015-2017.csv
         </Value></Input>
     <Input>
         <!-- Percentage of max variation (stability test) -->

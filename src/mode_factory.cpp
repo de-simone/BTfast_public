@@ -54,13 +54,11 @@ void mode_factory( BTfast &btf,
         if( optim_mode == "parallel" ){
             std::cout<< "    Run Mode   : Strategy Factory (Exhaustive Generation + Validation)\n\n";
             // Exhaustive Parallel Optimization
-            bool sort_results {true};
-            bool verbose {true};
             btf.run_parallel_optimization( search_space, generated_strategies,
                                            optim_file,  param_file, fitness_metric,
                                            datafeed,
                                            //btf.start_date(),btf.end_date(),
-                                           sort_results, verbose );
+                                           true, true );
         }
         else if( optim_mode == "genetic" ){
             std::cout<< "    Run Mode   : Strategy Factory (Genetic Generation + Validation)\n\n";
@@ -142,6 +140,7 @@ void mode_factory( BTfast &btf,
 
 // ------------------------------------------------------------------------- //
 /*! Strategy Factory mode (Sequential Generation + Validation)
+    Parameter names must match those in MasterCode.xml
 */
 void mode_factory_sequential( BTfast &btf,
                               std::unique_ptr<DataFeed> &datafeed,
@@ -206,6 +205,9 @@ void mode_factory_sequential( BTfast &btf,
                   << " (mode_factory_sequential).\n";
         exit(1);
     }
+    // Add optimization parameter range to each strategy in search space
+    utils_params::expand_strategies_with_opt_range(
+                            "Exit_switch", parameter_ranges, search_space);
     //utils_params::print_parameters_t_vector( search_space );
 
     // Exhaustive Parallel Optimization
@@ -443,7 +445,7 @@ void mode_factory_sequential( BTfast &btf,
         std::vector<strategy_t> generated_5 {};
         btf.run_parallel_optimization( search_space, generated_5,
                                        optim_file,  param_file, fitness_metric,
-                                       datafeed, true, true );
+                                       datafeed, true, false );
         if( generated_5.empty() ){
              std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
              exit(1);

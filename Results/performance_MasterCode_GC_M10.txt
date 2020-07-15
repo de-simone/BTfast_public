@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-07-12 22:52:40
+# TimeStamp   : 2020-07-15 16:16:29
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10
@@ -28,6 +28,8 @@
 #     </OptRange>
 # 
 # For Backtest: only the <Start> value of <OptRange> parameters is read.
+# 
+# Names of input variables must match those in 'mode_factory_sequential'
 # -->
 # <Inputs>
 #     <Input>
@@ -44,14 +46,14 @@
 #     </Input>
 #     <OptRange>
 #         <Name>POI_switch</Name>         <!-- 1..7:1 -->
-#         <Start>1</Start>
+#         <Start>6</Start>
 #         <Stop>7</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
-#         <Name>Distance_switch</Name>    <!-- 1..3:1 -->
-#         <Start>1</Start>
-#         <Stop>3</Stop>
+#         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
+#         <Start>2</Start>
+#         <Stop>2</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
@@ -67,42 +69,48 @@
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
-#         <Name>Filter1L_switch</Name>    <!-- 0..42:1 -->
-#         <Start>0</Start>
-#         <Stop>42</Stop>
-#         <Step>1</Step>
-#     </OptRange>
-#     <OptRange>
-#         <Name>Filter1S_switch</Name>    <!-- 0..42:1 -->
-#         <Start>0</Start>
-#         <Stop>42</Stop>
-#         <Step>1</Step>
-#     </OptRange>
-#     <OptRange>
-#         <Name>MktRegimeL_switch</Name>  <!-- 1..8:1 -->
+#         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
 #         <Start>1</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
+#         <Start>1</Start>
+#         <Stop>50</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>MktRegimeL_switch</Name>  <!-- 0..8:1 -->
+#         <Start>0</Start>
 #         <Stop>8</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
-#         <Name>MktRegimeS_switch</Name>  <!-- 1..8:1 -->
-#         <Start>1</Start>
+#         <Name>MktRegimeS_switch</Name>  <!-- 0..8:1 -->
+#         <Start>0</Start>
 #         <Stop>8</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <Input>
 #         <Name>DPS_switch</Name>         <!--  0 (false) or 1 (true) -->
-#         <Value>1</Value>
+#         <Value>0</Value>
 #     </Input>
 #     <OptRange>
+#         <Name>Exit_switch</Name>        <!-- 1..2:1 -->
+#         <Start>1</Start>
+#         <Stop>2</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
 #         <Name>fractN_long</Name>        <!-- 0..5:1 -->
-#         <Start>0</Start>
+#         <Start>2</Start>
 #         <Stop>5</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>fractN_short</Name>       <!-- 0..5:1 -->
-#         <Start>0</Start>
+#         <Start>2</Start>
 #         <Stop>5</Stop>
 #         <Step>1</Step>
 #     </OptRange>
@@ -117,34 +125,34 @@
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
-     N. of Trades       :    1456         1456            0
-     Net Profit         :   30430.00     30430.00         0.00
-     Net Profit %       :       0.3%         0.3%         0.0%
-     CAGR               :       0.0%         0.0%         0.0%
-     Avg Trade          :      20.90        20.90         0.00
-     Avg Ticks          :       0.60         0.60         0.00
-     Profit Factor      :       1.03         1.03         0.00
-     Win Percent        :      50.7%        50.7%         0.0%
-     Avg DrawDown       :  -44055.02    -44055.02         0.00
-     Avg DrawDown %     :      -0.4%        -0.4%         0.0%
-     Max DrawDown       :  -96980.00    -96980.00         0.00
-     Max DrawDown %     :      -1.0%        -1.0%         0.0%
-     Net PL/Max DD      :       0.31         0.31         0.00
-     CAGR/Max DD %      :       0.05         0.05         0.00
-     Expectancy         :       0.01         0.01         0.00
-     Z-score            :       0.34         0.34         0.00
-     R^2                :     0.0000       0.0000       0.0000
+     N. of Trades       :     257          257            0
+     Net Profit         :   48050.00     48050.00         0.00
+     Net Profit %       :       0.5%         0.5%         0.0%
+     CAGR               :       0.1%         0.1%         0.0%
+     Avg Trade          :     186.96       186.96         0.00
+     Avg Ticks          :      18.70        18.70         0.00
+     Profit Factor      :       1.67         1.67         0.00
+     Win Percent        :      53.3%        53.3%         0.0%
+     Avg DrawDown       :   -2133.54     -2133.54         0.00
+     Avg DrawDown %     :      -0.0%        -0.0%         0.0%
+     Max DrawDown       :   -9090.00     -9090.00         0.00
+     Max DrawDown %     :      -0.1%        -0.1%         0.0%
+     Net PL/Max DD      :       5.29         5.29         0.00
+     CAGR/Max DD %      :       0.76         0.76         0.00
+     Expectancy         :       0.31         0.31         0.00
+     Z-score            :       2.91         2.91         0.00
+     R^2                :     0.7726       0.7726       0.0000
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :    2361.19      2361.19         0.00
-     Gross Profit       : 1174680.00   1174680.00         0.00
-     Gross Loss         : -1144250.00  -1144250.00         0.00
-     Avg Profit         :    1591.71      1591.71         0.00
-     Avg Loss           :   -1593.66     -1593.66         0.00
-     Max Profit         :   13380.00     13380.00         0.00
-     Max Loss           :  -15240.00    -15240.00         0.00
-     Avg Bars in Win    :     109.55       109.55         0.00
-     Avg Bars in Loss   :     105.90       105.90         0.00
-     Max Consec. Wins   :      11           11            0
-     Max Consec. Losses :      10           10            0
-     Minimum Capital    :  152070.00    152070.00         0.00
+     Std.Dev. of P/L    :    1029.02      1029.02         0.00
+     Gross Profit       :  120040.00    120040.00         0.00
+     Gross Loss         :  -71990.00    -71990.00         0.00
+     Avg Profit         :     876.20       876.20         0.00
+     Avg Loss           :    -599.92      -599.92         0.00
+     Max Profit         :    3820.00      3820.00         0.00
+     Max Loss           :   -3730.00     -3730.00         0.00
+     Avg Bars in Win    :      74.85        74.85         0.00
+     Avg Bars in Loss   :      65.99        65.99         0.00
+     Max Consec. Wins   :       8            8            0
+     Max Consec. Losses :       5            5            0
+     Minimum Capital    :   20235.00     20235.00         0.00
    # ========================================================= #

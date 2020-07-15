@@ -61,18 +61,17 @@ void BTfast::run_parallel_optimization(
                     std::bind(&BTfast::run_backtest, this )
                     //[this](){ BTfast::run_backtest(this); }
                 );*/
-
         //parameters_t parameter_combination = *it;
 
-        if( verbose ){
-            mtx.lock();
-            iter++;        // Increment iteration
-            std::cout << utils_time::current_datetime_str() + " | "
-                      << "(Parallel) Running optimization " << iter << " / "
-                      //<< std::distance(search_space.begin(), parameter_combination)+1
-                      << search_space.size() << "\n";
-            mtx.unlock();
-        }
+        //if( verbose ){
+        mtx.lock();
+        iter++;        // Increment iteration
+        std::cout << utils_time::current_datetime_str() + " | "
+                  << "(Parallel) Running optimization " << iter << " / "
+                  //<< std::distance(search_space.begin(), parameter_combination)+1
+                  << search_space.size() << "\n";
+        mtx.unlock();
+        //}
 
         // Make a copy of DataFeed object and wrap it into a new unique_ptr
         std::unique_ptr<DataFeed> datafeed_copy = datafeed.get()->clone();
@@ -98,26 +97,26 @@ void BTfast::run_parallel_optimization(
                                               *parameter_combination );
     }
     //--- End optimization loop
+    std::cout << "Optimization Done.\n";
 
-    if( verbose ){
-        std::cout << "Optimization Done.\n";
-    }
 
     // Sort in descending order of fitness_metric
     if( sort_results ){
         utils_optim::sort_by_metric( optim_results, fitness_metric );
     }
 
-    // Write optimization results to file 'optim_file'
-    int control = utils_fileio::write_strategies_to_file(
-                                            optim_file, paramfile,
-                                            optim_results, strategy_name_,
-                                            symbol_.name(), timeframe_,
-                                            first_date_parsed_,
-                                            last_date_parsed_, verbose );
-    if( control == 1 && verbose ){
-        std::cout << "\nOptimization results written on file: "
-                  << optim_file <<"\n";
+    if( verbose ){
+        // Write optimization results to file 'optim_file' and on stdout
+        int control = utils_fileio::write_strategies_to_file(
+                                                optim_file, paramfile,
+                                                optim_results, strategy_name_,
+                                                symbol_.name(), timeframe_,
+                                                first_date_parsed_,
+                                                last_date_parsed_, verbose );
+        if( control == 1 ){
+            std::cout << "\nOptimization results written on file: "
+                      << optim_file <<"\n";
+        }
     }
 }
 
@@ -167,12 +166,12 @@ void BTfast::run_optimization( const std::vector<parameters_t> &search_space,
     // [ ("p1", 10), ("p2", 2), ... ]
     for(parameters_t parameter_combination: search_space){
 
-        if( verbose ){
-            iter++;     // Increment iteration
-            std::cout << utils_time::current_datetime_str() + " | "
-                      << "Running optimization " << iter << " / "
-                      << search_space.size() << "\n";
-        }
+        //if( verbose ){
+        iter++;     // Increment iteration
+        std::cout << utils_time::current_datetime_str() + " | "
+                  << "Running optimization " << iter << " / "
+                  << search_space.size() << "\n";
+        //}
 
         // Starts computing elapsed time
         t1 = std::chrono::high_resolution_clock::now();
@@ -228,24 +227,24 @@ void BTfast::run_optimization( const std::vector<parameters_t> &search_space,
 
     }
     //--- End optimization loop
-    if( verbose ){
-        std::cout << "Optimization Done.\n";
-    }
+    std::cout << "Optimization Done.\n";
 
     // Sort in descending order of fitness_metric
     if( sort_results ){
         utils_optim::sort_by_metric( optim_results, fitness_metric );
     }
 
-    // Write optimization results to file 'optim_file' and on stdout 
-    int control = utils_fileio::write_strategies_to_file(
+    if( verbose ){
+        // Write optimization results to file 'optim_file' and on stdout
+        int control = utils_fileio::write_strategies_to_file(
                                             optim_file, paramfile,
                                             optim_results, strategy_name_,
                                             symbol_.name(), timeframe_,
                                             first_date_parsed_,
                                             last_date_parsed_, verbose );
-    if( control == 1 && verbose ){
-        std::cout << "\nOptimization results written on file: "
-                  << optim_file <<"\n";
+        if( control == 1 ){
+            std::cout << "\nOptimization results written on file: "
+                      << optim_file <<"\n";
+        }
     }
 }

@@ -109,6 +109,7 @@ class MasterCode : public Strategy {
     int MktRegimeL_switch_ {0};
     int MktRegimeS_switch_ {0};
     int DPS_switch_ {0};
+    int Exit_switch_ {0};
     //--
     //-- Parameters
     int fractN_long_ {1};       // fract = 2^fractN_ / 10
