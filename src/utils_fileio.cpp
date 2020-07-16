@@ -260,7 +260,7 @@ void utils_fileio::read_config_file(
 param_ranges_t utils_fileio::read_param_file( std::string paramfile )
 {
 
-    std::vector<std::pair<std::string,std::vector<int>>> result {};
+    param_ranges_t result {};
     std::string node_name {""};
     int node_value {0};
     int node_start {0};
@@ -376,6 +376,7 @@ void utils_fileio::copy_file_to_file( std::string sourcefile,
 
     Names/Number/Order of performance metrics must be matched among:
         - utils_params::extract_parameters_from_single_strategy
+        - utils_params::extract_metrics_from_single_strategy
         - utils_optim::append_to_optim_results
         - utils_optim::sort_by_metric
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
@@ -434,16 +435,16 @@ int utils_fileio::write_strategies_to_file( std::string fname,
             for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
                 row_elem[0] = '\0';
                 header_elem[0] = '\0';
-                sprintf(header_elem, "%9s, ", optrun->first.c_str());
+                sprintf(header_elem, "%9s,", optrun->first.c_str());
                 strcat(header, header_elem);    // append header_elem to header
                 if( optrun == it->begin() ){           // Ntrades is int
-                    sprintf(row_elem, "%9d, ",(int) optrun->second);
+                    sprintf(row_elem, "%9d,",(int) optrun->second);
                 }
                 else if( optrun <= it->begin()+6 ){    // other 6 metrics are double
                     sprintf(row_elem, "%9.2f, ", optrun->second);
                 }
                 else {                                // strategy params are int
-                    sprintf(row_elem, "%11d, ",(int) optrun->second);
+                    sprintf(row_elem, "%11d,",(int) optrun->second);
                 }
                 strcat(row, row_elem);          // append row_elem to row
             }
@@ -526,7 +527,8 @@ std::vector<strategy_t> utils_fileio::read_strategies_from_file(
 
         }
         // remove last element (after last ',')
-        row.pop_back();
+        //row.pop_back();
+
         // load row into strategy
         strategy_t strategy{};
         for( size_t i = 0; i < row.size(); i++){

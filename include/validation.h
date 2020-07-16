@@ -13,15 +13,16 @@ Class for Selection and Validation of strategies
 Member Variables
 - num_validated_: number of strategies passing validation
 - btf_: BTfast object passed by const ref from main
-
+- datafeed_: pointer to datafeed object
 - strategies_to_validate_: input strategies to feed into validation process
                           (single strategy, or bunch from optimization or file)
+- parameter_ranges_: ranges of all strategy parameters
 - selected_file_: file to store strategies passing selection
 - fitness_metric: performance metric used to compare OOS with IS
 - max_variation_: max variation of performance metric allowed by stability test
 - num_noise_tests_: number of randomization tests when adding noise
 
-[- parameter_ranges_: ranges of all strategy parameters]
+
 [- date_i_: initial selected date to parse]
 [- date_f_: final selected date to parse]
 */
@@ -36,8 +37,8 @@ class Validation {
     int num_validated_ {0};
     BTfast &btf_;
     std::unique_ptr<DataFeed> &datafeed_;
-    //const param_ranges_t &parameter_ranges_;
     const std::vector<strategy_t> &strategies_to_validate_;
+    const param_ranges_t &parameter_ranges_;
     const std::string &selected_file_;
     const std::string &validated_file_;
     const std::string &fitness_metric_;
@@ -58,6 +59,7 @@ class Validation {
         Validation( BTfast &btf,
                     std::unique_ptr<DataFeed> &datafeed,
                     const std::vector<strategy_t> &strategies_to_validate,
+                    const param_ranges_t &parameter_ranges_,
                     const std::string &selected_file,
                     const std::string &validated_file,
                     const std::string &fitness_metric,

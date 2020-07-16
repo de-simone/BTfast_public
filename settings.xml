@@ -50,7 +50,7 @@ General Settings for BTfast
         <!-- Start date (included). Format: YYYY-MM-DD
             (0 for first date on file)  -->
         <Name>  START_DATE      </Name>
-        <Value>  2010-01-01        <!-- 2014-01-01 2007-10-29 -->
+        <Value>  2011-01-01        <!-- 2014-01-01 2007-10-29 -->
         </Value></Input>
     <Input>
         <!-- End date (included). Format: YYYY-MM-DD
@@ -71,8 +71,8 @@ General Settings for BTfast
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
         <Value>  GC/GC_M10_2010-2014_2018-2019.csv
-            <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
-            <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
+            <!-- GC_M10_2010-2019.csv    -->                  <!-- format = 1 -->
+            <!-- GC_M10_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
             <!-- NG_D_2004_2014.csv    -->                  <!-- format = 2 -->
             <!-- NG_M10_2007-2019_DXT.csv -->               <!-- format = 3 -->

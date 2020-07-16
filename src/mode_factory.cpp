@@ -55,8 +55,8 @@ void mode_factory( BTfast &btf,
             std::cout<< "    Run Mode   : Strategy Factory (Exhaustive Generation + Validation)\n\n";
             // Exhaustive Parallel Optimization
             btf.run_parallel_optimization( search_space, generated_strategies,
-                                           optim_file,  param_file, fitness_metric,
-                                           datafeed,
+                                           optim_file, param_file,
+                                           fitness_metric, datafeed,
                                            //btf.start_date(),btf.end_date(),
                                            true, true );
         }
@@ -96,6 +96,7 @@ void mode_factory( BTfast &btf,
                                                                 optim_file );
             std::cout<<"Imported " << generated_strategies.size()
                      <<" strategies from file:\n" << optim_file<<"\n";
+
         }
         else{
             std::cout<<">>>ERROR: invalid optim_mode (mode_factory).\n";
@@ -115,8 +116,8 @@ void mode_factory( BTfast &btf,
 
         // -------------------------    VALIDATION   ----------------------- //
         // Instantiate Validation object
-        Validation validation { btf, datafeed,
-                                generated_strategies, selected_file,
+        Validation validation { btf, datafeed, generated_strategies,
+                                parameter_ranges, selected_file,
                                 validated_file, fitness_metric,
                                 data_dir, data_file_oos, max_variation_pct,
                                 num_noise_tests, noise_file };
@@ -140,7 +141,20 @@ void mode_factory( BTfast &btf,
 
 // ------------------------------------------------------------------------- //
 /*! Strategy Factory mode (Sequential Generation + Validation)
-    Parameter names must match those in MasterCode.xml
+
+    Names/Number/Order of performance metrics must be matched among:
+        - utils_params::extract_parameters_from_single_strategy
+        - utils_params::extract_metrics_from_single_strategy
+        - utils_optim::append_to_optim_results
+        - utils_optim::sort_by_metric
+        - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
+        - utils_fileio::write_strategies_to_file
+        - Individual::compute_individual_fitness
+        - Validation::intermediate_selection
+        - Validation::selection_conditions
+        - mode_factory_sequential
+
+    >> Parameter names must match those in MasterCode.xml <<
 */
 void mode_factory_sequential( BTfast &btf,
                               std::unique_ptr<DataFeed> &datafeed,
@@ -212,9 +226,9 @@ void mode_factory_sequential( BTfast &btf,
 
     // Exhaustive Parallel Optimization
     std::vector<strategy_t> generated_1 {};
-    btf.run_parallel_optimization( search_space, generated_1,
-                                   optim_file,  param_file, fitness_metric,
-                                   datafeed, true, true );
+    btf.run_parallel_optimization( search_space, generated_1, optim_file,
+                                   param_file, fitness_metric, datafeed,
+                                   true, true );
     if( generated_1.empty() ){
         std::cout<<">>> ERROR: no strategy generated (mode_factory_sequential)\n";
         exit(1);
@@ -223,10 +237,10 @@ void mode_factory_sequential( BTfast &btf,
     //--- SELECTION STEP 1
     std::vector<strategy_t> selected_1 {};
     // Instantiate Validation object
-    Validation val1 { btf, datafeed, generated_1, selected_file,
-                      validated_file, fitness_metric, data_dir,
-                      data_file_oos, max_variation_pct, num_noise_tests,
-                      noise_file };
+    Validation val1 { btf, datafeed, generated_1, parameter_ranges,
+                      selected_file, validated_file, fitness_metric,
+                      data_dir, data_file_oos, max_variation_pct,
+                      num_noise_tests, noise_file };
     val1.initial_generation_selection( generated_1, selected_1 );
     std::cout << "Number of strategies passing 1st generation step: "
               << selected_1.size() <<"\n\n";
@@ -506,7 +520,11 @@ void mode_factory_sequential( BTfast &btf,
                                                       performance_dps,
                                                       strat_params );
                 // Append strategy with new filter and DPS activated
-                selected_5.push_back( optim_results.at(0) );
+                // if performance metrics are different than the one w/o filter
+                if( utils_optim::equal_strategy_metrics( optim_results.at(0),
+                                                         no_filter_strat ) ){
+                    selected_5.push_back( optim_results.at(0) );
+                }
             }
             else{
                 // Append strategy without new filter to selected vector
@@ -526,11 +544,10 @@ void mode_factory_sequential( BTfast &btf,
     // --------------------------------------------------------------------- //
 
 
-
     // ---------------------------    VALIDATION   ------------------------- //
     // Instantiate Validation object
-    Validation validation { btf, datafeed, selected_5, selected_file,
-                            validated_file, fitness_metric,
+    Validation validation { btf, datafeed, selected_5, parameter_ranges,
+                            selected_file, validated_file, fitness_metric,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };
     // Run full validation process

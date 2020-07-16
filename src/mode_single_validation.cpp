@@ -64,9 +64,8 @@ void mode_single_validation( BTfast &btf,
 
     // ---------------------------    VALIDATION   ------------------------- //
     // Instantiate Validation object
-    Validation validation { btf, datafeed,
-                            strategy_to_validate, selected_file,
-                            validated_file, fitness_metric,
+    Validation validation { btf, datafeed, strategy_to_validate, parameter_ranges,
+                            selected_file, validated_file, fitness_metric,
                             data_dir, data_file_oos, max_variation_pct,
                             num_noise_tests, noise_file };
 

@@ -211,6 +211,42 @@ void utils_params::extract_parameters_from_single_strategy(
     }
 }
 
+// --------------------------------------------------------------------- //
+/*  Extract only the performance metrics values from strategy 'source'
+    (ignoring the entries with parameters metrics)
+    and store them into vector 'dest'.
+
+    Names/Number/Order of performance metrics must be matched among:
+        - utils_params::extract_parameters_from_single_strategy
+        - utils_params::extract_metrics_from_single_strategy
+        - utils_optim::append_to_optim_results
+        - utils_optim::sort_by_metric
+        - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
+        - utils_fileio::write_strategies_to_file
+        - Individual::compute_individual_fitness
+        - Validation::intermediate_selection
+        - Validation::selection_conditions
+        - mode_factory_sequential
+*/
+void utils_params::extract_metrics_from_single_strategy(
+                                                    const strategy_t &source,
+                                                    std::vector<double> &dest )
+{
+    // clear destination vector
+    dest.clear();
+    // loop over strategy values (metrics or parameters)
+    for(std::pair<std::string,double> p : source){
+        if(    p.first == "Ntrades"  || p.first == "AvgTicks"
+            || p.first == "WinPerc" || p.first == "PftFactor"
+            //|| p.first == "AvgTrade" || p.first == "NetPL"
+            || p.first == "NP/MDD"
+            || p.first == "Expectancy" || p.first == "Z-score" ){
+            // append to destination
+            dest.push_back( p.second );
+        }
+    }
+}
+
 
 
 

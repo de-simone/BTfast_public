@@ -22,8 +22,8 @@
 */
 Validation::Validation( BTfast &btf,
                         std::unique_ptr<DataFeed> &datafeed,
-                        //const param_ranges_t &parameter_ranges,
                         const std::vector<strategy_t> &strategies_to_validate,
+                        const param_ranges_t &parameter_ranges,
                         const std::string &selected_file,
                         const std::string &validated_file,
                         const std::string &fitness_metric,
@@ -35,6 +35,7 @@ Validation::Validation( BTfast &btf,
 : btf_ {btf},
   datafeed_ {datafeed},
   strategies_to_validate_ {strategies_to_validate},
+  parameter_ranges_ {parameter_ranges},
   selected_file_ {selected_file},
   validated_file_ {validated_file},
   fitness_metric_ {fitness_metric},
@@ -76,8 +77,7 @@ Validation::Validation( BTfast &btf,
         - Selection
         - Validation: OOS metrics test
         - Validation: OOS consistency test (Mann-Whitney on ticks)
-        - Validation: Profitability test on "fractN_long"
-        - Validation: Profitability test on "fractN_short"
+        - Validation: Profitability test on "fractN_long", "fractN_short"
         - Validation: Stability test
         - Validation: Noise test
 
@@ -110,7 +110,6 @@ void Validation::run_validation()
     std::vector<strategy_t> passed_validation_4 {};
     std::vector<strategy_t> passed_validation_5 {};
     std::vector<strategy_t> passed_validation_6 {};
-
 
     //--- Selection
     // strategies_to_validate_ -> passed_selection
@@ -201,10 +200,7 @@ void Validation::selection( const std::vector<strategy_t> &input_strategies,
     selection_conditions( input_strategies, output_strategies );
 
     if( output_strategies.size() > 0 ){
-
-        /*// Keep at most 100 selected strategies
-        size_t max_selected_strategies {100};
-        if( output_strategies.size() > max_selected_strategies ){
+        /*if( output_strategies.size() > 100 ){ // Keep at most 100 selected strategies
             output_strategies.resize( max_selected_strategies );
         }*/
 
@@ -235,6 +231,7 @@ void Validation::selection( const std::vector<strategy_t> &input_strategies,
 
     Names/Number/Order of performance metrics must be matched among:
         - utils_params::extract_parameters_from_single_strategy
+        - utils_params::extract_metrics_from_single_strategy
         - utils_optim::append_to_optim_results
         - utils_optim::sort_by_metric
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
@@ -257,7 +254,7 @@ void Validation::initial_generation_selection(
         double AvgTicks { utils_params::strategy_attribute_by_name("AvgTicks",
                                                                     strat) };
         //double WinPerc { utils_params::strategy_attribute_by_name("WinPerc",
-        //                                                            strat) };
+        //                                                            strat ) };
         double PftFactor { utils_params::strategy_attribute_by_name("PftFactor",
                                                                     strat) };
         double NpMdd { utils_params::strategy_attribute_by_name("NP/MDD",
@@ -268,12 +265,12 @@ void Validation::initial_generation_selection(
                                                                     strat) };
         // Selection Conditions
 
-        bool condition1 { Ntrades > 50 * (btf_.day_counter() / 252.0) };
-        bool condition2 { AvgTicks > 7 };
+        bool condition1 { Ntrades > 100 };
+        bool condition2 { AvgTicks > 6 };
         bool condition3 { NpMdd > 1.5 };
         bool condition4 { PftFactor > 1.0 };
         bool condition5 { Expectancy > 0.05 };
-        bool condition6 { Zscore > 0.5  };
+        bool condition6 { Zscore > 0.5 };
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );
@@ -291,6 +288,7 @@ void Validation::initial_generation_selection(
 
     Names/Number/Order of performance metrics must be matched among:
         - utils_params::extract_parameters_from_single_strategy
+        - utils_params::extract_metrics_from_single_strategy
         - utils_optim::append_to_optim_results
         - utils_optim::sort_by_metric
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
@@ -722,16 +720,16 @@ void Validation::stability_test( const std::vector<strategy_t>
         utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
 
-        param_ranges_t parameter_ranges {};
-        // Fill 'parameter_ranges'...
+        param_ranges_t param_ranges {}; 
+        // Fill 'param_ranges'...
         for( single_param_t el: strat_params ){
             if( el.first != "epsilon" ){        //  ... with strategy parameters
-                parameter_ranges.push_back(
+                param_ranges.push_back(
                                     std::make_pair( el.first,
                                                 std::vector<int>{el.second} ) );
             }
             else if( el.first == "epsilon" ){   // ... with epsilons
-                parameter_ranges.push_back(
+                param_ranges.push_back(
                                     std::make_pair( "epsilon", eps_values ));
             }
             else{
@@ -743,7 +741,7 @@ void Validation::stability_test( const std::vector<strategy_t>
 
         // Cartesian product of all epsilons
         std::vector<parameters_t> search_space {
-                        utils_params::cartesian_product(parameter_ranges) };
+                        utils_params::cartesian_product(param_ranges) };
 
         // Initialize vector where storing optimization results of running
         std::vector<strategy_t> optim_results {};
@@ -880,7 +878,7 @@ void Validation::noise_test( const std::vector<strategy_t>
         double original_metric { perf_metric.at(0) };
 
         //double percentile_low  { utils_math::percentile( perf_metric, 0.15 ) };
-        //double percentile_high { utils_math::percentile( perf_metric, 0.85 ) };        
+        //double percentile_high { utils_math::percentile( perf_metric, 0.85 ) };
         double lower_level { utils_math::mean( perf_metric )
                              - 2 * utils_math::stdev( perf_metric ) };
         double upper_level { utils_math::mean( perf_metric )

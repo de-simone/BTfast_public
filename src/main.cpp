@@ -34,6 +34,7 @@
 
  * TO DO:
 
+    - Validation::profitability test: only run over fractN_long if side_switch=1, etc.
     - check implementation of LIMIT orders with TradeStation
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).

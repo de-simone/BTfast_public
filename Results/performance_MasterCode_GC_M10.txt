@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-07-15 16:16:29
+# TimeStamp   : 2020-07-16 11:07:29
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10
-# Date Range  : 2010-01-04 --> 2019-12-31
+# Date Range  : 2011-01-03 --> 2019-12-31
 #
 #<Strategies/MasterCode.xml>
 # <?xml version='1.0' encoding='UTF-8'?>
@@ -38,7 +38,7 @@
 #     </Input>
 #     <Input>
 #         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-#         <Value>1</Value>
+#         <Value>2</Value>
 #     </Input>
 #     <Input>
 #         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
@@ -46,37 +46,37 @@
 #     </Input>
 #     <OptRange>
 #         <Name>POI_switch</Name>         <!-- 1..7:1 -->
-#         <Start>6</Start>
+#         <Start>5</Start>
 #         <Stop>7</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
-#         <Start>2</Start>
-#         <Stop>2</Stop>
+#         <Start>1</Start>
+#         <Stop>4</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
-#         <Start>0</Start>
+#         <Start>3</Start>
 #         <Stop>5</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
-#         <Start>0</Start>
+#         <Start>7</Start>
 #         <Stop>10</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
-#         <Start>1</Start>
+#         <Start>0</Start>
 #         <Stop>50</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
-#         <Start>1</Start>
+#         <Start>15</Start>
 #         <Stop>50</Stop>
 #         <Step>1</Step>
 #     </OptRange>
@@ -104,7 +104,7 @@
 #     </OptRange>
 #     <OptRange>
 #         <Name>fractN_long</Name>        <!-- 0..5:1 -->
-#         <Start>2</Start>
+#         <Start>0</Start>
 #         <Stop>5</Stop>
 #         <Step>1</Step>
 #     </OptRange>
@@ -125,34 +125,34 @@
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
-     N. of Trades       :     257          257            0
-     Net Profit         :   48050.00     48050.00         0.00
-     Net Profit %       :       0.5%         0.5%         0.0%
-     CAGR               :       0.1%         0.1%         0.0%
-     Avg Trade          :     186.96       186.96         0.00
-     Avg Ticks          :      18.70        18.70         0.00
-     Profit Factor      :       1.67         1.67         0.00
-     Win Percent        :      53.3%        53.3%         0.0%
-     Avg DrawDown       :   -2133.54     -2133.54         0.00
-     Avg DrawDown %     :      -0.0%        -0.0%         0.0%
-     Max DrawDown       :   -9090.00     -9090.00         0.00
-     Max DrawDown %     :      -0.1%        -0.1%         0.0%
-     Net PL/Max DD      :       5.29         5.29         0.00
-     CAGR/Max DD %      :       0.76         0.76         0.00
-     Expectancy         :       0.31         0.31         0.00
-     Z-score            :       2.91         2.91         0.00
-     R^2                :     0.7726       0.7726       0.0000
+     N. of Trades       :     365            0          365
+     Net Profit         :   86330.00         0.00     86330.00
+     Net Profit %       :       0.9%         0.0%         0.9%
+     CAGR               :       0.1%         0.0%         0.1%
+     Avg Trade          :     236.52         0.00       236.52
+     Avg Ticks          :      23.65         0.00        23.65
+     Profit Factor      :       1.64         0.00         1.64
+     Win Percent        :      52.9%         0.0%        52.9%
+     Avg DrawDown       :   -2887.51         0.00     -2887.51
+     Avg DrawDown %     :      -0.0%         0.0%        -0.0%
+     Max DrawDown       :  -15190.00         0.00    -15190.00
+     Max DrawDown %     :      -0.2%         0.0%        -0.2%
+     Net PL/Max DD      :       5.68         0.00         5.68
+     CAGR/Max DD %      :       0.95         0.00         0.95
+     Expectancy         :       0.30         0.00         0.30
+     Z-score            :       2.90         0.00         2.90
+     R^2                :     0.7409       0.0000       0.7409
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :    1029.02      1029.02         0.00
-     Gross Profit       :  120040.00    120040.00         0.00
-     Gross Loss         :  -71990.00    -71990.00         0.00
-     Avg Profit         :     876.20       876.20         0.00
-     Avg Loss           :    -599.92      -599.92         0.00
-     Max Profit         :    3820.00      3820.00         0.00
-     Max Loss           :   -3730.00     -3730.00         0.00
-     Avg Bars in Win    :      74.85        74.85         0.00
-     Avg Bars in Loss   :      65.99        65.99         0.00
-     Max Consec. Wins   :       8            8            0
-     Max Consec. Losses :       5            5            0
-     Minimum Capital    :   20235.00     20235.00         0.00
+     Std.Dev. of P/L    :    1558.29         0.00      1558.29
+     Gross Profit       :  221250.00         0.00    221250.00
+     Gross Loss         : -134920.00         0.00   -134920.00
+     Avg Profit         :    1146.37         0.00      1146.37
+     Avg Loss           :    -784.42         0.00      -784.42
+     Max Profit         :   12580.00         0.00     12580.00
+     Max Loss           :   -4130.00         0.00     -4130.00
+     Avg Bars in Win    :      94.97         0.00        94.97
+     Avg Bars in Loss   :     105.42         0.00       105.42
+     Max Consec. Wins   :       6            0            6
+     Max Consec. Losses :       7            0            7
+     Minimum Capital    :   29385.00         0.00     29385.00
    # ========================================================= #

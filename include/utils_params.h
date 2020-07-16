@@ -90,6 +90,13 @@ namespace utils_params {
 
 
     // --------------------------------------------------------------------- //
+    //  Extract only the performance metrics values from strategy 'source'
+    //   (ignoring the entries with parameters metrics)
+    //   and store them into vector 'dest'.
+    void extract_metrics_from_single_strategy( const strategy_t &source,
+                                               std::vector<double> &dest );
+
+    // --------------------------------------------------------------------- //
     /*!  Extract parameter range vector from 'par_range' corresponding to
          name 'par_name' and expand strategy 'source' with
          'par_name' replaced by optimization range.

@@ -63,15 +63,15 @@ void BTfast::run_parallel_optimization(
                 );*/
         //parameters_t parameter_combination = *it;
 
-        //if( verbose ){
-        mtx.lock();
-        iter++;        // Increment iteration
-        std::cout << utils_time::current_datetime_str() + " | "
-                  << "(Parallel) Running optimization " << iter << " / "
-                  //<< std::distance(search_space.begin(), parameter_combination)+1
-                  << search_space.size() << "\n";
-        mtx.unlock();
-        //}
+        if( verbose ){
+            mtx.lock();
+            iter++;        // Increment iteration
+            std::cout << utils_time::current_datetime_str() + " | "
+                      << "(Parallel) Running optimization " << iter << " / "
+                      //<< std::distance(search_space.begin(), parameter_combination)+1
+                      << search_space.size() << "\n";
+            mtx.unlock();
+        }
 
         // Make a copy of DataFeed object and wrap it into a new unique_ptr
         std::unique_ptr<DataFeed> datafeed_copy = datafeed.get()->clone();

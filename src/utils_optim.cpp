@@ -1,5 +1,7 @@
 #include "utils_optim.h"
 
+#include "utils_params.h"
+
 #include <algorithm>    // std::sort
 #include <iostream>     // std::cout
 
@@ -9,6 +11,7 @@
 
    Names/Number/Order of performance metrics must be matched among:
        - utils_params::extract_parameters_from_single_strategy
+       - utils_params::extract_metrics_from_single_strategy
        - utils_optim::append_to_optim_results
        - utils_optim::sort_by_metric
        - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
@@ -69,9 +72,28 @@ bool utils_optim::equal_strategies( const strategy_t &a, const strategy_t &b )
 }
 
 // ------------------------------------------------------------------------- //
+/*! Binary predicate function to compare two strategy_t objects.
+    Returns true if the two strategies have the same performance metrics.
+*/
+bool utils_optim::equal_strategy_metrics( const strategy_t &a,
+                                          const strategy_t &b )
+{
+    if( a.size() != b.size() ){
+        return(false);
+    }
+    else{
+        std::vector<double> metrics_a {};
+        utils_params::extract_metrics_from_single_strategy( a, metrics_a );
+        std::vector<double> metrics_b {};
+        utils_params::extract_metrics_from_single_strategy( b, metrics_b );
+        return( metrics_a == metrics_b );
+    }
+}
+
+// ------------------------------------------------------------------------- //
 /*! Binary predicate function to compare two parameters_t objects
 */
-
+/*
 bool utils_optim::equal_strategy_params( const parameters_t &a,
                                          const parameters_t &b )
 {
@@ -86,6 +108,7 @@ bool utils_optim::equal_strategy_params( const parameters_t &a,
         return( cond );
     }
 }
+*/
 
 // ------------------------------------------------------------------------- //
 /*! Remove duplicates from 'strategies'.
@@ -109,24 +132,25 @@ void utils_optim::remove_duplicates( std::vector<strategy_t> &strategies,
 // ------------------------------------------------------------------------- //
 /*! Remove duplicates from parameters (modified in-place)
 */
-
+/*
 void utils_optim::remove_duplicates( std::vector<parameters_t> &parameters )
 {
-    /*
+
     if( parameters.empty() ){
         return;
     }
     parameters.erase( std::unique( parameters.begin(), parameters.end(),
                                     utils_optim::equal_strategy_params ),
                       parameters.end() );
-    */
-}
 
+}
+*/
 // ------------------------------------------------------------------------- //
 /*! Binary functions for sorting in descending order of metrics
 
 Names/Number/Order of performance metrics must be matched among:
     - utils_params::extract_parameters_from_single_strategy
+    - utils_params::extract_metrics_from_single_strategy
     - utils_optim::append_to_optim_results
     - utils_optim::sort_by_metric
     - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
@@ -181,6 +205,7 @@ bool utils_optim::sort_by_zscore(const strategy_t& a, const strategy_t& b)
 
     Names/Number/Order of performance metrics must be matched among:
         - utils_params::extract_parameters_from_single_strategy
+        - utils_params::extract_metrics_from_single_strategy
         - utils_optim::append_to_optim_results
         - utils_optim::sort_by_metric
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc

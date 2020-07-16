@@ -31,7 +31,7 @@ Names of input variables must match those in 'mode_factory_sequential'
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-        <Value>1</Value>
+        <Value>2</Value>
     </Input>
     <Input>
         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
@@ -39,37 +39,37 @@ Names of input variables must match those in 'mode_factory_sequential'
     </Input>
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..7:1 -->
-        <Start>6</Start>
+        <Start>5</Start>
         <Stop>7</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
-        <Start>2</Start>
-        <Stop>2</Stop>
+        <Start>1</Start>
+        <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
-        <Start>0</Start>
+        <Start>3</Start>
         <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
-        <Start>0</Start>
+        <Start>7</Start>
         <Stop>10</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
-        <Start>1</Start>
+        <Start>0</Start>
         <Stop>50</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
-        <Start>1</Start>
+        <Start>15</Start>
         <Stop>50</Stop>
         <Step>1</Step>
     </OptRange>
@@ -97,7 +97,7 @@ Names of input variables must match those in 'mode_factory_sequential'
     </OptRange>
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..5:1 -->
-        <Start>2</Start>
+        <Start>0</Start>
         <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>
