@@ -119,7 +119,6 @@ void Validation::run_validation()
     num_validated_ = (int) passed_selection.size();
     //---
 
-    /*
     //--- Validation - OOS metrics test
     // passed_selection -> passed_validation_1
     OOS_metrics_test( passed_selection, passed_validation_1 );
@@ -131,11 +130,10 @@ void Validation::run_validation()
     OOS_consistency_test( passed_validation_1, passed_validation_2 );
     num_validated_ = (int) passed_validation_2.size();
     //---
-    */
+
     //--- Validation - Profitability test
     // passed_validation_2 -> passed_validation_3
-    //<<<profitability_test( passed_validation_2, passed_validation_3 );
-    profitability_test( passed_selection, passed_validation_3 );
+    profitability_test( passed_validation_2, passed_validation_3 );    
     num_validated_ = (int) passed_validation_3.size();
     //---//
 
