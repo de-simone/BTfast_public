@@ -96,6 +96,11 @@ class MasterCode : public Strategy {
 
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
+    /*  Names of input variables must match those in 'mode_factory_sequential'
+
+        Names of optimization variables ("fractN_long", "fractN_short")
+        and "Side_switch" must match in 'validation.cpp'
+    */
     int MyStop_ {0};
     //-- Switches
     int BOMR_switch_ {1};

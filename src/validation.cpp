@@ -83,6 +83,9 @@ Validation::Validation( BTfast &btf,
 
     Return: number of validated strategies
 
+    Names of optimization variables ("fractN_long", "fractN_short")
+    and "Side_switch" must match in MasterCode.xml.
+
 */
 void Validation::run_validation()
 {
@@ -109,7 +112,6 @@ void Validation::run_validation()
     std::vector<strategy_t> passed_validation_3 {};
     std::vector<strategy_t> passed_validation_4 {};
     std::vector<strategy_t> passed_validation_5 {};
-    std::vector<strategy_t> passed_validation_6 {};
 
     //--- Selection
     // strategies_to_validate_ -> passed_selection
@@ -117,6 +119,7 @@ void Validation::run_validation()
     num_validated_ = (int) passed_selection.size();
     //---
 
+    /*
     //--- Validation - OOS metrics test
     // passed_selection -> passed_validation_1
     OOS_metrics_test( passed_selection, passed_validation_1 );
@@ -128,31 +131,24 @@ void Validation::run_validation()
     OOS_consistency_test( passed_validation_1, passed_validation_2 );
     num_validated_ = (int) passed_validation_2.size();
     //---
-
-    //--- Validation - Profitability test 1
+    */
+    //--- Validation - Profitability test
     // passed_validation_2 -> passed_validation_3
-    profitability_test( passed_validation_2, passed_validation_3,
-                        "fractN_long", 0,5,1);
+    //<<<profitability_test( passed_validation_2, passed_validation_3 );
+    profitability_test( passed_selection, passed_validation_3 );
     num_validated_ = (int) passed_validation_3.size();
     //---//
 
-    //--- Validation - Profitability test 2
-    // passed_validation_3 -> passed_validation_4
-    profitability_test( passed_validation_3, passed_validation_4,
-                        "fractN_short", 0,5,1);
-    num_validated_ = (int) passed_validation_4.size();
-    //---//
-
     //--- Validation - Stability test
-    // passed_validation_4 -> passed_validation_5
-    stability_test( passed_validation_4, passed_validation_5 );
-    num_validated_ = (int) passed_validation_5.size();
+    // passed_validation_3 -> passed_validation_4
+    stability_test( passed_validation_3, passed_validation_4 );
+    num_validated_ = (int) passed_validation_4.size();
     //---
 
     //--- Validation - Noise test
-    // passed_validation_5 -> passed_validation_6
-    noise_test( passed_validation_5, passed_validation_6 );
-    num_validated_ = (int) passed_validation_6.size();
+    // passed_validation_4 -> passed_validation_5
+    noise_test( passed_validation_4, passed_validation_5 );
+    num_validated_ = (int) passed_validation_5.size();
     //---
 
     printf( "\n>>> N. of strategies passing Full Validation: %d\n",
@@ -162,7 +158,7 @@ void Validation::run_validation()
     if( num_validated_ > 0 ){
         int control = utils_fileio::write_strategies_to_file(
                                                     validated_file_, "",
-                                                    passed_validation_6,
+                                                    passed_validation_5,
                                                     btf_.strategy_name(),
                                                     btf_.symbol().name(),
                                                     btf_.timeframe(),
@@ -562,42 +558,15 @@ void Validation::OOS_consistency_test( const std::vector<strategy_t>
     Perform test on strategies in 'input_strategies'
     and store those which pass it into 'output_strategies'.
 */
-void Validation::profitability_test( const std::vector<strategy_t>
-                                                        &input_strategies,
-                                std::vector<strategy_t> &output_strategies,
-                                const std::string &optim_param_name,
-                                int start, int stop, int step )
+void Validation::profitability_test(
+                            const std::vector<strategy_t>& input_strategies,
+                                std::vector<strategy_t>& output_strategies )
 {
     if( input_strategies.empty() ){
         return;
     }
     std::cout << "\n" << utils_time::current_datetime_str() + " | "
-              << "Running Profitability Test over parameter "
-              << optim_param_name <<" ("<<start<<".."<<stop<<":"<<step<<")\n";
-
-    // Range of values for optimization parameter
-    std::vector<int> optimization_range {};
-    do {
-        optimization_range.push_back(start);
-        start += step;
-    } while( start <= stop );
-
-    /*
-    // Extract range of optimization parameter "optim_param_name"
-    // from original parameter_ranges_
-    for( auto el: parameter_ranges_ ){
-        if( el.first == optim_param_name ){
-            optimization_range = el.second ;
-        }
-    }
-    // Check if metric vector is empty
-    if( optimization_range.empty() ){
-        std::cout<<">>> ERROR: empty optimization_range vector. "
-                 << "Check name of optimization parameter "
-                 << "in Validation::profitability_test.\n";
-        exit(1);
-    }
-    */
+              << "Running Profitability Test \n";
 
     //--- Loop over input_strategies
     for( const auto& strat: input_strategies ){
@@ -609,62 +578,24 @@ void Validation::profitability_test( const std::vector<strategy_t>
         parameters_t strat_params {};
         utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
-
-        param_ranges_t param_ranges {};
-        // Fill 'param_ranges'...
-        for( single_param_t el: strat_params ){
-            if( el.first != optim_param_name ){     //  ... with parameters != optim param
-                param_ranges.push_back( std::make_pair(
-                                                el.first,
-                                                std::vector<int>{el.second} ) );
-            }
-            else if( el.first == optim_param_name ){ // ... with optim param
-                param_ranges.push_back( std::make_pair( optim_param_name,
-                                                        optimization_range ) );
-            }
-            else{
-              std::cout<<">>> ERROR: epsilon parameter not found "
-                       <<"in strategy parameters (validation).\n";
-              exit(1);
-            }
+        // Store value of Side switch (1=Long, 2=Short, 3=Both)
+        int side_switch { utils_params::parameter_by_name( "Side_switch",
+                                                           strat_params) };
+        bool test_passed {false};
+        switch( side_switch ){
+            case 1:
+                test_passed = check_profitability(strat_params, "fractN_long");
+                break;
+            case 2:
+                test_passed = check_profitability(strat_params, "fractN_short");
+                break;
+            case 3:
+                test_passed = (
+                            check_profitability(strat_params, "fractN_long")
+                        && check_profitability(strat_params, "fractN_short") );
+                break;
         }
-
-        // Cartesian product of all parameter ranges
-        std::vector<parameters_t> search_space {
-                        utils_params::cartesian_product(param_ranges) };
-
-        // Initialize vector where storing optimization results of running
-        std::vector<strategy_t> optim_results {};
-
-        // Run optimization over optimization parameter
-        btf_.run_parallel_optimization( search_space,
-                                        optim_results, "", "",
-                                        fitness_metric_, datafeed_,
-                                        true, false );
-
-        // Fill vector of AvgTicks from backtests over optim param
-        std::vector<double> metric {};
-        for( strategy_t opres: optim_results ){
-            for( auto el: opres ){
-                if( el.first == "AvgTicks" ){
-                    metric.push_back( el.second );
-                }
-            }
-        }
-        // Check if metric vector is empty
-        if( metric.empty() ){
-            std::cout<<">>> ERROR: empty metric vector (validation).\n";
-            exit(1);
-        }
-        // Count profitable runs (with AvgTicks > transaction costs)
-        int profitable_runs {0};
-        for( double at: metric ){
-            if( at > btf_.symbol().transaction_cost_ticks() ){
-                profitable_runs++;
-            }
-        }
-        // at least 80% of all runs must be profitable
-        if( profitable_runs >= 0.8 * metric.size() ){
+        if( test_passed ){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
             output_strategies.push_back( strat );
@@ -675,12 +606,60 @@ void Validation::profitability_test( const std::vector<strategy_t>
     }
     //--- End loop over input_strategies
 
-    printf( "%21s N. of strategies passing Profitability Test over %s: %lu\n",
-            "", optim_param_name.c_str(), output_strategies.size() );
+    printf( "%21s N. of strategies passing Profitability Test: %lu\n", "",
+            output_strategies.size() );
 }
 
 
 
+// ------------------------------------------------------------------------- //
+/*! Check profitability of single strategy by varying 'optim_param_name':
+    >= 80% of all runs must be profitable
+*/
+bool Validation::check_profitability( const parameters_t& strat_params,
+                                      const std::string &optim_param_name )
+{
+    bool result {false};
+
+    std::cout << "( " << optim_param_name << " ) ";
+
+    // Initialize 'search_space' with single strategy parameters
+    std::vector<parameters_t> search_space {strat_params};
+    // Fill 'search_space' with combintations of 'optim_param_name'
+    utils_params::expand_strategies_with_opt_range(
+                      optim_param_name, parameter_ranges_, search_space );
+    // Initialize vector where storing optimization results of running
+    std::vector<strategy_t> optim_results {};
+    // Run optimization over optimization parameter
+    btf_.run_parallel_optimization( search_space, optim_results, "", "",
+                                    fitness_metric_, datafeed_,true,false);
+
+    // Fill vector of AvgTicks from backtests over optim param
+    std::vector<double> metric {};
+    for( const strategy_t& opres: optim_results ){
+        for( const auto& el: opres ){
+            if( el.first == "AvgTicks" ){
+                metric.push_back( el.second );
+            }
+        }
+    }
+    // Check if metric vector is empty
+    if( metric.empty() ){
+        std::cout<<">>> ERROR: empty metric vector (validation).\n";
+        exit(1);
+    }
+    // Count profitable runs (with AvgTicks > transaction costs)
+    int profitable_runs {0};
+    for( double at: metric ){
+        if( at > btf_.symbol().transaction_cost_ticks() ){
+            profitable_runs++;
+        }
+    }
+    // at least 80% of all runs must be profitable
+    result = ( profitable_runs >= 0.8 * metric.size() );
+
+    return( result );
+}
 
 
 
@@ -720,17 +699,15 @@ void Validation::stability_test( const std::vector<strategy_t>
         utils_params::extract_parameters_from_single_strategy( strat,
                                                                strat_params );
 
-        param_ranges_t param_ranges {}; 
+        param_ranges_t param_ranges {};
         // Fill 'param_ranges'...
-        for( single_param_t el: strat_params ){
+        for( const auto& el: strat_params ){
             if( el.first != "epsilon" ){        //  ... with strategy parameters
-                param_ranges.push_back(
-                                    std::make_pair( el.first,
-                                                std::vector<int>{el.second} ) );
+                param_ranges.push_back( std::make_pair(
+                                    el.first, std::vector<int>{el.second} ) );
             }
             else if( el.first == "epsilon" ){   // ... with epsilons
-                param_ranges.push_back(
-                                    std::make_pair( "epsilon", eps_values ));
+                param_ranges.push_back( std::make_pair("epsilon", eps_values));
             }
             else{
                 std::cout<<">>> ERROR: epsilon parameter not found "

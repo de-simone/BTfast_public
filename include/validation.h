@@ -79,16 +79,21 @@ class Validation {
         void selection_conditions(
                             const std::vector<strategy_t> &input_strategies,
                             std::vector<strategy_t> &output_strategies );
+
         void OOS_metrics_test( const std::vector<strategy_t> &input_strategies,
                                std::vector<strategy_t> &output_strategies );
+
         void OOS_consistency_test( const std::vector<strategy_t> &input_strategies,
                                    std::vector<strategy_t> &output_strategies );
+
         void profitability_test( const std::vector<strategy_t> &input_strategies,
-                                 std::vector<strategy_t> &output_strategies,
-                                 const std::string &optim_param_name,
-                                 int start, int stop, int step );
+                                 std::vector<strategy_t> &output_strategies );
+        bool check_profitability( const parameters_t& strat_params,
+                                  const std::string &optim_param_name );
+
         void stability_test( const std::vector<strategy_t> &input_strategies,
                              std::vector<strategy_t> &output_strategies );
+
         void noise_test( const std::vector<strategy_t> &input_strategies,
                          std::vector<strategy_t> &output_strategies );
 

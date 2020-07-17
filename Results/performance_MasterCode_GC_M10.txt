@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-07-16 11:07:29
+# TimeStamp   : 2020-07-17 11:01:52
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10
@@ -30,6 +30,10 @@
 # For Backtest: only the <Start> value of <OptRange> parameters is read.
 # 
 # Names of input variables must match those in 'mode_factory_sequential'
+# 
+# Names of optimization variables ("fractN_long", "fractN_short")
+# and "Side_switch" must match in 'validation.cpp'
+# 
 # -->
 # <Inputs>
 #     <Input>
@@ -111,7 +115,7 @@
 #     <OptRange>
 #         <Name>fractN_short</Name>       <!-- 0..5:1 -->
 #         <Start>2</Start>
-#         <Stop>5</Stop>
+#         <Stop>4</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <Input>

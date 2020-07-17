@@ -97,7 +97,9 @@ void BTfast::run_parallel_optimization(
                                               *parameter_combination );
     }
     //--- End optimization loop
-    std::cout << "Optimization Done.\n";
+    if( verbose ){
+        std::cout << "Optimization Done.\n";
+    }
 
 
     // Sort in descending order of fitness_metric

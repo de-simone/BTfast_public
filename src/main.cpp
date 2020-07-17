@@ -29,12 +29,11 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-16
+                                                        Last update: 2020-07-17
                                           -------------------------------------
 
  * TO DO:
 
-    - Validation::profitability test: only run over fractN_long if side_switch=1, etc.
     - check implementation of LIMIT orders with TradeStation
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).
@@ -225,20 +224,18 @@ int main () {
     switch( run_mode ){
 
         // -------------------------   NO-TRADE   -------------------------- //
-        case 0: {
+        case 0:
             mode_notrade( btf, datafeed, parameter_ranges );
             break;
-        }
         // ----------------------------------------------------------------- //
 
         // ----------------------   SINGLE BACKTEST   ---------------------- //
-        case 1: {
+        case 1:
             mode_single_bt( btf, datafeed, parameter_ranges,
                             print_trade_list, print_performance_report,
                             write_trades_to_file, param_file, trade_list_file,
                             performance_file, profits_file );
             break;
-        }
         // ----------------------------------------------------------------- //
 
         // -----------------------   OPTIMIZATION   ------------------------ //

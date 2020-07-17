@@ -172,6 +172,13 @@ namespace utils_params {
                                             const param_ranges_t &par_range );
 
     // --------------------------------------------------------------------- //
+    /*!  Extract  parameter range  vector from 'source' corresponding to
+         name 'par_name'
+    */
+    std::vector<int> opt_range_by_name( const std::string &par_name,
+                                        const param_ranges_t &source );
+
+    // --------------------------------------------------------------------- //
     /*!  Extract parameter range vector from 'source' corresponding to
          name 'par_name' and replace parameter vector in 'dest'
     */

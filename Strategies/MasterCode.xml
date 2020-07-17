@@ -23,6 +23,10 @@
 For Backtest: only the <Start> value of <OptRange> parameters is read.
 
 Names of input variables must match those in 'mode_factory_sequential'
+
+Names of optimization variables ("fractN_long", "fractN_short")
+and "Side_switch" must match in 'validation.cpp'
+
 -->
 <Inputs>
     <Input>
@@ -97,13 +101,13 @@ Names of input variables must match those in 'mode_factory_sequential'
     </OptRange>
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..5:1 -->
-        <Start>0</Start>
-        <Stop>5</Stop>
+        <Start>1</Start>
+        <Stop>3</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>fractN_short</Name>       <!-- 0..5:1 -->
-        <Start>2</Start>
+        <Start>0</Start>
         <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>

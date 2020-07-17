@@ -252,7 +252,7 @@ void utils_params::extract_metrics_from_single_strategy(
 
 // --------------------------------------------------------------------- //
 /*!  Extract parameter range vector from 'par_range' corresponding to
-     name 'par_name' and expand base strategies 'base_strats' with
+     name 'par_name' and expand all base strategies 'base_strats' with
      'par_name' replaced by optimization range.
      Output vector replaces 'base_strats'.
 */
@@ -264,27 +264,16 @@ void utils_params::expand_strategies_with_opt_range(
 {
     std::vector<parameters_t> result;
     // find 'par_name' in 'par_range' and fill optrange vector
-    std::vector<int> optrange {};
-    for( const auto& param: par_range ){
-        if( param.first == par_name ){
-            optrange = param.second;
-            break;
-        }
-    }
-    // check if 'par_name' was found in 'par_range'
-    if( optrange.empty() ){
-        std::cout<< ">>> ERROR: Invalid parameter name "
-                 << "(replace_opt_range_by_name)\n";
-        exit(1);
-    }
+    std::vector<int> optrange { utils_params::opt_range_by_name( par_name,
+                                                                 par_range ) };
 
     for( const auto& elem: base_strats ){
         /// append original base strategy
         result.push_back(elem);
         // append strategy with modified value of 'par_name'
         for( const auto& param: optrange ){
-            // avoid duplication by checking if param value already exists
-            if( utils_params::parameter_by_name(par_name, elem) != param ){
+            // avoid duplication by checking if 'param' value already exists
+            if( param != utils_params::parameter_by_name(par_name, elem) ){
                 parameters_t new_entry { elem };
                 set_parameter_value_by_name( par_name, new_entry, param );
                 result.push_back(new_entry);
@@ -294,6 +283,10 @@ void utils_params::expand_strategies_with_opt_range(
     //utils_optim::remove_duplicates( result );
     base_strats = result;
 }
+
+
+
+
 
 // --------------------------------------------------------------------- //
 /*! Extract attribute (metric or paramter) named 'attr_name'
@@ -455,6 +448,30 @@ std::vector<parameters_t> utils_params::first_parameters_from_range(
     return( std::vector<parameters_t> {pars} );
 
 }
+
+// --------------------------------------------------------------------- //
+//  Extract  parameter range vector from 'source' corresponding to
+//  name 'par_name'
+std::vector<int> utils_params::opt_range_by_name( const std::string &par_name,
+                                                const param_ranges_t &source )
+{
+    std::vector<int> result {};
+    // find 'par_name' in source and fill result vector
+    for( const auto& elem: source ){
+        if( elem.first == par_name ){
+            result = elem.second;
+            break;
+        }
+    }
+    // check if 'par_name' was found in 'source'
+    if( result.empty() ){
+        std::cout<< ">>> ERROR: Invalid parameter name (opt_range_by_name)\n";
+        exit(1);
+    }
+
+    return( result );
+}
+
 // --------------------------------------------------------------------- //
 /*!  Extract parameter range vector from 'source' corresponding to
      name 'par_name' and replace parameter vector in 'dest'
@@ -465,19 +482,9 @@ void utils_params::replace_opt_range_by_name( const std::string &par_name,
 {
 
     // find 'par_name' in source and fill optrange vector
-    std::vector<int> optrange {};
-    for( const auto& elem: source ){
-        if( elem.first == par_name ){
-            optrange = elem.second;
-            break;
-        }
-    }
-    // check if 'par_name' was found in 'source'
-    if( optrange.empty() ){
-        std::cout<< ">>> ERROR: Invalid parameter name "
-                 << "(replace_opt_range_by_name)\n";
-        exit(1);
-    }
+    std::vector<int> optrange { utils_params::opt_range_by_name( par_name,
+                                                                 source ) };
+
     // replace parameter vector in 'dest' with 'optrange'
     bool elem_found {false};
     for( auto& elem: dest ){

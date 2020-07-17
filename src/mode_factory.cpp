@@ -39,20 +39,19 @@ void mode_factory( BTfast &btf,
     // (only for "genetic" optim_mode)
     for( int i = 0; i < max_num_generations; i++ ){
 
-        // Combine 'parameter_ranges' into all parameter combinations
-        std::vector<parameters_t> search_space {
-                     utils_params::cartesian_product(parameter_ranges) };
-
         // Initialize vector to store results of strategy generation
         // (new optimization or imported from file)
         // [ [("metric1", 110.2), ("metric2", 2.1), ("p1", 2.0), ("p2", 21.0), ...],
         std::vector<strategy_t> generated_strategies {};
 
-
         // --------------------    STATEGY GENERATION    ------------------- //
         // ----------------    (optimization or from file)    -------------- //
         if( optim_mode == "parallel" ){
             std::cout<< "    Run Mode   : Strategy Factory (Exhaustive Generation + Validation)\n\n";
+
+            // Combine 'parameter_ranges' into all parameter combinations
+            std::vector<parameters_t> search_space {
+                         utils_params::cartesian_product(parameter_ranges) };
             // Exhaustive Parallel Optimization
             btf.run_parallel_optimization( search_space, generated_strategies,
                                            optim_file, param_file,
@@ -60,17 +59,23 @@ void mode_factory( BTfast &btf,
                                            //btf.start_date(),btf.end_date(),
                                            true, true );
         }
+
         else if( optim_mode == "genetic" ){
             std::cout<< "    Run Mode   : Strategy Factory (Genetic Generation + Validation)\n\n";
             std::cout<<"\n--- Strategy Generation N. " << i + 1
                      << " / "<< max_num_generations <<" ---\n";
+
+            // Combine 'parameter_ranges' into all parameter combinations
+            std::vector<parameters_t> search_space {
+                        utils_params::cartesian_product(parameter_ranges) };
             // Genetic Parallel Optimization
             btf.run_genetic_optimization( search_space, generated_strategies,
-                                          optim_file, param_file, fitness_metric,
-                                          datafeed,
+                                          optim_file, param_file,
+                                          fitness_metric, datafeed,
                                           //btf.start_date(),btf.end_date(),
                                           population_size, generations );
         }
+
         else if( optim_mode == "import" ){
             std::cout<< "    Run Mode   : Strategy Factory (Import Generation Results + Validation)\n\n";
             // Import Generation Results from 'optim_file'
