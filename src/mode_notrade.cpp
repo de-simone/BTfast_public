@@ -32,33 +32,6 @@ void mode_notrade( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
     //utils_math::mannwhitney(v, w);
 
     std::string optim_param_name {"fractN_short"};
-    std::vector<int> optimization_range {
-                    utils_params::opt_range_by_name( optim_param_name,
-                                                     parameter_ranges ) };
-    param_ranges_t param_ranges {};
-    // Fill 'param_ranges'...
-    for( const auto& el: parameter_combination ){
-        if( el.first != optim_param_name ){     //  ... with parameters != optim param
-            param_ranges.push_back( std::make_pair(
-                                el.first, std::vector<int>{el.second} ) );
-        }
-        else if( el.first == optim_param_name ){ // ... with optim param
-            param_ranges.push_back( std::make_pair(
-                                optim_param_name, optimization_range ) );
-        }
-        else{
-          std::cout<<">>> ERROR: parameter not found "
-                   <<"in strategy parameters (validation).\n";
-          exit(1);
-        }
-    }
-
-    // Cartesian product of all parameter ranges
-    std::vector<parameters_t> search_space {
-                    utils_params::cartesian_product(param_ranges) };
-
-    utils_params::print_parameters_t_vector(search_space);
-
     std::vector<parameters_t> search_space_tmp {parameter_combination};
     utils_params::expand_strategies_with_opt_range(
                                         optim_param_name,
