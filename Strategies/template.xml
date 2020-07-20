@@ -34,6 +34,10 @@
         <Value>2</Value>
     </Input>
     <Input>
+        <Name>Exit_switch</Name>        <!-- 1..4:1 -->
+        <Value>1</Value>
+    </Input>
+    <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
         <Value>0</Value>
     </Input>

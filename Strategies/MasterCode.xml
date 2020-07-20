@@ -94,7 +94,7 @@ and "Side_switch" must match in 'validation.cpp'
         <Value>0</Value>
     </Input>
     <OptRange>
-        <Name>Exit_switch</Name>        <!-- 1..2:1 -->
+        <Name>Exit_switch</Name>        <!-- 1..4:1 -->
         <Start>1</Start>
         <Stop>2</Stop>
         <Step>1</Step>

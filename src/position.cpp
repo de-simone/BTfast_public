@@ -38,8 +38,8 @@ void Position::update_position( Event barevent ) {
 
     // update LONG position
     if( side_ == "LONG" ){
-        // pl_ = ( (barvent.close() - entry_price_) * quantity_
-        //           * barevent.symbol().big_point_value() )
+        pl_ = ( (barevent.close() - entry_price_) * quantity_
+                * barevent.symbol().big_point_value() );
 
         mae_ = std::max( mae_, ((entry_price_ - barevent.low())
                             * quantity_
@@ -67,9 +67,9 @@ void Position::update_position( Event barevent ) {
 
     // update SHORT position
     if( side_ == "SHORT" ){
-        // pl_ = ( (entry_price_-barvent.close()) * quantity_
-        //           * barevent.symbol().big_point_value() )
-        
+        pl_ = ( (entry_price_-barevent.close()) * quantity_
+                   * barevent.symbol().big_point_value() );
+
         mae_ = std::max( mae_, ((barevent.high()-entry_price_)
                                 * quantity_
                                 * barevent.symbol().big_point_value()) );

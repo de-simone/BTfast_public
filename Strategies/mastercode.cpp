@@ -355,18 +355,19 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
                                std::array<Event, 2> &signals )
 {
     // ------------------------    EXIT RULES    --------------------------- //
-    // Exit one bar before close of session,
-    // or at open of next session if session ends earlier than usual
-
     bool ExitLong   = ( MarketPosition_> 0
-                        && ExitCondition( Exit_switch_, data1, CurrentTime_,
-                                          CurrentDOW_, OneBarBeforeClose_,
-                                          tf_mins_, co_mins_ ) );
+                        && ExitCondition( Exit_switch_, data1, name_,
+                                          position_handler.open_positions(),
+                                          CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_,
+                                          tf_mins_, co_mins_, NewSession_) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                        && ExitCondition( Exit_switch_, data1, CurrentTime_,
-                                          CurrentDOW_, OneBarBeforeClose_,
-                                          tf_mins_, co_mins_ ) );
+                        && ExitCondition( Exit_switch_, data1, name_,
+                                          position_handler.open_positions(),
+                                          CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_,
+                                          tf_mins_, co_mins_, NewSession_ ) );
     // --------------------------------------------------------------------- //
 
 
@@ -375,8 +376,8 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
     if( ExitLong ){
         // identify long position to close
         Position long_pos_to_close {};
-        for( Position pos : position_handler.open_positions() ){
-            if( pos.side() == "LONG" ){
+        for( const Position& pos : position_handler.open_positions() ){
+            if( pos.side() == "LONG" && pos.strategy_name() == name_ ){
                 long_pos_to_close = pos;
                 break;
             }
@@ -393,8 +394,8 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
     if( ExitShort ){
         // identify short position to close
         Position short_pos_to_close {};
-        for( Position pos : position_handler.open_positions() ){
-            if( pos.side() == "SHORT" ){
+        for( const Position& pos : position_handler.open_positions() ){
+            if( pos.side() == "SHORT" && pos.strategy_name() == name_ ){
                 short_pos_to_close = pos;
                 break;
             }

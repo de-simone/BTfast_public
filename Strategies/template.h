@@ -96,6 +96,7 @@ class Template : public Strategy {
     //  (default values, may be replaced by XML)  //
     int MyStop_ {0};
     int fractN_ {2};
+    int Exit_switch_ {0};
     // ------------------------------------------ //
 
 

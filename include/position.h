@@ -21,12 +21,11 @@ Member Variables
 - stoploss_: stop loss in USD per contract
 - takeprofit_: take profit in USD per contract
 - ticket_: ticket assigned by broker (random number in backtest)
-- mae_: Max Adverse Excursion, in USD per contract
-- mfe_: Max Favourable excursion, in USD per contract
+- mae_: Max Adverse Excursion, in USD per contract (updated on every bar)
+- mfe_: Max Favourable excursion, in USD per contract (updated on every bar)
 - bars_in_trade_: number of bars since trade entry
 - days_in_trade_: number of days (sessions) since trade entry
-- pl_: Profit/Loss of the trade (includes spread+slippage).
-       Filled when position is closed.
+- pl_: Profit/Loss of the trade (updated on every bar)
 - keep_open_: keep position open, or close it because SL/TP hit
 
 */

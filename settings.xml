@@ -106,7 +106,7 @@ General Settings for BTfast
         <!-- Print performance report on stdout and on file -->
         <!-- 0: false, 1: true -->
         <Name>    PRINT_PERFORMANCE_REPORT     </Name>
-        <Value>   0
+        <Value>   1
         </Value></Input>
     <Input>
         <!-- Print list of transactions on stdout and on file -->
