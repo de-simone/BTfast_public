@@ -25,14 +25,16 @@
 <Inputs>
     <Input>
       <Name>MyStop</Name>
-      <Value>700</Value>
+      <Value>0</Value>
     </Input>
-    <OptRange>
+    <Input>
+        <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+        <Value>1</Value>
+    </Input>
+    <Input>
         <Name>fractN</Name>
-        <Start>2</Start>
-        <Stop>11</Stop>
-        <Step>1</Step>
-    </OptRange>
+        <Value>6</Value>
+    </Input>
     <Input>
         <Name>fract2</Name>
         <Value>2</Value>

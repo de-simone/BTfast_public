@@ -1,14 +1,17 @@
-#include "mrtest.h"
+#include "bomrcharacter.h"
 
+#include "filters/exits.h"      // ExitCondition
 #include "filters/TA_indicators.h"
 #include "utils_math.h" // round_double
-#include "utils_trade.h"      // MarketPosition
+#include "utils_trade.h"        // MarketPosition
+
+//#include <iostream>//<<<
 
 // ------------------------------------------------------------------------- //
 /*! Constructor
 */
-MRtest::MRtest( std::string name, Instrument symbol,
-                    std::string timeframe, int max_bars_back )
+BOMRcharacter::BOMRcharacter( std::string name, Instrument symbol,
+                              std::string timeframe, int max_bars_back )
 : Strategy{ name, symbol, timeframe, max_bars_back },
   digits_ { symbol_.digits() }
 {
@@ -33,13 +36,17 @@ MRtest::MRtest( std::string name, Instrument symbol,
     correspondence with the names appearing in XML param file.
     Recall: all parameters in XML are INTEGER.
 */
-void MRtest::set_param_values(
-                        const std::vector< std::pair<std::string,int> >&
+void BOMRcharacter::set_param_values(
+                            const std::vector< std::pair<std::string,int> >&
                                 parameter_set )
 {
     // Find parameter value in parameter_set by its name
     // (as it appears in XML file)
     //fractN_ = find_param_value_by_name( "fractN", parameter_set );
+    MyStop_ = find_param_value_by_name( "MyStop", parameter_set );
+    BOMR_switch_ = find_param_value_by_name( "BOMR_switch", parameter_set );
+    Nbars_ = find_param_value_by_name( "Nbars", parameter_set );
+    Xbars_ = find_param_value_by_name( "Xbars", parameter_set );
 
 }
 
@@ -54,9 +61,9 @@ void MRtest::set_param_values(
     Return: 1 if all OK; 0 if not enough session bars in history.
 */
 
-int MRtest::preliminaries( const std::deque<Event>& data1,
-                         const std::deque<Event>& data1D,
-                         const PositionHandler& position_handler)
+int BOMRcharacter::preliminaries( const std::deque<Event>& data1,
+                                const std::deque<Event>& data1D,
+                                const PositionHandler& position_handler)
 {
     // Check if bar collections are not empty
     if( data1.empty() || data1D.empty() ){
@@ -73,7 +80,7 @@ int MRtest::preliminaries( const std::deque<Event>& data1,
     MarketPosition_ = utils_trade::MarketPosition(position_handler);
 
     //-- OHLC of current session and previous 5 sessions
-    if( data1D.size() < OpenD_.size() ){    // daily bar collection long enough
+    if( data1D.size() < OpenD_.size()){    // daily bar collection long enough
         return(0);
     }
     else{
@@ -85,6 +92,7 @@ int MRtest::preliminaries( const std::deque<Event>& data1,
         }
     }
     //--
+
 
     //-- Enable/disable trading
     // Enable trading at the start of new session
@@ -103,14 +111,16 @@ int MRtest::preliminaries( const std::deque<Event>& data1,
     //--
 
     //-- Update Indicator Values
-    /*
-    bool make_new_entry {true};         // if computing indicator on intraday (data1)
-    //bool make_new_entry {NewSession_}; // if computing indicators on "D" (data1D)
-    ROC( roc_, data1, make_new_entry, max_bars_back_, 2, "CLOSE" );
-    ROC( roc_, data1, true, max_bars_back_, 2, "CLOSE" );
-    ROC( roc_, data1D, NewSession_, max_bars_back_, 2, "CLOSE" );
-    ATR( atr_, data1, true, max_bars_back_, 10 );
-    */
+
+    //bool make_new_entry {true};         // if computing indicator on intraday (data1)
+    bool make_new_entry {NewSession_}; // if computing indicators on "D" (data1D)
+    HighestHigh( highesthigh_, data1, make_new_entry, max_bars_back_, Nbars_);
+    LowestLow( lowestlow_, data1, make_new_entry, max_bars_back_, Nbars_);
+
+    // Require at least Nbars_ of history
+    if( highesthigh_.size() < Nbars_ +1 ){
+        return(0);
+    }
     //--
 
 
@@ -121,63 +131,55 @@ int MRtest::preliminaries( const std::deque<Event>& data1,
 //-------------------------------------------------------------------------- //
 /*! Define Entry rules and fill 'signals' array
 */
-void MRtest::compute_entry( const std::deque<Event>& data1,
-                              const std::deque<Event>& data1D,
-                              const PositionHandler& position_handler,
-                              std::array<Event, 2> &signals )
+void BOMRcharacter::compute_entry( const std::deque<Event>& data1,
+                                const std::deque<Event>& data1D,
+                                const PositionHandler& position_handler,
+                                std::array<Event, 2> &signals )
 {
-    // ---------------------------    FILTER 1    -------------------------- //
-    bool Filter1_long  = true; /*(  data1[0].close() > data1[1].close()
-                         && data1[1].close() > data1[1].open()
-                         && data1[2].close() > data1[2].open() );*/
 
-    bool Filter1_short = true; /*(  data1[0].close() < data1[1].close()
-                         && data1[1].close() < data1[1].open()
-                         && data1[2].close() < data1[2].open() );*/
+    // -------------------------    ENTRY LEVELS    ------------------------ //
+    // Breakout levels
+    double BO_level_long  = highesthigh_[0];
+    double BO_level_short = lowestlow_[0];
+    // Mean-reverting levels
+    double MR_level_long  = lowestlow_[0];
+    double MR_level_short = highesthigh_[0];
 
-    // Do not compute Entries if no filter is triggered
-    if( !Filter1_long && !Filter1_short ){
-        return;
-    }
-    // --------------------------------------------------------------------- //
-
-    // --------------------------    TIME FILTER    ------------------------ //
-    bool FilterT = (CurrentTime_ >= Time(8,0)
-                    && CurrentTime_ < symbol_.settlement_time() );
-
-    //FilterT = true;
-    // --------------------------------------------------------------------- //
-
-    // ------------------------    BREAKOUT LEVELS    ---------------------- //
-    //double fract { fractN_ * 0.1 };
-    double level_long  = LowD_[1];
-    double level_short = HighD_[1];
-
-    // --------------------------------------------------------------------- //
-
-    // ----------------------    COMBINE ALL FILTERS    -------------------- //
-    bool All_filters_long  { FilterT && Filter1_long };
-    bool All_filters_short { FilterT && Filter1_short };
     // --------------------------------------------------------------------- //
 
     // ------------------------    ENTRY RULES    -------------------------- //
-    bool EnterLong  = ( TradingEnabled_ && All_filters_long );
-    bool EnterShort = ( TradingEnabled_ && All_filters_short );
+    bool EnterLong  = ( TradingEnabled_ );
+    bool EnterShort = ( TradingEnabled_ );
     // --------------------------------------------------------------------- //
 
 
     ////////////////////////  DO NOT EDIT THIS BLOCK  /////////////////////////
     //////////////////////////     OPEN TRADES     ////////////////////////////
     if( EnterLong ){
-        signals[0] = Event { symbol_, data1[0].timestamp(),
-                             "BUY", "LIMIT", level_long,
-                             1.0, 0, name_, (double) MyStop_, 0.0 };
+
+        if( BOMR_switch_ == 1 ){
+            signals[0] = Event { symbol_, data1[0].timestamp(),
+                                 "BUY", "STOP", BO_level_long,
+                                 1.0, 0, name_, (double) MyStop_ , 0.0 };
+        }
+        else if( BOMR_switch_ == 2 ){
+            signals[0] = Event { symbol_, data1[0].timestamp(),
+                                 "BUY", "LIMIT", MR_level_long,
+                                 1.0, 0, name_, (double) MyStop_ , 0.0 };
+        }
     }
 
     if( EnterShort ){
-        signals[1] = Event { symbol_, data1[0].timestamp(),
-                             "SELLSHORT", "LIMIT", level_short,
-                             1.0, 0, name_, (double) MyStop_, 0.0 };
+        if( BOMR_switch_ == 1 ){
+            signals[1] = Event { symbol_, data1[0].timestamp(),
+                                 "SELLSHORT", "STOP", BO_level_short,
+                                 1.0, 0, name_, (double) MyStop_, 0.0 };
+        }
+        else if( BOMR_switch_ == 2 ){
+            signals[1] = Event { symbol_, data1[0].timestamp(),
+                                 "SELLSHORT", "LIMIT", MR_level_short,
+                                 1.0, 0, name_, (double) MyStop_, 0.0 };
+        }
     }
     ///////////////////////////////////////////////////////////////////////////
 }
@@ -187,25 +189,27 @@ void MRtest::compute_entry( const std::deque<Event>& data1,
 //-------------------------------------------------------------------------- //
 /*! Define Exit rules and fill 'signals' array
 */
-void MRtest::compute_exit( const std::deque<Event>& data1,
-                             const std::deque<Event>& data1D,
-                             const PositionHandler& position_handler,
-                             std::array<Event, 2> &signals )
+void BOMRcharacter::compute_exit( const std::deque<Event>& data1,
+                                const std::deque<Event>& data1D,
+                                const PositionHandler& position_handler,
+                                std::array<Event, 2> &signals )
 {
     // ------------------------    EXIT RULES    --------------------------- //
-    // Exit one bar before close of session,
-    // or at open of next session if session ends earlier than usual
+    // Exit after 'Xbars_' bars
     bool ExitLong   = ( MarketPosition_> 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( 4, data1, name_,
+                                          position_handler.open_positions(),
+                                          CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, Xbars_, Xbars_+1,
+                                          tf_mins_, co_mins_, NewSession_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( 4, data1, name_,
+                                          position_handler.open_positions(),
+                                          CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, Xbars_, Xbars_+1,
+                                          tf_mins_, co_mins_, NewSession_ ) );
+
     // --------------------------------------------------------------------- //
 
 
@@ -217,7 +221,7 @@ void MRtest::compute_exit( const std::deque<Event>& data1,
     if( ExitLong ){
         // identify long position to close
         Position long_pos_to_close {};
-        for( Position pos : position_handler.open_positions() ){
+        for( const Position& pos : position_handler.open_positions() ){
             if( pos.side() == "LONG" ){
                 long_pos_to_close = pos;
                 break;
@@ -235,7 +239,7 @@ void MRtest::compute_exit( const std::deque<Event>& data1,
     if( ExitShort ){
         // identify short position to close
         Position short_pos_to_close {};
-        for( Position pos : position_handler.open_positions() ){
+        for( const Position& pos : position_handler.open_positions() ){
             if( pos.side() == "SHORT" ){
                 short_pos_to_close = pos;
                 break;
@@ -261,9 +265,9 @@ void MRtest::compute_exit( const std::deque<Event>& data1,
     Second entry of 'signals' array: entry/exit signals for SHORT trades
 */
 
-void MRtest::compute_signals( const PriceCollection& price_collection,
-                                const PositionHandler& position_handler,
-                                std::array<Event, 2> &signals )
+void BOMRcharacter::compute_signals( const PriceCollection& price_collection,
+                                    const PositionHandler& position_handler,
+                                    std::array<Event, 2> &signals )
 {
     signals.fill(Event {}); // initialized to NONE events
 

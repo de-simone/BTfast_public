@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-07-20 10:50:29
+# TimeStamp   : 2020-07-20 10:51:56
 # Strategy    : test
 # Symbol      : NG
-# TimeFrame   : M10
-# Date Range  : 2001-05-14 --> 2019-12-31
+# TimeFrame   : D
+# Date Range  : 2004-01-05 --> 2014-12-31
 #
 #<Strategies/test.xml>
 # <?xml version='1.0' encoding='UTF-8'?>

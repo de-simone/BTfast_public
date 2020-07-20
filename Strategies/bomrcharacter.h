@@ -1,5 +1,5 @@
-#ifndef MRTEST_H
-#define MRTEST_H
+#ifndef BOMRCHARACTER_H
+#define BOMRCHARACTER_H
 
 #include "../Strategies/strategy.h"
 #include <array>    // std::array
@@ -67,7 +67,7 @@ Strategy Parameters:
 
 */
 
-class MRtest : public Strategy {
+class BOMRcharacter : public Strategy {
 
     int digits_{1};
     int tf_mins_ {0};
@@ -86,21 +86,23 @@ class MRtest : public Strategy {
     std::array<double, 6> CloseD_ {};
 
     // ---     Indicators     --- //
-    //std::deque<double> atr_ {};
-    //std::deque<double> roc_ {};
+    std::deque<double> highesthigh_ {};
+    std::deque<double> lowestlow_ {};
     // -------------------------- //
 
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
     int MyStop_ {0};
-    //int fractN_ {0};
+    int BOMR_switch_ {1};
+    int Nbars_ {1};  // bars for computing highest high/lowest low
+    int Xbars_ {1};  // n. of bars to exit
     // ------------------------------------------ //
 
 
     public:
         // Constructor
-        MRtest( std::string name, Instrument symbol,
-                  std::string timeframe, int max_bars_back );
+        BOMRcharacter( std::string name, Instrument symbol,
+                       std::string timeframe, int max_bars_back );
 
     private:
         // Functions overriding the base class virtual functions

@@ -36,6 +36,7 @@ void Test::set_param_values(
     // (as it appears in XML file)
     MyStop_ = find_param_value_by_name( "MyStop", parameter_set );
     fractN_ = find_param_value_by_name( "fractN", parameter_set );
+    BOMR_switch_ = find_param_value_by_name( "BOMR_switch", parameter_set );
 
 }
 
@@ -126,11 +127,14 @@ void Test::compute_entry( const std::deque<Event>& data1,
     // ---------------------------    FILTER 1    -------------------------- //
     bool Filter1_long  = (  data1[0].close() > data1[1].close()
                          && data1[1].close() > data1[1].open()
-                         && data1[2].close() > data1[2].open() );
+                         && data1[2].close() > data1[2].open()
+
+                          );
 
     bool Filter1_short = (  data1[0].close() < data1[1].close()
                          && data1[1].close() < data1[1].open()
-                         && data1[2].close() < data1[2].open() );
+                         && data1[2].close() < data1[2].open()
+                          );
     //Filter1_short = Filter1_long;
     // Do not compute Entries if no filter is triggered
     if( !Filter1_long && !Filter1_short ){
@@ -144,16 +148,24 @@ void Test::compute_entry( const std::deque<Event>& data1,
                         && CurrentTime_ >= Time(6,0)
                         && CurrentTime_ <= Time(11,0)
                         );
-    //MyTimeWindow = true;
+    MyTimeWindow = true;
     // --------------------------------------------------------------------- //
 
-    // ------------------------    BREAKOUT LEVELS    ---------------------- //
+    // -------------------------    ENTRY LEVELS    ------------------------ //
     double fract { fractN_ * 0.1 };
+    // Breakout levels
     double BO_level_long  = utils_math::round_double(
                              OpenD_[0] + fract * (HighD_[1] - LowD_[1]),
                                                     digits_);
     double BO_level_short = utils_math::round_double(
                              OpenD_[0] - fract * (HighD_[1] - LowD_[1]),
+                                                    digits_);
+    // Mean-Reverting levels
+    double MR_level_long  = utils_math::round_double(
+                             OpenD_[0] - fract * (HighD_[1] - LowD_[1]),
+                                                    digits_);
+    double MR_level_short = utils_math::round_double(
+                             OpenD_[0] + fract * (HighD_[1] - LowD_[1]),
                                                     digits_);
     // --------------------------------------------------------------------- //
 
@@ -171,15 +183,30 @@ void Test::compute_entry( const std::deque<Event>& data1,
     ////////////////////////  DO NOT EDIT THIS BLOCK  /////////////////////////
     //////////////////////////     OPEN TRADES     ////////////////////////////
     if( EnterLong ){
-        signals[0] = Event { symbol_, data1[0].timestamp(),
-                             "BUY", "STOP", BO_level_long,
-                             1.0, 0, name_, (double) MyStop_, 0.0 };
+
+        if( BOMR_switch_ == 1 ){
+            signals[0] = Event { symbol_, data1[0].timestamp(),
+                                 "BUY", "STOP", BO_level_long,
+                                 1.0, 0, name_, (double) MyStop_ , 0.0 };
+        }
+        else if( BOMR_switch_ == 2 ){
+            signals[0] = Event { symbol_, data1[0].timestamp(),
+                                 "BUY", "LIMIT", MR_level_long,
+                                 1.0, 0, name_, (double) MyStop_ , 0.0 };
+        }
     }
 
     if( EnterShort ){
-        signals[1] = Event { symbol_, data1[0].timestamp(),
-                             "SELLSHORT", "STOP", BO_level_short,
-                             1.0, 0, name_, (double) MyStop_, 0.0 };
+        if( BOMR_switch_ == 1 ){
+            signals[1] = Event { symbol_, data1[0].timestamp(),
+                                 "SELLSHORT", "STOP", BO_level_short,
+                                 1.0, 0, name_, (double) MyStop_, 0.0 };
+        }
+        else if( BOMR_switch_ == 2 ){
+            signals[1] = Event { symbol_, data1[0].timestamp(),
+                                 "SELLSHORT", "LIMIT", MR_level_short,
+                                 1.0, 0, name_, (double) MyStop_, 0.0 };
+        }
     }
     ///////////////////////////////////////////////////////////////////////////
 }

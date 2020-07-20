@@ -87,6 +87,7 @@ class Test : public Strategy {
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
     int MyStop_ {0};
+    int BOMR_switch_ {1};
     int fractN_ {2};
     // ------------------------------------------ //
 

@@ -6,6 +6,7 @@ bool ExitCondition( int exit_num, const std::deque<Event>& data1,
                     const std::vector<Position>& open_positions,
                     const Time& CurrentTime, const Time& CurrentDOW,
                     const Time& OneBarBeforeClose,
+                    int exit_days, int exit_bars,
                     int tf_mins, int co_mins, bool new_session )
 {
 
@@ -35,7 +36,7 @@ bool ExitCondition( int exit_num, const std::deque<Event>& data1,
             break;
 
         case 3:{
-        // Exit after 5 days
+        // Exit after 'exit_days' days
             // Find Position to close
             Position pos_to_close {};
             for( const Position& pos : open_positions ){
@@ -44,12 +45,26 @@ bool ExitCondition( int exit_num, const std::deque<Event>& data1,
                     break;
                 }
             }
-            result = ( pos_to_close.days_in_trade() == 5 );
+            result = ( pos_to_close.days_in_trade() == exit_days );
+            break;
+        }
+
+        case 4:{
+        // Exit after 'exit_bars' bars
+            // Find Position to close
+            Position pos_to_close {};
+            for( const Position& pos : open_positions ){
+                if( pos.strategy_name() == strategy_name ){
+                    pos_to_close = pos;
+                    break;
+                }
+            }
+            result = ( pos_to_close.bars_in_trade() == exit_bars );
             break;
         }
 
 
-        case 4:{
+        case 5:{
         // First profitable open
             // Find Position to close
             Position pos_to_close {};

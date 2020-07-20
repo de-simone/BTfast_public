@@ -29,22 +29,27 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-17
+                                                        Last update: 2020-07-20
                                           -------------------------------------
 
  * TO DO:
 
-    - check implementation of LIMIT orders with TradeStation
+    - in mastercode: atrD_ should be atr_. corresponding fract should be larger
+      than those for daily ranges 
+    - signal weights:
+        assign weight in [0,1] to breakout signal;
+        distribution of ticks over weights (e.g. histogram)
+        increase position on signal with weight associated to largest ticks
     - trade management: form of dynamic position sizing increasing/decreasing
       position during the trade (not before entry).
     - deal with more than 1 symbol (e.g. market breadth).
       datafeed sends to queue std::array<Event,10>, where storing simultaneous
       bars of up to 10 different symbols. Then PriceCollection runs over array
       to update all bar lists.
-   - genetic programming ( create bool nodes like HighD[1] > LowD[5],
-                          out of building blocks )
    - add commission/slippage to execution
 
+   [- genetic programming ( create bool nodes like HighD[1] > LowD[5],
+                          out of building blocks )]
    [- does the call to append_to_optim_results (in run_parallel_optimization)
        need #pragma omp critical (as in genetic) ?
    ]

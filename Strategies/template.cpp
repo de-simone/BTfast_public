@@ -119,6 +119,8 @@ int Template::preliminaries( const std::deque<Event>& data1,
     ROC( roc_, data1, true, max_bars_back_, 2, "CLOSE" );
     ROC( roc_, data1D, NewSession_, max_bars_back_, 2, "CLOSE" );
     ATR( atr_, data1, true, max_bars_back_, 10 );
+    HighestHigh( highesthigh_, data1, make_new_entry, max_bars_back_, 10);
+    LowestLow( lowestlow_, data1, make_new_entry, max_bars_back_, 10);
     */
     //--
 
@@ -211,14 +213,14 @@ void Template::compute_exit( const std::deque<Event>& data1,
                         && ExitCondition( Exit_switch_, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_,
+                                          OneBarBeforeClose_, 5, 5,
                                           tf_mins_, co_mins_, NewSession_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
                         && ExitCondition( Exit_switch_, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_,
+                                          OneBarBeforeClose_, 5, 5,
                                           tf_mins_, co_mins_, NewSession_ ) );
     // --------------------------------------------------------------------- //
 

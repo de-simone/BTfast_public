@@ -1,34 +1,40 @@
-# TimeStamp   : 2020-07-20 10:50:29
-# Strategy    : test
-# Symbol      : NG
-# TimeFrame   : M10
-# Date Range  : 2001-05-14 --> 2019-12-31
+# TimeStamp   : 2020-07-20 10:40:08
+# Strategy    : BOMRcharacter
+# Symbol      : GC
+# TimeFrame   : M15
+# Date Range  : 2010-01-04 --> 2019-12-31
 #
-#<Strategies/test.xml>
+#<Strategies/BOMRcharacter.xml>
 # <?xml version='1.0' encoding='UTF-8'?>
 # <!--
 # -->
 # <Inputs>
 #     <Input>
-#       <Name>MyStop</Name>
-#       <Value>700</Value>
+#         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
+#         <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>1</Value>
 #     </Input>
 #     <OptRange>
-#         <Name>fractN</Name>
-#         <Start>2</Start>
-#         <Stop>11</Stop>
-#         <Step>1</Step>
+#         <Name>Nbars</Name>              <!-- 3..30:3 -->
+#         <Start>3</Start>
+#         <Stop>30</Stop>
+#         <Step>3</Step>
 #     </OptRange>
-#     <Input>
-#         <Name>fract2</Name>
-#         <Value>2</Value>
-#     </Input>
+#     <OptRange>
+#         <Name>Xbars</Name>              <!-- 3..30:3 -->
+#         <Start>3</Start>
+#         <Stop>30</Stop>
+#         <Step>3</Step>
+#     </OptRange>
 #     <Input>
 #         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
 #         <Value>0</Value>
 #     </Input>
 # </Inputs>
-#</Strategies/test.xml>
+#</Strategies/BOMRcharacter.xml>
 #
 
    # ==================  Performance Report ================== #

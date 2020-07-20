@@ -306,16 +306,13 @@ void HighestHigh( std::deque<double> &out, const std::deque<Event>& bar,
     }
 
     //--- Start Calculation
-    double new_value {0.0};
-
-    new_value = bar.at(length).high();
+    double new_value { bar.at(length).high() };
 
     for( int k = length; k >= 1 ; k-- ){
         if( bar.at(k).high() > new_value ){
             new_value = bar.at(k).high();
         }
     }
-
     //--- End Calculation
 
     if( make_new_entry ){   // insert new value in front of deque
@@ -348,16 +345,13 @@ void LowestLow( std::deque<double> &out, const std::deque<Event>& bar,
     }
 
     //--- Start Calculation
-    double new_value {0.0};
-
-    new_value = bar.at(length).low();
+    double new_value { bar.at(length).low() };
 
     for( int k = length; k >= 1 ; k-- ){
         if( bar.at(k).low() < new_value ){
             new_value = bar.at(k).low();
         }
     }
-
     //--- End Calculation
 
     if( make_new_entry ){   // insert new value in front of deque

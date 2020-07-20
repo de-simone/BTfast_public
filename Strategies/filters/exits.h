@@ -21,6 +21,7 @@ bool ExitCondition( int exit_num, const std::deque<Event>& data1,
                    const std::vector<Position>& open_positions,
                    const Time& CurrentTime, const Time& CurrentDOW,
                    const Time& OneBarBeforeClose,
+                   int exit_days, int exit_bars,
                    int tf_mins, int co_mins, bool new_session );
 
 

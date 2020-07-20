@@ -1,8 +1,7 @@
 #include "strategy.h"
 
-#include "botest.h"
+#include "bomrcharacter.h"
 #include "mastercode.h"
-#include "mrtest.h"
 #include "ng1.h"
 #include "ng2.h"
 #include "ng3.h"
@@ -74,18 +73,13 @@ void select_strategy( std::unique_ptr<Strategy>& strategy_ptr,
                                                     symbol, timeframe,
                                                     max_bars_back );
     }
-    else if( strategy_name == "BOtest" ){
-        strategy_ptr = std::make_unique<BOtest> ( strategy_name,
-                                                      symbol, timeframe,
-                                                      max_bars_back );
+    else if( strategy_name == "BOMRcharacter" ){
+        strategy_ptr = std::make_unique<BOMRcharacter> ( strategy_name,
+                                                         symbol, timeframe,
+                                                         max_bars_back );
     }
     else if( strategy_name == "MasterCode" ){
         strategy_ptr = std::make_unique<MasterCode> ( strategy_name,
-                                                      symbol, timeframe,
-                                                      max_bars_back );
-    }
-    else if( strategy_name == "MRtest" ){
-        strategy_ptr = std::make_unique<MRtest> ( strategy_name,
                                                       symbol, timeframe,
                                                       max_bars_back );
     }

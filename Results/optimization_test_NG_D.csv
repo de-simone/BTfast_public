@@ -1,0 +1,36 @@
+# TimeStamp   : 2020-07-20 14:08:39
+# Strategy    : test
+# Symbol      : NG
+# TimeFrame   : D
+# Date Range  : 2004-01-05 --> 2014-12-31
+#
+#<Strategies/test.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#       <Name>MyStop</Name>
+#       <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>1</Value>
+#     </Input>
+#     <Input>
+#         <Name>fractN</Name>
+#         <Value>6</Value>
+#     </Input>
+#     <Input>
+#         <Name>fract2</Name>
+#         <Value>2</Value>
+#     </Input>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/test.xml>
+#
+#  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,   MyStop,BOMR_switch,   fractN,   fract2,  epsilon,
+        1,-21541.00,      0.00,      0.00,     -1.00,     -1.00,      0.00,           0,          1,          6,          2,          0,

@@ -359,14 +359,14 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
                         && ExitCondition( Exit_switch_, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_,
+                                          OneBarBeforeClose_, 5, 5,
                                           tf_mins_, co_mins_, NewSession_) );
 
     bool ExitShort  = ( MarketPosition_< 0
                         && ExitCondition( Exit_switch_, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_,
+                                          OneBarBeforeClose_, 5, 5,
                                           tf_mins_, co_mins_, NewSession_ ) );
     // --------------------------------------------------------------------- //
 

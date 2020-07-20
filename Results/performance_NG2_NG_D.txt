@@ -1,0 +1,59 @@
+# TimeStamp   : 2020-07-20 10:52:10
+# Strategy    : NG2
+# Symbol      : NG
+# TimeFrame   : D
+# Date Range  : 2004-01-05 --> 2014-12-31
+#
+#<Strategies/NG2.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#       <Name>MyStop</Name>
+#       <Value>200</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>fractN</Name>
+#         <Start>1</Start>
+#         <Stop>4</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+# </Inputs>
+#</Strategies/NG2.xml>
+#
+
+   # ==================  Performance Report ================== #
+                        |     All    |    Long    |    Short   |
+     Initial Balance    : 10000000.00
+     N. of Trades       :      22            6           16
+     Net Profit         :  187020.00      2060.00    184960.00
+     Net Profit %       :       1.9%         0.0%         1.8%
+     CAGR               :       0.2%         0.0%         0.2%
+     Avg Trade          :    8500.91       343.33     11560.00
+     Avg Ticks          :     850.09        34.33      1156.00
+     Profit Factor      :       4.50         1.38         4.85
+     Win Percent        :      22.7%        50.0%        12.5%
+     Avg DrawDown       :  -18402.73     -1240.00    -19798.75
+     Avg DrawDown %     :      -0.2%        -0.0%        -0.2%
+     Max DrawDown       :  -45860.00     -5360.00    -47920.00
+     Max DrawDown %     :      -0.5%        -0.1%        -0.5%
+     Net PL/Max DD      :       4.08         0.38         3.86
+     CAGR/Max DD %      :       0.37         0.03         0.35
+     Expectancy         :       2.70         0.19         3.37
+     Z-score            :       0.00         0.00         0.00
+     R^2                :     0.0091       0.0596       0.0238
+   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+     Std.Dev. of P/L    :   50199.57      3104.28     59060.84
+     Gross Profit       :  240450.00      7420.00    233030.00
+     Gross Loss         :  -53430.00     -5360.00    -48070.00
+     Avg Profit         :   48090.00      2473.33    116515.00
+     Avg Loss           :   -3142.94     -1786.67     -3433.57
+     Max Profit         :  232880.00      5580.00    232880.00
+     Max Loss           :   -7600.00     -3320.00     -7600.00
+     Avg Bars in Win    :     457.40         2.67      1139.50
+     Avg Bars in Loss   :      26.35         2.67        31.43
+     Max Consec. Wins   :       2            3            1
+     Max Consec. Losses :       6            3           11
+     Minimum Capital    :   70990.00     10240.00     74080.00
+   # ========================================================= #
