@@ -50,7 +50,7 @@ General Settings for BTfast
         <!-- Start date (included). Format: YYYY-MM-DD
             (0 for first date on file)  -->
         <Name>  START_DATE      </Name>
-        <Value>  0        <!-- 2014-01-01 2007-10-29 -->
+        <Value>  0       <!-- 2014-01-01 2007-10-29 -->
         </Value></Input>
     <Input>
         <!-- End date (included). Format: YYYY-MM-DD
@@ -87,7 +87,7 @@ General Settings for BTfast
              3 = intraday data exported from DXT (CSV)
         -->
         <Name>    CSV_FORMAT    </Name>
-        <Value>   2
+        <Value>   1
         </Value></Input>
     <Input>
         <Name>    DATAFEED_TYPE     </Name>
@@ -157,7 +157,7 @@ General Settings for BTfast
     <Input>
         <!-- Position size: fixed_size, fixed_notional, fixed_fractional  -->
         <Name>    POSITION_SIZE_TYPE     </Name>
-        <Value>   fixed_size
+        <Value>   fixed_notional
         </Value></Input>
     <Input>
         <!-- Number of contracts to use in "fixed_size" position size -->

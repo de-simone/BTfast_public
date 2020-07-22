@@ -31,7 +31,7 @@ and "Side_switch" must match in 'validation.cpp'
 <Inputs>
     <Input>
         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
-        <Value>2</Value>
+        <Value>1</Value>
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
@@ -42,15 +42,15 @@ and "Side_switch" must match in 'validation.cpp'
         <Value>0</Value>
     </Input>
     <OptRange>
-        <Name>POI_switch</Name>         <!-- 1..7:1 -->
+        <Name>POI_switch</Name>         <!-- 1..8:1 -->
         <Start>1</Start>
-        <Stop>7</Stop>
+        <Stop>8</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
         <Start>1</Start>
-        <Stop>3</Stop>
+        <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
@@ -66,15 +66,15 @@ and "Side_switch" must match in 'validation.cpp'
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
+        <Name>Filter1L_switch</Name>    <!-- 0..56:1 -->
         <Start>0</Start>
-        <Stop>50</Stop>
+        <Stop>56</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
+        <Name>Filter1S_switch</Name>    <!-- 0..56:1 -->
         <Start>0</Start>
-        <Stop>50</Stop>
+        <Stop>56</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
@@ -100,13 +100,13 @@ and "Side_switch" must match in 'validation.cpp'
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>fractN_long</Name>        <!-- 0..5:1 -->
+        <Name>fractN_long</Name>        <!-- 0..4:1 -->
         <Start>0</Start>
         <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>fractN_short</Name>       <!-- 0..5:1 -->
+        <Name>fractN_short</Name>       <!-- 0..4:1 -->
         <Start>0</Start>
         <Stop>4</Stop>
         <Step>1</Step>

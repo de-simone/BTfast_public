@@ -119,8 +119,7 @@ void TrueRange( std::deque<double> &out, const std::deque<Event>& bar,
 // Fill 'out' deque with indicator values (size <= 'max_bars_back')
 
 void ATR( std::deque<double> &out, const std::deque<Event>& bar,
-          bool make_new_entry, int max_bars_back,
-          int length )
+          bool make_new_entry, int max_bars_back, int length )
 {
     // Check if input is valid
     if( length <= 0 || max_bars_back <= 0 ){

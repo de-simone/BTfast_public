@@ -11,6 +11,8 @@
                             // no_filter_strategy,
                             // strategy_attribute_by_name,
                             // max_strategy_metric_by_name
+#include "utils_time.h"     // current_datetime_str
+
 #include "validation.h"
 
 #include <iostream>         // std::cout
@@ -247,7 +249,8 @@ void mode_factory_sequential( BTfast &btf,
                       data_dir, data_file_oos, max_variation_pct,
                       num_noise_tests, noise_file };
     val1.initial_generation_selection( generated_1, selected_1 );
-    std::cout << "Number of strategies passing 1st generation step: "
+    std::cout << "Number of strategies passing 1st generation step "
+              << "(POI_switch, Distance_switch, fractN, Exit_switch) : "
               << selected_1.size() <<"\n\n";
     if( selected_1.empty() ){
         exit(1);
@@ -301,7 +304,8 @@ void mode_factory_sequential( BTfast &btf,
         }
     }
     utils_optim::remove_duplicates( selected_2, fitness_metric );
-    std::cout << "Number of strategies passing 2nd generation step: "
+    std::cout << "Number of strategies passing 2nd generation step "
+              << "(DOW_switch) : "
               << selected_2.size() <<"\n\n";
     if( selected_2.empty() ){
        exit(1);
@@ -354,7 +358,8 @@ void mode_factory_sequential( BTfast &btf,
         }
     }
     utils_optim::remove_duplicates( selected_3, fitness_metric );
-    std::cout << "Number of strategies passing 3rd generation step: "
+    std::cout << "Number of strategies passing 3rd generation step "
+              << "(Intraday_switch) : "
               << selected_3.size() <<"\n\n";
     if( selected_3.empty() ){
        exit(1);
@@ -428,7 +433,8 @@ void mode_factory_sequential( BTfast &btf,
         }
     }
     utils_optim::remove_duplicates( selected_4, fitness_metric );
-    std::cout << "Number of strategies passing 4th generation step: "
+    std::cout << "Number of strategies passing 4th generation step "
+              << "(Filter1L_switch, Filter1S_switch) : "
               << selected_4.size() <<"\n\n";
     if( selected_4.empty() ){
        exit(1);
@@ -440,14 +446,19 @@ void mode_factory_sequential( BTfast &btf,
     std::vector<strategy_t> selected_5 {};
     for( const auto& selected_strat: selected_4 ){   // loop over selected strategies
 
-        std::cout << "Analyzing Market Regime filters for strategy "
+        std::cout << utils_time::current_datetime_str() + " | "
+                  << "Analyzing Market Regime filters for strategy "
                   << &selected_strat-&selected_4[0] + 1
                   << " / " << selected_4.size() <<"\n";
         // GENERATION STEP 5
         parameters_t selected_strat_params {};
-        // Extract parameters from each strategy in selected_4 to search space
+        // Extract parameters from each strategy in selected_4
         utils_params::extract_parameters_from_single_strategy(
                                         selected_strat, selected_strat_params);
+        // De-activate DPS (DPS_switch should be 0, already)
+        utils_params::set_parameter_value_by_name( "DPS_switch",
+                                                   selected_strat_params, 0);
+        // Append parameters to search space
         search_space.clear();
         search_space.push_back(selected_strat_params);
 
@@ -539,7 +550,8 @@ void mode_factory_sequential( BTfast &btf,
     } // end loop over selected_4 strategies
 
     utils_optim::remove_duplicates( selected_5, fitness_metric );
-    std::cout << "Number of strategies passing 5th generation step: "
+    std::cout << "Number of strategies passing 5th generation step "
+              << "(MktRegimeL_switch, MktRegimeS_switch) : "
               << selected_5.size() <<"\n\n";
     if( selected_5.empty() ){
        exit(1);

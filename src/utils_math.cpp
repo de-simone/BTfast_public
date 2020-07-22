@@ -116,7 +116,7 @@ double utils_math::stdev( const std::vector<double> &v )
                     }
                  );
 
-    double stdev { sqrt( accum / (v.size()-1) ) };
+    double stdev { std::sqrt( accum / (v.size()-1) ) };
 
     return( stdev );
 }

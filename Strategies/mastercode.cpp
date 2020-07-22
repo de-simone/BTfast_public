@@ -14,6 +14,7 @@
 #include <iostream>                     // std::cout
 #include <numeric>                      // std::accumulate
 
+
 using std::max_element;
 using std::min_element;
 using std::abs;
@@ -148,13 +149,13 @@ int MasterCode::preliminaries( const std::deque<Event>& data1,
     //--
 
     //-- Update Indicator Values
-    ///*
-    ATR( atrD_, data1D, NewSession_, max_bars_back_, 10 );
+    int ATRlength {20};
+    ATR( atr_, data1, true, max_bars_back_, ATRlength );
+    ATR( atrD_, data1D, NewSession_, max_bars_back_, ATRlength );
     // Require at least 100 days of ATR history
     if( atrD_.size() < 100 ){
         return(0);
-    }
-    //*/
+    }    
     //--
 
     return(1);
@@ -191,8 +192,8 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
 
 
     //double fract { std::pow(2,fractN_ ) * 0.1 };    // 2^fractN_ / 10
-    double fract_long { std::pow(2,fractN_long_) * 0.1 }; // 2^fractN_ / 10
-    double fract_short { std::pow(2,fractN_short_) * 0.1 }; // 2^fractN_ / 10
+    double fract_long { std::pow(2,fractN_long_) * 0.05 }; // 2^fractN_ / 20
+    double fract_short { std::pow(2,fractN_short_) * 0.05 }; // 2^fractN_ / 20
     fract_long = fract_long * ( 1 + epsilon_/20.0 ); // epsilon=1 means 5% variation
     fract_short = fract_short * ( 1 + epsilon_/20.0 ); // epsilon=1 means 5% variation
 
@@ -210,8 +211,10 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
             distance = ( *max_element( HighD_.begin()+1, HighD_.end() )
                          - *min_element( LowD_.begin()+1, LowD_.end() ) );
             break;
-        case 4:                // ATR(10 days)
-            distance = atrD_.front();
+        case 4:                // ATR(10 bars)
+            distance = atr_.front();
+            fract_long  = 5 * fract_long;
+            fract_short = 5 * fract_short;
             break;
     }
 

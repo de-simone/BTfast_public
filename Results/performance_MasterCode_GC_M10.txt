@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-07-17 13:05:12
+# TimeStamp   : 2020-07-21 08:10:42
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10
-# Date Range  : 2011-01-03 --> 2019-12-31
+# Date Range  : 2015-01-02 --> 2017-12-29
 #
 #<Strategies/MasterCode.xml>
 # <?xml version='1.0' encoding='UTF-8'?>
@@ -38,7 +38,7 @@
 # <Inputs>
 #     <Input>
 #         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
-#         <Value>1</Value>
+#         <Value>2</Value>
 #     </Input>
 #     <Input>
 #         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
@@ -50,7 +50,7 @@
 #     </Input>
 #     <OptRange>
 #         <Name>POI_switch</Name>         <!-- 1..7:1 -->
-#         <Start>5</Start>
+#         <Start>3</Start>
 #         <Stop>7</Stop>
 #         <Step>1</Step>
 #     </OptRange>
@@ -62,13 +62,13 @@
 #     </OptRange>
 #     <OptRange>
 #         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
-#         <Start>3</Start>
+#         <Start>0</Start>
 #         <Stop>5</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
-#         <Start>7</Start>
+#         <Start>10</Start>
 #         <Stop>10</Stop>
 #         <Step>1</Step>
 #     </OptRange>
@@ -80,7 +80,7 @@
 #     </OptRange>
 #     <OptRange>
 #         <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
-#         <Start>15</Start>
+#         <Start>40</Start>
 #         <Stop>50</Stop>
 #         <Step>1</Step>
 #     </OptRange>
@@ -101,21 +101,21 @@
 #         <Value>0</Value>
 #     </Input>
 #     <OptRange>
-#         <Name>Exit_switch</Name>        <!-- 1..2:1 -->
+#         <Name>Exit_switch</Name>        <!-- 1..5:1 -->
 #         <Start>1</Start>
 #         <Stop>2</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>fractN_long</Name>        <!-- 0..5:1 -->
-#         <Start>1</Start>
+#         <Start>0</Start>
 #         <Stop>3</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>fractN_short</Name>       <!-- 0..5:1 -->
-#         <Start>0</Start>
-#         <Stop>5</Stop>
+#         <Start>1</Start>
+#         <Stop>3</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <Input>
@@ -129,34 +129,34 @@
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
-     N. of Trades       :     587            0          587
-     Net Profit         :   59090.00         0.00     59090.00
-     Net Profit %       :       0.6%         0.0%         0.6%
-     CAGR               :       0.1%         0.0%         0.1%
-     Avg Trade          :     100.66         0.00       100.66
-     Avg Ticks          :      10.07         0.00        10.07
-     Profit Factor      :       1.23         0.00         1.23
-     Win Percent        :      46.7%         0.0%        46.7%
-     Avg DrawDown       :   -4711.62         0.00     -4711.62
-     Avg DrawDown %     :      -0.0%         0.0%        -0.0%
-     Max DrawDown       :  -18720.00         0.00    -18720.00
-     Max DrawDown %     :      -0.2%         0.0%        -0.2%
-     Net PL/Max DD      :       3.16         0.00         3.16
-     CAGR/Max DD %      :       0.53         0.00         0.53
-     Expectancy         :       0.13         0.00         0.13
-     Z-score            :       1.58         0.00         1.58
-     R^2                :     0.6438       0.0000       0.6438
+     N. of Trades       :     114            0          114
+     Net Profit         :  -57730.00         0.00    -57730.00
+     Net Profit %       :      -0.6%         0.0%        -0.6%
+     CAGR               :      -0.2%         0.0%        -0.2%
+     Avg Trade          :    -506.40         0.00      -506.40
+     Avg Ticks          :      -6.25         0.00        -6.25
+     Profit Factor      :       0.77         0.00         0.77
+     Win Percent        :      46.5%         0.0%        46.5%
+     Avg DrawDown       :  -52759.74         0.00    -52759.74
+     Avg DrawDown %     :      -0.5%         0.0%        -0.5%
+     Max DrawDown       :  -84890.00         0.00    -84890.00
+     Max DrawDown %     :      -0.8%         0.0%        -0.8%
+     Net PL/Max DD      :      -0.68         0.00        -0.68
+     CAGR/Max DD %      :      -0.23         0.00        -0.23
+     Expectancy         :      -0.12         0.00        -0.12
+     Z-score            :      -0.96         0.00        -0.96
+     R^2                :     0.0000       0.0000       0.0000
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :    1539.02         0.00      1539.02
-     Gross Profit       :  310730.00         0.00    310730.00
-     Gross Loss         : -251640.00         0.00   -251640.00
-     Avg Profit         :    1134.05         0.00      1134.05
-     Avg Loss           :    -803.96         0.00      -803.96
-     Max Profit         :   13150.00         0.00     13150.00
-     Max Loss           :   -7810.00         0.00     -7810.00
-     Avg Bars in Win    :     115.96         0.00       115.96
-     Avg Bars in Loss   :     117.52         0.00       117.52
-     Max Consec. Wins   :       6            0            6
-     Max Consec. Losses :       7            0            7
-     Minimum Capital    :   34680.00         0.00     34680.00
+     Std.Dev. of P/L    :    5625.10         0.00      5625.10
+     Gross Profit       :  193600.00         0.00    193600.00
+     Gross Loss         : -251330.00         0.00   -251330.00
+     Avg Profit         :    3652.83         0.00      3652.83
+     Avg Loss           :   -4120.16         0.00     -4120.16
+     Max Profit         :   22680.00         0.00     22680.00
+     Max Loss           :  -26250.00         0.00    -26250.00
+     Avg Bars in Win    :      50.00         0.00        50.00
+     Avg Bars in Loss   :      49.93         0.00        49.93
+     Max Consec. Wins   :       7            0            7
+     Max Consec. Losses :       9            0            9
+     Minimum Capital    :  133935.00         0.00    133935.00
    # ========================================================= #

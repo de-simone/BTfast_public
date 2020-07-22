@@ -38,9 +38,9 @@ Names of input variables must match those in 'mode_factory_sequential'
         <Value>0</Value>
     </Input>
     <OptRange>
-        <Name>POI_switch</Name>         <!-- 1..7:1 -->
+        <Name>POI_switch</Name>         <!-- 1..8:1 -->
         <Start>1</Start>
-        <Stop>7</Stop>
+        <Stop>8</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
@@ -62,15 +62,15 @@ Names of input variables must match those in 'mode_factory_sequential'
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>Filter1L_switch</Name>    <!-- 0..50:1 -->
+        <Name>Filter1L_switch</Name>    <!-- 0..56:1 -->
         <Start>0</Start>
-        <Stop>50</Stop>
+        <Stop>56</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>Filter1S_switch</Name>    <!-- 0..50:1 -->
+        <Name>Filter1S_switch</Name>    <!-- 0..56:1 -->
         <Start>0</Start>
-        <Stop>50</Stop>
+        <Stop>56</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
@@ -96,15 +96,15 @@ Names of input variables must match those in 'mode_factory_sequential'
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>fractN_long</Name>        <!-- 0..5:1 -->
+        <Name>fractN_long</Name>        <!-- 0..4:1 -->
         <Start>0</Start>
-        <Stop>5</Stop>
+        <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
-        <Name>fractN_short</Name>       <!-- 0..5:1 -->
+        <Name>fractN_short</Name>       <!-- 0..4:1 -->
         <Start>0</Start>
-        <Stop>50</Stop>
+        <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
     <Input>

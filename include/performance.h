@@ -79,14 +79,16 @@ class Performance {
         std::vector<Transaction> transactions() const { return(transactions_); }
         double initial_balance() const { return(initial_balance_); }
         int ntrades() const { return( (int) metrics_all_.at("ntrades") ); }
-        double netpl() const { return( metrics_all_.at("net_pl") ); }
-        double avgtrade() const { return( metrics_all_.at("avg_trade")); }
         double avgticks() const { return( metrics_all_.at("avg_ticks")); }
-        double profitfactor() const { return( metrics_all_.at("profit_factor") ); }
         double winperc() const { return( metrics_all_.at("win_perc") ); }
+        double profitfactor() const { return( metrics_all_.at("profit_factor") ); }
         double npmdd() const { return( metrics_all_.at("netpl_maxdd") ); }
         double expectancy() const { return( metrics_all_.at("expectancy") ); }
         double zscore() const { return( metrics_all_.at("zscore") ); }
+        double netpl() const { return( metrics_all_.at("net_pl") ); }
+        double avgtrade() const { return( metrics_all_.at("avg_trade")); }
+        double stdticks() const { return( metrics_all_.at("std_ticks") ); }
+
 
         // Setters
         //void set_initial_balance( double bal ){ initial_balance_ = bal; }

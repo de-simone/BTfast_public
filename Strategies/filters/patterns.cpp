@@ -22,7 +22,9 @@ bool Pattern ( int ptn_num,
             result = true;
             break;
 
-        // ---------------------   UNGER's PATTERNS   ---------------------- //
+        // ----------------------------------------------------------------- //
+        // -------------------   UNGER's BASIC PATTERNS   ------------------ //
+        // ----------------------------------------------------------------- //
         case 1:
             result =  abs(OpenD[1]-CloseD[1]) < 0.5 * (HighD[1]-LowD[1]);
             break;
@@ -118,10 +120,10 @@ bool Pattern ( int ptn_num,
             result = (CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3]
                         && OpenD[0]<CloseD[1]);
             break;
-        case 30:
-            result = (HighD[1]-CloseD[1]) < 0.20 * (HighD[1]-LowD[1]);
+        case 30:        // yesterday's Internal Bar Strength (close near the high)
+            result = (CloseD[1]-LowD[1]) > 0.80 * (HighD[1]-LowD[1]);
             break;
-        case 31:
+        case 31:        // yesterday's Internal Bar Strength (close near the low)
             result = (CloseD[1]-LowD[1]) < 0.20 * (HighD[1]-LowD[1]);
             break;
         case 32:
@@ -161,23 +163,24 @@ bool Pattern ( int ptn_num,
             break;
 
 
-
+        // ----------------------------------------------------------------- //
         // -----------------------   MY PATTERNS   ------------------------- //
-        case 43:        // 3 bars up
+        // ----------------------------------------------------------------- //
+        case 43:        // 3 days up
             result = ( CloseD[1]>OpenD[1]  && CloseD[2]>OpenD[2]
                         && CloseD[3]>OpenD[3] );
             break;
-        case 44:        // 3 bars down
+        case 44:        // 3 days down
             result = ( CloseD[1]<OpenD[1]  && CloseD[2]<OpenD[2]
                         && CloseD[3]<OpenD[3] );
             break;
 
-        case 45:        // 3 bars up, ascending
+        case 45:        // 3 days up, ascending
             result = ( CloseD[1]>OpenD[1]  && CloseD[2]>OpenD[2]
                         && CloseD[3]>OpenD[3]
                         && CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3] );
             break;
-        case 46:        // 3 bars down, descending
+        case 46:        // 3 days down, descending
             result = ( CloseD[1]<OpenD[1]  && CloseD[2]<OpenD[2]
                         && CloseD[3]<OpenD[3]
                         && CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3] );
@@ -208,7 +211,30 @@ bool Pattern ( int ptn_num,
                         && CloseD[1]>OpenD[3]  && CloseD[1]<CloseD[3]
                         && CloseD[2]>OpenD[3]  && CloseD[2]<CloseD[3] );
             break;
-
+        case 51:        // Retrace towards broken-out yesterday's high
+            result = ( OpenD[0]<HighD[1]
+                        && HighD[0]>HighD[1] && CloseD[0]<HighD[1] );
+            break;
+        case 52:        // Retrace towards broken-out yesterday's low
+            result = ( OpenD[0]>LowD[1]
+                        && LowD[0]<LowD[1] && CloseD[0]>LowD[1] );
+            break;
+        case 53:        // yesterday's close near 5-day low
+            result = ( ( CloseD[1]-*min_element(LowD.begin()+1, LowD.end()) )
+                       < 0.20 * ( *max_element(HighD.begin()+1, HighD.end())
+                                  - *min_element(LowD.begin()+1, LowD.end()) ) );
+            break;
+        case 54:        // yesterday's close near 5-day high
+            result = ( ( CloseD[1]-*min_element(LowD.begin()+1, LowD.end()) )
+                       > 0.80 * ( *max_element(HighD.begin()+1, HighD.end())
+                                  - *min_element(LowD.begin()+1, LowD.end()) ) );
+            break;
+        case 55:        // Volatility-Based Momentum (5) > 1.0
+            result = ( abs( CloseD[1]-CloseD[5] )/atrD[1] > 1.0 )
+            break;
+        case 56:        // Volatility-Based Momentum (5) > 2.0
+            result = ( abs( CloseD[1]-CloseD[5] )/atrD[1] > 2.0 )
+            break;
 
     }
 

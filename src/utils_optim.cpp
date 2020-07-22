@@ -27,16 +27,19 @@ void utils_optim::append_to_optim_results( std::vector<strategy_t> &optim,
                                             const parameters_t& parameters )
 {
     strategy_t row;
-    // Append performance metrics.
+    // Append performance metrics (those printed to file)
     row.push_back( std::make_pair("Ntrades", perform.ntrades()) );          // 0
-    //row.push_back( std::make_pair("NetPL", perform.netpl()) );
     row.push_back( std::make_pair("AvgTicks", perform.avgticks()) );        // 1
     row.push_back( std::make_pair("WinPerc", perform.winperc()) );          // 2
-    //row.push_back( std::make_pair("AvgTrade", perform.avgtrade()) );
     row.push_back( std::make_pair("PftFactor", perform.profitfactor()) );   // 3
     row.push_back( std::make_pair("NP/MDD", perform.npmdd()) );             // 4
     row.push_back( std::make_pair("Expectancy", perform.expectancy()) );    // 5
     row.push_back( std::make_pair("Z-score", perform.zscore()) );           // 6
+
+    // Append additional performance metrics
+    row.push_back( std::make_pair("NetPL", perform.netpl()) );
+    row.push_back( std::make_pair("AvgTrade", perform.avgtrade()) );
+    row.push_back( std::make_pair("StdTicks", perform.stdticks()) );
 
     // Append parameter combination
     for( single_param_t p : parameters ){

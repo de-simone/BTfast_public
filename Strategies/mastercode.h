@@ -90,7 +90,8 @@ class MasterCode : public Strategy {
 
 
     // ---     Indicators     --- //
-    std::deque<double> atrD_ {};
+    std::deque<double> atr_ {};     // ATR on data1 
+    std::deque<double> atrD_ {};    // ATR on data1D
     //std::deque<double> roc_ {};
     // -------------------------- //
 

@@ -428,33 +428,59 @@ int utils_fileio::write_strategies_to_file( std::string fname,
         char header_elem[30];
         char row[1000];
         char row_elem[30];
-        for( auto it = optim.begin(); it!=optim.end(); it++ ){
+
+        // Loop over strategies
+        for( const auto& it = optim.begin(); it!=optim.end(); it++ ){
             row[0] = '\0';
             header[0] = '\0';
 
-            for( auto optrun = it->begin(); optrun != it->end(); optrun++ ){
+            // Loop over strategy attributes (metrics and parameters)
+            for( const auto& attr = it->begin(); attr != it->end(); attr++ ){
+
                 row_elem[0] = '\0';
                 header_elem[0] = '\0';
-                sprintf(header_elem, "%9s,", optrun->first.c_str());
+                sprintf(header_elem, "%9s,", attr->first.c_str());
                 strcat(header, header_elem);    // append header_elem to header
-                if( optrun == it->begin() ){           // Ntrades is int
-                    sprintf(row_elem, "%9d,",(int) optrun->second);
+
+                std::string attr_name { attr->first };  // attribute name
+                double attr_value { attr->second };     // attribute value
+                // Number of trades is int
+                if( attr_name == "Ntrades" ){
+
+                    sprintf(row_elem, "%9d,",(int) attr_value );
                 }
-                else if( optrun <= it->begin()+6 ){    // other 6 metrics are double
-                    sprintf(row_elem, "%9.2f, ", optrun->second);
+                // other (double) metrics to be printed
+                else if( attr_name == "AvgTicks" || attr_name == "WinPerc"
+                    || attr_name == "PftFactor" || attr_name == "NP/MDD"
+                    || attr_name == "Expectancy"  || attr_name == "Z-score" ){
+                    sprintf(row_elem, "%9.2f, ", attr_value );
+                }
+                // strategy parameters (int), ignoring additional metrics
+                else if( attr_name != "NetPL" && attr_name != "AvgTrade"  ){
+                    sprintf(row_elem, "%11d,",(int) attr_value );
+                }
+                /*
+                if( attr == it->begin() ){           // Ntrades is int
+                    sprintf(row_elem, "%9d,",(int) attr->second);
+                }
+                else if( attr <= it->begin()+6 ){    // other 6 metrics are double
+                    sprintf(row_elem, "%9.2f, ", attr->second);
                 }
                 else {                                // strategy params are int
-                    sprintf(row_elem, "%11d,",(int) optrun->second);
+                    sprintf(row_elem, "%11d,",(int) attr->second);
                 }
+                */
                 strcat(row, row_elem);          // append row_elem to row
             }
+
+            // Print header
             if( it == optim.begin() ){
                 fprintf(outfile, "#%s\n", header);  // print on file
                 if( verbose ){
                     printf("#%s\n", header);        // print on stdout
                 }
-
             }
+            // Print strategy attributes
             fprintf(outfile, "%s\n", row);  // print on file
             if( verbose ){
                 printf("%s\n", row);        // print on stdout

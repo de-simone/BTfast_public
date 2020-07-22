@@ -29,13 +29,20 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-20
+                                                        Last update: 2020-07-21
                                           -------------------------------------
 
  * TO DO:
 
-    - in mastercode: atrD_ should be atr_. corresponding fract should be larger
-      than those for daily ranges 
+    - add stdticks to strategy performance metrics.
+        Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
+    - utils_optim::append_to_optim_results: Append additional performance metrics.
+      check if utils_fileio::write_strategies_to_file prints correctly only
+      a subset of them.
+    - Performance: check new net_pl
+    - Performance::zscore using utils_math::mean() and stdev(), instead of net_pl2
+    - Performance: drawdown length or avg time delay between equity peaks.
+
     - signal weights:
         assign weight in [0,1] to breakout signal;
         distribution of ticks over weights (e.g. histogram)
