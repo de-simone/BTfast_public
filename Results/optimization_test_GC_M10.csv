@@ -1,0 +1,42 @@
+# TimeStamp   : 2020-07-23 12:34:16
+# Strategy    : test
+# Symbol      : GC
+# TimeFrame   : M10
+# Date Range  : 2010-01-04 --> 2019-12-31
+#
+#<Strategies/test.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# -->
+# <Inputs>
+#     <Input>
+#       <Name>MyStop</Name>
+#       <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>1</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>fractN</Name>
+#         <Start>2</Start>
+#         <Stop>10</Stop>
+#         <Step>2</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>fract2</Name>
+#         <Value>2</Value>
+#     </Input>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/test.xml>
+#
+#  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,   MyStop,BOMR_switch,   fractN,   fract2,  epsilon,
+      715,     8.82,    49.79,     1.20,     1.90,     0.10,     1.63,          0,          1,          8,          2,          0,
+      531,     9.50,    51.79,     1.23,     2.31,     0.11,     1.60,          0,          1,         10,          2,          0,
+     1342,     5.25,    47.84,     1.12,     1.51,     0.06,     1.40,          0,          1,          4,          2,          0,
+      979,     5.38,    48.52,     1.14,     3.10,     0.07,     1.37,          0,          1,          6,          2,          0,
+     1723,     2.84,    48.46,     1.04,     0.49,     0.02,     0.60,          0,          1,          2,          2,          0,

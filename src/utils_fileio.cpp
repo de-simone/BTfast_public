@@ -2,7 +2,7 @@
 
 #include "xmlParser.h"  // XML parsing library
 
-#include <algorithm>    // std::remove
+#include <algorithm>    // std::remove, std::find
 #include <cstring>      // strcmp
 #include <fstream>      // std::fstream, open, close
 #include <iostream>     // std::cout
@@ -429,6 +429,13 @@ int utils_fileio::write_strategies_to_file( std::string fname,
         char row[1000];
         char row_elem[30];
 
+        // Vector of names of performance metrics to be printed/written
+        std::vector<std::string> selected_metrics { "Ntrades",  "AvgTicks",
+            "WinPerc", "PftFactor", "NP/MDD", "Expectancy", "Z-score" };
+        // Vector of names of performance metrics excluded from printing/writing
+        std::vector<std::string> excluded_metrics { "NetPL", "AvgTrade",
+                                                    "StdTicks" };
+
         // Loop over strategies
         for( auto it = optim.begin(); it!=optim.end(); it++ ){
             row[0] = '\0';
@@ -437,39 +444,36 @@ int utils_fileio::write_strategies_to_file( std::string fname,
             // Loop over strategy attributes (metrics and parameters)
             for( auto attr = it->begin(); attr != it->end(); attr++ ){
 
-                row_elem[0] = '\0';
-                header_elem[0] = '\0';
-                sprintf(header_elem, "%9s,", attr->first.c_str());
-                strcat(header, header_elem);    // append header_elem to header
-
                 std::string attr_name { attr->first };  // attribute name
                 double attr_value { attr->second };     // attribute value
-                // Number of trades is int
-                if( attr_name == "Ntrades" ){
 
-                    sprintf(row_elem, "%9d,",(int) attr_value );
+                // Ignore attribute if it belongs to excluded metrics
+                if(std::find(excluded_metrics.begin(), excluded_metrics.end(),
+                              attr_name ) != excluded_metrics.end() ){
+                    continue;
                 }
-                // other (double) metrics to be printed
-                else if( attr_name == "AvgTicks" || attr_name == "WinPerc"
-                    || attr_name == "PftFactor" || attr_name == "NP/MDD"
-                    || attr_name == "Expectancy"  || attr_name == "Z-score" ){
-                    sprintf(row_elem, "%9.2f, ", attr_value );
+
+                // Append attribute name to header
+                header_elem[0] = '\0';
+                sprintf(header_elem, "%9s,", attr_name.c_str());
+                strcat(header, header_elem);
+
+                row_elem[0] = '\0';
+
+                // Check if attribute name belongs to selected metrics
+                if(std::find(selected_metrics.begin(), selected_metrics.end(),
+                              attr_name ) != selected_metrics.end() ){
+                    if( attr_name == "Ntrades" ){ // Number of trades is int
+                        sprintf(row_elem, "%9d,",(int) attr_value );
+                    }
+                    else{           // other (double) metrics to be printed
+                        sprintf(row_elem, "%9.2f,", attr_value );
+                    }
                 }
-                // strategy parameters (int), ignoring additional metrics
-                else if( attr_name != "NetPL" && attr_name != "AvgTrade"  ){
-                    sprintf(row_elem, "%11d,",(int) attr_value );
+                // strategy parameters (int)
+                else{
+                    sprintf(row_elem, "%11d,", (int) attr_value );
                 }
-                /*
-                if( attr == it->begin() ){           // Ntrades is int
-                    sprintf(row_elem, "%9d,",(int) attr->second);
-                }
-                else if( attr <= it->begin()+6 ){    // other 6 metrics are double
-                    sprintf(row_elem, "%9.2f, ", attr->second);
-                }
-                else {                                // strategy params are int
-                    sprintf(row_elem, "%11d,",(int) attr->second);
-                }
-                */
                 strcat(row, row_elem);          // append row_elem to row
             }
 

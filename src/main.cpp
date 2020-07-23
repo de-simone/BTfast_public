@@ -34,15 +34,8 @@
 
  * TO DO:
 
-    - add std_ticks to strategy performance metrics.
-        Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
-    - utils_optim::append_to_optim_results: Append additional performance metrics.
-      check if utils_fileio::write_strategies_to_file prints correctly only
-      a subset of them.
-    - Performance: check new net_pl
-    - Performance::zscore using utils_math::mean() and stdev(), instead of net_pl2
-    - Performance: avg drawdown duration: avg time delay between equity peaks.
-
+    - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
+    
     - directionality in mkt regime: ADX(20) > 20
     - DPS: allow ps_factor=0,1,2.
         dynamic DOW with DPS

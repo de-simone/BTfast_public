@@ -119,7 +119,6 @@ void Validation::run_validation()
     num_validated_ = (int) passed_selection.size();
     //---
 
-    /*<<<
     //--- Validation - OOS metrics test
     // passed_selection -> passed_validation_1
     OOS_metrics_test( passed_selection, passed_validation_1 );
@@ -143,11 +142,10 @@ void Validation::run_validation()
     stability_test( passed_validation_3, passed_validation_4 );
     num_validated_ = (int) passed_validation_4.size();
     //---
-    */
+    
     //--- Validation - Noise test
     // passed_validation_4 -> passed_validation_5
-    //<<<noise_test( passed_validation_4, passed_validation_5 );
-    noise_test( passed_selection, passed_validation_5 );
+    noise_test( passed_validation_4, passed_validation_5 );
     num_validated_ = (int) passed_validation_5.size();
     //---
 

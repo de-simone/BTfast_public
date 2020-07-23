@@ -54,6 +54,7 @@ class Performance {
                         std::unordered_map<std::string,double> &metrics );
 
         void drawdown( const std::vector<double> &profits,
+                       const std::vector<Date>& dates_vec,
                        std::unordered_map<std::string,double> &metrics );
         void avgticks( const std::vector<double> &profits,
                        const std::vector<int> &lots, double tick_value,

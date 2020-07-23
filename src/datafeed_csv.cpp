@@ -1,6 +1,6 @@
 #include "datafeed_csv.h"
 
-#include <filesystem>   // std::filsystem
+#include <filesystem>   // std::filesystem
 #include <iostream>     // std::cout
 #include <unistd.h>     // access
 

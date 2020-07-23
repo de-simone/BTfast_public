@@ -69,7 +69,6 @@ void Performance::compute_metrics(
     metrics["ntrades"] = 0;
     metrics["nwins"] = 0;
     metrics["net_pl"] = 0;
-    metrics["net_pl2"] = 0; //<<<
     metrics["net_pl_pct"] = 0;
     metrics["avg_trade"] = 0;
     metrics["std_trade"] = 0;
@@ -93,7 +92,7 @@ void Performance::compute_metrics(
     metrics["max_dd_pct"] = 0;
     metrics["avg_dd"] = 0;
     metrics["avg_dd_pct"] = 0;
-    metrics["avg_dd_duration"] = 0; //<<< (avg num of days between equity peaks)
+    metrics["avg_dd_duration"] = 0; // avg num of days between equity peaks
     metrics["netpl_maxdd"] = 0;
     metrics["tsindex"] = 0;
     metrics["max_consec_win"] = 0;
@@ -107,7 +106,7 @@ void Performance::compute_metrics(
 
         std::vector<double> profits {};     // vector of profit/loss
         std::vector<int> lots {};           // vector of contract sizes
-        //<<< std::vector<Date> dates {};   // vector of trade exit dates
+        std::vector<Date> dates {};   // vector of trade exit dates
         double margin { transactions.front().symbol().margin() };
         double tick_value { transactions.front().symbol().tick_value() };
 
@@ -120,7 +119,7 @@ void Performance::compute_metrics(
                 // fill vector of contract sizes from transactions
                 lots.push_back( tr.quantity() );
                 // fill vector of trade exit dates
-                //<<< dates.push_back( tr.exit_time().date() );
+                dates.push_back( tr.exit_time().date() );
             }
             else{
                 continue; // discard transaction with 0 contracts
@@ -136,11 +135,21 @@ void Performance::compute_metrics(
         }
 
         // Number of trades
-        metrics["ntrades"] = transactions.size();
+        metrics["ntrades"] = profits.size();
+        if( metrics["ntrades"] <= 0 ){
+            return;
+        }
+
         // Total net profit/loss
-        //<<<metrics["net_pl"] = std::accumulate(profits.begin(),profits.end(),0.0);
-        // DrawDowns, NetPL, Nwins, GrossProfit, GrossLoss, MaxProfit, MaxLoss
-        drawdown( profits, /*dates,*/ metrics );
+        metrics["net_pl"] = std::accumulate(profits.begin(),profits.end(),0.0);
+        // NetPL % over initial balance
+        metrics["net_pl_pct"] = ( metrics["net_pl"] / initial_balance_ ) * 100.0;
+        // Avg Trade (mean of profits)
+        metrics["avg_trade"]  = utils_math::mean( profits );
+        // Standard Deviation of Profits
+        metrics["std_trade"] = utils_math::stdev( profits );
+        // DrawDowns, Nwins, GrossProfit, GrossLoss, MaxProfit, MaxLoss
+        drawdown( profits, dates, metrics );
         // Average number of bars in winning/losing trade, Average Profit, Loss
         if( metrics["nwins"] > 0 ){
             metrics["bars_in_win"]  /= metrics["nwins"];
@@ -150,19 +159,11 @@ void Performance::compute_metrics(
             metrics["bars_in_loss"] /= (metrics["ntrades"]-metrics["nwins"]);
             metrics["avg_loss"] = metrics["gross_loss"]/(metrics["ntrades"]-metrics["nwins"]);
         }
-        // NetPL % over initial balance
-        metrics["net_pl_pct"] = ( metrics["net_pl"] / initial_balance_ ) * 100.0;
-
-        if( metrics["ntrades"] > 0 ){
-            // Average Trade
-            metrics["avg_trade"]  = metrics["net_pl"] / metrics["ntrades"];
-            //metrics["avg_trade"]  = utils_math::mean( profits );
-            // Average Ticks per trade
-            avgticks( profits, lots, tick_value, metrics );
-            // Win Percent (Percent Profitable)
-            metrics["win_perc"]   = metrics["nwins"]/ metrics["ntrades"] * 100.0;
-        }
-        // Z-score, std_trade
+        // Average Ticks per trade
+        avgticks( profits, lots, tick_value, metrics );
+        // Win Percent (Percent Profitable)
+        metrics["win_perc"]   = metrics["nwins"]/ metrics["ntrades"] * 100.0;
+        // Z-score
         zscore( profits, metrics );
         // Profit Factor
         if( metrics["gross_loss"] != 0.0 ){
@@ -198,34 +199,30 @@ void Performance::compute_metrics(
 
 
 //-------------------------------------------------------------------------- //
-/*! NetPL, Nwins, GrossProfit, GrossLoss, MaxProfit, MaxLoss,
-    Max and average drawdown (cash and %)
+/*! Max and average drawdown (cash and %), avg drawdown duration,
+    Nwins, GrossProfit, GrossLoss, MaxProfit, MaxLoss,
+
     Store result into metrics.
 */
 void Performance::drawdown( const std::vector<double> &profits,
-                            /* const std::vector<Date>& dates_vec,*/
+                            const std::vector<Date>& dates_vec,
                             std::unordered_map<std::string,double> &metrics )
 {
-    //double cumul_pl {0.0};        // cumulative P/L
+    double cumul_pl {0.0};          // cumulative P/L
     double max_cumul_pl {0.0};      // max cumulative P/L
     double drawdown {0.0};          // drawdown after each trade
     double drawdown_pct {0.0};      // drawdown % after each trade
     double drawdown_sum {0.0};      // sum of drawdowns
     double drawdown_sum_pct {0.0};  // sum of drawdowns %
-    //<<<
-    /*int days_delay {0};            // time delay between equity highs (days)
-    std::vector<double> days_delay_vec {};
-                                    // vector storing days_delays
-    Date curr_date {};           // Date of trade in loop
-    Date peak_date {};           // Date of trade at equity high
-    */
+    int days_delay {0};             // time delay between equity highs (days)
+    std::vector<double> days_delay_vec {}; // vector storing days_delays
+    Date curr_date {};              // Date of trade in loop
+    Date peak_date {};              // Date of trade at equity high
 
+    int counter {0};                // loop counter
     for( double pl : profits ) {
 
-        metrics["net_pl"] += pl;//<<<
-        // cumul_pl += pl; //<<<
-        metrics["net_pl2"] += pow(pl,2); // sum of squared P/L //<<<
-
+        cumul_pl += pl;
         if( pl > 0 ){
             metrics["nwins"] += 1;
             metrics["gross_profit"] += pl;
@@ -242,24 +239,22 @@ void Performance::drawdown( const std::vector<double> &profits,
         }
 
         //- Compute DrawDown
-        if( metrics["net_pl"] /*cumul_pl*/ > max_cumul_pl ){ //<<< // new equity high
-            max_cumul_pl =  metrics["net_pl"] /*cumul_pl*/;
-            //<<<
-            //peak_date = dates_vec.at(&pl - &profits[0]);
-            //if( days_delay != 0 ){
-                //days_delay_vec.push_back((double) days_delay );
-            //}
-            //days_delay = 0;
-            //<<<
+        if( cumul_pl > max_cumul_pl ){          // new equity high
+
+            max_cumul_pl = cumul_pl;
+            peak_date = dates_vec.at(counter);
+            if( days_delay != 0 ){
+                days_delay_vec.push_back((double) days_delay );
+            }
+            days_delay = 0;
         }
-        /*<<<
         else{                                   // no new equity high
-            curr_date = dates_vec.at(&pl - &profits[0]);
+            curr_date = dates_vec.at(counter);
             days_delay += curr_date.DaysDiff(peak_date);
         }
-        */
-        drawdown = metrics["net_pl"]  /*cumul_pl*/ - max_cumul_pl; //<<<
-        drawdown_pct = ( (initial_balance_ + metrics["net_pl"] /*cumul_pl*/)
+
+        drawdown = cumul_pl - max_cumul_pl;
+        drawdown_pct = ( (initial_balance_ + cumul_pl)
                          / (initial_balance_+ max_cumul_pl) - 1)*100;
         drawdown_sum += drawdown;
         drawdown_sum_pct += drawdown_pct;
@@ -271,14 +266,14 @@ void Performance::drawdown( const std::vector<double> &profits,
             metrics["max_dd_pct"] = drawdown_pct;
         }
         //-
+        counter++;
     }
 
-    if( metrics["ntrades"] > 0 ){
-        // Avg DrawDown
-        metrics["avg_dd"] = drawdown_sum / metrics["ntrades"] ;
-        metrics["avg_dd_pct"] = drawdown_sum_pct / metrics["ntrades"] ;
-    }
-    //<<< metrics["avg_dd_duration"] = utils_math::mean( days_delay_vec );
+    // Avg DrawDown
+    metrics["avg_dd"] = drawdown_sum / metrics["ntrades"] ;
+    metrics["avg_dd_pct"] = drawdown_sum_pct / metrics["ntrades"] ;
+    // Avg DrawDown Duration (in days)
+    metrics["avg_dd_duration"] = utils_math::mean( days_delay_vec );
 }
 
 
@@ -299,7 +294,7 @@ void Performance::avgticks( const std::vector<double> &profits,
     std::vector<double> inv_lots( lots.begin(), lots.end() );
     std::transform( inv_lots.begin(), inv_lots.end(), inv_lots.begin(),
                 std::bind(std::divides<double>(), 1.0, std::placeholders::_1) );
-    /*
+
     std::vector<double> ticks_vec {};
     ticks_vec.reserve( profits.size() );
     // Fill ticks_vec with PL_i/Nlots_i
@@ -310,17 +305,14 @@ void Performance::avgticks( const std::vector<double> &profits,
         std::bind(std::divides<double>(), std::placeholders::_1, tick_value));
     metrics["avg_ticks"] = utils_math::mean( ticks_vec );
     metrics["std_ticks"] = utils_math::stdev( ticks_vec );
-    */
 
-    // Sum of PL_i / Nlots_i
+    /* // Sum of PL_i / Nlots_i
     double weighted_sum { std::inner_product( profits.begin(), profits.end(),
                                               inv_lots.begin(), 0.0 ) };
-
     if( metrics["ntrades"]*tick_value > 0 ){
         metrics["avg_ticks"] = weighted_sum / (metrics["ntrades"]*tick_value);
     }
-
-
+    */
 }
 
 
@@ -375,18 +367,6 @@ void Performance::max_consec_win_loss( const std::vector<double> &profits,
 void Performance::zscore( const std::vector<double> &profits,
                           std::unordered_map<std::string,double> &metrics )
 {
-    // Variance of Profits
-    double var_trade {0.0};
-    if( metrics["ntrades"] > 1 ){
-        var_trade = ( metrics["net_pl2"]/metrics["ntrades"]
-                        - pow(metrics["avg_trade"], 2) )
-                    * ( metrics["ntrades"] / (metrics["ntrades"] - 1) );
-    }
-    // Standard Deviation of Profits
-    // metrics["std_trade"] = utils_math::stdev( profits ); //<<<
-    if( var_trade > 0.0 ){
-        metrics["std_trade"] = sqrt(var_trade);
-    }
     if( metrics["std_trade"] > 0.0 && metrics["ntrades"] >= 30 ){
         metrics["zscore"] = sqrt(metrics["ntrades"])
                             * metrics["avg_trade"] / metrics["std_trade"];
@@ -505,11 +485,10 @@ void Performance::print_performance_report()
                                     metrics_all_["max_dd_pct"],
                                     metrics_long_["max_dd_pct"],
                                     metrics_short_["max_dd_pct"] );
-    /*printf("%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Avg DD Duration",
+    printf("%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Avg DD Duration",
                                     metrics_all_["avg_dd_duration"],
                                     metrics_long_["avg_dd_duration"],
                                     metrics_short_["avg_dd_duration"] );
-    *///<<<
     printf("%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Net PL/Max DD",
                                     metrics_all_["netpl_maxdd"],
                                     metrics_long_["netpl_maxdd"],
@@ -664,11 +643,10 @@ void Performance::write_performance_to_file( std::string fname,
                                         metrics_all_["max_dd_pct"],
                                         metrics_long_["max_dd_pct"],
                                         metrics_short_["max_dd_pct"] );
-        /*fprintf(outfile, "%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Avg DD Duration",
+        fprintf(outfile, "%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Avg DD Duration",
                                         metrics_all_["avg_dd_duration"],
                                         metrics_long_["avg_dd_duration"],
                                         metrics_short_["avg_dd_duration"] );
-        *///<<<
         fprintf(outfile, "%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Net PL/Max DD",
                                         metrics_all_["netpl_maxdd"],
                                         metrics_long_["netpl_maxdd"],

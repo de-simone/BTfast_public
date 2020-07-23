@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-07-09 12:28:49
+# TimeStamp   : 2020-07-23 13:11:31
 # Strategy    : test
 # Symbol      : GC
 # TimeFrame   : M10
-# Date Range  : 2015-01-02 --> 2017-12-29
+# Date Range  : 2010-01-04 --> 2019-12-31
 #
 #<Strategies/test.xml>
 # <?xml version='1.0' encoding='UTF-8'?>
@@ -11,13 +11,17 @@
 # <Inputs>
 #     <Input>
 #       <Name>MyStop</Name>
-#       <Value>700</Value>
+#       <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>1</Value>
 #     </Input>
 #     <OptRange>
 #         <Name>fractN</Name>
-#         <Start>2</Start>
-#         <Stop>11</Stop>
-#         <Step>1</Step>
+#         <Start>8</Start>
+#         <Stop>10</Stop>
+#         <Step>2</Step>
 #     </OptRange>
 #     <Input>
 #         <Name>fract2</Name>
@@ -34,34 +38,35 @@
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
-     N. of Trades       :       0            0            0
-     Net Profit         :       0.00         0.00         0.00
-     Net Profit %       :       0.0%         0.0%         0.0%
-     CAGR               :       0.0%         0.0%         0.0%
-     Avg Trade          :       0.00         0.00         0.00
-     Avg Ticks          :       0.00         0.00         0.00
-     Profit Factor      :       0.00         0.00         0.00
-     Win Percent        :       0.0%         0.0%         0.0%
-     Avg DrawDown       :       0.00         0.00         0.00
-     Avg DrawDown %     :       0.0%         0.0%         0.0%
-     Max DrawDown       :       0.00         0.00         0.00
-     Max DrawDown %     :       0.0%         0.0%         0.0%
-     Net PL/Max DD      :       0.00         0.00         0.00
-     CAGR/Max DD %      :       0.00         0.00         0.00
-     Expectancy         :       0.00         0.00         0.00
-     Z-score            :       0.00         0.00         0.00
-     R^2                :     0.0000       0.0000       0.0000
+     N. of Trades       :     715          351          364
+     Net Profit         :  334280.00    137320.00    196960.00
+     Net Profit %       :       3.3%         1.4%         2.0%
+     CAGR               :       0.5%         0.2%         0.3%
+     Avg Trade          :     467.52       391.23       541.10
+     Avg Ticks          :       8.82         6.53        11.02
+     Profit Factor      :       1.20         1.20         1.20
+     Win Percent        :      49.8%        50.4%        49.2%
+     Avg DrawDown       :  -45296.11    -19492.19    -43981.43
+     Avg DrawDown %     :      -0.4%        -0.2%        -0.4%
+     Max DrawDown       : -175760.00    -70450.00   -142330.00
+     Max DrawDown %     :      -1.7%        -0.7%        -1.4%
+     Avg DD Duration    :     490.90       668.04      2308.00
+     Net PL/Max DD      :       1.90         1.95         1.38
+     CAGR/Max DD %      :       0.28         0.28         0.20
+     Expectancy         :       0.10         0.10         0.10
+     Z-score            :       1.63         1.16         1.18
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     Std.Dev. of P/L    :       0.00         0.00         0.00
-     Gross Profit       :       0.00         0.00         0.00
-     Gross Loss         :       0.00         0.00         0.00
-     Avg Profit         :       0.00         0.00         0.00
-     Avg Loss           :       0.00         0.00         0.00
-     Max Profit         :       0.00         0.00         0.00
-     Max Loss           :       0.00         0.00         0.00
-     Avg Bars in Win    :       0.00         0.00         0.00
-     Avg Bars in Loss   :       0.00         0.00         0.00
-     Max Consec. Wins   :       0            0            0
-     Max Consec. Losses :       0            0            0
-     Minimum Capital    :       0.00         0.00         0.00
+     R^2                :     0.7088       0.6635       0.6597
+     Std.Dev. of P/L    :    7659.83      6299.24      8782.71
+     Gross Profit       : 2002970.00    840870.00   1162100.00
+     Gross Loss         : -1668690.00   -703550.00   -965140.00
+     Avg Profit         :    5626.32      4750.68      6492.18
+     Avg Loss           :   -4648.16     -4043.39     -5216.97
+     Max Profit         :   48180.00     23300.00     48180.00
+     Max Loss           :  -41040.00    -27020.00    -41040.00
+     Avg Bars in Win    :      61.60        64.95        58.28
+     Avg Bars in Loss   :      55.24        56.87        53.70
+     Max Consec. Wins   :       6            5            6
+     Max Consec. Losses :       8            5            8
+     Minimum Capital    :  270240.00    112275.00    220095.00
    # ========================================================= #

@@ -31,10 +31,12 @@
         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
         <Value>1</Value>
     </Input>
-    <Input>
+    <OptRange>
         <Name>fractN</Name>
-        <Value>6</Value>
-    </Input>
+        <Start>8</Start>
+        <Stop>10</Stop>
+        <Step>2</Step>
+    </OptRange>
     <Input>
         <Name>fract2</Name>
         <Value>2</Value>
