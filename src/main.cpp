@@ -34,8 +34,11 @@
 
  * TO DO:
 
+    - Performance: avg drawdown duration: avg time delay between equity peaks.
+        check results 
     - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
-    
+
+
     - directionality in mkt regime: ADX(20) > 20
     - DPS: allow ps_factor=0,1,2.
         dynamic DOW with DPS

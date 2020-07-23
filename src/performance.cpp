@@ -250,7 +250,7 @@ void Performance::drawdown( const std::vector<double> &profits,
         }
         else{                                   // no new equity high
             curr_date = dates_vec.at(counter);
-            days_delay += curr_date.DaysDiff(peak_date);
+            days_delay = curr_date.DaysDiff(peak_date);
         }
 
         drawdown = cumul_pl - max_cumul_pl;

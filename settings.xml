@@ -34,7 +34,7 @@ General Settings for BTfast
              NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   test
+        <Value>   MasterCode
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
@@ -118,7 +118,7 @@ General Settings for BTfast
         <!-- Write trade history to file (profits.csv) and show equity line (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    WRITE_TRADES_TO_FILE  </Name>
-        <Value>   0
+        <Value>   1
         </Value></Input>
     <!-- ================================================================== -->
 
