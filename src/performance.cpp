@@ -93,6 +93,7 @@ void Performance::compute_metrics(
     metrics["max_dd_pct"] = 0;
     metrics["avg_dd"] = 0;
     metrics["avg_dd_pct"] = 0;
+    metrics["avg_dd_duration"] = 0; //<<< (avg num of days between equity peaks)
     metrics["netpl_maxdd"] = 0;
     metrics["tsindex"] = 0;
     metrics["max_consec_win"] = 0;
@@ -211,13 +212,13 @@ void Performance::drawdown( const std::vector<double> &profits,
     double drawdown_pct {0.0};      // drawdown % after each trade
     double drawdown_sum {0.0};      // sum of drawdowns
     double drawdown_sum_pct {0.0};  // sum of drawdowns %
-    //int days_delay {0};             // time delay in days between equity highs
-    //std::vector<double> days_delay_vec {};
+    //<<<
+    /*int days_delay {0};            // time delay between equity highs (days)
+    std::vector<double> days_delay_vec {};
                                     // vector storing days_delays
-    //int curr_pos {0};             // position of trade in loop
-    //int ref_pos {0};             // reference position of trade at equity high
-    // Date curr_date {};
-    // Date ref_date {};
+    Date curr_date {};           // Date of trade in loop
+    Date peak_date {};           // Date of trade at equity high
+    */
 
     for( double pl : profits ) {
 
@@ -241,18 +242,20 @@ void Performance::drawdown( const std::vector<double> &profits,
         }
 
         //- Compute DrawDown
-        if( metrics["net_pl"] /*cumul_pl*/ > max_cumul_pl ){ //<<<
-            max_cumul_pl =  metrics["net_pl"]; // new equity high
-            //ref_pos = &pl - &profits[0];
-            //ref_date = dates_vec[ref_pos];
-            //days_delay_vec.push_back((double) days_delay );
+        if( metrics["net_pl"] /*cumul_pl*/ > max_cumul_pl ){ //<<< // new equity high
+            max_cumul_pl =  metrics["net_pl"] /*cumul_pl*/;
+            //<<<
+            //peak_date = dates_vec.at(&pl - &profits[0]);
+            //if( days_delay != 0 ){
+                //days_delay_vec.push_back((double) days_delay );
+            //}
             //days_delay = 0;
+            //<<<
         }
-        /*
-        else{
-            pos = &pl - &profits[0];
-            curr_date = dates_vec[pos];
-            days_delay += curr_date.DaysDiff(ref_date);
+        /*<<<
+        else{                                   // no new equity high
+            curr_date = dates_vec.at(&pl - &profits[0]);
+            days_delay += curr_date.DaysDiff(peak_date);
         }
         */
         drawdown = metrics["net_pl"]  /*cumul_pl*/ - max_cumul_pl; //<<<
@@ -275,8 +278,7 @@ void Performance::drawdown( const std::vector<double> &profits,
         metrics["avg_dd"] = drawdown_sum / metrics["ntrades"] ;
         metrics["avg_dd_pct"] = drawdown_sum_pct / metrics["ntrades"] ;
     }
-
-    // metrics["avg_days_delay"] = utils_math::mean( days_delay_vec );
+    //<<< metrics["avg_dd_duration"] = utils_math::mean( days_delay_vec );
 }
 
 
@@ -503,6 +505,11 @@ void Performance::print_performance_report()
                                     metrics_all_["max_dd_pct"],
                                     metrics_long_["max_dd_pct"],
                                     metrics_short_["max_dd_pct"] );
+    /*printf("%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Avg DD Duration",
+                                    metrics_all_["avg_dd_duration"],
+                                    metrics_long_["avg_dd_duration"],
+                                    metrics_short_["avg_dd_duration"] );
+    *///<<<
     printf("%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Net PL/Max DD",
                                     metrics_all_["netpl_maxdd"],
                                     metrics_long_["netpl_maxdd"],
@@ -519,11 +526,11 @@ void Performance::print_performance_report()
                                     metrics_all_["zscore"],
                                     metrics_long_["zscore"],
                                     metrics_short_["zscore"] );
+    printf("   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #\n");
     printf("%4s %-18s : %10.4f %12.4f %12.4f\n","", "R^2",
                                     metrics_all_["rsquared"],
                                     metrics_long_["rsquared"],
                                     metrics_short_["rsquared"]);
-    printf("   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #\n");
     printf("%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Std.Dev. of P/L",
                                     metrics_all_["std_trade"],
                                     metrics_long_["std_trade"],
@@ -657,6 +664,11 @@ void Performance::write_performance_to_file( std::string fname,
                                         metrics_all_["max_dd_pct"],
                                         metrics_long_["max_dd_pct"],
                                         metrics_short_["max_dd_pct"] );
+        /*fprintf(outfile, "%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Avg DD Duration",
+                                        metrics_all_["avg_dd_duration"],
+                                        metrics_long_["avg_dd_duration"],
+                                        metrics_short_["avg_dd_duration"] );
+        *///<<<
         fprintf(outfile, "%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Net PL/Max DD",
                                         metrics_all_["netpl_maxdd"],
                                         metrics_long_["netpl_maxdd"],
@@ -675,11 +687,11 @@ void Performance::write_performance_to_file( std::string fname,
                                         metrics_all_["zscore"],
                                         metrics_long_["zscore"],
                                         metrics_short_["zscore"] );
+        fprintf(outfile, "   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #\n");
         fprintf(outfile, "%4s %-18s : %10.4f %12.4f %12.4f\n","", "R^2",
                                         metrics_all_["rsquared"],
                                         metrics_long_["rsquared"],
                                         metrics_short_["rsquared"]);
-        fprintf(outfile, "   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #\n");
         fprintf(outfile, "%4s %-18s : %10.2f %12.2f %12.2f\n", "", "Std.Dev. of P/L",
                                         metrics_all_["std_trade"],
                                         metrics_long_["std_trade"],

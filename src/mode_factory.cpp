@@ -149,6 +149,14 @@ void mode_factory( BTfast &btf,
 // ------------------------------------------------------------------------- //
 /*! Strategy Factory mode (Sequential Generation + Validation)
 
+        - generation step 1 (POI, Distance, fractN, Exit),
+            initial generation selection
+        - generation step 2 (DOW), selection step 2
+        - generation step 3 (Intraday), selection step 3
+        - generation step 4 (Filter1), selection step 4
+        - generation + selection step 5 (MktRegime)
+
+
     Names/Number/Order of performance metrics must be matched among:
         - utils_params::extract_parameters_from_single_strategy
         - utils_params::extract_metrics_from_single_strategy
@@ -193,6 +201,7 @@ void mode_factory_sequential( BTfast &btf,
     bool selection_conditions {false};
     double avgticks_with_filter {0};
     double avgticks_no_filter {0};
+    //<<< double stdticks_no_filter {0};
     double zscore_with_filter {0};
     double zscore_no_filter {0};
     double perf_relative_improvement {0.2};
@@ -284,6 +293,8 @@ void mode_factory_sequential( BTfast &btf,
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", no_filter_strat );
+        //<<<stdticks_no_filter = utils_params::strategy_attribute_by_name(
+        //                                        "StdTicks", no_filter_strat );
         zscore_no_filter = utils_params::strategy_attribute_by_name(
                                                  "Z-score", no_filter_strat );
         // Metrics of strategy with new filter
@@ -291,6 +302,8 @@ void mode_factory_sequential( BTfast &btf,
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
+        //<<< selection_conditions = avgticks_with_filter >= avgticks_no_filter
+        //          + 1.5*stdticks_no_filter;
         selection_conditions =
             ( avgticks_with_filter >= avgticks_no_filter
                                         * ( 1 + perf_relative_improvement )

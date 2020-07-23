@@ -24,7 +24,7 @@ General Settings for BTfast
              4444: Strategy Factory (Import Generation Results + Validation)
              6:    Market overview (no trades)
          -->
-        <Value> 4
+        <Value> 4444
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -50,13 +50,13 @@ General Settings for BTfast
         <!-- Start date (included). Format: YYYY-MM-DD
             (0 for first date on file)  -->
         <Name>  START_DATE      </Name>
-        <Value>  0       <!-- 2014-01-01 2007-10-29 -->
+        <Value>  2010-01-01       <!-- 2014-01-01 2007-10-29 -->
         </Value></Input>
     <Input>
         <!-- End date (included). Format: YYYY-MM-DD
             (0 for last date on file)  -->
         <Name>  END_DATE        </Name>
-        <Value> 0      <!-- 2014-02-03 2007-11-06 -->
+        <Value> 2019-12-31      <!-- 2014-02-03 2007-11-06 -->
         </Value></Input>
     <!-- ================================================================== -->
 

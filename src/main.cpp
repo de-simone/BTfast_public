@@ -29,20 +29,23 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-21
+                                                        Last update: 2020-07-23
                                           -------------------------------------
 
  * TO DO:
 
-    - add stdticks to strategy performance metrics.
+    - add std_ticks to strategy performance metrics.
         Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
     - utils_optim::append_to_optim_results: Append additional performance metrics.
       check if utils_fileio::write_strategies_to_file prints correctly only
       a subset of them.
     - Performance: check new net_pl
     - Performance::zscore using utils_math::mean() and stdev(), instead of net_pl2
-    - Performance: drawdown length or avg time delay between equity peaks.
+    - Performance: avg drawdown duration: avg time delay between equity peaks.
 
+    - directionality in mkt regime: ADX(20) > 20
+    - DPS: allow ps_factor=0,1,2.
+        dynamic DOW with DPS
     - signal weights:
         assign weight in [0,1] to breakout signal;
         distribution of ticks over weights (e.g. histogram)

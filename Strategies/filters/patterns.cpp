@@ -25,7 +25,7 @@ bool Pattern ( int ptn_num,
         // ----------------------------------------------------------------- //
         // -------------------   UNGER's BASIC PATTERNS   ------------------ //
         // ----------------------------------------------------------------- //
-        case 1:
+        case 1:     // yesterday's body < 50% range
             result =  abs(OpenD[1]-CloseD[1]) < 0.5 * (HighD[1]-LowD[1]);
             break;
         case 2:
@@ -48,11 +48,11 @@ bool Pattern ( int ptn_num,
         case 7:
             result = (OpenD[0]-LowD[0])> ((OpenD[1]-LowD[1]) * 1.5);
             break;
-        case 8:         // 3 up-closes
+        case 8:         // 3 consecutive up-closes
             result = (CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3]
                         && CloseD[3]>CloseD[4]);
             break;
-        case 9:         // 3 down-closes
+        case 9:         // 3 consecutive down-closes
             result = (CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3]
                         && CloseD[3]<CloseD[4]);
             break;
@@ -146,26 +146,27 @@ bool Pattern ( int ptn_num,
             result = ( (HighD[1]-LowD[1]) < (HighD[2]-LowD[2])
                     && (HighD[2]-LowD[2]) < (HighD[3]-LowD[3]) );
             break;
-        case 38:
+        case 38:    // yesterday inside bar
             result = ( HighD[2]>HighD[1] && LowD[2]<LowD[1] );
             break;
-        case 39:
+        case 39:    // yesterday NOT an outside bar
             result = ( HighD[2]>HighD[1] || LowD[2]<LowD[1] );
             break;
-        case 40:
+        case 40:    // yesterday outside bar
             result = ( HighD[2]<HighD[1] || LowD[2]>LowD[1] );
-            break;
-        case 41:
-            result = ( CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3] );
-            break;
-        case 42:
-            result = ( CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3] );
             break;
 
 
         // ----------------------------------------------------------------- //
         // -----------------------   MY PATTERNS   ------------------------- //
         // ----------------------------------------------------------------- //
+        case 41:    // 2 consecutive up-closes
+            result = ( CloseD[1]>CloseD[2] && CloseD[2]>CloseD[3] );
+            break;
+        case 42:    // 2 consecutive down-closes
+            result = ( CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3] );
+            break;
+
         case 43:        // 3 days up
             result = ( CloseD[1]>OpenD[1]  && CloseD[2]>OpenD[2]
                         && CloseD[3]>OpenD[3] );
@@ -230,10 +231,10 @@ bool Pattern ( int ptn_num,
                                   - *min_element(LowD.begin()+1, LowD.end()) ) );
             break;
         case 55:        // Volatility-Based Momentum (5) > 1.0
-            result = ( abs( CloseD[1]-CloseD[5] )/atrD[1] > 1.0 )
+            result = ( abs( CloseD[1]-CloseD[5] )/atrD[1] > 1.0 );
             break;
         case 56:        // Volatility-Based Momentum (5) > 2.0
-            result = ( abs( CloseD[1]-CloseD[5] )/atrD[1] > 2.0 )
+            result = ( abs( CloseD[1]-CloseD[5] )/atrD[1] > 2.0 );
             break;
 
     }

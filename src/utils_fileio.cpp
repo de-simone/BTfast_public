@@ -430,12 +430,12 @@ int utils_fileio::write_strategies_to_file( std::string fname,
         char row_elem[30];
 
         // Loop over strategies
-        for( const auto& it = optim.begin(); it!=optim.end(); it++ ){
+        for( auto it = optim.begin(); it!=optim.end(); it++ ){
             row[0] = '\0';
             header[0] = '\0';
 
             // Loop over strategy attributes (metrics and parameters)
-            for( const auto& attr = it->begin(); attr != it->end(); attr++ ){
+            for( auto attr = it->begin(); attr != it->end(); attr++ ){
 
                 row_elem[0] = '\0';
                 header_elem[0] = '\0';

@@ -114,7 +114,7 @@ int BOMRcharacter::preliminaries( const std::deque<Event>& data1,
 
     //bool make_new_entry {true};         // if computing indicator on intraday (data1)
     bool make_new_entry {NewSession_}; // if computing indicators on "D" (data1D)
-    HighestHigh( highesthigh_, data1, make_new_entry, max_bars_back_, Nbars_);
+    HighestHigh( highesthigh_, data1, make_new_entry, max_bars_back_, Nbars_ );
     LowestLow( lowestlow_, data1, make_new_entry, max_bars_back_, Nbars_);
 
     // Require at least Nbars_ of history
