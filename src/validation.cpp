@@ -458,8 +458,7 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
         bool condition5 { ( profitable_yrs_is + profitable_yrs_oos )
                             / nyears  >= 0.75 };
         //--
-        std::cout<<(profitable_yrs_is+profitable_yrs_oos)
-                                    / ((double) nyears) <<"\n";//<<<
+
         if(condition1 && condition2 && condition3 && condition4 && condition5){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
