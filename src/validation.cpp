@@ -5,7 +5,8 @@
 #include "performance.h"
 #include "utils_fileio.h"       // write_strategies_to_file
 #include "utils_math.h"         // percentile, nearest_int
-#include "utils_params.h"       // extract_parameters_from_strategies
+#include "utils_params.h"       // extract_parameters_from_strategies,
+                                // strategy_attribute_by_name
 #include "utils_time.h"         // current_datetime_str
 
 #include <algorithm>    // std::max_element, std::min_element, std::remove, std::unique
@@ -845,19 +846,11 @@ void Validation::noise_test( const std::vector<strategy_t>
         //-- Fill vector of 'perf_metric_name' from backtests over noise_results
         std::string perf_metric_name { "AvgTicks" };
         std::vector<double> perf_metric {};
-        /*
-        for( auto el: strat ){
-            if( el.first == perf_metric_name ){
-                perf_metric.push_back( el.second );
-            }
-        }
-        */
-        for( strategy_t res: noise_results ){
-            for( auto el: res ){
-                if( el.first == perf_metric_name ){
-                    perf_metric.push_back( el.second );
-                }
-            }
+
+        for( const strategy_t& res: noise_results ){
+            perf_metric.push_back(
+                utils_params::strategy_attribute_by_name(perf_metric_name, res)
+                                 );
         }
         // Check if metric vector is empty
         if( perf_metric.empty() ){
@@ -870,7 +863,7 @@ void Validation::noise_test( const std::vector<strategy_t>
         // first entry of 'perf_metric' is performance metric on original data
         double original_metric { perf_metric.at(0) };
 
-        // 5th and 95th percentiles of performance metric
+        // mean +/- 2std of performance metric
         double lower_level { utils_math::mean( perf_metric )
                             - 2 * utils_math::stdev( perf_metric ) };
                             //{ utils_math::percentile( perf_metric, 0.05 ) };
