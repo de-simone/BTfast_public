@@ -43,13 +43,13 @@ and "Side_switch" must match in 'validation.cpp'
     </Input>
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..8:1 -->
-        <Start>7</Start>
+        <Start>6</Start>
         <Stop>8</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
-        <Start>3</Start>
+        <Start>2</Start>
         <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
@@ -101,7 +101,7 @@ and "Side_switch" must match in 'validation.cpp'
     </OptRange>
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..4:1 -->
-        <Start>3</Start>
+        <Start>1</Start>
         <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>

@@ -29,13 +29,16 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-23
+                                                        Last update: 2020-07-27
                                           -------------------------------------
 
  * TO DO:
 
+    - performance: Consistency of profits over years:
+     at least 75% of years profitable (avgticks>6)
+
     - Performance: avg drawdown duration: avg time delay between equity peaks.
-        check results 
+        check results, stdticks too large
     - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
 
 

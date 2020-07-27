@@ -41,7 +41,7 @@ void mode_single_validation( BTfast &btf,
 
     btf.run_backtest( account, datafeed, parameter_combination );
 
-    Performance performance { btf.initial_balance(), btf.day_counter(),
+    Performance performance { btf.initial_balance(), 
                               std::vector<Transaction> {} };
 
     performance.set_transactions( account.transactions() );

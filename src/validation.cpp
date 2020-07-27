@@ -142,7 +142,7 @@ void Validation::run_validation()
     stability_test( passed_validation_3, passed_validation_4 );
     num_validated_ = (int) passed_validation_4.size();
     //---
-    
+
     //--- Validation - Noise test
     // passed_validation_4 -> passed_validation_5
     noise_test( passed_validation_4, passed_validation_5 );
@@ -350,6 +350,7 @@ void Validation::selection_conditions(
 
 // ------------------------------------------------------------------------- //
 /*! metrics OOS > 50% metrics IS
+    and at least 75% of (IS+OOS) years are profitable
 
     Perform test on strategies in 'input_strategies'
     and store those which pass it into 'output_strategies'.
@@ -389,7 +390,7 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
         // Run single backtest
         btf_.run_backtest( account_is, datafeed_, strat_params );
         // Initialize Performance object for IS
-        Performance performance_is { btf_.initial_balance(), btf_.day_counter(),
+        Performance performance_is { btf_.initial_balance(),
                                      std::vector<Transaction> {} };
 
         if( !account_is.transactions().empty() ){
@@ -402,6 +403,8 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
             continue;   // discard this strategy
         }
         int ndays_is { btf_.day_counter() };
+        int nyears_is { performance_is.nyears() };
+        int profitable_yrs_is { performance_is.profitable_yrs() };
         //-- End In-Sample Backtest
 
         //-- Out-of-Sample Backtest
@@ -410,7 +413,7 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
         // Run single backtest
         btf_.run_backtest( account_oos, datafeed_oos, strat_params );
         // Initialize Performance object for OOS
-        Performance performance_oos { btf_.initial_balance(), btf_.day_counter(),
+        Performance performance_oos { btf_.initial_balance(),
                                      std::vector<Transaction> {} };
 
         if( !account_oos.transactions().empty() ){
@@ -423,6 +426,8 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
             continue;   // discard this strategy
         }
         int ndays_oos { btf_.day_counter() };
+        int nyears_oos { performance_oos.nyears() };
+        int profitable_yrs_oos { performance_oos.profitable_yrs() };
         //-- End Out-of-Sample Backtest
 
         // Avg number of trades per day
@@ -434,17 +439,28 @@ void Validation::OOS_metrics_test( const std::vector<strategy_t>
         if( ndays_oos > 0 ){
             trades_per_day_oos = performance_oos.ntrades()/(double) ndays_oos;
         }
+        // Total number of years
+        double nyears { (double) (nyears_is + nyears_oos) };
 
         //-- Selection Conditions
-        bool condition1 {  trades_per_day_oos >= 0.5 * trades_per_day_is
-                        && trades_per_day_oos <= 2.0 * trades_per_day_is };
+        // Similar number of trades per day
+        bool condition1 {  trades_per_day_oos >= 0.3 * trades_per_day_is
+                        && trades_per_day_oos <= 3.0 * trades_per_day_is };
+        // NetPL>0 on out-of-sample
         bool condition2 { performance_oos.netpl() > 0.0 };
+        // At least 50% AvgTicks on out-of-sample wrt in-sample
         bool condition3 {
-                performance_oos.avgticks() > 0.5 * performance_is.avgticks() };
+                performance_oos.avgticks() >= 0.5 * performance_is.avgticks() };
+        // At least 50% NetPL/MaxDD on out-of-sample wrt in-sample
         bool condition4 {
-                performance_oos.npmdd() > 0.5 * performance_is.npmdd() };
+                performance_oos.npmdd() >= 0.5 * performance_is.npmdd() };
+        // At least 75% of all years are profitable (AvgTicks>=6)
+        bool condition5 { ( profitable_yrs_is + profitable_yrs_oos )
+                            / nyears  >= 0.75 };
         //--
-        if( condition1 && condition2 && condition3 && condition4 ){
+        std::cout<<(profitable_yrs_is+profitable_yrs_oos)
+                                    / ((double) nyears) <<"\n";//<<<
+        if(condition1 && condition2 && condition3 && condition4 && condition5){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
             output_strategies.push_back( strat );

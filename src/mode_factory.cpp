@@ -539,8 +539,7 @@ void mode_factory_sequential( BTfast &btf,
                 // Backtest strategy with DPS
                 Account account_dps { btf.initial_balance() };
                 btf.run_backtest( account_dps, datafeed, strat_params );
-                Performance performance_dps { btf.initial_balance(),
-                                              btf.day_counter(),
+                Performance performance_dps { btf.initial_balance(),                                             
                                               std::vector<Transaction> {} };
                 performance_dps.set_transactions( account_dps.transactions() );
                 performance_dps.compute_metrics();

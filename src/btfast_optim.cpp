@@ -83,7 +83,7 @@ void BTfast::run_parallel_optimization(
         run_backtest( account, datafeed_copy, *parameter_combination );
 
         // Initialize Performance object
-        Performance performance { initial_balance_, day_counter_,
+        Performance performance { initial_balance_,
                                   std::vector<Transaction> {} };
         // Load transaction history into performance object
         performance.set_transactions( account.transactions() );
@@ -185,7 +185,7 @@ void BTfast::run_optimization( const std::vector<parameters_t> &search_space,
         run_backtest( account, datafeed, parameter_combination );
 
         // Initialize Performance object
-        Performance performance { initial_balance_, day_counter_,
+        Performance performance { initial_balance_,
                                   std::vector<Transaction> {} };
         // Load transaction history into performance object
         performance.set_transactions( account.transactions() );

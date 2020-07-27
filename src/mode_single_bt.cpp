@@ -41,7 +41,7 @@ void mode_single_bt( BTfast &btf,
     std::cout<<"\n";
 
     // Initialize Performance object
-    Performance performance { btf.initial_balance(), btf.day_counter(),
+    Performance performance { btf.initial_balance(), 
                               std::vector<Transaction> {} };
 
     // Load transaction history into performance object

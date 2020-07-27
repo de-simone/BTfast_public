@@ -31,7 +31,7 @@ set yrange [-10:50]
 bin_width = 1    # bin size
 set boxwidth bin_width * 0.8   # box width is 80% of bin width
 
-plot datafile using (tm_year(strptime('%Y-%m-%d', strcol(2)))):6 skip 2 \
+plot datafile using (tm_year(strptime('%Y-%m-%d', strcol(4)))):6 skip 2 \
             smooth unique with boxes lt 1
 
 print "Year ticks distribution plotted on file: ", outputfile

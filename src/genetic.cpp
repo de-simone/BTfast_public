@@ -70,7 +70,7 @@ void Individual::compute_individual_fitness(BTfast &btf,
     btf.run_backtest( account, datafeed, this->chromosome() );
 
     // Initialize Performance object
-    Performance performance { btf.initial_balance(), btf.day_counter(),
+    Performance performance { btf.initial_balance(), 
                               std::vector<Transaction> {} };
     // Load transaction history into performance object
     performance.set_transactions( account.transactions() );

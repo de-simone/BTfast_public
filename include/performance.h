@@ -33,7 +33,7 @@ class Performance {
 
 
     double initial_balance_ {100000.0};     ///< initial balance
-    int ndays_ {1};                         ///< number of days parsed from file
+    //int ndays_ {1};                         ///< number of days parsed from file
     std::vector<Transaction> transactions_ {};///< vector of Transaction objects
     std::vector<double> profits_ {};        ///< vector of profit/loss
     std::unordered_map<std::string,double> metrics_all_{}; ///< map of metrics (name,value) for all trades
@@ -45,7 +45,7 @@ class Performance {
 
     public:
         // constructor
-        Performance( double initial_balance, int ndays,
+        Performance( double initial_balance, //int ndays,
                      std::vector<Transaction> transactions);
 
         void compute_metrics();
@@ -56,16 +56,20 @@ class Performance {
         void drawdown( const std::vector<double> &profits,
                        const std::vector<Date>& dates_vec,
                        std::unordered_map<std::string,double> &metrics );
+        /*
         void avgticks( const std::vector<double> &profits,
                        const std::vector<int> &lots, double tick_value,
                        std::unordered_map<std::string,double> &metrics );
+        */
+        void profitable_years( const std::vector<double> &ticks_vec,
+                               const std::vector<Date>& dates_vec,
+                               std::unordered_map<std::string,double> &metrics );
         void max_consec_win_loss( const std::vector<double> &profits,
                         std::unordered_map<std::string,double> &metrics );
         void zscore( const std::vector<double> &profits,
                      std::unordered_map<std::string,double> &metrics );
         void cagr( const std::vector<double> &profits,
-                        std::unordered_map<std::string,double> &metrics,
-                        int nyears );
+                        std::unordered_map<std::string,double> &metrics );
         void rsquared( const std::vector<double> &profits,
                         std::unordered_map<std::string,double> &metrics );
 
@@ -87,9 +91,11 @@ class Performance {
         double expectancy() const { return( metrics_all_.at("expectancy") ); }
         double zscore() const { return( metrics_all_.at("zscore") ); }
         double netpl() const { return( metrics_all_.at("net_pl") ); }
+        
         double avgtrade() const { return( metrics_all_.at("avg_trade")); }
         double stdticks() const { return( metrics_all_.at("std_ticks") ); }
-
+        int nyears() const { return( metrics_all_.at("nyears")); }
+        int profitable_yrs() const { return( metrics_all_.at("profitable_yrs")); }
 
         // Setters
         //void set_initial_balance( double bal ){ initial_balance_ = bal; }
