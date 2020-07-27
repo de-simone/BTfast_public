@@ -31,7 +31,7 @@ namespace utils_math {
     // --------------------------------------------------------------------- //
     /*! p-th percentile  of a vector v
     */
-    double percentile( std::vector<double> &v, double p );
+    double percentile( const std::vector<double> &v, double p );
 
     // --------------------------------------------------------------------- //
     /*! Weighted average of a vector v with a weight vector w
@@ -44,7 +44,7 @@ namespace utils_math {
     */
     double mean( const std::vector<double> &v );
 
-    
+
     // --------------------------------------------------------------------- //
     /*! Standard deviation of vector (unbiased sample std, with 1/(N-1))
     */

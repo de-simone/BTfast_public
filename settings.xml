@@ -190,12 +190,12 @@ General Settings for BTfast
     <Input>
         <!-- Percentage of max variation (stability test) -->
         <Name>    MAX_VARIATION_PCT     </Name>
-        <Value>   40
+        <Value>   30
         </Value></Input>
     <Input>
         <!-- Number of noise tests (runs with price randomization) -->
         <Name>    NOISE_TESTS     </Name>
-        <Value>   100
+        <Value>   300
         </Value></Input>
     <!-- ================================================================== -->
 

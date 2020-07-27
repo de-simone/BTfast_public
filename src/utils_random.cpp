@@ -17,7 +17,7 @@ void utils_random::add_gaussian_noise( Event &bar )
     //int p { rand_int_01(utils_random::rand_generator) };// random int in [0,1]
 
     // Gaussian distribution with zero-mean, and std = (H-L)/3
-    std::normal_distribution<> gaussian {0, (bar.high()-bar.low())/3 };
+    std::normal_distribution<> gaussian {0, (bar.high()-bar.low())*0.33 };
     double noise { gaussian(utils_random::rand_generator) };
 
     // Random integer in [1,4]

@@ -42,19 +42,22 @@ int utils_math::theta( double a )
 
 // ------------------------------------------------------------------------- //
 // p-th percentile of a vector v
-double utils_math::percentile( std::vector<double> &v, double p )
+// nth_element modifies the input vector so work with a copy of it
+double utils_math::percentile( const std::vector<double> &v, double p )
 {
     if( p<0 || p>1 ){
         std::cout<<">>> ERROR: percentile must be in [0,1] (utils_math).\n";
         exit(1);
     }
 
-    const size_t pctil = v.size() * p;
-    // nth_element modifies the input vector
-    std::nth_element(v.begin(), v.begin() + pctil, v.end());
-    //std::cout << "The p-th percentile is " << v[pctil] << '\n';
+    std::vector<double> temp { v }; // copy input into temp vector
 
-    return( v[pctil] );
+    const size_t pctil = temp.size() * p;
+
+    std::nth_element(temp.begin(), temp.begin() + pctil, temp.end());
+    //std::cout << "The p-th percentile is " << temp[pctil] << '\n';
+
+    return( temp[pctil] );
 }
 
 // --------------------------------------------------------------------- //

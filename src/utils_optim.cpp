@@ -19,6 +19,7 @@
        - Individual::compute_individual_fitness
        - Validation::intermediate_selection
        - Validation::selection_conditions
+       - Validation::noise_test
        - mode_factory_sequential (run_modes)
 
 */
@@ -161,6 +162,7 @@ Names/Number/Order of performance metrics must be matched among:
     - Individual::compute_individual_fitness
     - Validation::intermediate_selection
     - Validation::selection_conditions
+    - Validation::noise_test
     - mode_factory_sequential (run_modes)
 */
 
@@ -216,6 +218,7 @@ bool utils_optim::sort_by_zscore(const strategy_t& a, const strategy_t& b)
         - Individual::compute_individual_fitness
         - Validation::intermediate_selection
         - Validation::selection_conditions
+        - Validation::noise_test
         - mode_factory_sequential (run_modes)
 */
 

@@ -178,6 +178,7 @@ void utils_params::extract_parameters_from_all_strategies(
 
     Names/Number/Order of performance metrics must be matched among:
         - utils_params::extract_parameters_from_single_strategy
+        - utils_params::extract_metrics_from_single_strategy
         - utils_optim::append_to_optim_results
         - utils_optim::sort_by_metric
         - utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc
@@ -185,6 +186,7 @@ void utils_params::extract_parameters_from_all_strategies(
         - Individual::compute_individual_fitness
         - Validation::intermediate_selection
         - Validation::selection_conditions
+        - Validation::noise_test
         - mode_factory_sequential (run_modes)
 
 */

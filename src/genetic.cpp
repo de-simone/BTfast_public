@@ -55,6 +55,7 @@ bool operator<(const Individual &ind1, const Individual &ind2)
        - Individual::compute_individual_fitness
        - Validation::initial_generation_selection
        - Validation::selection_conditions
+       - Validation::noise_test
        - mode_factory_sequential (run_modes)
 
 */
@@ -70,7 +71,7 @@ void Individual::compute_individual_fitness(BTfast &btf,
     btf.run_backtest( account, datafeed, this->chromosome() );
 
     // Initialize Performance object
-    Performance performance { btf.initial_balance(), 
+    Performance performance { btf.initial_balance(),
                               std::vector<Transaction> {} };
     // Load transaction history into performance object
     performance.set_transactions( account.transactions() );

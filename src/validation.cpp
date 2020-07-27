@@ -77,8 +77,8 @@ Validation::Validation( BTfast &btf,
         - Selection
         - Validation: OOS metrics test
         - Validation: OOS consistency test (Mann-Whitney on ticks)
-        - Validation: Profitability test on "fractN_long", "fractN_short"
-        - Validation: Stability test
+        - Validation: Profitability test ("fractN_long", "fractN_short")
+        - Validation: Stability test ("epsilon")
         - Validation: Noise test
 
     Return: number of validated strategies
@@ -118,7 +118,7 @@ void Validation::run_validation()
     selection( strategies_to_validate_, passed_selection );
     num_validated_ = (int) passed_selection.size();
     //---
-
+    /*
     //--- Validation - OOS metrics test
     // passed_selection -> passed_validation_1
     OOS_metrics_test( passed_selection, passed_validation_1 );
@@ -142,10 +142,11 @@ void Validation::run_validation()
     stability_test( passed_validation_3, passed_validation_4 );
     num_validated_ = (int) passed_validation_4.size();
     //---
-
+    */
     //--- Validation - Noise test
     // passed_validation_4 -> passed_validation_5
-    noise_test( passed_validation_4, passed_validation_5 );
+    //<<<noise_test( passed_validation_4, passed_validation_5 );
+    noise_test( passed_selection, passed_validation_5 );
     num_validated_ = (int) passed_validation_5.size();
     //---
 
@@ -233,6 +234,7 @@ void Validation::selection( const std::vector<strategy_t> &input_strategies,
         - Individual::compute_individual_fitness
         - Validation::initial_generation_selection
         - Validation::selection_conditions
+        - Validation::noise_test
         - mode_factory_sequential (run_modes)
 */
 void Validation::initial_generation_selection(
@@ -290,6 +292,7 @@ void Validation::initial_generation_selection(
         - Individual::compute_individual_fitness
         - Validation::initial_generation_selection
         - Validation::selection_conditions
+        - Validation::noise_test
         - mode_factory_sequential (run_modes)
 */
 void Validation::selection_conditions(
@@ -790,8 +793,7 @@ void Validation::stability_test( const std::vector<strategy_t>
 
 
 // ------------------------------------------------------------------------- //
-/*! Perf metric of strategy on original data between
-                    mean - 2*std   and   mean + 2*stdev
+/*! Perf metric of strategy on original data in [mean - 2*std , mean + 2*stdev]
 
     Perform test on strategies in 'input_strategies'
     and store those which pass it into 'output_strategies'.
@@ -841,7 +843,7 @@ void Validation::noise_test( const std::vector<strategy_t>
         //--
 
         //-- Fill vector of 'perf_metric_name' from backtests over noise_results
-        std::string perf_metric_name { "NP/MDD" };
+        std::string perf_metric_name { "AvgTicks" };
         std::vector<double> perf_metric {};
         /*
         for( auto el: strat ){
@@ -868,16 +870,16 @@ void Validation::noise_test( const std::vector<strategy_t>
         // first entry of 'perf_metric' is performance metric on original data
         double original_metric { perf_metric.at(0) };
 
-        //double percentile_low  { utils_math::percentile( perf_metric, 0.15 ) };
-        //double percentile_high { utils_math::percentile( perf_metric, 0.85 ) };
+        // 5th and 95th percentiles of performance metric
         double lower_level { utils_math::mean( perf_metric )
-                             - 2 * utils_math::stdev( perf_metric ) };
+                            - 2 * utils_math::stdev( perf_metric ) };
+                            //{ utils_math::percentile( perf_metric, 0.05 ) };
         double upper_level { utils_math::mean( perf_metric )
-                             + 2 * utils_math::stdev( perf_metric ) };
+                            + 2 * utils_math::stdev( perf_metric ) };
+                            //{ utils_math::percentile( perf_metric, 0.95 ) };
 
-        if( lower_level < upper_level
-         && original_metric >= lower_level
-         && original_metric <= upper_level ){
+        if( lower_level < upper_level &&
+            original_metric >= lower_level && original_metric <= upper_level ){
             printf("+PASSED+\n");
             // append passed strategy to output_strategies
             output_strategies.push_back( strat );
