@@ -155,7 +155,7 @@ int MasterCode::preliminaries( const std::deque<Event>& data1,
     // Require at least 100 days of ATR history
     if( atrD_.size() < 100 ){
         return(0);
-    }    
+    }
     //--
 
     return(1);
@@ -191,11 +191,11 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     }
 
 
-    //double fract { std::pow(2,fractN_ ) * 0.1 };    // 2^fractN_ / 10
-    double fract_long { std::pow(2,fractN_long_) * 0.05 }; // 2^fractN_ / 20
-    double fract_short { std::pow(2,fractN_short_) * 0.05 }; // 2^fractN_ / 20
-    fract_long = fract_long * ( 1 + epsilon_/20.0 ); // epsilon=1 means 5% variation
-    fract_short = fract_short * ( 1 + epsilon_/20.0 ); // epsilon=1 means 5% variation
+    //double fract { std::pow(2,fractN_ ) * 0.1 };      // 2^fractN_ / 10
+    double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
+    double fract_short { std::pow(2,fractN_short_) * 0.05 };// 2^fractN_ / 20
+    fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
+    fract_short = fract_short * ( 1 + epsilon_* 0.05 ); // epsilon=1 means 5% variation
 
     double distance {0.0};
     switch( Distance_switch_ ){

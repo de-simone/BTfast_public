@@ -33,7 +33,7 @@
                                           -------------------------------------
 
  * TO DO:
-    
+
     - Performance: avg drawdown duration: avg time delay between equity peaks.
         check results, stdticks too large
     - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
@@ -327,6 +327,13 @@ int main () {
             break;
         // ----------------------------------------------------------------- //
 
+        // --------------------------   NOISE TEST   ----------------------- //
+        case 5:
+            mode_noise( btf, datafeed, parameter_ranges,
+                        num_noise_tests, write_trades_to_file,
+                        noise_file, param_file, fitness_metric );
+            break;
+        // ----------------------------------------------------------------- //
 
         // ----------------------   MARKET OVERVIEW   ---------------------- //
         case 6: {
@@ -335,15 +342,7 @@ int main () {
         }
         // ----------------------------------------------------------------- //
 
-        // --------------------------   NOISE TEST   ----------------------- //
-        /*
-        case 5:
-            mode_noise( btf, datafeed, parameter_ranges,
-                        num_noise_tests, write_trades_to_file,
-                        noise_file, param_file, fitness_metric );
-            break;
-        */
-        // ----------------------------------------------------------------- //
+
 
 
         default:

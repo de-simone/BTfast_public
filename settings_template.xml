@@ -22,6 +22,7 @@ General Settings for BTfast
              44:   Strategy Factory (Exhaustive Generation + Validation)
              444:  Strategy Factory (Genetic Generation + Validation)
              4444: Strategy Factory (Import Generation Results + Validation)
+             5:    Noise test for Single Strategy
              6:    Market overview (no trades)
          -->
         <Value> 1

@@ -18,10 +18,11 @@ Member Variables
                           (single strategy, or bunch from optimization or file)
 - parameter_ranges_: ranges of all strategy parameters
 - selected_file_: file to store strategies passing selection
+- validated_file_: file to store strategies passing full validation
 - fitness_metric: performance metric used to compare OOS with IS
 - max_variation_: max variation of performance metric allowed by stability test
 - num_noise_tests_: number of randomization tests when adding noise
-
+- noise_file_: file to store results of randomization tests
 
 [- date_i_: initial selected date to parse]
 [- date_f_: final selected date to parse]
@@ -95,7 +96,8 @@ class Validation {
                              std::vector<strategy_t> &output_strategies );
 
         void noise_test( const std::vector<strategy_t> &input_strategies,
-                         std::vector<strategy_t> &output_strategies );
+                         std::vector<strategy_t> &output_strategies,
+                         bool write_to_file );
 
 
         //void selection_conditions_OOS( const std::vector<strategy_t> &OOS_run);

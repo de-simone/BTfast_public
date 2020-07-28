@@ -71,7 +71,7 @@ set xtics auto  # restore automatic xtics
 set xlabel "Avg Trade (USD)"
 #set yrange [0:]
 
-bin_width = 10                  # bin size in USD
+bin_width = 5                  # bin size in USD
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
 unset label
 set label sprintf(" Median = %5.0f $", AvgTrade_median) left at graph 0,0.95 front
@@ -101,7 +101,7 @@ unset arrow
 # Plot (2,1):
 
 set xlabel "Net PL/Max DD"
-bin_width = 1                   # bin size
+bin_width = 0.5                  # bin size
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
 unset label
 set label sprintf(" Median = %5.1f", NPMDD_median) left at graph 0,0.95 front
@@ -116,7 +116,7 @@ unset arrow
 # Plot (2,2): Expectancy
 
 set xlabel "Expectancy"
-bin_width = 0.1                  # bin size
+bin_width = 0.05                  # bin size
 set boxwidth bin_width * 0.8      # box width is 80% of bin width
 unset label
 set label sprintf(" Median = %5.2f", Expectancy_median) left at graph 0,0.95 front

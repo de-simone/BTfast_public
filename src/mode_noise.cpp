@@ -4,8 +4,11 @@
 #include "performance.h"
 #include "utils_optim.h"    // append_to_optim_results
 #include "utils_params.h"   // single_parameter_combination
+#include "utils_time.h"     // current_datetime_str
+#include "validation.h"
 
 #include <cstdlib>          // std::system
+#include <iostream>         // std::cout
 
 // ------------------------------------------------------------------------- //
 /*! Noise Test for Single Strategy (adding gaussian noise to price data)
@@ -18,47 +21,43 @@ void mode_noise( BTfast &btf,
                  const std::string &param_file,
                  const std::string &fitness_metric )
 {
+    std::cout<< "    Run Mode   : Single Noise Test\n\n";
+
+    // ----------------------------    BACKTEST   -------------------------- //
+    std::cout << utils_time::current_datetime_str() + " | "
+              << "Running Backtest \n";
+
     // Extract single parameter combination from parameter_ranges
     // (only the <Start> value is taken)
     parameters_t parameter_combination {
         utils_params::single_parameter_combination(parameter_ranges) };
 
-    // Initialize vector to store results of noise test
-    std::vector<strategy_t> noise_results {};
 
     //-- Backtest on original price data (without noise)
     Account account { btf.initial_balance() };
-    btf.run_backtest( account, datafeed,
-                      parameter_combination );
-    Performance performance { btf.initial_balance(), 
+    btf.run_backtest( account, datafeed, parameter_combination );
+    Performance performance { btf.initial_balance(),
                               std::vector<Transaction> {} };
     performance.set_transactions( account.transactions() );
     performance.compute_metrics();
-    utils_optim::append_to_optim_results( noise_results,
-                                          performance,
+    // Initialize vector to store results of backtest
+    std::vector<strategy_t> strategy_to_validate {};
+    utils_optim::append_to_optim_results( strategy_to_validate, performance,
                                           parameter_combination );
     //--
 
-    //-- Backtest with noised data
-    // Replicate the same 'parameter_combination' for
-    // ('num_noise_tests'-1) times, since 1 run is on original data
-    std::vector<parameters_t> search_space {};
+    // --------------------------------------------------------------------- //
 
-    for( int i = 0; i < num_noise_tests - 1; i++ ){
-        search_space.push_back(parameter_combination);
-    }
+    // ---------------------------    VALIDATION   ------------------------- //
+    // Instantiate Validation object
+    Validation validation { btf,datafeed, strategy_to_validate,parameter_ranges,
+                            "", "", fitness_metric, "", "", 0,
+                            num_noise_tests, noise_file };
 
-    // Each run is with same strategy parameters but with
-    // random noise added to price data
-    bool sort_results {false};
-    bool verbose {false};
-    btf.set_random_noise(true);
-    btf.run_parallel_optimization( search_space, noise_results, noise_file,
-                                   param_file, fitness_metric,
-                                   datafeed,
-                                   //btf.start_date(),btf.end_date(),
-                                   sort_results, verbose );
-    //--
+    // Run full validation process
+    std::vector<strategy_t> passed_test {};
+    validation.noise_test( strategy_to_validate, passed_test, true );
+    // --------------------------------------------------------------------- //
 
     // Plot distributions of performance metrics under noise test
     if( write_trades_to_file ){

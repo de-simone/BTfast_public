@@ -119,7 +119,7 @@ void Validation::run_validation()
     selection( strategies_to_validate_, passed_selection );
     num_validated_ = (int) passed_selection.size();
     //---
-    /*
+
     //--- Validation - OOS metrics test
     // passed_selection -> passed_validation_1
     OOS_metrics_test( passed_selection, passed_validation_1 );
@@ -143,11 +143,10 @@ void Validation::run_validation()
     stability_test( passed_validation_3, passed_validation_4 );
     num_validated_ = (int) passed_validation_4.size();
     //---
-    */
+
     //--- Validation - Noise test
     // passed_validation_4 -> passed_validation_5
-    //<<<noise_test( passed_validation_4, passed_validation_5 );
-    noise_test( passed_selection, passed_validation_5 );
+    noise_test( passed_validation_4, passed_validation_5, false );
     num_validated_ = (int) passed_validation_5.size();
     //---
 
@@ -798,10 +797,14 @@ void Validation::stability_test( const std::vector<strategy_t>
 
     Perform test on strategies in 'input_strategies'
     and store those which pass it into 'output_strategies'.
+
+    If 'write_to_file'=true, write optimization results to 'noise_file_' and
+    to stdout (used for noise test of single strategy)
 */
 void Validation::noise_test( const std::vector<strategy_t>
                                                         &input_strategies,
-                             std::vector<strategy_t> &output_strategies )
+                             std::vector<strategy_t> &output_strategies,
+                             bool write_to_file )
 {
     if( input_strategies.empty() ){
         return;
@@ -840,7 +843,7 @@ void Validation::noise_test( const std::vector<strategy_t>
         btf_.run_parallel_optimization( search_space,
                                         noise_results, noise_file_, "",
                                         fitness_metric_, datafeed_,
-                                        false, false);
+                                        false, write_to_file);
         //--
 
         //-- Fill vector of 'perf_metric_name' from backtests over noise_results
@@ -870,6 +873,12 @@ void Validation::noise_test( const std::vector<strategy_t>
         double upper_level { utils_math::mean( perf_metric )
                             + 2 * utils_math::stdev( perf_metric ) };
                             //{ utils_math::percentile( perf_metric, 0.95 ) };
+        if( write_to_file ){
+            std::cout << "\n";
+            std::cout << perf_metric_name <<"  |  original: "<< original_metric
+                      << " |  mean +/- 2*std: [ "
+                      << lower_level <<" , "<< upper_level<<" ]\n\n";
+        }
 
         if( lower_level < upper_level &&
             original_metric >= lower_level && original_metric <= upper_level ){
