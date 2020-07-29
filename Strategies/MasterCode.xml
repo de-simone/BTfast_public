@@ -35,7 +35,7 @@ and "Side_switch" must match in 'validation.cpp'
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-        <Value>1</Value>
+        <Value>2</Value>
     </Input>
     <Input>
         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
@@ -44,19 +44,19 @@ and "Side_switch" must match in 'validation.cpp'
     <OptRange>
         <Name>POI_switch</Name>         <!-- 1..8:1 -->
         <Start>1</Start>
-        <Stop>2</Stop>
+        <Stop>8</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
         <Start>1</Start>
-        <Stop>2</Stop>
+        <Stop>4</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
         <Start>0</Start>
-        <Stop>2</Stop>
+        <Stop>5</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>
@@ -96,7 +96,7 @@ and "Side_switch" must match in 'validation.cpp'
     <OptRange>
         <Name>Exit_switch</Name>        <!-- 1..5:1 -->
         <Start>1</Start>
-        <Stop>1</Stop>
+        <Stop>2</Stop>
         <Step>1</Step>
     </OptRange>
     <OptRange>

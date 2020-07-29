@@ -1,6 +1,6 @@
 #include "datafeed_csv.h"
 
-#include <filesystem>   // std::filesystem
+//#include <filesystem>   // std::filesystem (problematic on GCC8)
 #include <iostream>     // std::cout
 #include <unistd.h>     // access
 
@@ -36,7 +36,10 @@ void HistoricalBarsCSV::open_data_connection()
     // Check if csv_file exists
     if( access( data_file_path_.c_str(), F_OK ) != 0 ){
 
-        std::cout << "\nAvailable data files:\n";
+        std::cout << "\nList of Available CSV data files commented out because"
+        <<" of gcc8 problem with std:filesystem:recursive_directory_iterator\n";
+        /*
+        std::cout << "\nAvailable CSV data files:\n";
         for( const auto& entry:
                 std::filesystem::recursive_directory_iterator(data_dir_) ){
 
@@ -48,8 +51,10 @@ void HistoricalBarsCSV::open_data_connection()
                 std::cout << fname << "\n";
             }
         }
+        */
         std::cout << "\n>>> ERROR: CSV file does not exist (datafeed): "
-                  << data_file_path_ << "\nAvailable data files listed above.\n";
+                  << data_file_path_ <<"\n";
+        //<< "\nAvailable data files listed above.\n";
 
         exit(1);
     }
