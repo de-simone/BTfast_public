@@ -94,60 +94,64 @@ $(document).ready(function(){initNavTree('datafeed__csv_8h_source.html','');});
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;datafeed.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_historical_bars_c_s_v.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_historical_bars_c_s_v.html">HistoricalBarsCSV</a> : <span class="keyword">public</span> <a class="code" href="class_data_feed.html">DataFeed</a> {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    std::string csv_file_ {<span class="stringliteral">&quot;&quot;</span>};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">int</span> csv_format_ {1};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_date.html">Date</a> start_date_ {};</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_date.html">Date</a> end_date_ {};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span> continue_parsing_ {<span class="keyword">true</span>};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">//int tot_bars_ {1};</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    FILE *infile_;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">// Constructor</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="class_historical_bars_c_s_v.html#ae0e4ee07606e50c20588b805b9acde04">HistoricalBarsCSV</a>(<span class="keyword">const</span> <a class="code" href="class_instrument.html">Instrument</a> &amp;symbol,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                          std::string timeframe,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                          std::string data_file,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                          <span class="keywordtype">int</span> csv_format,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                          <a class="code" href="class_date.html">Date</a> start_date, <a class="code" href="class_date.html">Date</a> end_date);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">// Functions overriding the base class pure virtual functions</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        std::string data_file()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(csv_file_); }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">int</span> csv_format()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(csv_format_); }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="class_date.html">Date</a> start_date()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(start_date_); }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="class_date.html">Date</a> end_date()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(end_date_); }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">bool</span> continue_parsing()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(continue_parsing_); }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">int</span> tot_bars()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(1); } <span class="comment">// not defined</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#aeb99d10b80331acf10c67c72bf2ed56f">open_data_connection</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#af8f77d6c1d8da369de5dcae376ba0888">close_data_connection</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#a2fbcbc3695214469c23dfed398ac35be">reset_cursor</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#a46f6b389f11acb37b492972361d4eca3">stream_next_bar</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">void</span> set_start_date(<a class="code" href="class_date.html">Date</a> d)<span class="keyword"> override </span>{ start_date_=d; }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">void</span> set_end_date(<a class="code" href="class_date.html">Date</a> d)<span class="keyword"> override </span>{ end_date_=d; }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> set_data_file(std::string f)<span class="keyword"> override </span>{ csv_file_ = f; }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::unique_ptr&lt;DataFeed&gt; <a class="code" href="class_historical_bars_c_s_v.html#a29bbd8a48c95f90d2a487ccc64538a83">clone</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_historical_bars_c_s_v.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_historical_bars_c_s_v.html">HistoricalBarsCSV</a> : <span class="keyword">public</span> <a class="code" href="class_data_feed.html">DataFeed</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::string type_ {<span class="stringliteral">&quot;CSV&quot;</span>};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">const</span> std::string &amp;data_dir_;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">const</span> std::string &amp;data_file_;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::string data_file_path_ {<span class="stringliteral">&quot;&quot;</span>};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span> csv_format_ {1};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_date.html">Date</a> start_date_ {};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_date.html">Date</a> end_date_ {};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">bool</span> continue_parsing_ {<span class="keyword">true</span>};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">//int tot_bars_ {1};</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    FILE *infile_;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="comment">// Constructor</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_historical_bars_c_s_v.html#abb94984fe9f01a62178922c722d711a6">HistoricalBarsCSV</a>(<span class="keyword">const</span> <a class="code" href="class_instrument.html">Instrument</a> &amp;symbol,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                          <span class="keyword">const</span> std::string &amp;timeframe,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                          <span class="keyword">const</span> std::string &amp;data_dir,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                          <span class="keyword">const</span> std::string &amp;data_file,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                          <span class="keywordtype">int</span> csv_format, <a class="code" href="class_date.html">Date</a> start_date, <a class="code" href="class_date.html">Date</a> end_date);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">// Functions overriding the base class pure virtual functions</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        std::string type()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(type_); }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        std::string data_file()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(data_file_); }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">int</span> csv_format()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(csv_format_); }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="class_date.html">Date</a> start_date()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(start_date_); }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="class_date.html">Date</a> end_date()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(end_date_); }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordtype">bool</span> continue_parsing()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(continue_parsing_); }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">int</span> tot_bars()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(1); } <span class="comment">// not defined</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#aeb99d10b80331acf10c67c72bf2ed56f">open_data_connection</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#af8f77d6c1d8da369de5dcae376ba0888">close_data_connection</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#a2fbcbc3695214469c23dfed398ac35be">reset_cursor</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_historical_bars_c_s_v.html#a46f6b389f11acb37b492972361d4eca3">stream_next_bar</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">void</span> set_start_date(<a class="code" href="class_date.html">Date</a> d)<span class="keyword"> override </span>{ start_date_=d; }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> set_end_date(<a class="code" href="class_date.html">Date</a> d)<span class="keyword"> override </span>{ end_date_=d; }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">void</span> set_data_file(std::string f)<span class="keyword"> override </span>{ data_file_path_ = f; }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::unique_ptr&lt;DataFeed&gt; <a class="code" href="class_historical_bars_c_s_v.html#a29bbd8a48c95f90d2a487ccc64538a83">clone</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:36</div></div>
-<div class="ttc" id="aclass_historical_bars_c_s_v_html_a29bbd8a48c95f90d2a487ccc64538a83"><div class="ttname"><a href="class_historical_bars_c_s_v.html#a29bbd8a48c95f90d2a487ccc64538a83">HistoricalBarsCSV::clone</a></div><div class="ttdeci">std::unique_ptr&lt; DataFeed &gt; clone() const override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:160</div></div>
-<div class="ttc" id="aclass_historical_bars_c_s_v_html"><div class="ttname"><a href="class_historical_bars_c_s_v.html">HistoricalBarsCSV</a></div><div class="ttdef"><b>Definition:</b> datafeed_csv.h:28</div></div>
+<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:37</div></div>
+<div class="ttc" id="aclass_historical_bars_c_s_v_html_a29bbd8a48c95f90d2a487ccc64538a83"><div class="ttname"><a href="class_historical_bars_c_s_v.html#a29bbd8a48c95f90d2a487ccc64538a83">HistoricalBarsCSV::clone</a></div><div class="ttdeci">std::unique_ptr&lt; DataFeed &gt; clone() const override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:179</div></div>
+<div class="ttc" id="aclass_historical_bars_c_s_v_html"><div class="ttname"><a href="class_historical_bars_c_s_v.html">HistoricalBarsCSV</a></div><div class="ttdef"><b>Definition:</b> datafeed_csv.h:30</div></div>
+<div class="ttc" id="aclass_historical_bars_c_s_v_html_abb94984fe9f01a62178922c722d711a6"><div class="ttname"><a href="class_historical_bars_c_s_v.html#abb94984fe9f01a62178922c722d711a6">HistoricalBarsCSV::HistoricalBarsCSV</a></div><div class="ttdeci">HistoricalBarsCSV(const Instrument &amp;symbol, const std::string &amp;timeframe, const std::string &amp;data_dir, const std::string &amp;data_file, int csv_format, Date start_date, Date end_date)</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:13</div></div>
 <div class="ttc" id="aclass_data_feed_html"><div class="ttname"><a href="class_data_feed.html">DataFeed</a></div><div class="ttdef"><b>Definition:</b> datafeed.h:22</div></div>
-<div class="ttc" id="aclass_historical_bars_c_s_v_html_af8f77d6c1d8da369de5dcae376ba0888"><div class="ttname"><a href="class_historical_bars_c_s_v.html#af8f77d6c1d8da369de5dcae376ba0888">HistoricalBarsCSV::close_data_connection</a></div><div class="ttdeci">void close_data_connection() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:64</div></div>
-<div class="ttc" id="aclass_historical_bars_c_s_v_html_ae0e4ee07606e50c20588b805b9acde04"><div class="ttname"><a href="class_historical_bars_c_s_v.html#ae0e4ee07606e50c20588b805b9acde04">HistoricalBarsCSV::HistoricalBarsCSV</a></div><div class="ttdeci">HistoricalBarsCSV(const Instrument &amp;symbol, std::string timeframe, std::string data_file, int csv_format, Date start_date, Date end_date)</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:13</div></div>
-<div class="ttc" id="aclass_historical_bars_c_s_v_html_a46f6b389f11acb37b492972361d4eca3"><div class="ttname"><a href="class_historical_bars_c_s_v.html#a46f6b389f11acb37b492972361d4eca3">HistoricalBarsCSV::stream_next_bar</a></div><div class="ttdeci">void stream_next_bar() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:88</div></div>
-<div class="ttc" id="aclass_historical_bars_c_s_v_html_a2fbcbc3695214469c23dfed398ac35be"><div class="ttname"><a href="class_historical_bars_c_s_v.html#a2fbcbc3695214469c23dfed398ac35be">HistoricalBarsCSV::reset_cursor</a></div><div class="ttdeci">void reset_cursor() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:75</div></div>
-<div class="ttc" id="aclass_historical_bars_c_s_v_html_aeb99d10b80331acf10c67c72bf2ed56f"><div class="ttname"><a href="class_historical_bars_c_s_v.html#aeb99d10b80331acf10c67c72bf2ed56f">HistoricalBarsCSV::open_data_connection</a></div><div class="ttdeci">void open_data_connection() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:29</div></div>
+<div class="ttc" id="aclass_historical_bars_c_s_v_html_af8f77d6c1d8da369de5dcae376ba0888"><div class="ttname"><a href="class_historical_bars_c_s_v.html#af8f77d6c1d8da369de5dcae376ba0888">HistoricalBarsCSV::close_data_connection</a></div><div class="ttdeci">void close_data_connection() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:83</div></div>
+<div class="ttc" id="aclass_historical_bars_c_s_v_html_a46f6b389f11acb37b492972361d4eca3"><div class="ttname"><a href="class_historical_bars_c_s_v.html#a46f6b389f11acb37b492972361d4eca3">HistoricalBarsCSV::stream_next_bar</a></div><div class="ttdeci">void stream_next_bar() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:107</div></div>
+<div class="ttc" id="aclass_historical_bars_c_s_v_html_a2fbcbc3695214469c23dfed398ac35be"><div class="ttname"><a href="class_historical_bars_c_s_v.html#a2fbcbc3695214469c23dfed398ac35be">HistoricalBarsCSV::reset_cursor</a></div><div class="ttdeci">void reset_cursor() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:94</div></div>
+<div class="ttc" id="aclass_historical_bars_c_s_v_html_aeb99d10b80331acf10c67c72bf2ed56f"><div class="ttname"><a href="class_historical_bars_c_s_v.html#aeb99d10b80331acf10c67c72bf2ed56f">HistoricalBarsCSV::open_data_connection</a></div><div class="ttdeci">void open_data_connection() override</div><div class="ttdef"><b>Definition:</b> datafeed_csv.cpp:34</div></div>
 <div class="ttc" id="aclass_date_html"><div class="ttname"><a href="class_date.html">Date</a></div><div class="ttdef"><b>Definition:</b> datetime.h:9</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

@@ -113,22 +113,23 @@ $(document).ready(function(){initNavTree('position__sizer_8h_source.html','');})
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="class_position_sizer.html#acf1926c1d2a1460fb4c14aec144a61b7">PositionSizer</a>( <span class="keyword">const</span> std::string &amp;ps_type, <span class="keyword">const</span> <a class="code" href="class_instrument.html">Instrument</a> &amp;symbol,</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                       <span class="keywordtype">int</span> num_contracts, <span class="keywordtype">double</span> risk_fraction );</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_position_sizer.html#a8c701483127edb4e89a33c7a34b0b220">compute_quantity</a>( <span class="keywordtype">double</span> price, <span class="keyword">const</span> <a class="code" href="class_account.html">Account</a> &amp;account ) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_position_sizer.html#a99d297f11e826f18abb486d12fadd374">compute_quantity</a>( <span class="keywordtype">double</span> price, <span class="keywordtype">double</span> position_size_factor,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                              <span class="keyword">const</span> <a class="code" href="class_account.html">Account</a> &amp;account ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:36</div></div>
+<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:37</div></div>
 <div class="ttc" id="aclass_position_sizer_html_acf1926c1d2a1460fb4c14aec144a61b7"><div class="ttname"><a href="class_position_sizer.html#acf1926c1d2a1460fb4c14aec144a61b7">PositionSizer::PositionSizer</a></div><div class="ttdeci">PositionSizer(const std::string &amp;ps_type, const Instrument &amp;symbol, int num_contracts, double risk_fraction)</div><div class="ttdef"><b>Definition:</b> position_sizer.cpp:14</div></div>
+<div class="ttc" id="aclass_position_sizer_html_a99d297f11e826f18abb486d12fadd374"><div class="ttname"><a href="class_position_sizer.html#a99d297f11e826f18abb486d12fadd374">PositionSizer::compute_quantity</a></div><div class="ttdeci">int compute_quantity(double price, double position_size_factor, const Account &amp;account) const</div><div class="ttdef"><b>Definition:</b> position_sizer.cpp:28</div></div>
 <div class="ttc" id="aclass_position_sizer_html"><div class="ttname"><a href="class_position_sizer.html">PositionSizer</a></div><div class="ttdef"><b>Definition:</b> position_sizer.h:30</div></div>
-<div class="ttc" id="aclass_position_sizer_html_a8c701483127edb4e89a33c7a34b0b220"><div class="ttname"><a href="class_position_sizer.html#a8c701483127edb4e89a33c7a34b0b220">PositionSizer::compute_quantity</a></div><div class="ttdeci">int compute_quantity(double price, const Account &amp;account) const</div><div class="ttdef"><b>Definition:</b> position_sizer.cpp:28</div></div>
 <div class="ttc" id="aclass_account_html"><div class="ttname"><a href="class_account.html">Account</a></div><div class="ttdef"><b>Definition:</b> account.h:30</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

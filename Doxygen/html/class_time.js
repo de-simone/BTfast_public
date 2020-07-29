@@ -13,6 +13,7 @@ var class_time =
     [ "operator>=", "class_time.html#acf74b59af7eb42d1aea2ab565756d35f", null ],
     [ "second", "class_time.html#a5fd67b40cfda298d02d31217424ff276", null ],
     [ "tostring", "class_time.html#af34b119a0a4d16fe365f92a008d292e2", null ],
+    [ "tot_minutes", "class_time.html#a38e813e4e819eb8bd3cf8107b4b79b0d", null ],
     [ "hour_", "class_time.html#af1054ea267fd0a38c0746ce1a3f19d55", null ],
     [ "minute_", "class_time.html#aec4ff5c16a67ee87cbd980bc042f80ec", null ],
     [ "second_", "class_time.html#a020d3a4532bd17284f8857fa8ec2a937", null ]

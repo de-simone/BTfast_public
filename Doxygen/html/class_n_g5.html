@@ -139,6 +139,12 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a0ccb3c64052268bf5253ad000011d18d"><td class="memItemLeft" align="right" valign="top"><a id="a0ccb3c64052268bf5253ad000011d18d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>digits_</b> {1}</td></tr>
 <tr class="separator:a0ccb3c64052268bf5253ad000011d18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f311e81aae405a2558da57f28e36106"><td class="memItemLeft" align="right" valign="top"><a id="a1f311e81aae405a2558da57f28e36106"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>tf_mins_</b> {0}</td></tr>
+<tr class="separator:a1f311e81aae405a2558da57f28e36106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d15f4597370acf495e2a7706d4290f"><td class="memItemLeft" align="right" valign="top"><a id="aa1d15f4597370acf495e2a7706d4290f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>co_mins_</b> {0}</td></tr>
+<tr class="separator:aa1d15f4597370acf495e2a7706d4290f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef4d0af13a9ce8e0cae60658d4e11f71"><td class="memItemLeft" align="right" valign="top"><a id="aef4d0af13a9ce8e0cae60658d4e11f71"></a>
 <a class="el" href="class_time.html">Time</a>&#160;</td><td class="memItemRight" valign="bottom"><b>OneBarBeforeClose_</b> {}</td></tr>
 <tr class="separator:aef4d0af13a9ce8e0cae60658d4e11f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,15 +187,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>T_segment_duration_</b
 <tr class="memitem:afaadd64a31edcb8a98a29d489715a8d3"><td class="memItemLeft" align="right" valign="top"><a id="afaadd64a31edcb8a98a29d489715a8d3"></a>
 std::deque&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ATR_</b> {}</td></tr>
 <tr class="separator:afaadd64a31edcb8a98a29d489715a8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e72e88e72b8207f94f6f30e0a7975e7"><td class="memItemLeft" align="right" valign="top"><a id="a2e72e88e72b8207f94f6f30e0a7975e7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Ncontracts_</b> {1}</td></tr>
-<tr class="separator:a2e72e88e72b8207f94f6f30e0a7975e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6216a12eca86f8e7f2651d7d56540ea9"><td class="memItemLeft" align="right" valign="top"><a id="a6216a12eca86f8e7f2651d7d56540ea9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>MyStop_</b> {0}</td></tr>
 <tr class="separator:a6216a12eca86f8e7f2651d7d56540ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c57303a023076c6569ee4563503c457"><td class="memItemLeft" align="right" valign="top"><a id="a9c57303a023076c6569ee4563503c457"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>fractN_</b> {1}</td></tr>
-<tr class="separator:a9c57303a023076c6569ee4563503c457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba027566c986e45efb1bafe2b736fb16"><td class="memItemLeft" align="right" valign="top"><a id="aba027566c986e45efb1bafe2b736fb16"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>fractN_long_</b> {1}</td></tr>
+<tr class="separator:aba027566c986e45efb1bafe2b736fb16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cfdbec81fa5cb09a8ddd13051a752ef"><td class="memItemLeft" align="right" valign="top"><a id="a8cfdbec81fa5cb09a8ddd13051a752ef"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>fractN_short_</b> {1}</td></tr>
 <tr class="separator:a8cfdbec81fa5cb09a8ddd13051a752ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,6 +227,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_bars_back_</b> {10
 <li>symbol_: instance of instrument class (inherited from base class <a class="el" href="class_strategy.html">Strategy</a>)</li>
 <li>timeframe_: timeframe (inherited from base class <a class="el" href="class_strategy.html">Strategy</a>)</li>
 <li>digits_: rounding digits of symbol_</li>
+<li>tf_mins_: minutes of timeframe (for intraday)</li>
+<li>co_mins_: minutes between close of a session and open of next one</li>
 <li>OneBarBeforeClose_: <a class="el" href="class_time.html">Time</a> of 1 timeframe before session close (close of 2nd-to-last bar)</li>
 <li>CurrentDate_: date of current bar</li>
 <li>CurrentTime_: time of current bar</li>
@@ -238,7 +243,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_bars_back_</b> {10
 <hr  />
 <p><a class="el" href="class_strategy.html">Strategy</a> Parameters:</p>
 <ul>
-<li>Ncontracts_: Number of contracts to trade</li>
 <li>MyStop_: Stop-Loss in USD per contract</li>
 <li>fractN_: Fraction for breakout = 2^fractN_ / 10 </li>
 </ul>

@@ -29,14 +29,14 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-27
+                                                        Last update: 2020-07-28
                                           -------------------------------------
 
  * TO DO:
 
     - Performance: avg drawdown duration: avg time delay between equity peaks.
         check results, stdticks too large
-    - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
+    - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old ?
 
 
     - directionality in mkt regime: ADX(20) > 20

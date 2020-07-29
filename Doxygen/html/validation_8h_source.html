@@ -97,86 +97,104 @@ $(document).ready(function(){initNavTree('validation_8h_source.html','');});
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span>   <span class="comment">// std::vector</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// ------------------------------------------------------------------------- //</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Class for Strategy Selection and Validation</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_validation.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_validation.html">Validation</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// ------------------------------------------------------------------------- //</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// Class for Strategy Selection and Validation</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span> num_validated_ {0};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_b_tfast.html">BTfast</a> &amp;btf_;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::unique_ptr&lt;DataFeed&gt; &amp;datafeed_;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> param_ranges_t &amp;parameter_ranges_;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;strategies_to_validate_;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">const</span> std::string &amp;selected_file_;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">const</span> std::string &amp;validated_file_;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> std::string &amp;fitness_metric_;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">double</span> max_variation_ { 0.3 };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> num_noise_tests_;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> std::string &amp;noise_file_;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//Date date_i_ {};</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">//Date date_f_ {};</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">//double OOSfraction_ {0.0};</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_validation.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_validation.html">Validation</a> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">int</span> num_validated_ {0};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_b_tfast.html">BTfast</a> &amp;btf_;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::unique_ptr&lt;DataFeed&gt; &amp;datafeed_;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;strategies_to_validate_;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">const</span> param_ranges_t &amp;parameter_ranges_;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> std::string &amp;selected_file_;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">const</span> std::string &amp;validated_file_;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">const</span> std::string &amp;fitness_metric_;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> std::string &amp;data_dir_;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> std::string &amp;data_file_oos_;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//std::string data_file_oos_path_ {&quot;&quot;};</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">double</span> max_variation_ { 0.3 };</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> num_noise_tests_;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">const</span> std::string &amp;noise_file_;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="comment">// constructor</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="class_validation.html#aea0afa2315d1e8a6bd098d24b47d3b9f">Validation</a>( <a class="code" href="class_b_tfast.html">BTfast</a> &amp;btf,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    std::unique_ptr&lt;DataFeed&gt; &amp;datafeed,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    <span class="keyword">const</span> param_ranges_t &amp;parameter_ranges,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;strategies_to_validate,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    <span class="keyword">const</span> std::string &amp;selected_file,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <span class="keyword">const</span> std::string &amp;validated_file,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <span class="keyword">const</span> std::string &amp;fitness_metric,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordtype">int</span> max_variation_pct, <span class="keywordtype">int</span> num_noise_tests,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    <span class="keyword">const</span> std::string &amp;noise_file );</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">// full validation process</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#ac52fef5e50de606b845ef2ea0a905040">run_validation</a>();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a922d7cef65a65dc6b38a4ae1d3178a5d">selection</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#af54943638b768dd292ffdf15a47208cd">selection_conditions</a>(</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#ab03b2a603929762422efa3831a52dc2c">profitability_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                 std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a90b8b1d3f08d92a9188f1c065a141ee6">stability_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                             std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a55a6043ff7dc6006fc86d70301e41429">noise_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                         std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a46ddf1acebf810335f0622614dd813c2">OOS_metrics_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                               std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a29121c667197ecaa088e28161cce93b5">OOS_consistency_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                                   std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">//void selection_conditions_OOS( const std::vector&lt;strategy_t&gt; &amp;OOS_run);</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">//Date date_i_ {};</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">//Date date_f_ {};</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//double OOSfraction_ {0.0};</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">// constructor</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_validation.html#aba40ecb32a9d9237bdee758c682d45e1">Validation</a>( <a class="code" href="class_b_tfast.html">BTfast</a> &amp;btf,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    std::unique_ptr&lt;DataFeed&gt; &amp;datafeed,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;strategies_to_validate,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    <span class="keyword">const</span> param_ranges_t &amp;parameter_ranges_,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <span class="keyword">const</span> std::string &amp;selected_file,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <span class="keyword">const</span> std::string &amp;validated_file,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    <span class="keyword">const</span> std::string &amp;fitness_metric,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <span class="keyword">const</span> std::string &amp;data_dir,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="keyword">const</span> std::string &amp;data_file_oos,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="keywordtype">int</span> max_variation_pct, <span class="keywordtype">int</span> num_noise_tests,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <span class="keyword">const</span> std::string &amp;noise_file );</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="comment">// full validation process</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#ac52fef5e50de606b845ef2ea0a905040">run_validation</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a922d7cef65a65dc6b38a4ae1d3178a5d">selection</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a489a946dbed67576f1ddff42e61f87a1">initial_generation_selection</a>(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#af54943638b768dd292ffdf15a47208cd">selection_conditions</a>(</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                            <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                            std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a46ddf1acebf810335f0622614dd813c2">OOS_metrics_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                               std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">// Getters</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordtype">int</span> num_validated()<span class="keyword"> const </span>{ <span class="keywordflow">return</span>( num_validated_ ); }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a29121c667197ecaa088e28161cce93b5">OOS_consistency_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                   std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#ab03b2a603929762422efa3831a52dc2c">profitability_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                                 std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class_validation.html#acae7ec456be4398e39d1836d7f1b88b3">check_profitability</a>( <span class="keyword">const</span> parameters_t&amp; strat_params,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                                  <span class="keyword">const</span> std::string &amp;optim_param_name );</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a90b8b1d3f08d92a9188f1c065a141ee6">stability_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                             std::vector&lt;strategy_t&gt; &amp;output_strategies );</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_validation.html#a6c874bb955167f27fd8bbd8c0695c1e4">noise_test</a>( <span class="keyword">const</span> std::vector&lt;strategy_t&gt; &amp;input_strategies,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                         std::vector&lt;strategy_t&gt; &amp;output_strategies,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                         <span class="keywordtype">bool</span> write_to_file );</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="comment">//void selection_conditions_OOS( const std::vector&lt;strategy_t&gt; &amp;OOS_run);</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="comment">// Getters</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">int</span> num_validated()<span class="keyword"> const </span>{ <span class="keywordflow">return</span>( num_validated_ ); }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_validation_html_a29121c667197ecaa088e28161cce93b5"><div class="ttname"><a href="class_validation.html#a29121c667197ecaa088e28161cce93b5">Validation::OOS_consistency_test</a></div><div class="ttdeci">void OOS_consistency_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:709</div></div>
-<div class="ttc" id="aclass_validation_html"><div class="ttname"><a href="class_validation.html">Validation</a></div><div class="ttdef"><b>Definition:</b> validation.h:34</div></div>
-<div class="ttc" id="aclass_validation_html_aea0afa2315d1e8a6bd098d24b47d3b9f"><div class="ttname"><a href="class_validation.html#aea0afa2315d1e8a6bd098d24b47d3b9f">Validation::Validation</a></div><div class="ttdeci">Validation(BTfast &amp;btf, std::unique_ptr&lt; DataFeed &gt; &amp;datafeed, const param_ranges_t &amp;parameter_ranges, const std::vector&lt; strategy_t &gt; &amp;strategies_to_validate, const std::string &amp;selected_file, const std::string &amp;validated_file, const std::string &amp;fitness_metric, int max_variation_pct, int num_noise_tests, const std::string &amp;noise_file)</div><div class="ttdef"><b>Definition:</b> validation.cpp:21</div></div>
-<div class="ttc" id="aclass_validation_html_a922d7cef65a65dc6b38a4ae1d3178a5d"><div class="ttname"><a href="class_validation.html#a922d7cef65a65dc6b38a4ae1d3178a5d">Validation::selection</a></div><div class="ttdeci">void selection(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:174</div></div>
-<div class="ttc" id="aclass_validation_html_a55a6043ff7dc6006fc86d70301e41429"><div class="ttname"><a href="class_validation.html#a55a6043ff7dc6006fc86d70301e41429">Validation::noise_test</a></div><div class="ttdeci">void noise_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:567</div></div>
-<div class="ttc" id="aclass_validation_html_af54943638b768dd292ffdf15a47208cd"><div class="ttname"><a href="class_validation.html#af54943638b768dd292ffdf15a47208cd">Validation::selection_conditions</a></div><div class="ttdeci">void selection_conditions(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:262</div></div>
-<div class="ttc" id="aclass_validation_html_a90b8b1d3f08d92a9188f1c065a141ee6"><div class="ttname"><a href="class_validation.html#a90b8b1d3f08d92a9188f1c065a141ee6">Validation::stability_test</a></div><div class="ttdeci">void stability_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:452</div></div>
-<div class="ttc" id="aclass_validation_html_ab03b2a603929762422efa3831a52dc2c"><div class="ttname"><a href="class_validation.html#ab03b2a603929762422efa3831a52dc2c">Validation::profitability_test</a></div><div class="ttdeci">void profitability_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:338</div></div>
-<div class="ttc" id="aclass_validation_html_a46ddf1acebf810335f0622614dd813c2"><div class="ttname"><a href="class_validation.html#a46ddf1acebf810335f0622614dd813c2">Validation::OOS_metrics_test</a></div><div class="ttdeci">void OOS_metrics_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:674</div></div>
+<div class="ttc" id="aclass_validation_html_a29121c667197ecaa088e28161cce93b5"><div class="ttname"><a href="class_validation.html#a29121c667197ecaa088e28161cce93b5">Validation::OOS_consistency_test</a></div><div class="ttdeci">void OOS_consistency_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:488</div></div>
+<div class="ttc" id="aclass_validation_html"><div class="ttname"><a href="class_validation.html">Validation</a></div><div class="ttdef"><b>Definition:</b> validation.h:36</div></div>
+<div class="ttc" id="aclass_validation_html_a922d7cef65a65dc6b38a4ae1d3178a5d"><div class="ttname"><a href="class_validation.html#a922d7cef65a65dc6b38a4ae1d3178a5d">Validation::selection</a></div><div class="ttdeci">void selection(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:185</div></div>
+<div class="ttc" id="aclass_validation_html_a6c874bb955167f27fd8bbd8c0695c1e4"><div class="ttname"><a href="class_validation.html#a6c874bb955167f27fd8bbd8c0695c1e4">Validation::noise_test</a></div><div class="ttdeci">void noise_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies, bool write_to_file)</div><div class="ttdef"><b>Definition:</b> validation.cpp:804</div></div>
+<div class="ttc" id="aclass_validation_html_acae7ec456be4398e39d1836d7f1b88b3"><div class="ttname"><a href="class_validation.html#acae7ec456be4398e39d1836d7f1b88b3">Validation::check_profitability</a></div><div class="ttdeci">bool check_profitability(const parameters_t &amp;strat_params, const std::string &amp;optim_param_name)</div><div class="ttdef"><b>Definition:</b> validation.cpp:636</div></div>
+<div class="ttc" id="aclass_validation_html_aba40ecb32a9d9237bdee758c682d45e1"><div class="ttname"><a href="class_validation.html#aba40ecb32a9d9237bdee758c682d45e1">Validation::Validation</a></div><div class="ttdeci">Validation(BTfast &amp;btf, std::unique_ptr&lt; DataFeed &gt; &amp;datafeed, const std::vector&lt; strategy_t &gt; &amp;strategies_to_validate, const param_ranges_t &amp;parameter_ranges_, const std::string &amp;selected_file, const std::string &amp;validated_file, const std::string &amp;fitness_metric, const std::string &amp;data_dir, const std::string &amp;data_file_oos, int max_variation_pct, int num_noise_tests, const std::string &amp;noise_file)</div><div class="ttdef"><b>Definition:</b> validation.cpp:24</div></div>
+<div class="ttc" id="aclass_validation_html_a489a946dbed67576f1ddff42e61f87a1"><div class="ttname"><a href="class_validation.html#a489a946dbed67576f1ddff42e61f87a1">Validation::initial_generation_selection</a></div><div class="ttdeci">void initial_generation_selection(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:240</div></div>
+<div class="ttc" id="aclass_validation_html_af54943638b768dd292ffdf15a47208cd"><div class="ttname"><a href="class_validation.html#af54943638b768dd292ffdf15a47208cd">Validation::selection_conditions</a></div><div class="ttdeci">void selection_conditions(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:298</div></div>
+<div class="ttc" id="aclass_validation_html_a90b8b1d3f08d92a9188f1c065a141ee6"><div class="ttname"><a href="class_validation.html#a90b8b1d3f08d92a9188f1c065a141ee6">Validation::stability_test</a></div><div class="ttdeci">void stability_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:691</div></div>
+<div class="ttc" id="aclass_validation_html_ab03b2a603929762422efa3831a52dc2c"><div class="ttname"><a href="class_validation.html#ab03b2a603929762422efa3831a52dc2c">Validation::profitability_test</a></div><div class="ttdeci">void profitability_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:578</div></div>
+<div class="ttc" id="aclass_validation_html_a46ddf1acebf810335f0622614dd813c2"><div class="ttname"><a href="class_validation.html#a46ddf1acebf810335f0622614dd813c2">Validation::OOS_metrics_test</a></div><div class="ttdeci">void OOS_metrics_test(const std::vector&lt; strategy_t &gt; &amp;input_strategies, std::vector&lt; strategy_t &gt; &amp;output_strategies)</div><div class="ttdef"><b>Definition:</b> validation.cpp:361</div></div>
 <div class="ttc" id="aclass_b_tfast_html"><div class="ttname"><a href="class_b_tfast.html">BTfast</a></div><div class="ttdef"><b>Definition:</b> btfast.h:60</div></div>
-<div class="ttc" id="aclass_validation_html_ac52fef5e50de606b845ef2ea0a905040"><div class="ttname"><a href="class_validation.html#ac52fef5e50de606b845ef2ea0a905040">Validation::run_validation</a></div><div class="ttdeci">void run_validation()</div><div class="ttdef"><b>Definition:</b> validation.cpp:81</div></div>
+<div class="ttc" id="aclass_validation_html_ac52fef5e50de606b845ef2ea0a905040"><div class="ttname"><a href="class_validation.html#ac52fef5e50de606b845ef2ea0a905040">Validation::run_validation</a></div><div class="ttdeci">void run_validation()</div><div class="ttdef"><b>Definition:</b> validation.cpp:91</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -18,7 +18,6 @@ var class_n_g1 =
     [ "LowD_", "class_n_g1.html#ac62933d3842fad169f96e03b0c4362b8", null ],
     [ "MarketPosition_", "class_n_g1.html#a5f672ea6529df71cbef05212417f8ce5", null ],
     [ "MyStop_", "class_n_g1.html#a757f9bfe564d80433a653140b02d1ca8", null ],
-    [ "Ncontracts_", "class_n_g1.html#a0a8d0dfc987dc2fc20f1398955dc4db3", null ],
     [ "NewSession_", "class_n_g1.html#a0b1ad18d20f5140427239d8ff5012f27", null ],
     [ "OneBarBeforeClose_", "class_n_g1.html#ad648dc1657a2dc30dad22eba85bcb160", null ],
     [ "OpenD_", "class_n_g1.html#a4e98939a718917ea20b00db14a3e809c", null ],

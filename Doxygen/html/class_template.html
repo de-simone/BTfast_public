@@ -139,6 +139,12 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:af213610e5c709ff9a5ea5c6451c878cf"><td class="memItemLeft" align="right" valign="top"><a id="af213610e5c709ff9a5ea5c6451c878cf"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>digits_</b> {1}</td></tr>
 <tr class="separator:af213610e5c709ff9a5ea5c6451c878cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa99b5d37158f0228bc8a70000405fc1"><td class="memItemLeft" align="right" valign="top"><a id="aaa99b5d37158f0228bc8a70000405fc1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>tf_mins_</b> {0}</td></tr>
+<tr class="separator:aaa99b5d37158f0228bc8a70000405fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af72c0d5665b991f2ccd3116c740f3a5e"><td class="memItemLeft" align="right" valign="top"><a id="af72c0d5665b991f2ccd3116c740f3a5e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>co_mins_</b> {0}</td></tr>
+<tr class="separator:af72c0d5665b991f2ccd3116c740f3a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b102d2869bfff32923cc35655b43b68"><td class="memItemLeft" align="right" valign="top"><a id="a6b102d2869bfff32923cc35655b43b68"></a>
 <a class="el" href="class_time.html">Time</a>&#160;</td><td class="memItemRight" valign="bottom"><b>OneBarBeforeClose_</b> {}</td></tr>
 <tr class="separator:a6b102d2869bfff32923cc35655b43b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,18 +181,24 @@ std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"
 <tr class="memitem:a71a5c2205bb50589e0c2670bbdb8c323"><td class="memItemLeft" align="right" valign="top"><a id="a71a5c2205bb50589e0c2670bbdb8c323"></a>
 std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CloseD_</b> {}</td></tr>
 <tr class="separator:a71a5c2205bb50589e0c2670bbdb8c323"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37b466498e2d89e04d66c4a5020ce43a"><td class="memItemLeft" align="right" valign="top"><a id="a37b466498e2d89e04d66c4a5020ce43a"></a>
-std::deque&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ROC_</b> {}</td></tr>
-<tr class="separator:a37b466498e2d89e04d66c4a5020ce43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af25462a75c7dcbfb1c61078a32b6e8c7"><td class="memItemLeft" align="right" valign="top"><a id="af25462a75c7dcbfb1c61078a32b6e8c7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Ncontracts_</b> {1}</td></tr>
-<tr class="separator:af25462a75c7dcbfb1c61078a32b6e8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad967f54c3a93ec2e5b3d68c642588a4f"><td class="memItemLeft" align="right" valign="top"><a id="ad967f54c3a93ec2e5b3d68c642588a4f"></a>
+std::array&lt; int, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>VolumeD_</b> {}</td></tr>
+<tr class="separator:ad967f54c3a93ec2e5b3d68c642588a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24bb87b493d217768fe86f4f339c3a7"><td class="memItemLeft" align="right" valign="top"><a id="ab24bb87b493d217768fe86f4f339c3a7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>T_segment_duration_</b> {0}</td></tr>
+<tr class="separator:ab24bb87b493d217768fe86f4f339c3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e3259c1805cbb9dc800a17d2ff4f2e7"><td class="memItemLeft" align="right" valign="top"><a id="a4e3259c1805cbb9dc800a17d2ff4f2e7"></a>
+std::deque&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>roc_</b> {}</td></tr>
+<tr class="separator:a4e3259c1805cbb9dc800a17d2ff4f2e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e37727093fd209f8734f0e105c38770"><td class="memItemLeft" align="right" valign="top"><a id="a5e37727093fd209f8734f0e105c38770"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>MyStop_</b> {0}</td></tr>
 <tr class="separator:a5e37727093fd209f8734f0e105c38770"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9841a6e2ab5f80b51a38bcc6e7a74135"><td class="memItemLeft" align="right" valign="top"><a id="a9841a6e2ab5f80b51a38bcc6e7a74135"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>fractN_</b> {2}</td></tr>
 <tr class="separator:a9841a6e2ab5f80b51a38bcc6e7a74135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a626134cd02c489f5ca8bdc3f6009557e"><td class="memItemLeft" align="right" valign="top"><a id="a626134cd02c489f5ca8bdc3f6009557e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Exit_switch_</b> {0}</td></tr>
+<tr class="separator:a626134cd02c489f5ca8bdc3f6009557e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -212,6 +224,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_bars_back_</b> {10
 <li>symbol_: instance of instrument class (inherited from base class <a class="el" href="class_strategy.html">Strategy</a>)</li>
 <li>timeframe_: timeframe (inherited from base class <a class="el" href="class_strategy.html">Strategy</a>)</li>
 <li>digits_: rounding digits of symbol_</li>
+<li>tf_mins_: minutes of timeframe (for intraday)</li>
+<li>co_mins_: minutes between close of a session and open of next one</li>
 <li>OneBarBeforeClose_: <a class="el" href="class_time.html">Time</a> of 1 timeframe before session close (close of 2nd-to-last bar)</li>
 <li>CurrentDate_: date of current bar</li>
 <li>CurrentTime_: time of current bar</li>
@@ -220,12 +234,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_bars_back_</b> {10
 <li>TradingEnabled_: enable/disable trading during session. E.g. forbids multiple trades in same session.</li>
 <li>SessionOpenPrice_: opening price of the current session</li>
 <li>NewSession_: true at the start of a new session (day), otherwise false</li>
-<li>OpenD_, ... , CloseD_: array of OHLC of current and previous 5 sessions</li>
+<li>OpenD_, ... , CloseD_, VolumeD_: array of OHLCV of current and previous 5 sessions</li>
+<li>T_segment_duration: duration of T-segment window (in minutes)</li>
 </ul>
 <hr  />
 <p><a class="el" href="class_strategy.html">Strategy</a> Parameters:</p>
 <ul>
-<li>Ncontracts_: Number of contracts to trade</li>
 <li>MyStop_: Stop-Loss in USD per contract</li>
 <li>fract_: Fraction for breakout </li>
 </ul>

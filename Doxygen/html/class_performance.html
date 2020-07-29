@@ -98,20 +98,22 @@ $(document).ready(function(){initNavTree('class_performance.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aec8dee323d3198bda66fa09894cc6c18"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#aec8dee323d3198bda66fa09894cc6c18">Performance</a> (double initial_balance, int ndays, std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt; transactions)</td></tr>
-<tr class="separator:aec8dee323d3198bda66fa09894cc6c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a957f6e1b163fe93404d670227bd20675"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a957f6e1b163fe93404d670227bd20675">Performance</a> (double initial_balance, std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt; transactions)</td></tr>
+<tr class="separator:a957f6e1b163fe93404d670227bd20675"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d67d91e454a4e7a94430cf8bd71d686"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a3d67d91e454a4e7a94430cf8bd71d686">compute_metrics</a> ()</td></tr>
 <tr class="separator:a3d67d91e454a4e7a94430cf8bd71d686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e9e0fd4cc94ab4712c67b49ffd1d3fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a2e9e0fd4cc94ab4712c67b49ffd1d3fd">compute_metrics</a> (const std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt; &amp;transactions, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
 <tr class="separator:a2e9e0fd4cc94ab4712c67b49ffd1d3fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6e9363584b661aca1eaca99484984ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#ae6e9363584b661aca1eaca99484984ae">drawdown</a> (const std::vector&lt; double &gt; &amp;profits, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
-<tr class="separator:ae6e9363584b661aca1eaca99484984ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ae1ed73d93dea2cbbf67ff3600d2584"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a7ae1ed73d93dea2cbbf67ff3600d2584">drawdown</a> (const std::vector&lt; double &gt; &amp;profits, const std::vector&lt; <a class="el" href="class_date.html">Date</a> &gt; &amp;dates_vec, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
+<tr class="separator:a7ae1ed73d93dea2cbbf67ff3600d2584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8a2fcbed5c261ac4914d18bb345076a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#ab8a2fcbed5c261ac4914d18bb345076a">profitable_years</a> (const std::vector&lt; double &gt; &amp;ticks_vec, const std::vector&lt; <a class="el" href="class_date.html">Date</a> &gt; &amp;dates_vec, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
+<tr class="separator:ab8a2fcbed5c261ac4914d18bb345076a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b410e647eb38c6ff669deaed84ae1ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a9b410e647eb38c6ff669deaed84ae1ff">max_consec_win_loss</a> (const std::vector&lt; double &gt; &amp;profits, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
 <tr class="separator:a9b410e647eb38c6ff669deaed84ae1ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a223d1baaabd71ea939e63affa1e061b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a223d1baaabd71ea939e63affa1e061b2">zscore</a> (const std::vector&lt; double &gt; &amp;profits, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
 <tr class="separator:a223d1baaabd71ea939e63affa1e061b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10c9a9721c56cc97aa3869870203f95b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a10c9a9721c56cc97aa3869870203f95b">cagr</a> (const std::vector&lt; double &gt; &amp;profits, std::unordered_map&lt; std::string, double &gt; &amp;metrics, int nyears)</td></tr>
-<tr class="separator:a10c9a9721c56cc97aa3869870203f95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0caa1669a0803554109ca4576dd5401"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#ae0caa1669a0803554109ca4576dd5401">cagr</a> (const std::vector&lt; double &gt; &amp;profits, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
+<tr class="separator:ae0caa1669a0803554109ca4576dd5401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb9092acd7fab6dbaacae5ee79546574"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#acb9092acd7fab6dbaacae5ee79546574">rsquared</a> (const std::vector&lt; double &gt; &amp;profits, std::unordered_map&lt; std::string, double &gt; &amp;metrics)</td></tr>
 <tr class="separator:acb9092acd7fab6dbaacae5ee79546574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab78fcc06b42ecb7a8b323e7cd57555aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#ab78fcc06b42ecb7a8b323e7cd57555aa">print_performance_report</a> ()</td></tr>
@@ -129,18 +131,15 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>initial_balance</b>
 <tr class="memitem:a551ac6637555aa303eb4cee0c193a5f5"><td class="memItemLeft" align="right" valign="top"><a id="a551ac6637555aa303eb4cee0c193a5f5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>ntrades</b> () const</td></tr>
 <tr class="separator:a551ac6637555aa303eb4cee0c193a5f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3a6ac4877e865e3f24ede66c6f71f29"><td class="memItemLeft" align="right" valign="top"><a id="ae3a6ac4877e865e3f24ede66c6f71f29"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>netpl</b> () const</td></tr>
-<tr class="separator:ae3a6ac4877e865e3f24ede66c6f71f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8954e68cd6dc34d855d94811eefb24d8"><td class="memItemLeft" align="right" valign="top"><a id="a8954e68cd6dc34d855d94811eefb24d8"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>avgtrade</b> () const</td></tr>
-<tr class="separator:a8954e68cd6dc34d855d94811eefb24d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1c20622b2f6c78be903e80d20e861c5"><td class="memItemLeft" align="right" valign="top"><a id="ab1c20622b2f6c78be903e80d20e861c5"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>profitfactor</b> () const</td></tr>
-<tr class="separator:ab1c20622b2f6c78be903e80d20e861c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5668efea808e736e323115fa86f3c33d"><td class="memItemLeft" align="right" valign="top"><a id="a5668efea808e736e323115fa86f3c33d"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>avgticks</b> () const</td></tr>
+<tr class="separator:a5668efea808e736e323115fa86f3c33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87a2886cb04016838e6b0e2eecfcb998"><td class="memItemLeft" align="right" valign="top"><a id="a87a2886cb04016838e6b0e2eecfcb998"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>winperc</b> () const</td></tr>
 <tr class="separator:a87a2886cb04016838e6b0e2eecfcb998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c20622b2f6c78be903e80d20e861c5"><td class="memItemLeft" align="right" valign="top"><a id="ab1c20622b2f6c78be903e80d20e861c5"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>profitfactor</b> () const</td></tr>
+<tr class="separator:ab1c20622b2f6c78be903e80d20e861c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cc5da2f6516df63f8849d1671ad89f3"><td class="memItemLeft" align="right" valign="top"><a id="a0cc5da2f6516df63f8849d1671ad89f3"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>npmdd</b> () const</td></tr>
 <tr class="separator:a0cc5da2f6516df63f8849d1671ad89f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +149,21 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>expectancy</b> () c
 <tr class="memitem:a5a85ad6aa7031ab224684d68b9ddb1a6"><td class="memItemLeft" align="right" valign="top"><a id="a5a85ad6aa7031ab224684d68b9ddb1a6"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>zscore</b> () const</td></tr>
 <tr class="separator:a5a85ad6aa7031ab224684d68b9ddb1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3a6ac4877e865e3f24ede66c6f71f29"><td class="memItemLeft" align="right" valign="top"><a id="ae3a6ac4877e865e3f24ede66c6f71f29"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>netpl</b> () const</td></tr>
+<tr class="separator:ae3a6ac4877e865e3f24ede66c6f71f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8954e68cd6dc34d855d94811eefb24d8"><td class="memItemLeft" align="right" valign="top"><a id="a8954e68cd6dc34d855d94811eefb24d8"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>avgtrade</b> () const</td></tr>
+<tr class="separator:a8954e68cd6dc34d855d94811eefb24d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af624737bf1d54b80e3bd781a23c68bc1"><td class="memItemLeft" align="right" valign="top"><a id="af624737bf1d54b80e3bd781a23c68bc1"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>stdticks</b> () const</td></tr>
+<tr class="separator:af624737bf1d54b80e3bd781a23c68bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c54cdc1f829ecdb72b5c63beef9745e"><td class="memItemLeft" align="right" valign="top"><a id="a9c54cdc1f829ecdb72b5c63beef9745e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>nyears</b> () const</td></tr>
+<tr class="separator:a9c54cdc1f829ecdb72b5c63beef9745e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a5f2a74761c3a5262f7712f285f846"><td class="memItemLeft" align="right" valign="top"><a id="a02a5f2a74761c3a5262f7712f285f846"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>profitable_yrs</b> () const</td></tr>
+<tr class="separator:a02a5f2a74761c3a5262f7712f285f846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa0ca0f5629f864e310fbbb96d66aee2"><td class="memItemLeft" align="right" valign="top"><a id="afa0ca0f5629f864e310fbbb96d66aee2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_transactions</b> (std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt; transactions)</td></tr>
 <tr class="separator:afa0ca0f5629f864e310fbbb96d66aee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,10 +174,6 @@ Private Attributes</h2></td></tr>
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#aa2bc0e6edb543aa47903c66d7e1a5984">initial_balance_</a> {100000.0}</td></tr>
 <tr class="memdesc:aa2bc0e6edb543aa47903c66d7e1a5984"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial balance <br /></td></tr>
 <tr class="separator:aa2bc0e6edb543aa47903c66d7e1a5984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44529966847b3cfaaf62d08b1d16689c"><td class="memItemLeft" align="right" valign="top"><a id="a44529966847b3cfaaf62d08b1d16689c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#a44529966847b3cfaaf62d08b1d16689c">ndays_</a> {1}</td></tr>
-<tr class="memdesc:a44529966847b3cfaaf62d08b1d16689c"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of days parsed from file <br /></td></tr>
-<tr class="separator:a44529966847b3cfaaf62d08b1d16689c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb44f432c382d6d1cb0b473a130675c5"><td class="memItemLeft" align="right" valign="top"><a id="acb44f432c382d6d1cb0b473a130675c5"></a>
 std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_performance.html#acb44f432c382d6d1cb0b473a130675c5">transactions_</a> {}</td></tr>
 <tr class="memdesc:acb44f432c382d6d1cb0b473a130675c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">vector of <a class="el" href="class_transaction.html">Transaction</a> objects <br /></td></tr>
@@ -197,8 +207,8 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
 <li>ndays_: number of days parsed from file </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aec8dee323d3198bda66fa09894cc6c18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec8dee323d3198bda66fa09894cc6c18">&#9670;&nbsp;</a></span>Performance()</h2>
+<a id="a957f6e1b163fe93404d670227bd20675"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957f6e1b163fe93404d670227bd20675">&#9670;&nbsp;</a></span>Performance()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,12 +218,6 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>initial_balance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ndays</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -233,8 +237,8 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a10c9a9721c56cc97aa3869870203f95b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10c9a9721c56cc97aa3869870203f95b">&#9670;&nbsp;</a></span>cagr()</h2>
+<a id="ae0caa1669a0803554109ca4576dd5401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0caa1669a0803554109ca4576dd5401">&#9670;&nbsp;</a></span>cagr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,13 +253,7 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::unordered_map&lt; std::string, double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>metrics</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nyears</em>&#160;</td>
+          <td class="paramname"><em>metrics</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -333,8 +331,8 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
 
 </div>
 </div>
-<a id="ae6e9363584b661aca1eaca99484984ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6e9363584b661aca1eaca99484984ae">&#9670;&nbsp;</a></span>drawdown()</h2>
+<a id="a7ae1ed73d93dea2cbbf67ff3600d2584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ae1ed73d93dea2cbbf67ff3600d2584">&#9670;&nbsp;</a></span>drawdown()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -344,6 +342,12 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
           <td>(</td>
           <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>profits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="class_date.html">Date</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dates_vec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -358,7 +362,8 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
         </tr>
       </table>
 </div><div class="memdoc">
-<p>NetPL, Nwins, GrossProfit, GrossLoss, MaxProfit, MaxLoss, Max and average drawdown (cash and %) Store result into metrics. </p>
+<p>Max and average drawdown (cash and %), avg drawdown duration, Nwins, GrossProfit, GrossLoss, MaxProfit, MaxLoss</p>
+<p>Store result into metrics. </p>
 
 </div>
 </div>
@@ -409,6 +414,44 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
 
 </div>
 </div>
+<a id="ab8a2fcbed5c261ac4914d18bb345076a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8a2fcbed5c261ac4914d18bb345076a">&#9670;&nbsp;</a></span>profitable_years()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Performance::profitable_years </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ticks_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="class_date.html">Date</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dates_vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unordered_map&lt; std::string, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>metrics</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Mean and stddev of number of ticks per trade avg_ticks = ( 1/(Ntrades*tick_value) ) * sum_i (PL_i/Nlots_i). = mean( PL/(Nlots*tick_value) ) std_ticks = stdev( PL/(Nlots*tick_value) )</p>
+<p>Store results into metrics.</p>
+<p>Number of profitable years, Total number of years</p>
+<p>Store result into metrics. </p>
+
+</div>
+</div>
 <a id="acb9092acd7fab6dbaacae5ee79546574"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb9092acd7fab6dbaacae5ee79546574">&#9670;&nbsp;</a></span>rsquared()</h2>
 
@@ -434,7 +477,7 @@ std::unordered_map&lt; std::string, double &gt;&#160;</td><td class="memItemRigh
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Compute R^2, a.k.a. Coefficient of determination (squared of Pearson coefficient) </p>
+<p>Compute R^2, a.k.a. Coefficient of determination (squared of Pearson coefficient). Store result into metrics. </p>
 
 </div>
 </div>

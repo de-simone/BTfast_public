@@ -100,8 +100,8 @@ $(document).ready(function(){initNavTree('class_position_sizer.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acf1926c1d2a1460fb4c14aec144a61b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_position_sizer.html#acf1926c1d2a1460fb4c14aec144a61b7">PositionSizer</a> (const std::string &amp;ps_type, const <a class="el" href="class_instrument.html">Instrument</a> &amp;symbol, int num_contracts, double risk_fraction)</td></tr>
 <tr class="separator:acf1926c1d2a1460fb4c14aec144a61b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c701483127edb4e89a33c7a34b0b220"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_position_sizer.html#a8c701483127edb4e89a33c7a34b0b220">compute_quantity</a> (double price, const <a class="el" href="class_account.html">Account</a> &amp;account) const</td></tr>
-<tr class="separator:a8c701483127edb4e89a33c7a34b0b220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d297f11e826f18abb486d12fadd374"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_position_sizer.html#a99d297f11e826f18abb486d12fadd374">compute_quantity</a> (double price, double position_size_factor, const <a class="el" href="class_account.html">Account</a> &amp;account) const</td></tr>
+<tr class="separator:a99d297f11e826f18abb486d12fadd374"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -170,8 +170,8 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>risk_fraction_</b> 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8c701483127edb4e89a33c7a34b0b220"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c701483127edb4e89a33c7a34b0b220">&#9670;&nbsp;</a></span>compute_quantity()</h2>
+<a id="a99d297f11e826f18abb486d12fadd374"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99d297f11e826f18abb486d12fadd374">&#9670;&nbsp;</a></span>compute_quantity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,6 +181,12 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>risk_fraction_</b> 
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>price</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>position_size_factor</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

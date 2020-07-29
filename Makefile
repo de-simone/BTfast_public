@@ -17,13 +17,13 @@ CC         	:= g++ # standard C++ compiler
 UNAME := $(shell uname -s)
 ifeq ($(UNAME),Darwin)	#- Mac OS -#
 	
-	CFLAGS 	:= -std=c++17 -Wall -Xpreprocessor -fopenmp -lomp -lsqlite3
-			#   -lm -lcurl  
+	CFLAGS 	:= -std=c++17 -Wall -Xpreprocessor -fopenmp -lomp
+			#  -lsqlite3 -lm -lcurl  
 endif
 
 ifeq ($(UNAME),Linux)		#- Linux -#
 	
-	CFLAGS 	:= -std=c++17 -fopenmp -lsqlite3 
+	CFLAGS 	:= -std=c++17 -fopenmp #-lsqlite3 
 	LIBDIR	:= /usr/local
     	#INCLUDEDIR += -I$(LIBDIR)/include 			# path to sqlite.h	
 	#INCLUDEDIR += -L$(LIBDIR)/lib				# path to libsqlite3.so (<- should have this name)
@@ -56,7 +56,13 @@ all: 		# compile everything
 debug:  	# compile for debugging (lldb)
 
 	$(CC) $(CFLAGS) -g $(INCLUDEDIR) $(SRCFILES) -o $(OUTPUT) 
-	@echo ">>>" BTfast compiled successfully for profiling.
+	@echo ">>>" BTfast compiled successfully for debugging.
+	@echo
+
+debug_addr:  	# compile for debugging (google AddressSanitizer)
+
+	$(CC) $(CFLAGS) -fsanitize=address -O1 -fno-omit-frame-pointer -g $(INCLUDEDIR) $(SRCFILES) -o $(OUTPUT) 
+	@echo ">>>" BTfast compiled successfully for debugging.
 	@echo
 
 profile:  	# compile for profiling (gperftools)

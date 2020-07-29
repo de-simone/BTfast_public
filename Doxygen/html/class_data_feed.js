@@ -20,6 +20,7 @@ var class_data_feed =
     [ "symbol", "class_data_feed.html#a0c4fbab544e3573f9e53dbb340dc9ea2", null ],
     [ "timeframe", "class_data_feed.html#aa82880458f2f8c2a7717df2860c2ec0c", null ],
     [ "tot_bars", "class_data_feed.html#acd9c299be1c472999afd09c740ccdef0", null ],
+    [ "type", "class_data_feed.html#ad3e09666b70a4a29e88d5ff676bfc041", null ],
     [ "events_queue_", "class_data_feed.html#ae23bdffcd45a5ae7474880e979517c93", null ],
     [ "symbol_", "class_data_feed.html#a00df33f3e99181910933e3cca8553b49", null ],
     [ "timeframe_", "class_data_feed.html#ac7de51c0488497d20958abe1093879fa", null ]

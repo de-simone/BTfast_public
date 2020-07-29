@@ -208,12 +208,16 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>probability_</b> {0
 <p>Calculate fittness score of single individual and assign it to fitness_ member variable. Append performance+parameters to 'optim_results'.</p>
 <p>Names/Number/Order of performance metrics must be matched among:</p><ul>
 <li>utils_params::extract_parameters_from_single_strategy</li>
+<li>utils_params::extract_metrics_from_single_strategy</li>
 <li>utils_optim::append_to_optim_results</li>
 <li>utils_optim::sort_by_metric</li>
 <li>utils_optim::sort_by_ntrades, utils_optim::sort_by_avgtrade, etc</li>
 <li>utils_fileio::write_strategies_to_file</li>
 <li><a class="el" href="class_individual.html#a8ab0234024db23c5a010943e3b9da88f">Individual::compute_individual_fitness</a></li>
-<li><a class="el" href="class_validation.html#af54943638b768dd292ffdf15a47208cd">Validation::selection_conditions</a> </li>
+<li><a class="el" href="class_validation.html#a489a946dbed67576f1ddff42e61f87a1">Validation::initial_generation_selection</a></li>
+<li><a class="el" href="class_validation.html#af54943638b768dd292ffdf15a47208cd">Validation::selection_conditions</a></li>
+<li><a class="el" href="class_validation.html#a6c874bb955167f27fd8bbd8c0695c1e4">Validation::noise_test</a></li>
+<li>mode_factory_sequential (run_modes) </li>
 </ul>
 
 </div>

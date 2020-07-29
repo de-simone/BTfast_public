@@ -99,10 +99,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a68e81c7f481d2fd286ae091b216654c4"><td class="memItemLeft" align="right" valign="top"><a id="a68e81c7f481d2fd286ae091b216654c4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Date</b> (int year=1900, int month=1, int day=1)</td></tr>
 <tr class="separator:a68e81c7f481d2fd286ae091b216654c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2b1983f0d40a01bca60ef841278c0c4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_date.html#ae2b1983f0d40a01bca60ef841278c0c4">rdn</a> (int y, int m, int d)</td></tr>
-<tr class="separator:ae2b1983f0d40a01bca60ef841278c0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6ba2e3db30a4bfbf82c47429ab2196"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_date.html#a6b6ba2e3db30a4bfbf82c47429ab2196">DaysDiff</a> (const <a class="el" href="class_date.html">Date</a> &amp;date)</td></tr>
-<tr class="separator:a6b6ba2e3db30a4bfbf82c47429ab2196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131e9eba080e06b2e8e4a9c4c629e387"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_date.html#a131e9eba080e06b2e8e4a9c4c629e387">rdn</a> (int y, int m, int d) const</td></tr>
+<tr class="separator:a131e9eba080e06b2e8e4a9c4c629e387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae36c230dcdfcf462e0ededc8dc9f0d7c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_date.html#ae36c230dcdfcf462e0ededc8dc9f0d7c">DaysDiff</a> (const <a class="el" href="class_date.html">Date</a> &amp;date) const</td></tr>
+<tr class="separator:ae36c230dcdfcf462e0ededc8dc9f0d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb59de8d1ac3b04cbd57be3b551be2dc"><td class="memItemLeft" align="right" valign="top"><a id="adb59de8d1ac3b04cbd57be3b551be2dc"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>year</b> () const</td></tr>
 <tr class="separator:adb59de8d1ac3b04cbd57be3b551be2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,8 +157,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_leapyear_</b> {fal
 <tr class="separator:a3450f483fcc68f48ed2f97cde045844c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6b6ba2e3db30a4bfbf82c47429ab2196"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b6ba2e3db30a4bfbf82c47429ab2196">&#9670;&nbsp;</a></span>DaysDiff()</h2>
+<a id="ae36c230dcdfcf462e0ededc8dc9f0d7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae36c230dcdfcf462e0ededc8dc9f0d7c">&#9670;&nbsp;</a></span>DaysDiff()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,7 +168,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_leapyear_</b> {fal
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_date.html">Date</a> &amp;&#160;</td>
           <td class="paramname"><em>date</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -252,8 +252,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_leapyear_</b> {fal
 
 </div>
 </div>
-<a id="ae2b1983f0d40a01bca60ef841278c0c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2b1983f0d40a01bca60ef841278c0c4">&#9670;&nbsp;</a></span>rdn()</h2>
+<a id="a131e9eba080e06b2e8e4a9c4c629e387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a131e9eba080e06b2e8e4a9c4c629e387">&#9670;&nbsp;</a></span>rdn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +279,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_leapyear_</b> {fal
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">

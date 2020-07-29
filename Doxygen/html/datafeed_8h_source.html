@@ -122,38 +122,40 @@ $(document).ready(function(){initNavTree('datafeed_8h_source.html','');});
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_data_feed.html#afa6c84ba1b7414b3c00c76e231ad11a5">set_events_queue</a>(std::deque&lt;Event&gt; *events_queue);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// Pure virtual functions (overridden by derived objects)</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">virtual</span> std::string data_file() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> csv_format() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_date.html">Date</a> start_date() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_date.html">Date</a> end_date() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> continue_parsing() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> tot_bars() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> open_data_connection() = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> close_data_connection() = 0;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> reset_cursor() = 0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> stream_next_bar() = 0;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_start_date(<a class="code" href="class_date.html">Date</a> d) = 0;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_end_date(<a class="code" href="class_date.html">Date</a> d) = 0;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_data_file(std::string f) = 0;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">virtual</span> std::unique_ptr&lt;DataFeed&gt; clone() <span class="keyword">const</span> = 0;    </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">virtual</span> std::string type() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">virtual</span> std::string data_file() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> csv_format() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_date.html">Date</a> start_date() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_date.html">Date</a> end_date() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> continue_parsing() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> tot_bars() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> open_data_connection() = 0;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> close_data_connection() = 0;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> reset_cursor() = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> stream_next_bar() = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_start_date(<a class="code" href="class_date.html">Date</a> d) = 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_end_date(<a class="code" href="class_date.html">Date</a> d) = 0;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> set_data_file(std::string f) = 0;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">virtual</span> std::unique_ptr&lt;DataFeed&gt; clone() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// ------------------------------------------------------------------------- //</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> select_datafeed( std::unique_ptr&lt;DataFeed&gt;&amp; datafeed_ptr,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                      std::string datafeed_type,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                      <span class="keyword">const</span> <a class="code" href="class_instrument.html">Instrument</a> &amp;symbol, std::string timeframe,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                      std::string data_file_path, <span class="keywordtype">int</span> csv_format,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                      <a class="code" href="class_date.html">Date</a> start_date, <a class="code" href="class_date.html">Date</a> end_date );</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">// ------------------------------------------------------------------------- //</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> select_datafeed( std::unique_ptr&lt;DataFeed&gt;&amp; datafeed_ptr,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                      std::string datafeed_type,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                      <span class="keyword">const</span> <a class="code" href="class_instrument.html">Instrument</a> &amp;symbol, std::string timeframe,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                      <span class="keyword">const</span> std::string &amp;data_dir,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                      <span class="keyword">const</span> std::string &amp;data_file,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                      <span class="keywordtype">int</span> csv_format, <a class="code" href="class_date.html">Date</a> start_date, <a class="code" href="class_date.html">Date</a> end_date );</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_data_feed_html_afca61a0e0d7ac5191e9a2d0fb5b7fffe"><div class="ttname"><a href="class_data_feed.html#afca61a0e0d7ac5191e9a2d0fb5b7fffe">DataFeed::DataFeed</a></div><div class="ttdeci">DataFeed(const Instrument &amp;symbol, std::string timeframe)</div><div class="ttdef"><b>Definition:</b> datafeed.cpp:14</div></div>
-<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:36</div></div>
+<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:37</div></div>
 <div class="ttc" id="aclass_data_feed_html_a7cd34f142f8be707effcd3ac0d00f94e"><div class="ttname"><a href="class_data_feed.html#a7cd34f142f8be707effcd3ac0d00f94e">DataFeed::~DataFeed</a></div><div class="ttdeci">virtual ~DataFeed()=0</div><div class="ttdef"><b>Definition:</b> datafeed.cpp:20</div></div>
 <div class="ttc" id="aclass_data_feed_html_afa6c84ba1b7414b3c00c76e231ad11a5"><div class="ttname"><a href="class_data_feed.html#afa6c84ba1b7414b3c00c76e231ad11a5">DataFeed::set_events_queue</a></div><div class="ttdeci">void set_events_queue(std::deque&lt; Event &gt; *events_queue)</div><div class="ttdef"><b>Definition:</b> datafeed.cpp:26</div></div>
 <div class="ttc" id="aclass_data_feed_html"><div class="ttname"><a href="class_data_feed.html">DataFeed</a></div><div class="ttdef"><b>Definition:</b> datafeed.h:22</div></div>

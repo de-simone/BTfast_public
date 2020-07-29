@@ -202,7 +202,7 @@ void mode_factory_sequential( BTfast &btf,
     bool selection_conditions {false};
     double avgticks_with_filter {0};
     double avgticks_no_filter {0};
-    //<<< double stdticks_no_filter {0};
+    // double stdticks_no_filter {0};
     double zscore_with_filter {0};
     double zscore_no_filter {0};
     double perf_relative_improvement {0.2};
@@ -294,7 +294,7 @@ void mode_factory_sequential( BTfast &btf,
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", no_filter_strat );
-        //<<<stdticks_no_filter = utils_params::strategy_attribute_by_name(
+        //stdticks_no_filter = utils_params::strategy_attribute_by_name(
         //                                        "StdTicks", no_filter_strat );
         zscore_no_filter = utils_params::strategy_attribute_by_name(
                                                  "Z-score", no_filter_strat );
@@ -303,7 +303,7 @@ void mode_factory_sequential( BTfast &btf,
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
-        //<<< selection_conditions = avgticks_with_filter >= avgticks_no_filter
+        //selection_conditions = avgticks_with_filter >= avgticks_no_filter
         //          + 1.5*stdticks_no_filter;
         selection_conditions =
             ( avgticks_with_filter >= avgticks_no_filter
@@ -317,6 +317,7 @@ void mode_factory_sequential( BTfast &btf,
             selected_2.push_back(strat);
         }
     }
+
     utils_optim::remove_duplicates( selected_2, fitness_metric );
     std::cout << "Number of strategies passing 2nd generation step "
               << "(DOW_switch) : "

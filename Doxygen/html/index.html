@@ -91,48 +91,42 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
 Introduction</h1>
-<p><a class="el" href="class_b_tfast.html">BTfast</a> is a software written in C++ to do event-driven backtesting and optimization of trading systems.</p>
+<p><a class="el" href="class_b_tfast.html">BTfast</a> is a software written in C++ to do event-driven backtesting, optimization and validation of trading systems.</p>
 <dl class="section version"><dt>Version</dt><dd>v1.0 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Andrea De Simone</dd></dl>
-<p>Copyright (c) 2019, Andrea De Simone - All rights reserved.<br  />
+<p>Copyright (c) 2019-2020, Andrea De Simone - All rights reserved.<br  />
 </p>
 <h2><a class="anchor" id="Data"></a>
 Storage</h2>
-<p>CSV files, SQLite database</p>
+<ul>
+<li>CSV files</li>
+</ul>
 <p>Required files:</p><ul>
 <li>Configuration file: 'settings.xml'</li>
-<li>Data file, in BarData/ directory</li>
+<li>Data file, in 'data_dir' directory</li>
 <li><a class="el" href="class_strategy.html">Strategy</a> files: 'Strategy/strategyname.cpp', 'Strategy/strategyname.h', 'Strategy/StrategyName.xml'</li>
-</ul>
-<p>EDIT:</p><ul>
-<li>Input settings (in 'settings.xml')</li>
-<li><a class="el" href="class_strategy.html">Strategy</a> parameters (in 'Strategies/StrategyName.xml')</li>
+<li>Contract specifications: 'src/instruments.cpp'</li>
 </ul>
 <hr  />
 <p> Created by Prof. Andrea De Simone Copyright 2019 (c). All rights reserved Started on: 2019-11-22 </p>
 <h2><a class="anchor" id="autotoc_md1"></a>
-Last update: 2020-03-02</h2>
+Last update: 2020-07-28</h2>
 <p>TO DO:</p>
 <ul>
-<li>OOS tests in validation: oos_file_ in btf.</li>
-<li>multiple comparison, benjamini-hochberg</li>
-<li>put all filter patterns into file base_ptn -&gt; patterns.cpp</li>
-<li>check implementation of LIMIT orders with TradeStation</li>
-<li>MasterCodeMR for mean reversion ("stop"-&gt;"limit" order)</li>
+<li><a class="el" href="class_performance.html">Performance</a>: avg drawdown duration: avg time delay between equity peaks. check results, stdticks too large</li>
+<li>Sequential generation: select if avgticks_new &gt; avgticks_old + stdticks_old ?</li>
+<li>directionality in mkt regime: ADX(20) &gt; 20</li>
+<li>DPS: allow ps_factor=0,1,2. dynamic DOW with DPS</li>
+<li>signal weights: assign weight in [0,1] to breakout signal; distribution of ticks over weights (e.g. histogram) increase position on signal with weight associated to largest ticks</li>
+<li>trade management: form of dynamic position sizing increasing/decreasing position during the trade (not before entry).</li>
 <li>deal with more than 1 symbol (e.g. market breadth). datafeed sends to queue std::array&lt;Event,10&gt;, where storing simultaneous bars of up to 10 different symbols. Then <a class="el" href="class_price_collection.html">PriceCollection</a> runs over array to update all bar lists.</li>
 </ul>
-<p>does the call to append_to_optim_results (in run_parallel_optimization) need #pragma omp critical (as in genetic) ?</p><ul>
-<li>genetic programming ( create bool nodes like HighD[1] &gt; LowD[5], out of building blocks )</li>
-<li><p class="startli">add commission/slippage to execution</p>
-<p class="startli">[- fix IS/OOS dates. define: initial_date_IS (=input_start_date), final_date_IS, initial_date_OOS1, final_date_OOS1, initial_date_OOS2 (=final_date_OOS1+1 bday), final_date_OOS2(=input_end_date)</p><ul>
-<li>Selection with IS/OOS ]</li>
-</ul>
-<p class="startli">[- Bootstrap to get standard error on performance metrics] [- replace OpenMP parallelization with C++17 for_each loop and execution policy: std::execution::par_unseq (currently: error when #including &lt;execution&gt; )] [- error handling: replace exit(1) with try/throw/catch exceptions] [- IQfeed/IB API] [</p><ul>
+<p>add commission/slippage to execution</p>
+<p>[- genetic programming ( create bool nodes like HighD[1] &gt; LowD[5], out of building blocks )] [- does the call to append_to_optim_results (in run_parallel_optimization) need #pragma omp critical (as in genetic) ? ]</p>
+<p>[- multiple comparison, benjamini-hochberg] [- genetic optim: avoid computing the fitness of the same strategy (individual) multiple times] [- fix IS/OOS dates. define: initial_date_IS (=input_start_date), final_date_IS, initial_date_OOS1, final_date_OOS1, initial_date_OOS2 (=final_date_OOS1+1 bday), final_date_OOS2(=input_end_date) ] [- Bootstrap to get standard error on performance metrics] [- replace OpenMP parallelization with C++17 for_each loop and execution policy: std::execution::par_unseq (currently: error when #including &lt;execution&gt; )] [- error handling: replace exit(1) with try/throw/catch exceptions] [- IQfeed/IB API] [</p><ul>
 <li>perf decay filter: avg delay between peaks. Calcola il tempo medio in cui il TS genera nuovi massimi della equity line. Se il TS e' in ritardo (cioe' dopo questo tempo medio non ha generato un nuovo max), staccalo. Riattacca il TS quando ha generato un nuovo massimo.</li>
 <li>Portfolio analysis: correlation matrix of equity lines of multiple strategies</li>
 <li>Portfolio general director: monitor all systems, redistribute resources real time, decide whether to weight a strategy more or less or even switch it off (see <a href="http://www.systemsontheroad.com/#!STARTING-A-HEDGE-FUND-4-THE-BIG-PICTURE/c18q6/56411f070cf2e1ca27908c84">http://www.systemsontheroad.com/#!STARTING-A-HEDGE-FUND-4-THE-BIG-PICTURE/c18q6/56411f070cf2e1ca27908c84</a> ) ] </li>
-</ul>
-</li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->

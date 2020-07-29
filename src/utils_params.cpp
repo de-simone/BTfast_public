@@ -2,7 +2,8 @@
 
 #include "utils_optim.h"    // remove_duplicates
 
-#include <algorithm>    // std::reverse, std::sort, std::unique, std::max_element
+#include <algorithm>    // std::reverse, std::sort, std::unique,
+                        // std::max_element, std::find
 #include <numeric>      // std::accumulate
 #include <iostream>     // std::cout
 #include <utility>      // std::make_pair
@@ -151,10 +152,10 @@ void utils_params::extract_parameters_from_all_strategies(
                                     const std::vector<strategy_t> &source,
                                     std::vector<parameters_t> &dest )
 {
-    // clear destination vector
+    // Clear destination vector
     dest.clear();
-    // loop over source strategies
-    for( strategy_t el: source ){
+    // Loop over source strategies
+    for( const strategy_t& el: source ){
         parameters_t row;
         utils_params::extract_parameters_from_single_strategy( el, row);
         dest.push_back(row);
@@ -194,21 +195,32 @@ void utils_params::extract_parameters_from_single_strategy(
                                                     const strategy_t &source,
                                                     parameters_t &dest )
 {
-    // clear destination vector
+    // Vector of names of performance metrics to be printed/written
+    std::vector<std::string> selected_metrics { "Ntrades",  "AvgTicks",
+                "WinPerc", "PftFactor", "NP/MDD", "Expectancy", "Z-score" };
+    // Vector of names of performance metrics excluded from printing/writing
+    std::vector<std::string> excluded_metrics {"NetPL", "AvgTrade", "StdTicks"};
+
+    // Clear destination vector
     dest.clear();
-    // loop over strategy values (metrics or parameters)
-    for(std::pair<std::string,double> p : source){
-        if(    p.first == "Ntrades"  || p.first == "AvgTicks"
-            || p.first == "WinPerc" || p.first == "PftFactor"
-            //|| p.first == "AvgTrade" || p.first == "NetPL"
-            || p.first == "NP/MDD"
-            || p.first == "Expectancy" || p.first == "Z-score" ){
-            // skip performance metrics
-            continue;
+    // Loop over strategy attributes (metrics and parameters)
+    for( const auto& attr : source ){
+
+        std::string attr_name { attr.first };  // attribute name
+        double attr_value { attr.second };     // attribute value
+
+        // Check whether attribute name belongs to selected or excluded metrics
+        if( std::find( selected_metrics.begin(), selected_metrics.end(),
+                       attr_name ) != selected_metrics.end()
+            ||
+            std::find( excluded_metrics.begin(), excluded_metrics.end(),
+                       attr_name ) != excluded_metrics.end() ){
+           // skip all performance metrics
+           continue;
         }
         else{
             // cast and append
-            dest.push_back(std::make_pair(p.first, (int) p.second));
+            dest.push_back( std::make_pair(attr_name, (int) attr_value) );
         }
     }
 }
@@ -234,17 +246,23 @@ void utils_params::extract_metrics_from_single_strategy(
                                                     const strategy_t &source,
                                                     std::vector<double> &dest )
 {
-    // clear destination vector
+    // Vector of names of performance metrics to be printed/written
+    std::vector<std::string> selected_metrics { "Ntrades",  "AvgTicks",
+                "WinPerc", "PftFactor", "NP/MDD", "Expectancy", "Z-score" };
+
+    // Clear destination vector
     dest.clear();
-    // loop over strategy values (metrics or parameters)
-    for(std::pair<std::string,double> p : source){
-        if(    p.first == "Ntrades"  || p.first == "AvgTicks"
-            || p.first == "WinPerc" || p.first == "PftFactor"
-            //|| p.first == "AvgTrade" || p.first == "NetPL"
-            || p.first == "NP/MDD"
-            || p.first == "Expectancy" || p.first == "Z-score" ){
-            // append to destination
-            dest.push_back( p.second );
+    // Loop over strategy attributes (metrics and parameters)
+    for( const auto& attr : source ){
+
+        std::string attr_name { attr.first };  // attribute name
+        double attr_value { attr.second };     // attribute value
+
+        // Check whether attribute name belongs to selected metrics
+        if( std::find( selected_metrics.begin(), selected_metrics.end(),
+                       attr_name ) != selected_metrics.end() ){
+            // append attribute value to destination
+            dest.push_back( attr_value );
         }
     }
 }

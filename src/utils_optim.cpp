@@ -202,7 +202,7 @@ bool utils_optim::sort_by_expectancy(const strategy_t& a, const strategy_t& b)
 }
 bool utils_optim::sort_by_zscore(const strategy_t& a, const strategy_t& b)
 {
-    return( a[6].second > b[6].second );
+    return( a.at(6).second > b.at(6).second );
 }
 
 // ------------------------------------------------------------------------- //

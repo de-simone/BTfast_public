@@ -144,17 +144,18 @@ $(document).ready(function(){initNavTree('transaction_8h_source.html','');});
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">int</span> bars_in_trade()<span class="keyword"> const </span>{ <span class="keywordflow">return</span>(bars_in_trade_); }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">double</span> net_pl()<span class="keyword"> const </span>{ <span class="keywordflow">return</span>(net_pl_); }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">double</span> cumul_pl()<span class="keyword"> const </span>{ <span class="keywordflow">return</span>(cumul_pl_); }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">double</span> ticks()<span class="keyword"> const </span>{<span class="keywordflow">return</span>(net_pl_/(quantity_*symbol_.tick_value()));}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:36</div></div>
+<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:37</div></div>
 <div class="ttc" id="aclass_transaction_html"><div class="ttname"><a href="class_transaction.html">Transaction</a></div><div class="ttdef"><b>Definition:</b> transaction.h:34</div></div>
 <div class="ttc" id="aclass_transaction_html_a9bf89765eb0c7bb323bec52915fd41e1"><div class="ttname"><a href="class_transaction.html#a9bf89765eb0c7bb323bec52915fd41e1">Transaction::tostring</a></div><div class="ttdeci">std::string tostring()</div><div class="ttdef"><b>Definition:</b> transaction.cpp:28</div></div>
 <div class="ttc" id="aclass_date_time_html"><div class="ttname"><a href="class_date_time.html">DateTime</a></div><div class="ttdef"><b>Definition:</b> datetime.h:95</div></div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ndays_5f_508',['ndays_',['../class_performance.html#a44529966847b3cfaaf62d08b1d16689c',1,'Performance']]]
+  ['profits_5f_475',['profits_',['../class_performance.html#ae8dc0d63d0b9f0d9327ae02b1b6a936c',1,'Performance']]]
 ];

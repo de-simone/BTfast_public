@@ -139,6 +139,12 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a6f0de21e0cf288213c8ca82f374bc17e"><td class="memItemLeft" align="right" valign="top"><a id="a6f0de21e0cf288213c8ca82f374bc17e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>digits_</b> {1}</td></tr>
 <tr class="separator:a6f0de21e0cf288213c8ca82f374bc17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ec11dd8dd58815fabb24f26082618b"><td class="memItemLeft" align="right" valign="top"><a id="ac2ec11dd8dd58815fabb24f26082618b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>tf_mins_</b> {0}</td></tr>
+<tr class="separator:ac2ec11dd8dd58815fabb24f26082618b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b562f84ead2300b27e7a1d736ecee9"><td class="memItemLeft" align="right" valign="top"><a id="a08b562f84ead2300b27e7a1d736ecee9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>co_mins_</b> {0}</td></tr>
+<tr class="separator:a08b562f84ead2300b27e7a1d736ecee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93d851a12604cbff4f90d740dafeffc3"><td class="memItemLeft" align="right" valign="top"><a id="a93d851a12604cbff4f90d740dafeffc3"></a>
 <a class="el" href="class_time.html">Time</a>&#160;</td><td class="memItemRight" valign="bottom"><b>OneBarBeforeClose_</b> {}</td></tr>
 <tr class="separator:a93d851a12604cbff4f90d740dafeffc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,18 +181,24 @@ std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"
 <tr class="memitem:a59085cd53038150c3bd1d2ddb4ab8eeb"><td class="memItemLeft" align="right" valign="top"><a id="a59085cd53038150c3bd1d2ddb4ab8eeb"></a>
 std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CloseD_</b> {}</td></tr>
 <tr class="separator:a59085cd53038150c3bd1d2ddb4ab8eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4bfaace9068cba1e40d9cc73cc0301"><td class="memItemLeft" align="right" valign="top"><a id="a5a4bfaace9068cba1e40d9cc73cc0301"></a>
+std::array&lt; int, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>VolumeD_</b> {}</td></tr>
+<tr class="separator:a5a4bfaace9068cba1e40d9cc73cc0301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac43564cf6365107fe04ee7f1bbf8e40e"><td class="memItemLeft" align="right" valign="top"><a id="ac43564cf6365107fe04ee7f1bbf8e40e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>T_segment_duration_</b> {0}</td></tr>
 <tr class="separator:ac43564cf6365107fe04ee7f1bbf8e40e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34e3491789e64c299f2d94f2a77119b4"><td class="memItemLeft" align="right" valign="top"><a id="a34e3491789e64c299f2d94f2a77119b4"></a>
-std::deque&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ATR_</b> {}</td></tr>
-<tr class="separator:a34e3491789e64c299f2d94f2a77119b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa74d3e7691c099ada59171bad318ad17"><td class="memItemLeft" align="right" valign="top"><a id="aa74d3e7691c099ada59171bad318ad17"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Ncontracts_</b> {1}</td></tr>
-<tr class="separator:aa74d3e7691c099ada59171bad318ad17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8bfe3ea33f307c167433c4de38709dc"><td class="memItemLeft" align="right" valign="top"><a id="ad8bfe3ea33f307c167433c4de38709dc"></a>
+std::deque&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>atr_</b> {}</td></tr>
+<tr class="separator:ad8bfe3ea33f307c167433c4de38709dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb672a53881503f9b4742f27c9a59a3"><td class="memItemLeft" align="right" valign="top"><a id="afcb672a53881503f9b4742f27c9a59a3"></a>
+std::deque&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>atrD_</b> {}</td></tr>
+<tr class="separator:afcb672a53881503f9b4742f27c9a59a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c43f1e865e04e457d966a524371bef1"><td class="memItemLeft" align="right" valign="top"><a id="a0c43f1e865e04e457d966a524371bef1"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>MyStop_</b> {0}</td></tr>
 <tr class="separator:a0c43f1e865e04e457d966a524371bef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2ba9c8757ea9d77701702faa613d32e"><td class="memItemLeft" align="right" valign="top"><a id="ab2ba9c8757ea9d77701702faa613d32e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>BOMR_switch_</b> {1}</td></tr>
+<tr class="separator:ab2ba9c8757ea9d77701702faa613d32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad02fa8b9080dda6800ee416d28e06cf"><td class="memItemLeft" align="right" valign="top"><a id="aad02fa8b9080dda6800ee416d28e06cf"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Side_switch_</b> {3}</td></tr>
 <tr class="separator:aad02fa8b9080dda6800ee416d28e06cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,15 +208,30 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>POI_switch_</b> {1}</t
 <tr class="memitem:a1266d3d364bae41a94562d6106955d1c"><td class="memItemLeft" align="right" valign="top"><a id="a1266d3d364bae41a94562d6106955d1c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Distance_switch_</b> {1}</td></tr>
 <tr class="separator:a1266d3d364bae41a94562d6106955d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2698fb13de4c70b33da956f04294cbc"><td class="memItemLeft" align="right" valign="top"><a id="af2698fb13de4c70b33da956f04294cbc"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>FilterT_switch_</b> {0}</td></tr>
-<tr class="separator:af2698fb13de4c70b33da956f04294cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef6edac42fd7d2866d6b289b4a023fa5"><td class="memItemLeft" align="right" valign="top"><a id="aef6edac42fd7d2866d6b289b4a023fa5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>DOW_switch_</b> {0}</td></tr>
+<tr class="separator:aef6edac42fd7d2866d6b289b4a023fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7712a2f9981eb1c6b1d6593590fb06be"><td class="memItemLeft" align="right" valign="top"><a id="a7712a2f9981eb1c6b1d6593590fb06be"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Intraday_switch_</b> {0}</td></tr>
+<tr class="separator:a7712a2f9981eb1c6b1d6593590fb06be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52aa337f46eebbb6e2a8ee6943f4674f"><td class="memItemLeft" align="right" valign="top"><a id="a52aa337f46eebbb6e2a8ee6943f4674f"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Filter1L_switch_</b> {0}</td></tr>
 <tr class="separator:a52aa337f46eebbb6e2a8ee6943f4674f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb2dcaf9ee7d91a33d9942f1e20cae40"><td class="memItemLeft" align="right" valign="top"><a id="afb2dcaf9ee7d91a33d9942f1e20cae40"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Filter1S_switch_</b> {0}</td></tr>
 <tr class="separator:afb2dcaf9ee7d91a33d9942f1e20cae40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cd14e8de07587c8d18fb90d89892c29"><td class="memItemLeft" align="right" valign="top"><a id="a8cd14e8de07587c8d18fb90d89892c29"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>MktRegimeL_switch_</b> {0}</td></tr>
+<tr class="separator:a8cd14e8de07587c8d18fb90d89892c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44da29c6f7ec36af875d05374110e20e"><td class="memItemLeft" align="right" valign="top"><a id="a44da29c6f7ec36af875d05374110e20e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>MktRegimeS_switch_</b> {0}</td></tr>
+<tr class="separator:a44da29c6f7ec36af875d05374110e20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d7c01af135d338910ddb5ef97884747"><td class="memItemLeft" align="right" valign="top"><a id="a5d7c01af135d338910ddb5ef97884747"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>DPS_switch_</b> {0}</td></tr>
+<tr class="separator:a5d7c01af135d338910ddb5ef97884747"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f0e7c65e08d54da5f6c226a95059782"><td class="memItemLeft" align="right" valign="top"><a id="a7f0e7c65e08d54da5f6c226a95059782"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Exit_switch_</b> {0}</td></tr>
+<tr class="separator:a7f0e7c65e08d54da5f6c226a95059782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e764e5443c905a5b09044ecf5c5f440"><td class="memItemLeft" align="right" valign="top"><a id="a6e764e5443c905a5b09044ecf5c5f440"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>fractN_long_</b> {1}</td></tr>
 <tr class="separator:a6e764e5443c905a5b09044ecf5c5f440"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +266,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_bars_back_</b> {10
 <li>symbol_: instance of instrument class (inherited from base class <a class="el" href="class_strategy.html">Strategy</a>)</li>
 <li>timeframe_: timeframe (inherited from base class <a class="el" href="class_strategy.html">Strategy</a>)</li>
 <li>digits_: rounding digits of symbol_</li>
+<li>tf_mins_: minutes of timeframe (for intraday)</li>
+<li>co_mins_: minutes between close of a session and open of next one</li>
 <li>OneBarBeforeClose_: <a class="el" href="class_time.html">Time</a> of 1 timeframe before session close (close of 2nd-to-last bar)</li>
 <li>CurrentDate_: date of current bar</li>
 <li>CurrentTime_: time of current bar</li>
@@ -247,13 +276,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_bars_back_</b> {10
 <li>TradingEnabled_: enable/disable trading during session. E.g. forbids multiple trades in same session.</li>
 <li>SessionOpenPrice_: opening price of the current session</li>
 <li>NewSession_: true at the start of a new session (day), otherwise false</li>
-<li>OpenD_, ... , CloseD_: array of OHLC of current and previous 5 sessions</li>
+<li>OpenD_, ... , CloseD_, VolumeD_: array of OHLCV of current and previous 5 sessions</li>
 <li>T_segment_duration: duration of T-segment window (in minutes)</li>
 </ul>
 <hr  />
 <p><a class="el" href="class_strategy.html">Strategy</a> Parameters:</p>
 <ul>
-<li>Ncontracts_: Number of contracts to trade</li>
 <li>MyStop_: Stop-Loss in USD per contract</li>
 <li>fractN_: Fraction for breakout = 2^fractN_ / 10 </li>
 </ul>
@@ -516,7 +544,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>max_bars_back_</b> {10
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set values of the input parameters, by setting the correspondence with the names appearing in <a class="el" href="struct_x_m_l.html">XML</a> param file. Recall: all parameters in <a class="el" href="struct_x_m_l.html">XML</a> are INTEGER. </p>
+<p>Set values of the input parameters, by setting the correspondence with the names appearing in <a class="el" href="struct_x_m_l.html">XML</a> param file. Recall: all parameters in <a class="el" href="struct_x_m_l.html">XML</a> are INTEGER.</p>
+<p>Names of input variables must match those in 'mode_factory_sequential' </p>
 
 <p>Implements <a class="el" href="class_strategy.html">Strategy</a>.</p>
 

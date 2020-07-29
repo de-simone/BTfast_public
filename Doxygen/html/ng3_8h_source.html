@@ -123,75 +123,74 @@ $(document).ready(function(){initNavTree('ng3_8h_source.html','');});
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// ------------------------------------------------------------------------- //</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_n_g3.html">   70</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="class_n_g3.html">NG3</a> : <span class="keyword">public</span> <a class="code" href="class_strategy.html">Strategy</a> {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> digits_{1};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_time.html">Time</a> OneBarBeforeClose_ {};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="class_date.html">Date</a> CurrentDate_ {};</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_time.html">Time</a> CurrentTime_ {};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> CurrentDOW_ {0};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">int</span> MarketPosition_ {0};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">bool</span> TradingEnabled_ {<span class="keyword">true</span>};</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">double</span> SessionOpenPrice_ {0.0};</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">bool</span> NewSession_ {<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::array&lt;double, 6&gt; OpenD_ {};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    std::array&lt;double, 6&gt; HighD_ {};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    std::array&lt;double, 6&gt; LowD_ {};</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    std::array&lt;double, 6&gt; CloseD_ {};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">int</span> T_segment_duration_ {0};</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_n_g3.html">   69</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="class_n_g3.html">NG3</a> : <span class="keyword">public</span> <a class="code" href="class_strategy.html">Strategy</a> {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> digits_{1};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="class_time.html">Time</a> OneBarBeforeClose_ {};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_date.html">Date</a> CurrentDate_ {};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="class_time.html">Time</a> CurrentTime_ {};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> CurrentDOW_ {0};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> MarketPosition_ {0};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">bool</span> TradingEnabled_ {<span class="keyword">true</span>};</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">double</span> SessionOpenPrice_ {0.0};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">bool</span> NewSession_ {<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    std::array&lt;double, 6&gt; OpenD_ {};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::array&lt;double, 6&gt; HighD_ {};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    std::array&lt;double, 6&gt; LowD_ {};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    std::array&lt;double, 6&gt; CloseD_ {};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">int</span> T_segment_duration_ {0};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">// --- Initialization of Input Parameters --- //</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">//  (default values, may be replaced by XML)  //</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">int</span> Ncontracts_ {1};        <span class="comment">// N. of contracts to trade</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">int</span> MyStop_ {0};            <span class="comment">// Stop-Loss in USD per contract</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// Parameters</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> fractN_ {1};           <span class="comment">// (0-4 step 1,  fract = 2^fractN_ / 10)</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">// ------------------------------------------ //</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="comment">// Constructor</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="class_n_g3.html#ab38e34c1130895547b94e1987a3572de">NG3</a>( std::string name, <a class="code" href="class_instrument.html">Instrument</a> symbol,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;             std::string timeframe, <span class="keywordtype">int</span> max_bars_back );</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">// Functions overriding the base class virtual functions</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// --- Initialization of Input Parameters --- //</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">//  (default values, may be replaced by XML)  //</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span> MyStop_ {0};            <span class="comment">// Stop-Loss in USD per contract</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">// Parameters</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">int</span> fractN_ {1};           <span class="comment">// (0-4 step 1,  fract = 2^fractN_ / 10)</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// ------------------------------------------ //</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="comment">// Constructor</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <a class="code" href="class_n_g3.html#ab38e34c1130895547b94e1987a3572de">NG3</a>( std::string name, <a class="code" href="class_instrument.html">Instrument</a> symbol,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;             std::string timeframe, <span class="keywordtype">int</span> max_bars_back );</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">// Functions overriding the base class virtual functions</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordtype">int</span> digits()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(digits_); }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">int</span> digits()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span>(digits_); }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">// Set values of parameters (for optimization)</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#ac80dc7be1ff9a86cb86f02e25f84703f">set_param_values</a>(</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <span class="keyword">const</span> std::vector&lt; std::pair&lt;std::string,int&gt; &gt;&amp;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                        parameter_set ) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="comment">// Variable definitions and preliminary calculations</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_n_g3.html#a52d39b860cc804262148b4abc3f77d51">preliminaries</a>( <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                           <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1D,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                           <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="comment">// Define Entry signals</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#ab8d6ead3116ddf168ed25e58d5c9010b">compute_entry</a>( <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                            <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1D,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                            <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                            std::array&lt;Event, 2&gt; &amp;signals ) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="comment">// Define Exit signals</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#ac985ade0296e05ec7b2a45069d2790a9">compute_exit</a>( <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                           <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1D,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                           <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                           std::array&lt;Event, 2&gt; &amp;signals ) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="comment">// Handle computation of Entry/Exit signals</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#a7146d3879152bfaf54f968531963817f">compute_signals</a>( <span class="keyword">const</span> <a class="code" href="class_price_collection.html">PriceCollection</a>&amp; price_collection,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                              <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                              std::array&lt;Event, 2&gt; &amp;signals ) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment">// Set values of parameters (for optimization)</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#ac80dc7be1ff9a86cb86f02e25f84703f">set_param_values</a>(</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="keyword">const</span> std::vector&lt; std::pair&lt;std::string,int&gt; &gt;&amp;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                        parameter_set ) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="comment">// Variable definitions and preliminary calculations</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="class_n_g3.html#a52d39b860cc804262148b4abc3f77d51">preliminaries</a>( <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                           <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1D,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                           <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="comment">// Define Entry signals</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#ab8d6ead3116ddf168ed25e58d5c9010b">compute_entry</a>( <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                            <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1D,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                            <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                            std::array&lt;Event, 2&gt; &amp;signals ) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="comment">// Define Exit signals</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#ac985ade0296e05ec7b2a45069d2790a9">compute_exit</a>( <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                           <span class="keyword">const</span> std::deque&lt;Event&gt;&amp; data1D,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                           <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                           std::array&lt;Event, 2&gt; &amp;signals ) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="comment">// Handle computation of Entry/Exit signals</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_n_g3.html#a7146d3879152bfaf54f968531963817f">compute_signals</a>( <span class="keyword">const</span> <a class="code" href="class_price_collection.html">PriceCollection</a>&amp; price_collection,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                              <span class="keyword">const</span> <a class="code" href="class_position_handler.html">PositionHandler</a>&amp; position_handler,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                              std::array&lt;Event, 2&gt; &amp;signals ) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;};</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:36</div></div>
+<div class="ttc" id="aclass_instrument_html"><div class="ttname"><a href="class_instrument.html">Instrument</a></div><div class="ttdef"><b>Definition:</b> instruments.h:37</div></div>
 <div class="ttc" id="aclass_n_g3_html_a7146d3879152bfaf54f968531963817f"><div class="ttname"><a href="class_n_g3.html#a7146d3879152bfaf54f968531963817f">NG3::compute_signals</a></div><div class="ttdeci">void compute_signals(const PriceCollection &amp;price_collection, const PositionHandler &amp;position_handler, std::array&lt; Event, 2 &gt; &amp;signals) override</div><div class="ttdef"><b>Definition:</b> ng3.cpp:252</div></div>
 <div class="ttc" id="aclass_time_html"><div class="ttname"><a href="class_time.html">Time</a></div><div class="ttdef"><b>Definition:</b> datetime.h:57</div></div>
 <div class="ttc" id="aclass_strategy_html"><div class="ttname"><a href="class_strategy.html">Strategy</a></div><div class="ttdef"><b>Definition:</b> strategy.h:31</div></div>
@@ -199,7 +198,7 @@ $(document).ready(function(){initNavTree('ng3_8h_source.html','');});
 <div class="ttc" id="aclass_price_collection_html"><div class="ttname"><a href="class_price_collection.html">PriceCollection</a></div><div class="ttdef"><b>Definition:</b> price_collection.h:36</div></div>
 <div class="ttc" id="aclass_n_g3_html_a52d39b860cc804262148b4abc3f77d51"><div class="ttname"><a href="class_n_g3.html#a52d39b860cc804262148b4abc3f77d51">NG3::preliminaries</a></div><div class="ttdeci">int preliminaries(const std::deque&lt; Event &gt; &amp;data1, const std::deque&lt; Event &gt; &amp;data1D, const PositionHandler &amp;position_handler) override</div><div class="ttdef"><b>Definition:</b> ng3.cpp:69</div></div>
 <div class="ttc" id="aclass_n_g3_html_ab8d6ead3116ddf168ed25e58d5c9010b"><div class="ttname"><a href="class_n_g3.html#ab8d6ead3116ddf168ed25e58d5c9010b">NG3::compute_entry</a></div><div class="ttdeci">void compute_entry(const std::deque&lt; Event &gt; &amp;data1, const std::deque&lt; Event &gt; &amp;data1D, const PositionHandler &amp;position_handler, std::array&lt; Event, 2 &gt; &amp;signals) override</div><div class="ttdef"><b>Definition:</b> ng3.cpp:123</div></div>
-<div class="ttc" id="aclass_n_g3_html"><div class="ttname"><a href="class_n_g3.html">NG3</a></div><div class="ttdef"><b>Definition:</b> ng3.h:70</div></div>
+<div class="ttc" id="aclass_n_g3_html"><div class="ttname"><a href="class_n_g3.html">NG3</a></div><div class="ttdef"><b>Definition:</b> ng3.h:69</div></div>
 <div class="ttc" id="aclass_n_g3_html_ab38e34c1130895547b94e1987a3572de"><div class="ttname"><a href="class_n_g3.html#ab38e34c1130895547b94e1987a3572de">NG3::NG3</a></div><div class="ttdeci">NG3(std::string name, Instrument symbol, std::string timeframe, int max_bars_back)</div><div class="ttdef"><b>Definition:</b> ng3.cpp:20</div></div>
 <div class="ttc" id="aclass_n_g3_html_ac80dc7be1ff9a86cb86f02e25f84703f"><div class="ttname"><a href="class_n_g3.html#ac80dc7be1ff9a86cb86f02e25f84703f">NG3::set_param_values</a></div><div class="ttdeci">void set_param_values(const std::vector&lt; std::pair&lt; std::string, int &gt; &gt; &amp;parameter_set) override</div><div class="ttdef"><b>Definition:</b> ng3.cpp:48</div></div>
 <div class="ttc" id="aclass_n_g3_html_ac985ade0296e05ec7b2a45069d2790a9"><div class="ttname"><a href="class_n_g3.html#ac985ade0296e05ec7b2a45069d2790a9">NG3::compute_exit</a></div><div class="ttdeci">void compute_exit(const std::deque&lt; Event &gt; &amp;data1, const std::deque&lt; Event &gt; &amp;data1D, const PositionHandler &amp;position_handler, std::array&lt; Event, 2 &gt; &amp;signals) override</div><div class="ttdef"><b>Definition:</b> ng3.cpp:188</div></div>

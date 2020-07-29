@@ -26,7 +26,7 @@ var NAVTREE =
     [ "BTfast: Back-Test fast!", "index.html", [
       [ "Introduction", "index.html#intro_sec", [
         [ "Storage", "index.html#Data", null ],
-        [ "Last update: 2020-03-02", "index.html#autotoc_md1", null ]
+        [ "Last update: 2020-07-28", "index.html#autotoc_md1", null ]
       ] ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
@@ -51,11 +51,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "account_8h_source.html",
-"class_individual.html#a8ab0234024db23c5a010943e3b9da88f",
-"class_population.html#adb2330e802fda1510ff34f112aa94c66",
-"functions_f.html",
-"struct_fts5_extension_api.html#a3ba0207080a9ca498625eefcc120bf1e",
-"structsqlite3__pcache__methods2.html#a8fcb4ba48106aac8dfff247baea06e1a"
+"class_historical_bars_c_s_v.html#a2fbcbc3695214469c23dfed398ac35be",
+"class_n_g6.html#a36fc4827ad1e0bc1b1e0ea1f3e783554",
+"class_time.html#aec4ff5c16a67ee87cbd980bc042f80ec",
+"group__xml_update.html#ga02e1a7e3f9c48e05fad77abda2116375"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

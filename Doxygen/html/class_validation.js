@@ -1,7 +1,9 @@
 var class_validation =
 [
-    [ "Validation", "class_validation.html#aea0afa2315d1e8a6bd098d24b47d3b9f", null ],
-    [ "noise_test", "class_validation.html#a55a6043ff7dc6006fc86d70301e41429", null ],
+    [ "Validation", "class_validation.html#aba40ecb32a9d9237bdee758c682d45e1", null ],
+    [ "check_profitability", "class_validation.html#acae7ec456be4398e39d1836d7f1b88b3", null ],
+    [ "initial_generation_selection", "class_validation.html#a489a946dbed67576f1ddff42e61f87a1", null ],
+    [ "noise_test", "class_validation.html#a6c874bb955167f27fd8bbd8c0695c1e4", null ],
     [ "num_validated", "class_validation.html#a5628d4aa03c6b41e241b0a1cbf75ec80", null ],
     [ "OOS_consistency_test", "class_validation.html#a29121c667197ecaa088e28161cce93b5", null ],
     [ "OOS_metrics_test", "class_validation.html#a46ddf1acebf810335f0622614dd813c2", null ],
@@ -11,6 +13,8 @@ var class_validation =
     [ "selection_conditions", "class_validation.html#af54943638b768dd292ffdf15a47208cd", null ],
     [ "stability_test", "class_validation.html#a90b8b1d3f08d92a9188f1c065a141ee6", null ],
     [ "btf_", "class_validation.html#afa27b988b2acb5fcb1a7c0e27b5584be", null ],
+    [ "data_dir_", "class_validation.html#a49f5db0823f4e97a2f9a8c8b557c8138", null ],
+    [ "data_file_oos_", "class_validation.html#af7ad61291201879b8b32eae447809c3d", null ],
     [ "datafeed_", "class_validation.html#a6ae81b0025dbd9c00ea8d568d6553326", null ],
     [ "fitness_metric_", "class_validation.html#aeb76bc7b8734e23329207f9be1609a21", null ],
     [ "max_variation_", "class_validation.html#ad0774e0cf2b69bb10c39ca5ec816a0e8", null ],

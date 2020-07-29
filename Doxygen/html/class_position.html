@@ -218,11 +218,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>keep_open_</b> {true}
 <li>stoploss_: stop loss in USD per contract</li>
 <li>takeprofit_: take profit in USD per contract</li>
 <li>ticket_: ticket assigned by broker (random number in backtest)</li>
-<li>mae_: Max Adverse Excursion, in USD per contract</li>
-<li>mfe_: Max Favourable excursion, in USD per contract</li>
+<li>mae_: Max Adverse Excursion, in USD per contract (updated on every bar)</li>
+<li>mfe_: Max Favourable excursion, in USD per contract (updated on every bar)</li>
 <li>bars_in_trade_: number of bars since trade entry</li>
 <li>days_in_trade_: number of days (sessions) since trade entry</li>
-<li>pl_: Profit/Loss of the trade (includes spread+slippage). Filled when position is closed.</li>
+<li>pl_: Profit/Loss of the trade (updated on every bar)</li>
 <li>keep_open_: keep position open, or close it because SL/TP hit </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

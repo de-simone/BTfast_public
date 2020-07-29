@@ -2,7 +2,7 @@ var class_date =
 [
     [ "Date", "class_date.html#a68e81c7f481d2fd286ae091b216654c4", null ],
     [ "day", "class_date.html#a42aff770b2b450b6b2d83789b9194d56", null ],
-    [ "DaysDiff", "class_date.html#a6b6ba2e3db30a4bfbf82c47429ab2196", null ],
+    [ "DaysDiff", "class_date.html#ae36c230dcdfcf462e0ededc8dc9f0d7c", null ],
     [ "is_bday", "class_date.html#a7d9a30cfc02e53eab7a1581f7fd48d56", null ],
     [ "is_leapyear", "class_date.html#a55f6e924aec8be8681f6dec4e71ae211", null ],
     [ "month", "class_date.html#a82f550e37c8ff6a3709a256b2e43b762", null ],
@@ -11,7 +11,7 @@ var class_date =
     [ "operator==", "class_date.html#a16b90fa191e5d3080aa558fb29c676d2", null ],
     [ "operator>", "class_date.html#a07bc9ce9aec7e46cc14c6983bad65b7f", null ],
     [ "operator>=", "class_date.html#ac9d2b2e941656f5eb7b85b6d16c2aa0c", null ],
-    [ "rdn", "class_date.html#ae2b1983f0d40a01bca60ef841278c0c4", null ],
+    [ "rdn", "class_date.html#a131e9eba080e06b2e8e4a9c4c629e387", null ],
     [ "tostring", "class_date.html#a70a16b16a30cc1c62057d5ffc88e0edd", null ],
     [ "weekday", "class_date.html#a32867b0e6a00024a88d8478b53f643f2", null ],
     [ "year", "class_date.html#adb59de8d1ac3b04cbd57be3b551be2dc", null ],

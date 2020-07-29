@@ -103,9 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4b4fb7d14d87c83305a8ffb4d2eb3d9f"><td class="memItemLeft" align="right" valign="top"><a id="a4b4fb7d14d87c83305a8ffb4d2eb3d9f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Event</b> (<a class="el" href="class_instrument.html">Instrument</a> symbol_, <a class="el" href="class_date_time.html">DateTime</a> timestamp, std::string timeframe, double open, double high, double low, double close, int volume)</td></tr>
 <tr class="separator:a4b4fb7d14d87c83305a8ffb4d2eb3d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d8e308f85888d20076106708a14aeec"><td class="memItemLeft" align="right" valign="top"><a id="a7d8e308f85888d20076106708a14aeec"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Event</b> (<a class="el" href="class_instrument.html">Instrument</a> symbol, <a class="el" href="class_date_time.html">DateTime</a> timestamp, std::string action, std::string order_type, double suggested_price, int suggested_quantity, std::string strategy_name, double stoploss, double takeprofit)</td></tr>
-<tr class="separator:a7d8e308f85888d20076106708a14aeec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e9575f7df292d67a3c6d788f53d053"><td class="memItemLeft" align="right" valign="top"><a id="ad9e9575f7df292d67a3c6d788f53d053"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Event</b> (<a class="el" href="class_instrument.html">Instrument</a> symbol, <a class="el" href="class_date_time.html">DateTime</a> timestamp, std::string action, std::string order_type, double suggested_price, double position_size_factor, int quantity_to_close, std::string strategy_name, double stoploss, double takeprofit)</td></tr>
+<tr class="separator:ad9e9575f7df292d67a3c6d788f53d053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee284bf7a2a71e708c42f08c78a2cb98"><td class="memItemLeft" align="right" valign="top"><a id="aee284bf7a2a71e708c42f08c78a2cb98"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Event</b> (<a class="el" href="class_instrument.html">Instrument</a> symbol, <a class="el" href="class_date_time.html">DateTime</a> timestamp, std::string action, std::string order_type, double suggested_price, int quantity, std::string strategy_name, double stoploss, double takeprofit, int ticket)</td></tr>
 <tr class="separator:aee284bf7a2a71e708c42f08c78a2cb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,9 +163,12 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>takeprofit</b> () c
 <tr class="memitem:adc236330f02b5aa1c483140ff0cf5ff8"><td class="memItemLeft" align="right" valign="top"><a id="adc236330f02b5aa1c483140ff0cf5ff8"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>suggested_price</b> () const</td></tr>
 <tr class="separator:adc236330f02b5aa1c483140ff0cf5ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a671ba527397b99b89768cda42d642171"><td class="memItemLeft" align="right" valign="top"><a id="a671ba527397b99b89768cda42d642171"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>suggested_quantity</b> () const</td></tr>
-<tr class="separator:a671ba527397b99b89768cda42d642171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a533aac7702964e47a2b83d6922874a9d"><td class="memItemLeft" align="right" valign="top"><a id="a533aac7702964e47a2b83d6922874a9d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>quantity_to_close</b> () const</td></tr>
+<tr class="separator:a533aac7702964e47a2b83d6922874a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab409371fa67d695693889953fa4e74a1"><td class="memItemLeft" align="right" valign="top"><a id="ab409371fa67d695693889953fa4e74a1"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>position_size_factor</b> () const</td></tr>
+<tr class="separator:ab409371fa67d695693889953fa4e74a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cebb8028cd46fff53d2113fca496efc"><td class="memItemLeft" align="right" valign="top"><a id="a1cebb8028cd46fff53d2113fca496efc"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>quantity</b> () const</td></tr>
 <tr class="separator:a1cebb8028cd46fff53d2113fca496efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,6 +199,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_volume</b> (int v
 <tr class="memitem:a70a5ec1cf7d45313720a48c0e9879f5d"><td class="memItemLeft" align="right" valign="top"><a id="a70a5ec1cf7d45313720a48c0e9879f5d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_timestamp</b> (<a class="el" href="class_date_time.html">DateTime</a> t)</td></tr>
 <tr class="separator:a70a5ec1cf7d45313720a48c0e9879f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a466deae0671d4ee18e529395ce488676"><td class="memItemLeft" align="right" valign="top"><a id="a466deae0671d4ee18e529395ce488676"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_stoploss</b> (double sl)</td></tr>
+<tr class="separator:a466deae0671d4ee18e529395ce488676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64077158a3e9d387048c066caa6e44c9"><td class="memItemLeft" align="right" valign="top"><a id="a64077158a3e9d387048c066caa6e44c9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_takeprofit</b> (double tp)</td></tr>
+<tr class="separator:a64077158a3e9d387048c066caa6e44c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -244,9 +253,12 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>takeprofit_</b> {0.
 <tr class="memitem:a27ebaa60759a448de63c887a2ecdcad6"><td class="memItemLeft" align="right" valign="top"><a id="a27ebaa60759a448de63c887a2ecdcad6"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>suggested_price_</b> {0.0}</td></tr>
 <tr class="separator:a27ebaa60759a448de63c887a2ecdcad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae618c96d056e4ea27e58d6c54e4789c1"><td class="memItemLeft" align="right" valign="top"><a id="ae618c96d056e4ea27e58d6c54e4789c1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>suggested_quantity_</b> {0}</td></tr>
-<tr class="separator:ae618c96d056e4ea27e58d6c54e4789c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae29adaa11bfe583df87e59a7be71be76"><td class="memItemLeft" align="right" valign="top"><a id="ae29adaa11bfe583df87e59a7be71be76"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>position_size_factor_</b> {0.0}</td></tr>
+<tr class="separator:ae29adaa11bfe583df87e59a7be71be76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb60b91b4e4f3c4eb7f2878b3185a93"><td class="memItemLeft" align="right" valign="top"><a id="a1eb60b91b4e4f3c4eb7f2878b3185a93"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>quantity_to_close_</b> {0}</td></tr>
+<tr class="separator:a1eb60b91b4e4f3c4eb7f2878b3185a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a495929a1016107c51d500a1602d605cb"><td class="memItemLeft" align="right" valign="top"><a id="a495929a1016107c51d500a1602d605cb"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>quantity_</b> {0}</td></tr>
 <tr class="separator:a495929a1016107c51d500a1602d605cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -286,7 +298,8 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>commission_</b> {0.
 <li>suggested_price_: price at which ideally place market order</li>
 </ul>
 <p>Member variable for SIGNAL event</p><ul>
-<li>suggested_quantity_: suggested number of contracts to transact, which may be modififed by the <a class="el" href="class_position_sizer.html">PositionSizer</a>.</li>
+<li>position_size_factor_: factor controlling scaling up/dn the position dynamically (used by <a class="el" href="class_position_sizer.html">PositionSizer</a>)</li>
+<li>quantity_to_close_: quantity of contracts to close on exit signals</li>
 </ul>
 <p>Member variable for ORDER/FILL event</p><ul>
 <li>quantity_: the quantity of contracts (lots/shares) to transact.</li>

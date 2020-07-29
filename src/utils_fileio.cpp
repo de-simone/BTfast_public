@@ -401,6 +401,13 @@ int utils_fileio::write_strategies_to_file( std::string fname,
                                              bool verbose )
 {
     int result {0};
+
+    // Vector of names of performance metrics to be printed/written
+    std::vector<std::string> selected_metrics { "Ntrades",  "AvgTicks",
+                "WinPerc", "PftFactor", "NP/MDD", "Expectancy", "Z-score" };
+    // Vector of names of performance metrics excluded from printing/writing
+    std::vector<std::string> excluded_metrics {"NetPL", "AvgTrade", "StdTicks"};
+
     if( fname != "" ){
 
         DateTime now{};
@@ -430,12 +437,6 @@ int utils_fileio::write_strategies_to_file( std::string fname,
         char row[1000];
         char row_elem[30];
 
-        // Vector of names of performance metrics to be printed/written
-        std::vector<std::string> selected_metrics { "Ntrades",  "AvgTicks",
-            "WinPerc", "PftFactor", "NP/MDD", "Expectancy", "Z-score" };
-        // Vector of names of performance metrics excluded from printing/writing
-        std::vector<std::string> excluded_metrics { "NetPL", "AvgTrade",
-                                                    "StdTicks" };
 
         // Loop over strategies
         for( auto it = optim.begin(); it!=optim.end(); it++ ){
@@ -461,7 +462,7 @@ int utils_fileio::write_strategies_to_file( std::string fname,
 
                 row_elem[0] = '\0';
 
-                // Check if attribute name belongs to selected metrics
+                // Check whether attribute name belongs to selected metrics
                 if(std::find(selected_metrics.begin(), selected_metrics.end(),
                               attr_name ) != selected_metrics.end() ){
                     if( attr_name == "Ntrades" ){ // Number of trades is int

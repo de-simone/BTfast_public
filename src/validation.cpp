@@ -261,12 +261,12 @@ void Validation::initial_generation_selection(
                                                                     strat) };
         // Selection Conditions
 
-        bool condition1 { Ntrades > 150 };
-        bool condition2 { AvgTicks > 3 };
-        bool condition3 { NpMdd > 1.0 };
-        bool condition4 { PftFactor > 1.0 };
-        bool condition5 { Expectancy > 0.01 };
-        bool condition6 { Zscore > 0.1 };
+        bool condition1 { Ntrades > 300 };
+        bool condition2 { AvgTicks > 5 };
+        bool condition3 { NpMdd > 2.0 };
+        bool condition4 { PftFactor > 1.1 };
+        bool condition5 { Expectancy > 0.05 };
+        bool condition6 { Zscore > 0.5 };
         // Combine all conditions
         bool selection_conditions = ( condition1 && condition2 && condition3
                                     && condition4 && condition5 && condition6 );

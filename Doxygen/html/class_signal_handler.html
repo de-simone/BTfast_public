@@ -280,10 +280,10 @@ std::deque&lt; <a class="el" href="class_event.html">Event</a> &gt; *&#160;</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Append new incoming signals from signals to signals vectors 'long_signals_', 'short_signals_'.</p>
+<p>Append new incoming signals from signals array to signals vectors 'long_signals_', 'short_signals_'.</p>
 <p>signals is an array of size=2, of the form {Long entry/exit, Short entry/exit}</p>
 <p>Each of the vectors 'long_signals_' and 'short_signals_' typically contains only 1 signal. The only exception to store 2 signals is when an Entry comes right after an Exit, or an Exit comes right after an Entry.</p>
-<p>Check if first signal of 'long_signals_' and 'short_signals_' is triggered, and, if yes, convert it into an order sent to the queue.</p>
+<p>Check if first signal of 'long_signals_' and 'short_signals_' is triggered, and, if yes, convert it into an order event and send it to the queue.</p>
 <p>'barevent' is already 'next bar' after strategy generated the signal. </p>
 
 </div>
