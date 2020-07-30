@@ -53,14 +53,14 @@ bool Pattern ( int ptn_num,
                         && CloseD[3]>CloseD[4]);
             break;
         case 9:         // 3 consecutive down-closes
-            result = (CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3]
-                        && CloseD[3]<CloseD[4]);
+            result = ( CloseD[1]<CloseD[2] && CloseD[2]<CloseD[3]
+                        && CloseD[3]<CloseD[4] );
             break;
         case 10:
-            result = (HighD[1]>HighD[2] && LowD[1]>LowD[2]);
+            result = ( HighD[1]>HighD[2] && LowD[1]>LowD[2] );
             break;
         case 11:
-            result = (HighD[1]<HighD[2] && LowD[1]<LowD[2]);
+            result = ( HighD[1]<HighD[2] && LowD[1]<LowD[2] );
             break;
         case 12:
             result = ( HighD[0] > (LowD[0] + LowD[0]*0.75/100) );
