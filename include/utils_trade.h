@@ -14,6 +14,14 @@ namespace utils_trade {
     int MarketPosition( const PositionHandler& position_handler );
 
     // --------------------------------------------------------------------- //
+    /*! Find the position with side "LONG" or "SHORT" and corresponding to
+        strategy 'strat_name', inside the vector of open positions
+    */
+    Position find_pos_to_close( const std::string& side,
+                                const std::string& strat_name,
+                                const std::vector<Position>& open_positions );
+
+    // --------------------------------------------------------------------- //
     /*! Compute the number of entries during current session, as sum of
         positions open and closed + positions open and not closed.
         'timestamp' is the current bar timestamp.
@@ -29,6 +37,9 @@ namespace utils_trade {
     */
     void FeaturesExtraction( const PriceCollection &price_collection,
                              std::string fname );
+
+
+
 
 }
 

@@ -2,7 +2,7 @@
 
 #include "filters/TA_indicators.h"   // ROC
 #include "utils_math.h" // modulus, round_double
-#include "utils_trade.h"      // MarketPosition
+#include "utils_trade.h"      // MarketPosition, find_pos_to_close
 
 // ------------------------------------------------------------------------- //
 /*! Constructor
@@ -241,13 +241,8 @@ void Test::compute_exit( const std::deque<Event>& data1,
     //////////////////////////     CLOSE TRADES     ///////////////////////////
     if( ExitLong ){
         // identify long position to close
-        Position long_pos_to_close {};
-        for( Position pos : position_handler.open_positions() ){
-            if( pos.side() == "LONG" ){
-                long_pos_to_close = pos;
-                break;
-            }
-        }
+        Position long_pos_to_close { utils_trade::find_pos_to_close("LONG",
+                                name_, position_handler.open_positions()) };
         // long position to close has been found
         if( long_pos_to_close.quantity() > 0 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
@@ -259,13 +254,8 @@ void Test::compute_exit( const std::deque<Event>& data1,
 
     if( ExitShort ){
         // identify short position to close
-        Position short_pos_to_close {};
-        for( Position pos : position_handler.open_positions() ){
-            if( pos.side() == "SHORT" ){
-                short_pos_to_close = pos;
-                break;
-            }
-        }
+        Position short_pos_to_close { utils_trade::find_pos_to_close("SHORT",
+                                name_, position_handler.open_positions()) };
         // short position to close has been found
         if( short_pos_to_close.quantity() > 0 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),

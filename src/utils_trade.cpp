@@ -32,6 +32,28 @@ int utils_trade::MarketPosition( const PositionHandler &position_handler )
 }
 
 // ------------------------------------------------------------------------- //
+// Find the position with side "LONG" or "SHORT" and corresponding to
+//    strategy 'strat_name', inside the vector of open positions
+
+Position utils_trade::find_pos_to_close( const std::string& side,
+                                         const std::string& strat_name,
+                                 const std::vector<Position>& open_positions )
+{
+    Position result {};
+    if( side == "LONG" || side == "SHORT" ){
+        for( const Position& pos : open_positions ){
+            if( pos.side() == side && pos.strategy_name() == strat_name ){
+                result = pos;
+                break;
+            }
+        }
+    }
+    return(result);
+}
+
+
+
+// ------------------------------------------------------------------------- //
 // Compute the number of entries during current session
 // (deprecated because slow)
 /*

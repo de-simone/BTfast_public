@@ -7,7 +7,7 @@
 #include "filters/time_filters.h"       // TimeFilter_DOW, TimeFilter_Intraday
 #include "filters/TA_indicators.h"      // ATR
 #include "utils_math.h"                 // modulus, round_double, mean
-#include "utils_trade.h"                // MarketPosition
+#include "utils_trade.h"                // MarketPosition, find_pos_to_close
 
 #include <algorithm>                    // std::max_element, std::min_element
 #include <cmath>                        // std::abs,std::pow
@@ -378,13 +378,8 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
     //////////////////////////     CLOSE TRADES     ///////////////////////////
     if( ExitLong ){
         // identify long position to close
-        Position long_pos_to_close {};
-        for( const Position& pos : position_handler.open_positions() ){
-            if( pos.side() == "LONG" && pos.strategy_name() == name_ ){
-                long_pos_to_close = pos;
-                break;
-            }
-        }
+        Position long_pos_to_close { utils_trade::find_pos_to_close("LONG",
+                                name_, position_handler.open_positions()) };
         // long position to close has been found
         if( long_pos_to_close.quantity() > 0 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
@@ -396,13 +391,8 @@ void MasterCode::compute_exit( const std::deque<Event>& data1,
 
     if( ExitShort ){
         // identify short position to close
-        Position short_pos_to_close {};
-        for( const Position& pos : position_handler.open_positions() ){
-            if( pos.side() == "SHORT" && pos.strategy_name() == name_ ){
-                short_pos_to_close = pos;
-                break;
-            }
-        }
+        Position short_pos_to_close { utils_trade::find_pos_to_close("SHORT",
+                                name_, position_handler.open_positions()) };
         // short position to close has been found
         if( short_pos_to_close.quantity() > 0 ){
             signals[1] = Event { symbol_, data1[0].timestamp(),
