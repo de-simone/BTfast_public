@@ -90,7 +90,7 @@ class MasterCode : public Strategy {
 
 
     // ---     Indicators     --- //
-    std::deque<double> atr_ {};     // ATR on data1 
+    std::deque<double> atr_ {};     // ATR on data1
     std::deque<double> atrD_ {};    // ATR on data1D
     //std::deque<double> roc_ {};
     // -------------------------- //
@@ -118,8 +118,8 @@ class MasterCode : public Strategy {
     int Exit_switch_ {0};
     //--
     //-- Parameters
-    int fractN_long_ {1};       // fract = 2^fractN_ / 10
-    int fractN_short_ {1};
+    int fractN_long_ {1};       // fract = 2^fractN_ / 20
+    int fractN_short_ {1};      // fract = 2^fractN_ / 20
     //--
     double epsilon_{0.0};       // used for stability test (5% variation)
     // ------------------------------------------ //

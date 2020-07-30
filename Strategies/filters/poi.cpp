@@ -21,7 +21,7 @@ void PointOfInititation( double &POI_long, double &POI_short,
             POI_long  = OpenD[0];
             POI_short = POI_long;
             break;
-            
+
         case 2:         // Close of yesterday
             POI_long  = CloseD[1];
             POI_short = POI_long;

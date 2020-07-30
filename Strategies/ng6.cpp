@@ -1,14 +1,16 @@
 #include "ng6.h"
 
+#include "filters/exits.h"              // ExitCondition
 #include "filters/patterns.h"           // Pattern
-//#include "filters/time_filters.h"        // TimeFilter
+//#include "filters/time_filters.h"     // TimeFilter
 #include "filters/TA_indicators.h"      // ATR
 #include "utils_math.h"                 // modulus, round_double
 #include "utils_trade.h"                // MarketPosition
 
-#include <algorithm>    // std::max_element, std::min_element
-#include <cmath>        // std::abs,std::pow
-#include <iostream>     // std::cout
+#include <algorithm>                    // std::max_element, std::min_element
+#include <cmath>                        // std::abs,std::pow
+#include <iostream>                     // std::cout
+#include <numeric>                      // std::accumulate
 
 using std::max_element;
 using std::min_element;
@@ -57,10 +59,9 @@ void NG6::set_param_values(
 {
     // Find parameter value in parameter_set by its name (as appear in XML file)
     MyStop_ = find_param_value_by_name( "MyStop", parameter_set );
-    //fractN_ = find_param_value_by_name( "fractN", parameter_set );
+    Side_switch_ = find_param_value_by_name( "Side_switch", parameter_set );
     fractN_long_  = find_param_value_by_name( "fractN_long", parameter_set );
     fractN_short_ = find_param_value_by_name( "fractN_short", parameter_set );
-    volabin_ = find_param_value_by_name( "VolatilityBin", parameter_set );
     epsilon_ = find_param_value_by_name( "epsilon", parameter_set );
 }
 
@@ -123,16 +124,14 @@ int NG6::preliminaries( const std::deque<Event>& data1,
     //--
 
     //-- Update Indicator Values
+
     ATR( atr_, data1D, NewSession_, max_bars_back_, 10 );
-    /*
     // Require at least 100 days of ATR history
     if( atr_.size() < 100 ){
         return(0);
     }
-    */
+
     //--
-
-
 
     return(1);
 }
@@ -147,98 +146,71 @@ void NG6::compute_entry( const std::deque<Event>& data1,
 {
 
     // --------------------    POINT OF INITIATION    ---------------------- //
-    double POI_long  {  CloseD_[1] };                   // 3
-    double POI_short {  0.5*(HighD_[0] + LowD_[0]) };     // 2
-
-    /*
-    if( CurrentDOW_ == 2 || CurrentDOW_ == 3 ){ // tue,wed
-        POI_short =  (CloseD_[1] + HighD_[1] + LowD_[1])/3 ; //6
-    }
-    */
+    double POI_long  {  CloseD_[1] };
+    double POI_short {  *max_element( CloseD_.begin()+1, CloseD_.end() ) };
     // --------------------------------------------------------------------- //
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
-    //double fract { std::pow(2,fractN_ ) * 0.1 };  // 2^fractN_ / 10
-    /*
-    double fract_long { std::pow(2, fractN_long_) * 0.1 };      // 2^fractN_ / 10
-    double fract_short { std::pow(2, fractN_short_) * 0.1 };    // 2^fractN_ / 10
-    fract_long  = fract_long  * ( 1 + epsilon_/20.0 ); // epsilon=1 means 5% variation
-    fract_short = fract_short * ( 1 + epsilon_/20.0 ); // epsilon=1 means 5% variation
-    */
-
+    double distance_long { HighD_[1] - LowD_[1] };
     double level_long  = utils_math::round_double(
-                               POI_long  + 0.8  * (HighD_[1] - LowD_[1]),
-                                                      digits_ );
+                               POI_long  + 0.8 * distance_long,  digits_ );
+
+
+    double distance_short { ( std::accumulate(HighD_.begin(), HighD_.end(), 0.0)
+                            - std::accumulate(LowD_.begin(), LowD_.end(), 0.0)
+                            ) / HighD_.size() };
     double level_short = utils_math::round_double(
-                               POI_short - 0.1 * (HighD_[1] - LowD_[1]),
-                                                      digits_ );
-    /*if( CurrentDOW_ == 2 || CurrentDOW_ == 3 ){ // tue,wed
-        level_short = utils_math::round_double(
-                               POI_short - 0.4 * (
-                                *max_element( HighD_.begin()+1, HighD_.end() )
-                                - *min_element( LowD_.begin()+1, LowD_.end() )),
-                                                      digits_ );
-    }
-    */
+                               POI_short + 0.1 * distance_short, digits_ );
     // --------------------------------------------------------------------- //
 
     // --------------------------    TIME FILTER    ------------------------ //
-    bool FilterT { CurrentTime_ >= Time(8,0)
-                    && CurrentTime_ < symbol_.settlement_time()
-                    && CurrentDOW_ != 5     // not on fri
-                };
+    bool FilterT_long { CurrentTime_ >= Time(8,0)
+                        && CurrentTime_ < symbol_.settlement_time()
+                        && CurrentDOW_ != 5     // not on fri
+                      };
+    bool FilterT_short { CurrentDOW_ != 5  };
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
     bool Filter1_long { true };
     bool Filter1_short { true };
 
-    Filter1_long = LowD_[1] < LowD_[5]; // 23
-    Filter1_short = ( CloseD_[1]>CloseD_[2] &&
-                    (CloseD_[2]>CloseD_[3] || CloseD_[3]>CloseD_[4]) );  // 8mod
-    /*
-    if( CurrentDOW_ == 2 || CurrentDOW_ == 3 ){ // tue,wed
-        Filter1_short = (OpenD_[0]-LowD_[0])> ((OpenD_[1]-LowD_[1]) * 1); // 6
-    }
-    */
-    /*Filter1_short = Filter1_short &&
-                    Pattern( volabin_, OpenD_, HighD_, LowD_, CloseD_, atr_ );
-    */
+    Filter1_long = LowD_[1] < LowD_[5];
+    Filter1_short = ( HighD_[1]>HighD_[2] && HighD_[1]>HighD_[3]
+                      && HighD_[1]>HighD_[4] );
+    //Filter1_short = ( HighD_[0] < (LowD_[0] + LowD_[0]*0.75/100) );
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //
-    bool All_filters_long  { FilterT && Filter1_long };
-    bool All_filters_short { FilterT && CurrentDOW_ != 2 && Filter1_short };
+    bool All_filters_long  { FilterT_long && Filter1_long };
+    bool All_filters_short { FilterT_short && Filter1_short };
 
-    All_filters_long = false;
+    //All_filters_long = false;
     //All_filters_short = false;
     // --------------------------------------------------------------------- //
 
     // ------------------------    ENTRY RULES    -------------------------- //
-    bool EnterLong  = ( TradingEnabled_ && All_filters_long );
-    bool EnterShort = ( TradingEnabled_ && All_filters_short );
+    bool EnterLong  = ( TradingEnabled_
+                        && ( Side_switch_ == 1 || Side_switch_ == 3 )
+                        && All_filters_long );
+
+    bool EnterShort = ( TradingEnabled_
+                        && ( Side_switch_ == 2 || Side_switch_ == 3 )
+                        && All_filters_short );
     // --------------------------------------------------------------------- //
 
 
     ////////////////////////  DO NOT EDIT THIS BLOCK  /////////////////////////
     //////////////////////////     OPEN TRADES     ////////////////////////////
     if( EnterLong ){
-        /*std::cout<<data1[0].timestamp().tostring()<<"    "
-                 <<CloseD_[1]<<", "<<HighD_[1]<<", "<<LowD_[1]<<", "
-                 <<LowD_[5]<<", "<<level_long<<"\n";
-        std::cout<<"LowD = "<< data1D[0].timestamp().tostring()
-                 <<"  "<< data1D[0].low()<<"\n";
-        */
         signals[0] = Event { symbol_, data1[0].timestamp(),
                              "BUY", "STOP", level_long,
-                             //"BUY", "MARKET", level_long,
                              1.0, 0, name_, (double) MyStop_, 0.0 };
     }
 
     if( EnterShort ){
         signals[1] = Event { symbol_, data1[0].timestamp(),
-                             "SELLSHORT", "STOP", level_short,
-                             //"SELLSHORT", "MARKET", level_short,
+                             "SELLSHORT", "LIMIT", level_short,
                              1.0, 0, name_, (double) MyStop_ , 0.0 };
     }
     ///////////////////////////////////////////////////////////////////////////
@@ -256,18 +228,20 @@ void NG6::compute_exit( const std::deque<Event>& data1,
     // ------------------------    EXIT RULES    --------------------------- //
     // Exit one bar before close of session,
     // or at open of next session if session ends earlier than usual
-
+    int Exit_switch { 1 };
     bool ExitLong   = ( MarketPosition_> 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( Exit_switch, data1, name_,
+                                          position_handler.open_positions(),
+                                          CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, 5, 5,
+                                          tf_mins_, co_mins_, NewSession_) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                       && ( CurrentTime_ == OneBarBeforeClose_
-                           || ((data1[0].timestamp().time()
-                               - data1[1].timestamp().time()).tot_minutes() >
-                               co_mins_ + tf_mins_ ) ) );
+                        && ExitCondition( Exit_switch, data1, name_,
+                                          position_handler.open_positions(),
+                                          CurrentTime_, CurrentDOW_,
+                                          OneBarBeforeClose_, 5, 5,
+                                          tf_mins_, co_mins_, NewSession_ ) );
     // --------------------------------------------------------------------- //
 
 

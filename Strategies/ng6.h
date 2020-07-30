@@ -95,11 +95,11 @@ class NG6 : public Strategy {
     // --- Initialization of Input Parameters --- //
     //  (default values, may be replaced by XML)  //
     int MyStop_ {0};            // Stop-Loss in USD per contract
+    // Switches
+    int Side_switch_ {3};
     // Parameters
-    //int fractN_ {1};            // fract = 2^fractN_ / 10
-    int fractN_long_ {1};
-    int fractN_short_ {1};
-    int volabin_ {0};          // volatility bin
+    int fractN_long_ {1};       // fract = 2^fractN_ / 20
+    int fractN_short_ {1};      // fract = 2^fractN_ / 20
     double epsilon_{0.0};       // used for stability test (5% variation)
     // ------------------------------------------ //
 

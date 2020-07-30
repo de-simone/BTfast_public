@@ -316,7 +316,7 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     ////////////////////////  DO NOT EDIT THIS BLOCK  /////////////////////////
     //////////////////////////     OPEN TRADES     ////////////////////////////
     if( EnterLong ){
-        
+
         if( BOMR_switch_ == 1 ){
             signals[0] = Event { symbol_, data1[0].timestamp(),
                                  "BUY", "STOP", level_long,
