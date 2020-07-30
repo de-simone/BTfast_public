@@ -104,6 +104,18 @@ void Instrument::fill_members (){
         settlement_time_ = Time {13,15};
     }
 
+    // E-mini EUR/USD - CME (Chicago)
+    else if( name_ == "E7" ){
+        contract_unit_ = 62500; // euro
+        margin_ = 1252;
+        commission_ = 3.0;
+        tick_size_ = 0.0001;
+        tick_value_ = 6.25;
+        session_open_time_ = Time {17,0};
+        session_close_time_ = Time {16,0};
+        settlement_time_ = Time {14,00};
+    }
+
     // Gold - COMEX (NY)
     else if( name_ == "GC" ){
         contract_unit_ = 100; // troy ounces
@@ -131,7 +143,7 @@ void Instrument::fill_members (){
     // E-mini Russell 2000 index - CME (Chicago)
     else if( name_ == "RTY" ){
         contract_unit_ = 50; // 50 x index value
-        margin_ = 7040;
+        margin_ = 6380;
         commission_ = 3.0;
         tick_size_ = 0.1;
         tick_value_ = 5.0;
@@ -143,7 +155,7 @@ void Instrument::fill_members (){
     // Wheat (SRW) - CBOT (Chicago)
     else if( name_ == "W" ){
         contract_unit_ = 5000; // Bushels
-        margin_ = 1485;
+        margin_ = 1375;
         commission_ = 3.0;
         tick_size_ = 0.25;
         tick_value_ = 12.5;

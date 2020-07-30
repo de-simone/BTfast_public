@@ -84,7 +84,7 @@ class BTfast {
     std::array<int, 24> volume_hour_ {};
     // Sum of range Close-Open (in ticks) for each Day of Week
     std::array<double, 7> co_range_dow_ {};
-    // Daily range H-L (in ticks)
+    // Daily range H-L (in USD)
     std::vector<double> hl_range_ {};
 
 

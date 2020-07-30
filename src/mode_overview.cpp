@@ -33,21 +33,25 @@ void mode_overview( BTfast &btf, std::unique_ptr<DataFeed> &datafeed,
     std::ofstream outfile;
     outfile.open( overview_file );
 
+    // (Date, End-of-Day price)
     for( auto p: btf.eod_prices() ){
         outfile << p.first.tostring() <<", "<< p.second <<"\n";
     }
     outfile << "\n\n";
 
+    // Volume for each hour
     for( int i=0; i < btf.volume_hour().size(); i++ ){
         outfile << i <<", " << btf.volume_hour().at(i) <<"\n";
     }
     outfile << "\n\n";
 
+    // Sum of range Close-Open (in ticks) for each Day of Week
     for( int i=0; i < btf.co_range_dow().size(); i++ ){
         outfile << i+1 <<", " << btf.co_range_dow().at(i) <<"\n";
     }
     outfile << "\n\n";
 
+    // Daily range H-L (in USD)
     for( auto r: btf.hl_range() ){
         outfile << r <<"\n";
     }

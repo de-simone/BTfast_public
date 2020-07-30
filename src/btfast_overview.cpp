@@ -169,7 +169,7 @@ void BTfast::run_overview( Account &account,
                                                     / symbol_.tick_size();
 
                     hl_range_.push_back( (HighD[1]-LowD[1])
-                                            / symbol_.tick_size() );
+                                         * symbol_.big_point_value()  );
 
                 }
                 // -------------   END COLLECTING MARKET INFO   ------------ //

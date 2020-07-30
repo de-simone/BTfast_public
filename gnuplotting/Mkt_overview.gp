@@ -50,7 +50,18 @@ unset timefmt
 unset xdata
 
 
-# Plot (1,2): Close-Open range per DOW
+# Plot (1,2): Volume per hour
+
+set xlabel "Hour"
+set ylabel "Volume"
+set xrange [-0.5:23.5]
+set xtics 0,1,23
+bin_width = 1                   # bin size in ticks
+set boxwidth bin_width * 0.8    # box width is 80% of bin width
+plot datafile index 1 using 1:2  smooth unique with boxes lt 1
+
+
+# Plot (2,1): Close-Open range per DOW
 
 set xlabel "Day of Week"
 set ylabel "Sum of Close-Open (ticks)"
@@ -62,17 +73,6 @@ plot datafile index 2 using 1:2 smooth unique with boxes lt 2
 
 
 
-# Plot (2,1): Volume per hour
-
-set xlabel "Hour"
-set ylabel "Volume"
-set xrange [-0.5:23.5]
-set xtics 0,1,23
-bin_width = 1                   # bin size in ticks
-set boxwidth bin_width * 0.8    # box width is 80% of bin width
-plot datafile index 1 using 1:2  smooth unique with boxes lt 1
-
-
 
 # Plot (2,2): High-Low daily range
 
@@ -80,12 +80,12 @@ unset xrange
 unset ylabel
 set xtics auto
 
-set xlabel "High-Low range (ticks)"
-bin_width = 50                   # bin size in ticks
-set xtics 2*bin_width norangelimit nomirror
+set xlabel "High-Low range (USD)"
+bin_width = 250                   # bin size in ticks
+set xtics 4*bin_width norangelimit nomirror
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
 unset label
-set label sprintf("   Median = %5.0f", AvgTicks_median) left at graph 0.7,0.90 front
+set label sprintf("   Median =%5.0f USD", AvgTicks_median) left at graph 0.7,0.90 front
 plot datafile index 3 using (bin($1, bin_width)):(1.0) smooth freq with boxes lt 3
 
 
