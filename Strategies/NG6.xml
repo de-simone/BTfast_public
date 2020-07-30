@@ -25,11 +25,11 @@
 <Inputs>
     <Input>
       <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-      <Value>3</Value>
+      <Value>2</Value>
     </Input>
     <Input>
       <Name>MyStop</Name>
-      <Value>1500</Value>
+      <Value>0</Value>
     </Input>
     <Input>
         <Name>fractN_long</Name>             <!-- 0..5:1 -->

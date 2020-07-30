@@ -156,9 +156,9 @@ void NG6::compute_entry( const std::deque<Event>& data1,
                                POI_long  + 0.8 * distance_long,  digits_ );
 
 
-    double distance_short { ( std::accumulate(HighD_.begin(), HighD_.end(), 0.0)
-                            - std::accumulate(LowD_.begin(), LowD_.end(), 0.0)
-                            ) / HighD_.size() };
+    double distance_short { ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
+                            - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0)
+                            ) / ( (double) (HighD_.size() - 1) ) };
     double level_short = utils_math::round_double(
                                POI_short + 0.1 * distance_short, digits_ );
     // --------------------------------------------------------------------- //

@@ -203,11 +203,11 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
             distance = ( HighD_[1] - LowD_[1] );
             break;
         case 2:                // avg of (H-L) over last 5 sessions
-            distance = ( std::accumulate(HighD_.begin(), HighD_.end(), 0.0)
-                         - std::accumulate(LowD_.begin(), LowD_.end(), 0.0)
-                       ) / HighD_.size();
+            distance = ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
+                         - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0)
+                       ) / ( (double) (HighD_.size() - 1) );
             break;
-        case 3:                // HH(5)-LL(5)
+        case 3:                // HighestHigh(5) - LowestLow(5)
             distance = ( *max_element( HighD_.begin()+1, HighD_.end() )
                          - *min_element( LowD_.begin()+1, LowD_.end() ) );
             break;
