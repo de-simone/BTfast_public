@@ -1,0 +1,163 @@
+# TimeStamp   : 2020-07-30 14:55:14
+# Strategy    : MasterCode
+# Symbol      : E7
+# TimeFrame   : M10
+# Date Range  : 2010-01-03 --> 2019-12-31
+#
+#<Strategies/MasterCode.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+# === All parameters need to be INTEGER ===
+# 
+#  - Main node within <Inputs> and </Inputs>
+# 
+#  - Fixed-input parameters are with syntax:
+# 
+#     <Input>
+#       <Name>parameter_name</Name>
+#       <Value>0.5</Value>
+#     </Input>
+# 
+#  - Optimizable parameter are with syntax:
+# 
+#     <OptRange>
+#       <Name>parameter_name</Name>
+#       <Start>1</Start>
+#       <Stop>20</Stop>
+#       <Step>1</Step>
+#     </OptRange>
+# 
+# For Backtest: only the <Start> value of <OptRange> parameters is read.
+# 
+# Names of input variables must match those in 'mode_factory_sequential'
+# 
+# Names of optimization variables ("fractN_long", "fractN_short")
+# and "Side_switch" must match in 'validation.cpp'
+# 
+# -->
+# <Inputs>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>2</Value>
+#     </Input>
+#     <Input>
+#         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
+#         <Value>2</Value>
+#     </Input>
+#     <Input>
+#         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
+#         <Value>0</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>POI_switch</Name>         <!-- 1..8:1 -->
+#         <Start>6</Start>
+#         <Stop>8</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
+#         <Start>2</Start>
+#         <Stop>4</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
+#         <Start>5</Start>
+#         <Stop>5</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Intraday_switch</Name>    <!-- 0..10:1 -->
+#         <Start>0</Start>
+#         <Stop>10</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Filter1L_switch</Name>    <!-- 0..56:1 -->
+#         <Start>0</Start>
+#         <Stop>56</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>Filter1S_switch</Name>    <!-- 0..56:1 -->
+#         <Start>24</Start>
+#         <Stop>56</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>MktRegimeL_switch</Name>  <!-- 0..8:1 -->
+#         <Start>0</Start>
+#         <Stop>8</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>MktRegimeS_switch</Name>  <!-- 0..8:1 -->
+#         <Start>0</Start>
+#         <Stop>8</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>DPS_switch</Name>         <!--  0 (false) or 1 (true) -->
+#         <Value>0</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>Exit_switch</Name>        <!-- 1..5:1 -->
+#         <Start>1</Start>
+#         <Stop>2</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>fractN_long</Name>        <!-- 0..4:1 -->
+#         <Start>0</Start>
+#         <Stop>4</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <OptRange>
+#         <Name>fractN_short</Name>       <!-- 0..4:1 -->
+#         <Start>1</Start>
+#         <Stop>4</Stop>
+#         <Step>1</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+# </Inputs>
+#</Strategies/MasterCode.xml>
+#
+
+   # ==================  Performance Report ================== #
+                        |     All    |    Long    |    Short   |
+     Initial Balance    : 10000000.00
+     N. of Trades       :     436            0          436
+     Net Profit         :  199231.25         0.00    199231.25
+     Net Profit %       :       2.0%         0.0%         2.0%
+     CAGR               :       0.2%         0.0%         0.2%
+     Avg Trade          :     456.95         0.00       456.95
+     Avg Ticks          :       6.03         0.00         6.03
+     Profit Factor      :       1.30         0.00         1.30
+     Win Percent        :      57.1%         0.0%        57.1%
+     Avg DrawDown       :  -21206.34         0.00    -21206.34
+     Avg DrawDown %     :      -0.2%         0.0%        -0.2%
+     Max DrawDown       :  -88850.00         0.00    -88850.00
+     Max DrawDown %     :      -0.9%         0.0%        -0.9%
+     Avg DD Duration    :    1390.00         0.00      1390.00
+     Net PL/Max DD      :       2.24         0.00         2.24
+     CAGR/Max DD %      :       0.22         0.00         0.22
+     Expectancy         :       0.13         0.00         0.13
+     Z-score            :       1.94         0.00         1.94
+   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+     R^2                :     0.9342       0.0000       0.9342
+     Std.Dev. of P/L    :    4911.78         0.00      4911.78
+     Gross Profit       :  861368.75         0.00    861368.75
+     Gross Loss         : -662137.50         0.00   -662137.50
+     Avg Profit         :    3459.31         0.00      3459.31
+     Avg Loss           :   -3540.84         0.00     -3540.84
+     Max Profit         :   25593.75         0.00     25593.75
+     Max Loss           :  -17062.50         0.00    -17062.50
+     Avg Bars in Win    :      99.31         0.00        99.31
+     Avg Bars in Loss   :     102.32         0.00       102.32
+     Max Consec. Wins   :       8            0            8
+     Max Consec. Losses :       6            0            6
+     Minimum Capital    :  134527.00         0.00    134527.00
+   # ========================================================= #

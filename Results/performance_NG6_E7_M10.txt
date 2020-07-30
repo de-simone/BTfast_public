@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-07-30 14:48:33
+# TimeStamp   : 2020-07-30 14:54:42
 # Strategy    : NG6
 # Symbol      : E7
 # TimeFrame   : M10
@@ -37,34 +37,34 @@
                         |     All    |    Long    |    Short   |
      Initial Balance    : 10000000.00
      N. of Trades       :     439            0          439
-     Net Profit         :   16206.25         0.00     16206.25
-     Net Profit %       :       0.2%         0.0%         0.2%
-     CAGR               :       0.0%         0.0%         0.0%
-     Avg Trade          :      36.92         0.00        36.92
+     Net Profit         :  196681.25         0.00    196681.25
+     Net Profit %       :       2.0%         0.0%         2.0%
+     CAGR               :       0.2%         0.0%         0.2%
+     Avg Trade          :     448.02         0.00       448.02
      Avg Ticks          :       5.91         0.00         5.91
-     Profit Factor      :       1.28         0.00         1.28
+     Profit Factor      :       1.29         0.00         1.29
      Win Percent        :      56.9%         0.0%        56.9%
-     Avg DrawDown       :   -1897.04         0.00     -1897.04
-     Avg DrawDown %     :      -0.0%         0.0%        -0.0%
-     Max DrawDown       :   -8406.25         0.00     -8406.25
-     Max DrawDown %     :      -0.1%         0.0%        -0.1%
-     Avg DD Duration    :    1390.00         0.00      1390.00
-     Net PL/Max DD      :       1.93         0.00         1.93
-     CAGR/Max DD %      :       0.19         0.00         0.19
-     Expectancy         :       0.12         0.00         0.12
-     Z-score            :       1.84         0.00         1.84
+     Avg DrawDown       :  -21966.80         0.00    -21966.80
+     Avg DrawDown %     :      -0.2%         0.0%        -0.2%
+     Max DrawDown       :  -91400.00         0.00    -91400.00
+     Max DrawDown %     :      -0.9%         0.0%        -0.9%
+     Avg DD Duration    :    1436.47         0.00      1436.47
+     Net PL/Max DD      :       2.15         0.00         2.15
+     CAGR/Max DD %      :       0.21         0.00         0.21
+     Expectancy         :       0.13         0.00         0.13
+     Z-score            :       1.91         0.00         1.91
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     R^2                :     0.9233       0.0000       0.9233
-     Std.Dev. of P/L    :     419.33         0.00       419.33
-     Gross Profit       :   73125.00         0.00     73125.00
-     Gross Loss         :  -56918.75         0.00    -56918.75
-     Avg Profit         :     292.50         0.00       292.50
-     Avg Loss           :    -301.16         0.00      -301.16
-     Max Profit         :    1968.75         0.00      1968.75
-     Max Loss           :   -1493.75         0.00     -1493.75
+     R^2                :     0.9280       0.0000       0.9280
+     Std.Dev. of P/L    :    4917.91         0.00      4917.91
+     Gross Profit       :  868118.75         0.00    868118.75
+     Gross Loss         : -671437.50         0.00   -671437.50
+     Avg Profit         :    3472.48         0.00      3472.48
+     Avg Loss           :   -3552.58         0.00     -3552.58
+     Max Profit         :   25593.75         0.00     25593.75
+     Max Loss           :  -17062.50         0.00    -17062.50
      Avg Bars in Win    :     100.93         0.00       100.93
      Avg Bars in Loss   :     101.98         0.00       101.98
      Max Consec. Wins   :       8            0            8
      Max Consec. Losses :       6            0            6
-     Minimum Capital    :   13861.37         0.00     13861.37
+     Minimum Capital    :  138352.00         0.00    138352.00
    # ========================================================= #
