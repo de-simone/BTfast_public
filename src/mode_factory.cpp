@@ -291,6 +291,9 @@ void mode_factory_sequential( BTfast &btf,
         // Find strategy equal to 'strat' except without new filter
         no_filter_strat  = utils_params::no_filter_strategy("DOW_switch",
                                                             strat, generated_2);
+        if( no_filter_strat.empty() ){
+            continue;   // skip strat if corresponding no_filter_strat not found
+        }
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", no_filter_strat );
@@ -350,6 +353,9 @@ void mode_factory_sequential( BTfast &btf,
         // Find strategy equal to 'strat' except without new filter
         no_filter_strat  = utils_params::no_filter_strategy("Intraday_switch",
                                                             strat, generated_3);
+        if( no_filter_strat.empty() ){
+            continue;   // skip strat if corresponding no_filter_strat not found
+        }
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", no_filter_strat );
@@ -424,6 +430,9 @@ void mode_factory_sequential( BTfast &btf,
                                         "Filter1L_switch", "Filter1S_switch",
                                         strat, generated_4 );
                 break;
+        }
+        if( no_filter_strat.empty() ){
+            continue;   // skip strat if corresponding no_filter_strat not found
         }
         // Metrics of strategy without new filter(s)
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
@@ -515,6 +524,9 @@ void mode_factory_sequential( BTfast &btf,
                                         "MktRegimeL_switch", "MktRegimeS_switch",
                                         strat, generated_5 );
                     break;
+            }
+            if( no_filter_strat.empty() ){
+                continue;   // skip strat if corresponding no_filter_strat not found
             }
             // Metric of strategy without new filter(s)
             avgticks_no_filter = utils_params::strategy_attribute_by_name(

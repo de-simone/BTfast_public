@@ -176,11 +176,11 @@ bool utils_optim::sort_by_ntrades(const strategy_t& a, const strategy_t& b)
 }*/
 bool utils_optim::sort_by_avgticks(const strategy_t& a, const strategy_t& b)
 {
-    return( a[1].second > b[1].second );
+    return( a.at(1).second > b.at(1).second );
 }
 bool utils_optim::sort_by_winperc(const strategy_t& a, const strategy_t& b)
 {
-    return( a[2].second > b[2].second );
+    return( a.at(2).second > b.at(2).second );
 }
 /*
 bool utils_optim::sort_by_avgtrade(const strategy_t& a, const strategy_t& b)
@@ -190,15 +190,15 @@ bool utils_optim::sort_by_avgtrade(const strategy_t& a, const strategy_t& b)
 */
 bool utils_optim::sort_by_profitfactor(const strategy_t& a, const strategy_t& b)
 {
-    return( a[3].second > b[3].second );
+    return( a.at(3).second > b.at(3).second );
 }
 bool utils_optim::sort_by_npmdd(const strategy_t& a, const strategy_t& b)
 {
-    return( a[4].second > b[4].second );
+    return( a.at(4).second > b.at(4).second );
 }
 bool utils_optim::sort_by_expectancy(const strategy_t& a, const strategy_t& b)
 {
-    return( a[5].second > b[5].second );
+    return( a.at(5).second > b.at(5).second );
 }
 bool utils_optim::sort_by_zscore(const strategy_t& a, const strategy_t& b)
 {
@@ -249,7 +249,7 @@ void utils_optim::sort_by_metric( std::vector<strategy_t> &optim,
     else if( metric == "Expectancy" ){
         std::sort( optim.begin(), optim.end(), utils_optim::sort_by_expectancy);
     }
-    else if( metric == "Z-score" ){
+    else if( metric == "Z-score" ){        
         std::sort( optim.begin(), optim.end(), utils_optim::sort_by_zscore );
     }
     else{

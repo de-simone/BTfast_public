@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-07-29 11:07:40
+# TimeStamp   : 2020-07-31 21:35:42
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10
@@ -42,7 +42,7 @@
 #     </Input>
 #     <Input>
 #         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-#         <Value>1</Value>
+#         <Value>2</Value>
 #     </Input>
 #     <Input>
 #         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
@@ -50,20 +50,20 @@
 #     </Input>
 #     <OptRange>
 #         <Name>POI_switch</Name>         <!-- 1..8:1 -->
-#         <Start>1</Start>
-#         <Stop>2</Stop>
+#         <Start>4</Start>
+#         <Stop>4</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>Distance_switch</Name>    <!-- 1..4:1 -->
-#         <Start>1</Start>
-#         <Stop>2</Stop>
+#         <Start>3</Start>
+#         <Stop>3</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
-#         <Start>0</Start>
-#         <Stop>2</Stop>
+#         <Start>3</Start>
+#         <Stop>3</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
@@ -109,13 +109,13 @@
 #     <OptRange>
 #         <Name>fractN_long</Name>        <!-- 0..4:1 -->
 #         <Start>0</Start>
-#         <Stop>4</Stop>
+#         <Stop>0</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>fractN_short</Name>       <!-- 0..4:1 -->
-#         <Start>0</Start>
-#         <Stop>4</Stop>
+#         <Start>3</Start>
+#         <Stop>3</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <Input>
@@ -126,12 +126,4 @@
 #</Strategies/MasterCode.xml>
 #
 #  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,BOMR_switch,Side_switch,   MyStop,POI_switch,Distance_switch,DOW_switch,Intraday_switch,Filter1L_switch,Filter1S_switch,MktRegimeL_switch,MktRegimeS_switch,DPS_switch,Exit_switch,fractN_long,fractN_short,  epsilon,
-      351,    11.15,    52.71,     1.37,     3.22,     0.17,     1.99,          1,          1,          0,          1,          1,          1,          0,          0,          0,          0,          0,          0,          1,          4,          0,          0,
-      328,    11.42,    50.30,     1.36,     3.50,     0.18,     1.89,          1,          1,          0,          1,          1,          2,          0,          0,          0,          0,          0,          0,          1,          4,          0,          0,
-      795,     6.46,    51.19,     1.18,     2.63,     0.09,     1.68,          1,          1,          0,          2,          2,          1,          0,          0,          0,          0,          0,          0,          1,          3,          0,          0,
-      409,     8.20,    50.86,     1.27,     2.63,     0.13,     1.65,          1,          1,          0,          1,          1,          0,          0,          0,          0,          0,          0,          0,          1,          4,          0,          0,
-     1253,     5.05,    48.44,     1.13,     2.54,     0.07,     1.54,          1,          1,          0,          2,          2,          0,          0,          0,          0,          0,          0,          0,          1,          2,          0,          0,
-     1181,     5.14,    48.35,     1.14,     2.17,     0.07,     1.54,          1,          1,          0,          2,          2,          1,          0,          0,          0,          0,          0,          0,          1,          2,          0,          0,
-      884,     5.28,    50.45,     1.15,     2.34,     0.07,     1.47,          1,          1,          0,          2,          2,          0,          0,          0,          0,          0,          0,          0,          1,          3,          0,          0,
-     1131,     4.79,    49.25,     1.13,     3.06,     0.07,     1.41,          1,          1,          0,          2,          2,          2,          0,          0,          0,          0,          0,          0,          1,          2,          0,          0,
-      771,     4.28,    50.19,     1.12,     1.64,     0.06,     1.08,          1,          1,          0,          2,          2,          2,          0,          0,          0,          0,          0,          0,          1,          3,          0,          0,
+      329,    10.14,    48.02,     1.24,     2.76,     0.13,     1.25,          1,          2,          0,          4,          3,          3,          0,          0,          0,          0,          0,          0,          1,          0,          3,          0,

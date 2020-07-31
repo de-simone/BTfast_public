@@ -25,7 +25,7 @@ General Settings for BTfast
              5:    Noise test for Single Strategy
              6:    Market overview (no trades)
          -->
-        <Value> 1
+        <Value> 4
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -35,7 +35,7 @@ General Settings for BTfast
              NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   GC1
+        <Value>   MasterCode
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>

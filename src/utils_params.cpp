@@ -592,7 +592,7 @@ strategy_t utils_params::no_filter_strategy( std::string filter_name,
         bool is_equal {false};
         for( int i = 0; i < strat_params.size(); i++ ){
             if(  ( strat_params.at(i).first == filter_name
-                && strat_params.at(i).second == 0 )
+                && strat_params.at(i).second == 0 ) 
               || ( strat_params.at(i).first != filter_name
                 && strat_params.at(i).second == ref_strat_params.at(i).second)){
                 is_equal =  true;
