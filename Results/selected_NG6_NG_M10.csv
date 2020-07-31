@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-04-18 08:24:14
+# TimeStamp   : 2020-07-31 10:24:07
 # Strategy    : NG6
 # Symbol      : NG
 # TimeFrame   : M10
-# Date Range  : 2009-10-01 --> 2019-12-30
+# Date Range  : 2010-01-03 --> 2019-12-30
 #
-#  Ntrades,  AvgTicks,   WinPerc, PftFactor,    NP/MDD, Expectancy,   Z-score,    MyStop, fractN_long, fractN_short, ATRperiod,   epsilon, 
-      355,     16.92,     58.03,      1.78,      7.91,      0.33,      3.35,           0,           3,           2,           0,           0, 
+#  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,Side_switch,   MyStop,fractN_long,fractN_short,  epsilon,
+      539,    18.54,    55.84,     1.87,     9.84,     0.38,     4.19,          3,          0,          4,          2,          0,

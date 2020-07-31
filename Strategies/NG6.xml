@@ -29,8 +29,20 @@
     </Input>
     <Input>
       <Name>MyStop</Name>
-      <Value>2000</Value>
+      <Value>1500</Value>
     </Input>
+    <OptRange>
+        <Name>fractN_long</Name>        <!-- 0..4:1 -->
+        <Start>4</Start>
+        <Stop>4</Stop>
+        <Step>1</Step>
+    </OptRange>
+    <OptRange>
+        <Name>fractN_short</Name>       <!-- 0..4:1 -->
+        <Start>2</Start>
+        <Stop>4</Stop>
+        <Step>1</Step>
+    </OptRange>
     <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
         <Value>0</Value>

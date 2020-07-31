@@ -60,8 +60,8 @@ void NG6::set_param_values(
     // Find parameter value in parameter_set by its name (as appear in XML file)
     MyStop_ = find_param_value_by_name( "MyStop", parameter_set );
     Side_switch_ = find_param_value_by_name( "Side_switch", parameter_set );
-    //fractN_long_  = find_param_value_by_name( "fractN_long", parameter_set );
-    //fractN_short_ = find_param_value_by_name( "fractN_short", parameter_set );
+    fractN_long_  = find_param_value_by_name( "fractN_long", parameter_set );
+    fractN_short_ = find_param_value_by_name( "fractN_short", parameter_set );
     epsilon_ = find_param_value_by_name( "epsilon", parameter_set );
 }
 
@@ -151,19 +151,23 @@ void NG6::compute_entry( const std::deque<Event>& data1,
     // --------------------------------------------------------------------- //
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
-    double distance_long { HighD_[1] - LowD_[1] };
-    double distance_short { HighD_[1] - LowD_[1]  };
+    //double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
+    //double fract_short { std::pow(2,fractN_short_) * 0.05 };// 2^fractN_ / 20
+    //fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
+    //fract_short = fract_short * ( 1 + epsilon_* 0.05 ); // epsilon=1 means 5% variation
+    double fract_long { 0.8 };
+    double fract_short { 0.2 };
 
-    double level_long  = utils_math::round_double(
-                               POI_long  + 0.8 * distance_long,  digits_ );
-    double level_short = utils_math::round_double(
-                              POI_short + 0.05 * distance_short, digits_ );
-    /*
+    double distance_long { HighD_[1] - LowD_[1] };
     // Avg (H-L) of last 5 sessions
     double distance_short { ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
                             - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0)
                             ) / ( (double) (HighD_.size() - 1) ) };
-    */
+
+    double level_long  = utils_math::round_double(
+                            POI_long  + fract_long  * distance_long,  digits_ );
+    double level_short = utils_math::round_double(
+                            POI_short + fract_short * distance_short, digits_ );
     // --------------------------------------------------------------------- //
 
     // --------------------------    TIME FILTER    ------------------------ //
@@ -171,12 +175,15 @@ void NG6::compute_entry( const std::deque<Event>& data1,
                         && CurrentTime_ < symbol_.settlement_time()
                         && CurrentDOW_ != 5     // no fri
                       };
-    bool FilterT_short { FilterT_long  };
+    bool FilterT_short { CurrentDOW_ != 5  };   // no fri
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
     bool Filter1_long { LowD_[1] < LowD_[5] };
-    bool Filter1_short { HighD_[1]>HighD_[2] && LowD_[1]>LowD_[2] };
+    bool Filter1_short { HighD_[1]>HighD_[2] || LowD_[1]<LowD_[2] };
+    //Filter1_short = HighD_[1]>HighD_[2] && HighD_[1]>HighD_[3] && HighD_[1]>HighD_[4];
+    //Filter1_short = HighD_[1]>HighD_[2] && LowD_[1]>LowD_[2];
+    //Filter1_short = HighD_[0] < (LowD_[0] + LowD_[0]*0.75/100);
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //

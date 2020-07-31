@@ -51,7 +51,7 @@ General Settings for BTfast
         <!-- Start date (included). Format: YYYY-MM-DD
             (0 for first date on file)  -->
         <Name>  START_DATE      </Name>
-        <Value>  0       <!-- 2014-01-01 2007-10-29 -->
+        <Value>  2010-01-01       <!-- 2014-01-01 2007-10-29 -->
         </Value></Input>
     <Input>
         <!-- End date (included). Format: YYYY-MM-DD
@@ -166,7 +166,7 @@ General Settings for BTfast
         <Value>   1
         </Value></Input>
     <Input>
-        <!-- Fraction in [0,1] to use in "fixed_fractional", "fixed_notional"-->
+        <!-- Fraction in [0,1] to use in "fixed_notional", "fixed_fractional" -->
         <Name>    RISK_FRACTION     </Name>
         <Value>   0.1
         </Value></Input>
@@ -186,7 +186,7 @@ General Settings for BTfast
         <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
              (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
         <Name>    DATA_FILE_OOS     </Name>
-        <Value>   E7/E7_M10_2015-2017.csv
+        <Value>   NG/NG_M10_2015-2017_DXT.csv
         </Value></Input>
     <Input>
         <!-- Percentage of max variation (stability test) -->
@@ -196,7 +196,7 @@ General Settings for BTfast
     <Input>
         <!-- Number of noise tests (runs with price randomization) -->
         <Name>    NOISE_TESTS     </Name>
-        <Value>   250
+        <Value>   300
         </Value></Input>
     <!-- ================================================================== -->
 

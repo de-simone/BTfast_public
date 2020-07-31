@@ -98,8 +98,8 @@ class NG6 : public Strategy {
     // Switches
     int Side_switch_ {3};
     // Parameters
-    //int fractN_long_ {1};       // fract = 2^fractN_ / 20
-    //int fractN_short_ {1};      // fract = 2^fractN_ / 20
+    int fractN_long_ {1};       // fract = 2^fractN_ / 20
+    int fractN_short_ {1};      // fract = 2^fractN_ / 20
     double epsilon_{0.0};       // used for stability test (5% variation)
     // ------------------------------------------ //
 
