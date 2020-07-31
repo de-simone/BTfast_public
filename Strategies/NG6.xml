@@ -25,19 +25,11 @@
 <Inputs>
     <Input>
       <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-      <Value>2</Value>
+      <Value>3</Value>
     </Input>
     <Input>
       <Name>MyStop</Name>
-      <Value>0</Value>
-    </Input>
-    <Input>
-        <Name>fractN_long</Name>             <!-- 0..5:1 -->
-        <Value>1</Value>
-    </Input>
-    <Input>
-        <Name>fractN_short</Name>             <!-- 0..5:1 -->
-        <Value>2</Value>
+      <Value>2000</Value>
     </Input>
     <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->

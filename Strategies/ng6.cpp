@@ -60,8 +60,8 @@ void NG6::set_param_values(
     // Find parameter value in parameter_set by its name (as appear in XML file)
     MyStop_ = find_param_value_by_name( "MyStop", parameter_set );
     Side_switch_ = find_param_value_by_name( "Side_switch", parameter_set );
-    fractN_long_  = find_param_value_by_name( "fractN_long", parameter_set );
-    fractN_short_ = find_param_value_by_name( "fractN_short", parameter_set );
+    //fractN_long_  = find_param_value_by_name( "fractN_long", parameter_set );
+    //fractN_short_ = find_param_value_by_name( "fractN_short", parameter_set );
     epsilon_ = find_param_value_by_name( "epsilon", parameter_set );
 }
 
@@ -152,41 +152,36 @@ void NG6::compute_entry( const std::deque<Event>& data1,
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
     double distance_long { HighD_[1] - LowD_[1] };
+    double distance_short { HighD_[1] - LowD_[1]  };
+
     double level_long  = utils_math::round_double(
                                POI_long  + 0.8 * distance_long,  digits_ );
-
-
+    double level_short = utils_math::round_double(
+                              POI_short + 0.05 * distance_short, digits_ );
+    /*
+    // Avg (H-L) of last 5 sessions
     double distance_short { ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
                             - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0)
                             ) / ( (double) (HighD_.size() - 1) ) };
-    double level_short = utils_math::round_double(
-                               POI_short + 0.1 * distance_short, digits_ );
+    */
     // --------------------------------------------------------------------- //
 
     // --------------------------    TIME FILTER    ------------------------ //
     bool FilterT_long { CurrentTime_ >= Time(8,0)
                         && CurrentTime_ < symbol_.settlement_time()
-                        && CurrentDOW_ != 5     // not on fri
+                        && CurrentDOW_ != 5     // no fri
                       };
-    bool FilterT_short { CurrentDOW_ != 5  };
+    bool FilterT_short { FilterT_long  };
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
-    bool Filter1_long { true };
-    bool Filter1_short { true };
-
-    Filter1_long = LowD_[1] < LowD_[5];
-    Filter1_short = ( HighD_[1]>HighD_[2] && HighD_[1]>HighD_[3]
-                      && HighD_[1]>HighD_[4] );
-    //Filter1_short = ( HighD_[0] < (LowD_[0] + LowD_[0]*0.75/100) );
+    bool Filter1_long { LowD_[1] < LowD_[5] };
+    bool Filter1_short { HighD_[1]>HighD_[2] && LowD_[1]>LowD_[2] };
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //
     bool All_filters_long  { FilterT_long && Filter1_long };
     bool All_filters_short { FilterT_short && Filter1_short };
-
-    //All_filters_long = false;
-    //All_filters_short = false;
     // --------------------------------------------------------------------- //
 
     // ------------------------    ENTRY RULES    -------------------------- //
