@@ -153,11 +153,13 @@ void GC1::compute_entry( const std::deque<Event>& data1,
     /*
     double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
     fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
+    double fract_short { std::pow(2,fractN_short_) * 0.05 };  // 2^fractN_ / 20
+    fract_short = fract_short * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
     */
     double fract_long { 0.4 };
 
     double distance_long { HighD_[1] - LowD_[1] };
-    double level_long  { utils_math::round_double(
+    double level_long { utils_math::round_double(
                         POI_long  + fract_long  * distance_long,  digits_ ) };
 
     double level_short { level_long };
@@ -169,7 +171,7 @@ void GC1::compute_entry( const std::deque<Event>& data1,
 
     // ---------------------------    FILTER 1    -------------------------- //
     bool Filter1_long { HighD_[2]>HighD_[1] || LowD_[2]<LowD_[1] };
-    //Filter1_long = HighD_[0] > HighD_[1];    
+    //Filter1_long = HighD_[0] > HighD_[1];
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //

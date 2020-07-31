@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-07-31 17:45:57
+# TimeStamp   : 2020-07-31 18:17:09
 # Strategy    : GC1
 # Symbol      : GC
 # TimeFrame   : M10
@@ -19,13 +19,13 @@
 #     </Input>
 #     <OptRange>
 #         <Name>fractN_long</Name>        <!-- 0..4:1 -->
-#         <Start>0</Start>
+#         <Start>3</Start>
 #         <Stop>4</Stop>
 #         <Step>1</Step>
 #     </OptRange>
 #     <OptRange>
 #         <Name>fractN_short</Name>       <!-- 0..4:1 -->
-#         <Start>1</Start>
+#         <Start>3</Start>
 #         <Stop>4</Stop>
 #         <Step>1</Step>
 #     </OptRange>

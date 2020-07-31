@@ -31,7 +31,7 @@ General Settings for BTfast
     <!-- =======================    MAIN SETTINGS    ====================== -->
     <Input>
         <!-- Available strategies (should match .xml filenames):
-            BOtest, MasterCode, MRtest,
+            BOtest, GC1, MasterCode, MRtest,
             template,test,NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
