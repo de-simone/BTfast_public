@@ -72,7 +72,7 @@ class BOMRcharacter : public Strategy {
     int digits_{1};
     int tf_mins_ {0};
     int co_mins_ {0};
-    Time OneBarBeforeClose_ {};
+    Time OneBarBeforeClose_ {};    
     Date CurrentDate_ {};
     Time CurrentTime_ {};
     int CurrentDOW_ {0};

@@ -19,7 +19,7 @@ BOMRcharacter::BOMRcharacter( std::string name, Instrument symbol,
         // Get minutes from "Mx"
         tf_mins_ = std::stoi( timeframe_.substr(1, std::string::npos) );
         Time delta {tf_mins_/60, tf_mins_%60}; // time difference of 1 timeframe bar
-        OneBarBeforeClose_ = symbol_.session_close_time() - delta;
+        OneBarBeforeClose_ = symbol_.session_close_time()- delta;
     }
 
     // duration of after session, from close to open (in minutes)
@@ -112,10 +112,10 @@ int BOMRcharacter::preliminaries( const std::deque<Event>& data1,
 
     //-- Update Indicator Values
 
-    //bool make_new_entry {true};         // if computing indicator on intraday (data1)
-    bool make_new_entry {NewSession_}; // if computing indicators on "D" (data1D)
-    HighestHigh( highesthigh_, data1, make_new_entry, max_bars_back_, Nbars_ );
-    LowestLow( lowestlow_, data1, make_new_entry, max_bars_back_, Nbars_);
+    //bool make_new_entry {true};     // if computing indicator on intraday bars (data1)
+    bool make_new_entry {NewSession_};// if computing indicator on session bars (data1D)
+    HighestHigh( highesthigh_, data1D, make_new_entry, max_bars_back_, Nbars_ );
+    LowestLow( lowestlow_, data1D, make_new_entry, max_bars_back_, Nbars_);
 
     // Require at least Nbars_ of history
     if( highesthigh_.size() < Nbars_ +1 ){
@@ -200,14 +200,16 @@ void BOMRcharacter::compute_exit( const std::deque<Event>& data1,
                         && ExitCondition( 1 /*4*/, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_, Xbars_, Xbars_+1,
+                                          symbol_.session_close_time()
+                                          /*OneBarBeforeClose_*/, Xbars_, Xbars_+1,
                                           tf_mins_, co_mins_, NewSession_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
                         && ExitCondition( 1 /*4*/, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_, Xbars_, Xbars_+1,
+                                          symbol_.session_close_time()
+                                          /*OneBarBeforeClose_*/, Xbars_, Xbars_+1,
                                           tf_mins_, co_mins_, NewSession_ ) );
 
     // --------------------------------------------------------------------- //

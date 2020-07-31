@@ -151,18 +151,21 @@ void NG6::compute_entry( const std::deque<Event>& data1,
     // --------------------------------------------------------------------- //
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
-    //double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
-    //double fract_short { std::pow(2,fractN_short_) * 0.05 };// 2^fractN_ / 20
-    //fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
-    //fract_short = fract_short * ( 1 + epsilon_* 0.05 ); // epsilon=1 means 5% variation
+    /*
+    double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
+    double fract_short { std::pow(2,fractN_short_) * 0.05 };// 2^fractN_ / 20
+    fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
+    fract_short = fract_short * ( 1 + epsilon_* 0.05 ); // epsilon=1 means 5% variation
+    */
     double fract_long { 0.8 };
-    double fract_short { 0.2 };
+    double fract_short { 0.1 };
 
     double distance_long { HighD_[1] - LowD_[1] };
     // Avg (H-L) of last 5 sessions
-    double distance_short { ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
-                            - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0)
-                            ) / ( (double) (HighD_.size() - 1) ) };
+    double distance_short {
+                    ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
+                    - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0) )
+                    / ( (double) (HighD_.size() - 1) ) };
 
     double level_long  = utils_math::round_double(
                             POI_long  + fract_long  * distance_long,  digits_ );
@@ -180,8 +183,9 @@ void NG6::compute_entry( const std::deque<Event>& data1,
 
     // ---------------------------    FILTER 1    -------------------------- //
     bool Filter1_long { LowD_[1] < LowD_[5] };
-    bool Filter1_short { HighD_[1]>HighD_[2] || LowD_[1]<LowD_[2] };
-    //Filter1_short = HighD_[1]>HighD_[2] && HighD_[1]>HighD_[3] && HighD_[1]>HighD_[4];
+    bool Filter1_short { HighD_[1]>HighD_[2] && HighD_[1]>HighD_[3]
+                         && HighD_[1]>HighD_[4] };
+    //Filter1_short = HighD_[1]>HighD_[2] && LowD_[1]<LowD_[2];
     //Filter1_short = HighD_[1]>HighD_[2] && LowD_[1]>LowD_[2];
     //Filter1_short = HighD_[0] < (LowD_[0] + LowD_[0]*0.75/100);
     // --------------------------------------------------------------------- //

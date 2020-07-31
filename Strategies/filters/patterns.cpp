@@ -153,7 +153,7 @@ bool Pattern ( int ptn_num,
             result = ( HighD[2]>HighD[1] || LowD[2]<LowD[1] );
             break;
         case 40:    // yesterday outside bar
-            result = ( HighD[2]<HighD[1] || LowD[2]>LowD[1] );
+            result = ( HighD[2]<HighD[1] && LowD[2]>LowD[1] );
             break;
 
 

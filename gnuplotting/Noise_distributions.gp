@@ -63,21 +63,21 @@ set label sprintf("   Min = %5.0f", AvgTicks_min) left at graph 0,0.80 front
 set arrow from OriginalAvgTicks,graph 0 to OriginalAvgTicks,graph 1 nohead ls 2 front
 plot datafile using (bin($2, bin_width)):(1.0) smooth freq with boxes lc 'blue'
 unset arrow
-set xtics auto  # restore automatic xtics
+#set xtics auto  # restore automatic xtics
 
 
-# Plot (1,2): Average Trade
+# Plot (1,2): Win Percentage
 
-set xlabel "Avg Trade (USD)"
+set xlabel "Win %"
 #set yrange [0:]
 
-bin_width = 5                  # bin size in USD
+bin_width = 0.5                  # bin size in USD
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
 unset label
-set label sprintf(" Median = %5.0f $", AvgTrade_median) left at graph 0,0.95 front
-set label sprintf("    Avg = %5.0f $", AvgTrade_mean) left at graph 0,0.90 front
-set label sprintf("    Std = %5.0f $", AvgTrade_stddev) left at graph 0,0.85 front
-set label sprintf("    Min = %5.0f $", AvgTrade_min) left at graph 0,0.80 front
+set label sprintf(" Median = %5.1f%%", AvgTrade_median) left at graph 0,0.95 front
+set label sprintf("    Avg = %5.1f%%", AvgTrade_mean) left at graph 0,0.90 front
+set label sprintf("    Std = %5.1f%%", AvgTrade_stddev) left at graph 0,0.85 front
+set label sprintf("    Min = %5.1f%%", AvgTrade_min) left at graph 0,0.80 front
 set arrow from OriginalAvgTrade,graph 0 to OriginalAvgTrade,graph 1 nohead ls 2 front
 plot datafile using (bin($3, bin_width)):(1.0) smooth freq with boxes lc 'green'
 unset arrow
@@ -130,7 +130,7 @@ unset arrow
 # Plot (2,3): Z-score
 
 set xlabel "Z-score"
-bin_width = 0.5                 # bin size
+bin_width = 0.2               # bin size
 set boxwidth bin_width * 0.8    # box width is 80% of bin width
 unset label
 set label sprintf(" Median = %5.1f", Zscore_median) left at graph 0,0.95 front

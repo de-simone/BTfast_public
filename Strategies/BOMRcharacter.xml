@@ -31,18 +31,14 @@
         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
         <Value>2</Value>
     </Input>
-    <OptRange>
+    <Input>
         <Name>Nbars</Name>              <!-- 3..30:3 -->
-        <Start>3</Start>
-        <Stop>30</Stop>
-        <Step>3</Step>
-    </OptRange>
-    <OptRange>
+        <Value>1</Value>
+    </Input>
+    <Input>
         <Name>Xbars</Name>              <!-- 3..30:3 -->
-        <Start>3</Start>
-        <Stop>30</Stop>
-        <Step>3</Step>
-    </OptRange>
+        <Value>3</Value>
+    </Input>
     <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
         <Value>0</Value>
