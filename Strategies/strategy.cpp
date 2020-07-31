@@ -1,6 +1,7 @@
 #include "strategy.h"
 
 #include "bomrcharacter.h"
+#include "gc1.h"
 #include "mastercode.h"
 #include "ng1.h"
 #include "ng2.h"
@@ -77,6 +78,11 @@ void select_strategy( std::unique_ptr<Strategy>& strategy_ptr,
         strategy_ptr = std::make_unique<BOMRcharacter> ( strategy_name,
                                                          symbol, timeframe,
                                                          max_bars_back );
+    }
+    else if( strategy_name == "GC1" ){
+        strategy_ptr = std::make_unique<GC1> ( strategy_name,
+                                               symbol, timeframe,
+                                               max_bars_back );
     }
     else if( strategy_name == "MasterCode" ){
         strategy_ptr = std::make_unique<MasterCode> ( strategy_name,

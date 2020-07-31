@@ -1,4 +1,4 @@
-#include "ng6.h"
+#include "gc1.h"
 
 #include "filters/exits.h"              // ExitCondition
 #include "filters/patterns.h"           // Pattern
@@ -20,7 +20,7 @@ using std::pow;
 // ------------------------------------------------------------------------- //
 /*! Constructor
 */
-NG6::NG6( std::string name, Instrument symbol,
+GC1::GC1( std::string name, Instrument symbol,
                         std::string timeframe, int max_bars_back )
 : Strategy{ name, symbol, timeframe, max_bars_back },
   digits_ { symbol_.digits() }
@@ -53,7 +53,7 @@ NG6::NG6( std::string name, Instrument symbol,
     correspondence with the names appearing in XML param file.
     Recall: all parameters in XML are INTEGER.
 */
-void NG6::set_param_values(
+void GC1::set_param_values(
                         const std::vector< std::pair<std::string,int> >&
                                 parameter_set )
 {
@@ -76,7 +76,7 @@ void NG6::set_param_values(
     Return: 1 if all OK; 0 if not enough session bars in history.
 */
 
-int NG6::preliminaries( const std::deque<Event>& data1,
+int GC1::preliminaries( const std::deque<Event>& data1,
                          const std::deque<Event>& data1D,
                          const PositionHandler& position_handler)
 {
@@ -139,60 +139,42 @@ int NG6::preliminaries( const std::deque<Event>& data1,
 //-------------------------------------------------------------------------- //
 /*! Define Entry rules and fill 'signals' array
 */
-void NG6::compute_entry( const std::deque<Event>& data1,
+void GC1::compute_entry( const std::deque<Event>& data1,
                                 const std::deque<Event>& data1D,
                                 const PositionHandler& position_handler,
                                 std::array<Event, 2> &signals )
 {
 
     // --------------------    POINT OF INITIATION    ---------------------- //
-    double POI_long  {  CloseD_[1] };
-    double POI_short {  *max_element( CloseD_.begin()+1, CloseD_.end() ) };
+    double POI_long {  *max_element( CloseD_.begin()+1, CloseD_.end() ) };
     // --------------------------------------------------------------------- //
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
     /*
     double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
-    double fract_short { std::pow(2,fractN_short_) * 0.05 };// 2^fractN_ / 20
     fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
-    fract_short = fract_short * ( 1 + epsilon_* 0.05 ); // epsilon=1 means 5% variation
     */
-    double fract_long { 0.8 };
-    double fract_short { 0.1 };
+    double fract_long { 0.4 };
 
     double distance_long { HighD_[1] - LowD_[1] };
-    // Avg (H-L) of last 5 sessions
-    double distance_short {
-                    ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
-                    - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0) )
-                    / ( (double) (HighD_.size() - 1) ) };
-
-    double level_long { utils_math::round_double(
+    double level_long  { utils_math::round_double(
                         POI_long  + fract_long  * distance_long,  digits_ ) };
-    double level_short { utils_math::round_double(
-                        POI_short + fract_short * distance_short, digits_ ) };
+
+    double level_short { level_long };
     // --------------------------------------------------------------------- //
 
     // --------------------------    TIME FILTER    ------------------------ //
-    bool FilterT_long { CurrentTime_ >= Time(8,0)
-                        && CurrentTime_ < symbol_.settlement_time()
-                        && CurrentDOW_ != 5     // no fri
-                      };
-    bool FilterT_short { CurrentDOW_ != 5  };   // no fri
+    bool FilterT_long { CurrentDOW_ != 3 };     // no wed
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
-    bool Filter1_long { LowD_[1] < LowD_[5] };
-    bool Filter1_short { HighD_[1]>HighD_[2] && HighD_[1]>HighD_[3]
-                         && HighD_[1]>HighD_[4] };
-    //Filter1_short = HighD_[1]>HighD_[2] && LowD_[1]<LowD_[2];
-    //Filter1_short = HighD_[1]>HighD_[2] && LowD_[1]>LowD_[2];
-    //Filter1_short = HighD_[0] < (LowD_[0] + LowD_[0]*0.75/100);
+    bool Filter1_long { HighD_[2]>HighD_[1] || LowD_[2]<LowD_[1] };
+    //Filter1_long = HighD_[0] > HighD_[1];    
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //
     bool All_filters_long  { FilterT_long && Filter1_long };
-    bool All_filters_short { FilterT_short && Filter1_short };
+    bool All_filters_short { false };
     // --------------------------------------------------------------------- //
 
     // ------------------------    ENTRY RULES    -------------------------- //
@@ -216,7 +198,7 @@ void NG6::compute_entry( const std::deque<Event>& data1,
 
     if( EnterShort ){
         signals[1] = Event { symbol_, data1[0].timestamp(),
-                             "SELLSHORT", "LIMIT", level_short,
+                             "SELLSHORT", "STOP", level_short,
                              1.0, 0, name_, (double) MyStop_ , 0.0 };
     }
     ///////////////////////////////////////////////////////////////////////////
@@ -226,7 +208,7 @@ void NG6::compute_entry( const std::deque<Event>& data1,
 //-------------------------------------------------------------------------- //
 /*! Define Exit rules and fill 'signals' array
 */
-void NG6::compute_exit( const std::deque<Event>& data1,
+void GC1::compute_exit( const std::deque<Event>& data1,
                                const std::deque<Event>& data1D,
                                const PositionHandler& position_handler,
                                std::array<Event, 2> &signals )
@@ -291,7 +273,7 @@ void NG6::compute_exit( const std::deque<Event>& data1,
     Second entry of 'signals' array: entry/exit signals for SHORT trades
 */
 
-void NG6::compute_signals( const PriceCollection& price_collection,
+void GC1::compute_signals( const PriceCollection& price_collection,
                                   const PositionHandler& position_handler,
                                   std::array<Event, 2> &signals )
 {
