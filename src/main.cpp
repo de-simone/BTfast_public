@@ -29,11 +29,15 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-07-30
+                                                        Last update: 2020-08-03
                                           -------------------------------------
 
  * TO DO:
 
+    - print strategies validated up to noise test (excluded)
+    - select best-performing sample of 100 trades  from IS+OOS:
+      moving window of 100 consecutive trades with max avgticks
+      use this best-sample as a benchmark for two-sample test (on/off-sync)
     - Performance: avg drawdown duration: avg time delay between equity peaks.
         check results, stdticks too large
     - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old ?

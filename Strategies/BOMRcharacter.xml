@@ -29,11 +29,11 @@
     </Input>
     <Input>
         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
-        <Value>2</Value>
+        <Value>1</Value>
     </Input>
     <Input>
         <Name>Nbars</Name>              <!-- 3..30:3 -->
-        <Value>1</Value>
+        <Value>3</Value>
     </Input>
     <Input>
         <Name>Xbars</Name>              <!-- 3..30:3 -->
