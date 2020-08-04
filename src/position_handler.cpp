@@ -3,7 +3,7 @@
 #include "transaction.h"
 #include "utils_math.h"      // round_double
 
-#include <iostream>     // std::cout
+#include <iostream>         // std::cout
 
 
 // ------------------------------------------------------------------------- //
@@ -36,18 +36,34 @@ void PositionHandler::on_bar( const Event &barevent ) {
     // Check if some position is open ('open_positions_' not empty)
     if( !open_positions_.empty() ){
 
+        //<<< Time bar_close_time { barevent.timestamp().time() };
+
         // Loop over open open positions
-        for( auto & pos : open_positions_){
+        for( auto& pos : open_positions_){
 
             // update open position and check whether SL/TP is hit
             pos.update_position( barevent );
 
             // update account (floating) balance
-            // account_.set_equity(account_.balance() + pos.pl_ );
+            //<<<
+            /*
+            if( (barevent.symbol().two_days_session()    // session spans two days
+                 && bar_close_time == Time {0,0,0} )
+                ||
+                ( !barevent.symbol().two_days_session()   // session spans 1 day
+                 && bar_close_time == barevent.symbol().session_close_time()
+                )
+            ){
+                //account_.set_equity( account_.balance() + pos.pl_ );
+                account_.add_to_equity( pos.pl_ );
+            }
+            */
+            //<<<
+
 
             // if SL or TP is hit, send to queue the order to close position
             if( !pos.keep_open() ){
-                                
+
                 if( pos.side() == "LONG") {
                     Event oev {pos.symbol().name(), barevent.timestamp(),
                                 "SELL", "MARKET", barevent.close(),
@@ -62,7 +78,6 @@ void PositionHandler::on_bar( const Event &barevent ) {
                                 0.0, 0.0, pos.ticket()};
                     events_queue_->push_back(oev);
                 }
-
             }
         }
     }
@@ -105,12 +120,9 @@ void PositionHandler::on_fill( const Event &fillevent ) {
     //--- Close open position
     if( fillevent.action() == "SELL" || fillevent.action() == "BUYTOCOVER" ){
 
-        // Initialize object of position to close
-        Position pos_to_close { "", Instrument {}, "", 0, DateTime {},
-                                0.0, 0.0, 0.0, 0 };
-
         // Identify position to close by strategy name
-        for( auto pos : open_positions_ ){
+        Position pos_to_close {};
+        for( const Position& pos : open_positions_ ){
             if( pos.strategy_name() == fillevent.strategy_name() ){
                 pos_to_close = pos;
                 break;
@@ -118,7 +130,6 @@ void PositionHandler::on_fill( const Event &fillevent ) {
         }
 
         if( pos_to_close.quantity() != 0 ){  // position to close found
-
             // P/L of the position to be closed
             double pos_pl {0.0};
             if( fillevent.action() == "SELL" ){

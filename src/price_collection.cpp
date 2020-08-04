@@ -89,9 +89,8 @@ void PriceCollection::on_bar(Event &barevent){
 void PriceCollection::update_D_bars(const Event &barevent){
 
     // time at bar open/close
-    Time bar_close_time = barevent.timestamp().time();
-    Time bar_open_time = (barevent.timestamp().time() - delta_);
-
+    Time bar_close_time { barevent.timestamp().time() };
+    Time bar_open_time { barevent.timestamp().time() - delta_ };
     // reference to daily bars, as alias
     std::deque<Event>& bar_list = bar_collection_[
                                                 barevent.symbol().name()]["D"];

@@ -25,7 +25,7 @@ General Settings for BTfast
              5:    Noise test for Single Strategy
              6:    Market overview (no trades)
          -->
-        <Value> 4444
+        <Value> 1
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
