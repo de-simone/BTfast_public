@@ -144,6 +144,31 @@ void Validation::run_validation()
     num_validated_ = (int) passed_validation_4.size();
     //---
 
+    // Write validated strategies before noise test to 'validated_file_prenoise'
+    if( num_validated_ > 0 ){
+        // remove extension from validated_file_
+        std::string validated_file_prenoise { validated_file_ };
+        std::string extension { ".csv" };
+        std::string::size_type i { validated_file_prenoise.find(extension) };
+        if (i != std::string::npos){
+            validated_file_prenoise.erase(i, extension.length());
+        }
+        validated_file_prenoise += "_pre-noise"+extension;  // add suffix
+        int control = utils_fileio::write_strategies_to_file(
+                                                    validated_file_prenoise, "",
+                                                    passed_validation_4,
+                                                    btf_.strategy_name(),
+                                                    btf_.symbol().name(),
+                                                    btf_.timeframe(),
+                                                    btf_.first_date_parsed(),
+                                                    btf_.last_date_parsed(),
+                                                    false );
+        if( control == 1 ){
+            std::cout << "\nValidated strategies (before noise test) "
+                      << "written on file: " << validated_file_prenoise <<"\n";
+        }
+    }
+
     //--- Validation - Noise test
     // passed_validation_4 -> passed_validation_5
     noise_test( passed_validation_4, passed_validation_5, false );
