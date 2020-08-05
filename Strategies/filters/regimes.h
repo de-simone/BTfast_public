@@ -8,8 +8,10 @@
 /*! Market Regimes (volatility, directionality)
 */
 bool MktRegime ( int reg_num,
-                 std::array<double, 6> OpenD, std::array<double, 6> HighD,
-                 std::array<double, 6> LowD,  std::array<double, 6> CloseD,
-                 std::deque<double> atrD ); // ATR on daily data
+                 const std::array<double, 6>& OpenD,
+                 const std::array<double, 6>& HighD,
+                 const std::array<double, 6>& LowD,
+                 const std::array<double, 6>& CloseD,
+                 const std::deque<double>& atrD ) ; // ATR on daily data
 
 #endif

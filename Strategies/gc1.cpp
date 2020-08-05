@@ -124,13 +124,12 @@ int GC1::preliminaries( const std::deque<Event>& data1,
     //--
 
     //-- Update Indicator Values
-
-    ATR( atr_, data1D, NewSession_, max_bars_back_, 10 );
+    int ATRlength {20};
+    ATR( atr_, data1, true, max_bars_back_, ATRlength );
     // Require at least 100 days of ATR history
     if( atr_.size() < 100 ){
         return(0);
     }
-
     //--
 
     return(1);
@@ -146,7 +145,7 @@ void GC1::compute_entry( const std::deque<Event>& data1,
 {
 
     // --------------------    POINT OF INITIATION    ---------------------- //
-    double POI_long {  *max_element( CloseD_.begin()+1, CloseD_.end() ) };
+    double POI_long {  HighD_[1] };
     // --------------------------------------------------------------------- //
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
@@ -156,9 +155,9 @@ void GC1::compute_entry( const std::deque<Event>& data1,
     double fract_short { std::pow(2,fractN_short_) * 0.05 };  // 2^fractN_ / 20
     fract_short = fract_short * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
     */
-    double fract_long { 0.4 };
-    
-    double distance_long { HighD_[1] - LowD_[1] };
+    double fract_long { 4.0 };
+
+    double distance_long { atr_.front() };
     double level_long { utils_math::round_double(
                         POI_long  + fract_long  * distance_long,  digits_ ) };
 
@@ -166,12 +165,11 @@ void GC1::compute_entry( const std::deque<Event>& data1,
     // --------------------------------------------------------------------- //
 
     // --------------------------    TIME FILTER    ------------------------ //
-    bool FilterT_long { CurrentDOW_ != 3 };     // no wed
+    bool FilterT_long { true };
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
-    bool Filter1_long { HighD_[2]>HighD_[1] || LowD_[2]<LowD_[1] };
-    Filter1_long = HighD_[0] > HighD_[1];
+    bool Filter1_long { HighD_[0]-OpenD_[0] > HighD_[1]-OpenD_[1] };    
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //

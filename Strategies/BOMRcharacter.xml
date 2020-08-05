@@ -13,13 +13,13 @@
 *
 * - Optimizable parameter are with syntax:
 *
-*    <OptRange>
-*      <Name>parameter_name</Name>
-*      <Start>1</Start>
-*      <Stop>20</Stop>
-*      <Step>1</Step>
-*    </OptRange>
-*
+    <OptRange>
+      <Name>parameter_name</Name>
+      <Start>1</Start>
+      <Stop>20</Stop>
+      <Step>1</Step>
+    </OptRange>
+
 * For Backtest: only the <Start> value of <OptRange> parameters is read.
 -->
 <Inputs>
@@ -33,7 +33,7 @@
     </Input>
     <Input>
         <Name>Nbars</Name>              <!-- 3..30:3 -->
-        <Value>5</Value>
+        <Value>3</Value>
     </Input>
     <Input>
         <Name>Xbars</Name>              <!-- 3..30:3 -->

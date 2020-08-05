@@ -10,9 +10,11 @@ using std::min_element;
 
 // ------------------------------------------------------------------------- //
 bool MktRegime ( int reg_num,
-                 std::array<double, 6> OpenD, std::array<double, 6> HighD,
-                 std::array<double, 6> LowD,  std::array<double, 6> CloseD,
-                 std::deque<double> atrD )
+                 const std::array<double, 6>& OpenD,
+                 const std::array<double, 6>& HighD,
+                 const std::array<double, 6>& LowD,
+                 const std::array<double, 6>& CloseD,
+                 const std::deque<double>& atrD )
 {
 
     bool result {false};
@@ -46,7 +48,7 @@ bool MktRegime ( int reg_num,
     // --------------------------------------------------------------------- //
 
     switch( reg_num ){
-        
+
         case 0:
             result = true;
             break;

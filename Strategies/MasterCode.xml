@@ -54,6 +54,18 @@ and "Side_switch" must match in 'validation.cpp'
         <Step>1</Step>
     </OptRange>
     <OptRange>
+        <Name>fractN_long</Name>        <!-- 0..4:1 -->
+        <Start>0</Start>
+        <Stop>4</Stop>
+        <Step>1</Step>
+    </OptRange>
+    <OptRange>
+        <Name>fractN_short</Name>       <!-- 0..4:1 -->
+        <Start>0</Start>
+        <Stop>4</Stop>
+        <Step>1</Step>
+    </OptRange>
+    <OptRange>
         <Name>DOW_switch</Name>         <!-- 0..5:1 -->
         <Start>0</Start>
         <Stop>5</Stop>
@@ -78,6 +90,12 @@ and "Side_switch" must match in 'validation.cpp'
         <Step>1</Step>
     </OptRange>
     <OptRange>
+        <Name>Exit_switch</Name>        <!-- 1..5:1 -->
+        <Start>1</Start>
+        <Stop>2</Stop>
+        <Step>1</Step>
+    </OptRange>
+    <OptRange>
         <Name>MktRegimeL_switch</Name>  <!-- 0..8:1 -->
         <Start>0</Start>
         <Stop>8</Stop>
@@ -93,24 +111,6 @@ and "Side_switch" must match in 'validation.cpp'
         <Name>DPS_switch</Name>         <!--  0 (false) or 1 (true) -->
         <Value>0</Value>
     </Input>
-    <OptRange>
-        <Name>Exit_switch</Name>        <!-- 1..5:1 -->
-        <Start>1</Start>
-        <Stop>2</Stop>
-        <Step>1</Step>
-    </OptRange>
-    <OptRange>
-        <Name>fractN_long</Name>        <!-- 0..4:1 -->
-        <Start>0</Start>
-        <Stop>4</Stop>
-        <Step>1</Step>
-    </OptRange>
-    <OptRange>
-        <Name>fractN_short</Name>       <!-- 0..4:1 -->
-        <Start>0</Start>
-        <Stop>4</Stop>
-        <Step>1</Step>
-    </OptRange>
     <Input>
         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
         <Value>0</Value>

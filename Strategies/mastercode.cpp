@@ -1,5 +1,6 @@
 #include "mastercode.h"
 
+#include "filters/distances.h"          // DistanceCalculation
 #include "filters/exits.h"              // ExitCondition
 #include "filters/poi.h"                // PointOfInititation
 #include "filters/patterns.h"           // Pattern
@@ -173,7 +174,7 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
     // --------------------    POINT OF INITIATION    ---------------------- //
     double POI_long {0.0};
     double POI_short {0.0};
-    PointOfInititation( POI_long, POI_short, POI_switch_, BOMR_switch_,
+    PointOfInititation( POI_switch_, BOMR_switch_, POI_long, POI_short,
                         OpenD_, HighD_, LowD_, CloseD_) ;
     // --------------------------------------------------------------------- //
 
@@ -190,42 +191,24 @@ void MasterCode::compute_entry( const std::deque<Event>& data1,
         exit(1);
     }
 
-
+    // Fraction of volatility
     //double fract { std::pow(2,fractN_ ) * 0.1 };      // 2^fractN_ / 10
     double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
     double fract_short { std::pow(2,fractN_short_) * 0.05 };// 2^fractN_ / 20
     fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
     fract_short = fract_short * ( 1 + epsilon_* 0.05 ); // epsilon=1 means 5% variation
 
+    // Distance (volatility)
     double distance {0.0};
-    switch( Distance_switch_ ){
-        case 1:                // (High1-Low1)
-            distance = ( HighD_[1] - LowD_[1] );
-            break;
-        case 2:                // avg of (H-L) over last 5 sessions
-            distance = ( std::accumulate(HighD_.begin()+1, HighD_.end(), 0.0)
-                         - std::accumulate(LowD_.begin()+1, LowD_.end(), 0.0)
-                       ) / ( (double) (HighD_.size() - 1) );
-            break;
-        case 3:                // HighestHigh(5) - LowestLow(5)
-            distance = ( *max_element( HighD_.begin()+1, HighD_.end() )
-                         - *min_element( LowD_.begin()+1, LowD_.end() ) );
-            break;
-        case 4:                // ATR(10 bars)
-            distance = atr_.front();
-            fract_long  = 5 * fract_long;
-            fract_short = 5 * fract_short;
-            break;
-    }
+    DistanceCalculation( Distance_switch_, distance, fract_long, fract_short,
+                         OpenD_, HighD_, LowD_, CloseD_, atr_);
 
-    // POI +/- f * distance
+    // level = POI +/- fract * distance
     double level_long  { utils_math::round_double(
-                                    POI_long + sign * fract_long * distance,
-                                                    digits_ ) };
+                        POI_long + sign * fract_long * distance, digits_ ) };
 
     double level_short { utils_math::round_double(
-                                    POI_short - sign * fract_short * distance,
-                                                    digits_ ) };
+                        POI_short - sign * fract_short * distance, digits_ ) };
     //std::cout<<"HighD0/LowD0: "<< HighD_[0]<<", "<< LowD_[0]<<"\n";
     //std::cout<<"HighD1/LowD1: "<< HighD_[1]<<", "<< LowD_[1]<<"\n";
     //std::cout<<"level_long = "<<level_long<<"\n";

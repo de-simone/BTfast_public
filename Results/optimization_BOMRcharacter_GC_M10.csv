@@ -1,0 +1,48 @@
+# TimeStamp   : 2020-08-05 22:25:44
+# Strategy    : BOMRcharacter
+# Symbol      : GC
+# TimeFrame   : M10
+# Date Range  : 2010-01-03 --> 2019-12-31
+#
+#<Strategies/BOMRcharacter.xml>
+# <?xml version='1.0' encoding='UTF-8'?>
+# <!--
+#     <OptRange>
+#       <Name>parameter_name</Name>
+#       <Start>1</Start>
+#       <Stop>20</Stop>
+#       <Step>1</Step>
+#     </OptRange>
+# 
+# -->
+# <Inputs>
+#     <Input>
+#         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
+#         <Value>0</Value>
+#     </Input>
+#     <Input>
+#         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
+#         <Value>1</Value>
+#     </Input>
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
+#     <OptRange>
+#         <Name>Nbars</Name>              <!-- 3..30:3 -->
+#         <Start>3</Start>
+#         <Stop>10</Stop>
+#         <Step>3</Step>
+#     </OptRange>
+#     <Input>
+#         <Name>Xbars</Name>              <!-- 3..30:3 -->
+#         <Value>3</Value>
+#     </Input>
+# 
+# </Inputs>
+#</Strategies/BOMRcharacter.xml>
+#
+#  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,   MyStop,BOMR_switch,  epsilon,    Nbars,    Xbars,
+      261,    14.78,    50.19,     1.18,     1.40,     0.09,     0.87,          0,          1,          0,          9,          3,
+      315,     8.00,    51.11,     1.10,     0.63,     0.05,     0.55,          0,          1,          0,          6,          3,
+      375,     2.49,    48.27,     1.03,     0.21,     0.01,     0.18,          0,          1,          0,          3,          3,

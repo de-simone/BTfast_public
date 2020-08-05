@@ -473,7 +473,7 @@ void mode_factory_sequential( BTfast &btf,
     std::vector<strategy_t> selected_5 { selected_4 };//<<<
     /*
     //--- GENERATION + SELECTION STEP 5
-    std::cout << "\nStarting 5th generation step (MktRegimeL_switch, MktRegimeS_switch) \n";    
+    std::cout << "\nStarting 5th generation step (MktRegimeL_switch, MktRegimeS_switch) \n";
     std::vector<strategy_t> selected_5 {};
     for( const auto& selected_strat: selected_4 ){   // loop over selected strategies
 

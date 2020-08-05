@@ -195,9 +195,9 @@ void BOMRcharacter::compute_exit( const std::deque<Event>& data1,
                                 std::array<Event, 2> &signals )
 {
     // ------------------------    EXIT RULES    --------------------------- //
-    // Exit at end of day  [4: Exit after 'Xbars_' bars]
+    // Exit at end of day  [3: Exit after 'Xbars_' days]
     bool ExitLong   = ( MarketPosition_> 0
-                        && ExitCondition( 1 /*4*/, data1, name_,
+                        && ExitCondition( 3, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
                                           symbol_.session_close_time()
@@ -205,7 +205,7 @@ void BOMRcharacter::compute_exit( const std::deque<Event>& data1,
                                           tf_mins_, co_mins_, NewSession_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                        && ExitCondition( 1 /*4*/, data1, name_,
+                        && ExitCondition( 3, data1, name_,
                                           position_handler.open_positions(),
                                           CurrentTime_, CurrentDOW_,
                                           symbol_.session_close_time()
