@@ -465,7 +465,8 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
 
-
+    std::vector<strategy_t> selected_5 { selected_4 };//<<<
+    /*
     //--- GENERATION + SELECTION STEP 5
     std::vector<strategy_t> selected_5 {};
     for( const auto& selected_strat: selected_4 ){   // loop over selected strategies
@@ -574,6 +575,7 @@ void mode_factory_sequential( BTfast &btf,
             }
         }
     } // end loop over selected_4 strategies
+    */
 
     utils_optim::remove_duplicates( selected_5, fitness_metric );
     std::cout << "Number of strategies passing 5th generation step "
