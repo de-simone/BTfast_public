@@ -121,6 +121,7 @@ void utils_print::show_backtest_results(
     // Print Trade List on stdout and on file
     if( print_trade_list ){
         account.print_transaction_history();
+        //account.print_equity();//<<<
         account.write_transaction_history_to_file( trade_list_file,
                                             paramfile,
                                             strategy_name, symbol_name,

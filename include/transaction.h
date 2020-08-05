@@ -60,7 +60,7 @@ class Transaction {
 
 
         // string representations
-        std::string tostring();
+        std::string tostring() const;
 
         // Getters
         int ticket() const { return(ticket_); }

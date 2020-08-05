@@ -33,7 +33,7 @@
     </Input>
     <Input>
         <Name>Nbars</Name>              <!-- 3..30:3 -->
-        <Value>3</Value>
+        <Value>5</Value>
     </Input>
     <Input>
         <Name>Xbars</Name>              <!-- 3..30:3 -->

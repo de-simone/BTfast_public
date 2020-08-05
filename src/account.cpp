@@ -13,7 +13,9 @@
 */
 Account::Account(double initial_balance)
 : initial_balance_{initial_balance}, balance_{initial_balance}
-{}
+{
+    //equity_.push_back( std::make_pair(Date {}, initial_balance) );
+}
 
 
 //-------------------------------------------------------------------------- //
@@ -41,12 +43,28 @@ void Account::print_transaction_history() const
 
     // Iterate over transaction vector
     int i {1};
-    for( Transaction tr : transactions_ ) {
+    for( const Transaction& tr : transactions_ ) {
         printf("%7d %s\n", i, tr.tostring().c_str());
         i++;
     }
 }
 
+//-------------------------------------------------------------------------- //
+/*! Print equity history on stdout
+*/
+void Account::print_equity() const
+{
+    std::string header{""};
+
+    header += "\n# ------------------- ";
+    header += ">>> Equity History <<< ------------------- #\n";
+    header += "# Date        Equity";
+    std::cout << header << "\n";
+
+    for( const auto& entry : equity_ ) {
+        std::cout<< entry.first.tostring() <<",    "<< entry.second<<"\n";
+    }
+}
 
 //-------------------------------------------------------------------------- //
 /*! Write transaction history to file
@@ -87,7 +105,7 @@ void Account::write_transaction_history_to_file( std::string fname,
 
     // Iterate over transaction vector
     int i {1};
-    for( Transaction tr : transactions_ ) {
+    for( const Transaction& tr : transactions_ ) {
         outfile << std::setw(7) << i << " " << tr.tostring() <<"\n";
         i++;
     }
@@ -123,7 +141,7 @@ void Account::write_equity_to_file( std::string fname ) const
 
     // Iterate over transaction vector
     int i {1};
-    for( Transaction tr : transactions_ ) {
+    for( const Transaction& tr : transactions_ ) {
         outfile << std::fixed << std::setprecision(1)
                 << "     " << i
                 << ",    " << tr.entry_time().date().tostring()
@@ -156,7 +174,7 @@ double Account::largest_loss() const
     }
     double max_loss {0.0};
 
-    for( Transaction tr: transactions_ ){
+    for( const Transaction& tr: transactions_ ){
         if( tr.net_pl() < max_loss ){
             max_loss = tr.net_pl();
         }
@@ -172,4 +190,13 @@ void Account::reset( double initial_balance )
     initial_balance_ = initial_balance;
     balance_ = initial_balance;
     transactions_ = std::vector<Transaction> {};
+}
+
+
+//-------------------------------------------------------------------------- //
+/*! Add new entry (Date, daily PL) to equity vector
+*/
+void Account::add_to_equity( Date new_date, double daily_pl )
+{
+    equity_.push_back( std::make_pair(new_date, daily_pl) );
 }

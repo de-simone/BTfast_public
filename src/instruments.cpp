@@ -147,8 +147,8 @@ void Instrument::fill_members (){
         commission_ = 3.0;
         tick_size_ = 0.1;
         tick_value_ = 5.0;
-        session_open_time_ = Time {18,0};
-        session_close_time_ = Time {17,0};
+        session_open_time_ = Time {17,0};
+        session_close_time_ = Time {16,0};
         settlement_time_ = Time {14,30};
     }
 

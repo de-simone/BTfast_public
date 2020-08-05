@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-08-01 06:44:09
+# TimeStamp   : 2020-08-05 12:48:31
 # Strategy    : MasterCode
 # Symbol      : GC
 # TimeFrame   : M10

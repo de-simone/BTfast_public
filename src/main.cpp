@@ -29,12 +29,13 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-08-04
+                                                        Last update: 2020-08-05
                                           -------------------------------------
 
  * TO DO:
 
-    - update account (floating) balance (position_handler)
+    - check closing times of data in database (RTY,GC,NG ok)
+    - check account equity, utils_print-> account.print_equity();
     - select best-performing sample of 100 trades  from IS+OOS:
       moving window of 104 consecutive trades (remove 2 trades with largest profits,
       and 2 trades with largest loss) with max avgticks

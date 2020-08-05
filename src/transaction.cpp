@@ -25,7 +25,7 @@ Transaction::Transaction(std::string strategy_name, Instrument symbol,
 //-------------------------------------------------------------------------- //
 /*! String representation
 */
-std::string Transaction::tostring()  {
+std::string Transaction::tostring() const {
 
     char buffer[300];
     int digits = symbol_.digits();

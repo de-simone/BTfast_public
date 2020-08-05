@@ -33,33 +33,18 @@ void PositionHandler::on_bar( const Event &barevent ) {
         return;
     }
 
+    double daily_pl {0.0};
+
     // Check if some position is open ('open_positions_' not empty)
     if( !open_positions_.empty() ){
-
-        //<<< Time bar_close_time { barevent.timestamp().time() };
 
         // Loop over open open positions
         for( auto& pos : open_positions_){
 
             // update open position and check whether SL/TP is hit
             pos.update_position( barevent );
-
-            // update account (floating) balance
-            //<<<
-            /*
-            if( (barevent.symbol().two_days_session()    // session spans two days
-                 && bar_close_time == Time {0,0,0} )
-                ||
-                ( !barevent.symbol().two_days_session()   // session spans 1 day
-                 && bar_close_time == barevent.symbol().session_close_time()
-                )
-            ){
-                //account_.set_equity( account_.balance() + pos.pl_ );
-                account_.add_to_equity( pos.pl_ );
-            }
-            */
-            //<<<
-
+            // cumulate P/L of all open positions 
+            daily_pl += pos.pl();
 
             // if SL or TP is hit, send to queue the order to close position
             if( !pos.keep_open() ){
@@ -80,6 +65,18 @@ void PositionHandler::on_bar( const Event &barevent ) {
                 }
             }
         }
+    }
+
+    // Update account equity (floating balance at end of day)
+    Time bar_close_time { barevent.timestamp().time() };
+    if( (barevent.symbol().two_days_session()    // session spans two days
+         && bar_close_time == Time {0,0,0} )
+        ||
+        ( !barevent.symbol().two_days_session()   // session spans 1 day
+         && bar_close_time == barevent.symbol().session_close_time()
+        )
+    ){
+        account_.add_to_equity( barevent.timestamp().date(), daily_pl );
     }
 }
 
