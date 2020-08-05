@@ -34,7 +34,7 @@
 
  * TO DO:
 
-    - check closing times of data in database (RTY,GC,NG ok)
+    - run factory for GC_short, RTY_long/short    
     - check account equity, utils_print-> account.print_equity();
     - select best-performing sample of 100 trades  from IS+OOS:
       moving window of 104 consecutive trades (remove 2 trades with largest profits,

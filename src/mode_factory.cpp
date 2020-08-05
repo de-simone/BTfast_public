@@ -213,6 +213,8 @@ void mode_factory_sequential( BTfast &btf,
     // ----------------------    STATEGY GENERATION    --------------------- //
 
     //--- GENERATION STEP 1
+    std::cout << "\nStarting 1st generation step "
+              << "(POI_switch, Distance_switch, fractN, Exit_switch) \n";
     // Initial parameter set with just the first element of each
     // parameter in parameter_ranges
     search_space = utils_params::first_parameters_from_range(parameter_ranges);
@@ -269,6 +271,7 @@ void mode_factory_sequential( BTfast &btf,
 
 
     //--- GENERATION STEP 2
+    std::cout << "\nStarting 2nd generation step (DOW_switch) \n";
     // Extract strategy parameters from selected_1 to search space
     utils_params::extract_parameters_from_all_strategies( selected_1,
                                                           search_space );
@@ -331,6 +334,7 @@ void mode_factory_sequential( BTfast &btf,
     //---
 
     //--- GENERATION STEP 3
+    std::cout << "\nStarting 3rd generation step (Intraday_switch) \n";
     // Extract strategy parameters from selected_2 to search space
     utils_params::extract_parameters_from_all_strategies( selected_2,
                                                           search_space );
@@ -388,6 +392,7 @@ void mode_factory_sequential( BTfast &btf,
     //---
 
     //--- GENERATION STEP 4
+    std::cout << "\nStarting 4th generation step (Filter1L_switch, Filter1S_switch) \n";
     // Extract strategy parameters from selected_3 to search space
     utils_params::extract_parameters_from_all_strategies( selected_3,
                                                           search_space );
@@ -468,6 +473,7 @@ void mode_factory_sequential( BTfast &btf,
     std::vector<strategy_t> selected_5 { selected_4 };//<<<
     /*
     //--- GENERATION + SELECTION STEP 5
+    std::cout << "\nStarting 5th generation step (MktRegimeL_switch, MktRegimeS_switch) \n";    
     std::vector<strategy_t> selected_5 {};
     for( const auto& selected_strat: selected_4 ){   // loop over selected strategies
 
