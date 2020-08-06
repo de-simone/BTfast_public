@@ -1,4 +1,4 @@
-# TimeStamp   : 2020-08-05 22:25:44
+# TimeStamp   : 2020-08-06 11:39:14
 # Strategy    : BOMRcharacter
 # Symbol      : GC
 # TimeFrame   : M10
@@ -25,24 +25,19 @@
 #         <Value>1</Value>
 #     </Input>
 #     <Input>
-#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
-#         <Value>0</Value>
-#     </Input>
-#     <OptRange>
 #         <Name>Nbars</Name>              <!-- 3..30:3 -->
-#         <Start>3</Start>
-#         <Stop>10</Stop>
-#         <Step>3</Step>
-#     </OptRange>
+#         <Value>3</Value>
+#     </Input>
 #     <Input>
 #         <Name>Xbars</Name>              <!-- 3..30:3 -->
 #         <Value>3</Value>
 #     </Input>
-# 
+#     <Input>
+#         <Name>epsilon</Name>            <!-- always 0 (used in stability test) -->
+#         <Value>0</Value>
+#     </Input>
 # </Inputs>
 #</Strategies/BOMRcharacter.xml>
 #
-#  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,   MyStop,BOMR_switch,  epsilon,    Nbars,    Xbars,
-      261,    14.78,    50.19,     1.18,     1.40,     0.09,     0.87,          0,          1,          0,          9,          3,
-      315,     8.00,    51.11,     1.10,     0.63,     0.05,     0.55,          0,          1,          0,          6,          3,
-      375,     2.49,    48.27,     1.03,     0.21,     0.01,     0.18,          0,          1,          0,          3,          3,
+#  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,   MyStop,BOMR_switch,    Nbars,    Xbars,  epsilon,
+      375,     2.49,    48.27,     1.03,     0.21,     0.01,     0.18,          0,          1,          3,          3,          0,

@@ -29,12 +29,12 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-08-05
+                                                        Last update: 2020-08-06
                                           -------------------------------------
 
  * TO DO:
 
-    - run factory for GC (Mean-reverting), RTY_long/short    
+    - run factory for GC (Mean-reverting), RTY_long/short
     - check account equity, utils_print-> account.print_equity();
     - select best-performing sample of 100 trades  from IS+OOS:
       moving window of 104 consecutive trades (remove 2 trades with largest profits,

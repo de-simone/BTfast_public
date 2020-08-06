@@ -4,9 +4,10 @@
 
 #include <algorithm>    // std::remove, std::find
 #include <cstring>      // strcmp
-#include <fstream>      // std::fstream, open, close
+#include <fstream>      // std::fstream, std::ofstream, open, close
+#include <iomanip>     // std::setw
 #include <iostream>     // std::cout
-#include <sstream>      // stringstream
+#include <sstream>      // std::stringstream
 
 
 
@@ -413,35 +414,34 @@ int utils_fileio::write_strategies_to_file( std::string fname,
         DateTime now{};
         now.set_current();
 
-        FILE* outfile = fopen(fname.c_str(), "w");
-        // Summary
-        fprintf(outfile, "# TimeStamp   : %s:%02d\n",
-                now.tostring().c_str(),  (int) now.second() );
-        fprintf(outfile, "# Strategy    : %s\n", strategy_name.c_str());
-        fprintf(outfile, "# Symbol      : %s\n", symbol_name.c_str());
-        fprintf(outfile, "# TimeFrame   : %s\n", timeframe.c_str());
-        fprintf(outfile, "# Date Range  : %s --> %s\n", date_i.tostring().c_str(),
-                                                        date_f.tostring().c_str());
-        fprintf(outfile,"#\n");
-        fclose(outfile);
+        std::ofstream outfile;
+        outfile.open(fname);
+
+        outfile << "# TimeStamp   : " << now.tostring() << ":" <<
+                    std::setw(2) << now.second() << "\n";
+        outfile << "# Strategy    : " << strategy_name << "\n";
+        outfile << "# Symbol      : " << symbol_name << "\n";
+        outfile << "# TimeFrame   : " << timeframe << "\n";
+        outfile << "# Date Range  : " << date_i.tostring() << " --> "
+                                      << date_f.tostring() << "\n";
+        outfile << "#\n";
+        outfile.close();
 
         // Copy XML strategy file (if provided)
         if( paramfile != "" ){
             utils_fileio::copy_file_to_file(paramfile, fname);
         }
+        // open file in append mode
+        outfile.open(fname, std::fstream::app);
 
-        fopen(fname.c_str(), "a");
         // Iterate over optimization runs
-        char header[500];
-        char header_elem[30];
-        char row[1000];
-        char row_elem[30];
-
+        std::stringstream header {};
+        std::stringstream row {};
 
         // Loop over strategies
         for( auto it = optim.begin(); it!=optim.end(); it++ ){
-            row[0] = '\0';
-            header[0] = '\0';
+            row.str("");
+            header.str("");
 
             // Loop over strategy attributes (metrics and parameters)
             for( auto attr = it->begin(); attr != it->end(); attr++ ){
@@ -456,43 +456,39 @@ int utils_fileio::write_strategies_to_file( std::string fname,
                 }
 
                 // Append attribute name to header
-                header_elem[0] = '\0';
-                sprintf(header_elem, "%9s,", attr_name.c_str());
-                strcat(header, header_elem);
-
-                row_elem[0] = '\0';
+                header << std::setw(9) << attr_name << ",";
 
                 // Check whether attribute name belongs to selected metrics
                 if(std::find(selected_metrics.begin(), selected_metrics.end(),
                               attr_name ) != selected_metrics.end() ){
                     if( attr_name == "Ntrades" ){ // Number of trades is int
-                        sprintf(row_elem, "%9d,",(int) attr_value );
+                        row << std::setw(9) << (int) attr_value <<  ",";
                     }
                     else{           // other (double) metrics to be printed
-                        sprintf(row_elem, "%9.2f,", attr_value );
+                        row << std::setw(9) << std::fixed << std::setprecision(2)
+                            << attr_value <<  ",";
                     }
                 }
                 // strategy parameters (int)
                 else{
-                    sprintf(row_elem, "%11d,", (int) attr_value );
+                    row << std::setw(11) << (int) attr_value << ",";
                 }
-                strcat(row, row_elem);          // append row_elem to row
             }
 
             // Print header
             if( it == optim.begin() ){
-                fprintf(outfile, "#%s\n", header);  // print on file
+                outfile << "#" << header.str() <<"\n";      // print on file
                 if( verbose ){
-                    printf("#%s\n", header);        // print on stdout
+                    std::cout << "#" << header.str() <<"\n"; // print on stdout
                 }
             }
             // Print strategy attributes
-            fprintf(outfile, "%s\n", row);  // print on file
+            outfile << row.str() <<"\n";        // print on file
             if( verbose ){
-                printf("%s\n", row);        // print on stdout
+                std::cout << row.str() <<"\n";  // print on stdout
             }
         }
-        fclose(outfile);
+        outfile.close();
 
         result = 1;
     }

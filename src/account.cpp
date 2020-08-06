@@ -92,8 +92,10 @@ void Account::write_transaction_history_to_file( std::string fname,
     outfile.close();
 
     // Copy XML strategy file
-    utils_fileio::copy_file_to_file(paramfile, fname);
-
+    if( paramfile != "" ){
+        utils_fileio::copy_file_to_file(paramfile, fname);
+    }
+    // open file in append mode 
     outfile.open(fname, std::fstream::app);
     std::string header{""};
     header += "# ------------------- ";

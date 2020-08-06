@@ -31,11 +31,11 @@ General Settings for BTfast
     <!-- =======================    MAIN SETTINGS    ====================== -->
     <Input>
         <!-- Available strategies (should match .xml filenames):
-             BOMRcharacter, GC1, MasterCode, template,test,
+             BOMRcharacter, GC1, GC2, MasterCode, template,test,
              NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   BOMRcharacter
+        <Value>   GC1
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
