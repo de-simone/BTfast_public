@@ -29,7 +29,7 @@
                                               Created by Prof. Andrea De Simone
                                         Copyright 2019 (c). All rights reserved
                                                          Started on: 2019-11-22
-                                                        Last update: 2020-08-06
+                                                        Last update: 2020-08-24
                                           -------------------------------------
 
  * TO DO:
@@ -42,7 +42,9 @@
       use this best-sample as a benchmark for two-sample test (on/off-sync)
     - Performance: avg drawdown duration: avg time delay between equity peaks.
         check results, stdticks too large
-    - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old ?
+    - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
+      remove outliers before computing avg,std.
+    - print actual MasterCode strategy (ready for TS code). 
 
 
     - directionality in mkt regime: ADX(20) > 20

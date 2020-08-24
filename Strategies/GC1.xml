@@ -29,7 +29,7 @@
     </Input>
     <Input>
       <Name>MyStop</Name>
-      <Value>1800</Value>
+      <Value>0</Value>
     </Input>
     <OptRange>
         <Name>fractN_long</Name>        <!-- 0..4:1 -->

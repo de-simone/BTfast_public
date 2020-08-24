@@ -25,7 +25,7 @@ General Settings for BTfast
              5:    Noise test for Single Strategy
              6:    Market overview (no trades)
          -->
-        <Value> 1
+        <Value> 5
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -35,11 +35,11 @@ General Settings for BTfast
              NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   BOMRcharacter
+        <Value>   GC1
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   RTY
+        <Value>   GC
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
@@ -71,7 +71,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  RTY/RTY_M10_2010-2019.csv
+        <Value>  GC/GC_M10_2010-2014_2018-2019.csv
             <!-- GC_M10_2010-2019.csv    -->                  <!-- format = 1 -->
             <!-- GC_M10_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -153,7 +153,7 @@ General Settings for BTfast
     <Input>
         <!-- Initial account balance -->
         <Name>    INITIAL_BALANCE     </Name>
-        <Value>   10000000
+        <Value>   100000
         </Value></Input>
     <Input>
         <!-- Position size: fixed_size, fixed_notional, fixed_fractional  -->
@@ -186,7 +186,7 @@ General Settings for BTfast
         <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
              (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
         <Name>    DATA_FILE_OOS     </Name>
-        <Value>   RTY/RTY_M10_2015-2017.csv
+        <Value>   NG/NG_M10_2015-2017_DXT.csv
         </Value></Input>
     <Input>
         <!-- Percentage of max variation (stability test) -->
@@ -196,7 +196,7 @@ General Settings for BTfast
     <Input>
         <!-- Number of noise tests (runs with price randomization) -->
         <Name>    NOISE_TESTS     </Name>
-        <Value>   300
+        <Value>   500
         </Value></Input>
     <!-- ================================================================== -->
 

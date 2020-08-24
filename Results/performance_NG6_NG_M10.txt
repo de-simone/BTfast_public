@@ -1,8 +1,8 @@
-# TimeStamp   : 2020-07-31 14:19:00
+# TimeStamp   : 2020-08-17 10:32:38
 # Strategy    : NG6
 # Symbol      : NG
 # TimeFrame   : M10
-# Date Range  : 2009-10-01 --> 2019-12-30
+# Date Range  : 2010-01-03 --> 2019-12-30
 #
 #<Strategies/NG6.xml>
 # <?xml version='1.0' encoding='UTF-8'?>
@@ -39,36 +39,36 @@
 
    # ==================  Performance Report ================== #
                         |     All    |    Long    |    Short   |
-     Initial Balance    : 10000000.00
-     N. of Trades       :     522          158          364
-     Net Profit         :   80420.00     30680.00     49740.00
-     Net Profit %       :       0.8%         0.3%         0.5%
-     CAGR               :       0.1%         0.0%         0.1%
-     Avg Trade          :     154.06       194.18       136.65
-     Avg Ticks          :      15.41        19.42        13.66
-     Profit Factor      :       1.70         2.56         1.52
-     Win Percent        :      57.1%        61.4%        55.2%
-     Avg DrawDown       :   -1341.13      -494.43     -1293.85
-     Avg DrawDown %     :      -0.0%        -0.0%        -0.0%
-     Max DrawDown       :   -8910.00     -3390.00     -8870.00
-     Max DrawDown %     :      -0.1%        -0.0%        -0.1%
-     Avg DD Duration    :      29.31        62.12      1104.64
-     Net PL/Max DD      :       9.03         9.05         5.61
-     CAGR/Max DD %      :       1.29         1.29         0.80
-     Expectancy         :       0.30         0.60         0.23
-     Z-score            :       3.78         3.77         2.53
+     Initial Balance    :  100000.00
+     N. of Trades       :     733          229          504
+     Net Profit         :  105860.00     40820.00     65040.00
+     Net Profit %       :     105.9%        40.8%        65.0%
+     CAGR               :       7.5%         3.5%         5.1%
+     Avg Trade          :     144.42       178.25       129.05
+     Avg Ticks          :      14.44        17.83        12.90
+     Profit Factor      :       1.75         2.56         1.56
+     Win Percent        :      57.3%        59.8%        56.2%
+     Avg DrawDown       :    -790.18      -417.90      -846.43
+     Avg DrawDown %     :      -0.6%        -0.4%        -0.6%
+     Max DrawDown       :   -8910.00     -3290.00     -8870.00
+     Max DrawDown %     :      -5.2%        -3.2%        -5.6%
+     Avg DD Duration    :     455.55        62.64       638.52
+     Net PL/Max DD      :      11.88        12.41         7.33
+     CAGR/Max DD %      :       1.43         1.08         0.92
+     Expectancy         :       0.32         0.63         0.25
+     Z-score            :       4.82         4.60         3.24
    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
-     R^2                :     0.9839       0.9660       0.9557
-     Std.Dev. of P/L    :     931.70       646.65      1031.52
-     Gross Profit       :  195140.00     50310.00    144830.00
-     Gross Loss         : -114720.00    -19630.00    -95090.00
-     Avg Profit         :     654.83       518.66       720.55
-     Avg Loss           :    -512.14      -321.80      -583.37
+     R^2                :     0.9765       0.9531       0.9702
+     Std.Dev. of P/L    :     811.40       587.00       895.07
+     Gross Profit       :  247480.00     67050.00    180430.00
+     Gross Loss         : -141620.00    -26230.00   -115390.00
+     Avg Profit         :     589.24       489.42       637.56
+     Avg Loss           :    -452.46      -285.11      -522.13
      Max Profit         :    8220.00      2940.00      8220.00
      Max Loss           :   -5880.00     -1610.00     -5880.00
-     Avg Bars in Win    :      81.64        39.18       102.13
-     Avg Bars in Loss   :      81.52        39.48        97.25
-     Max Consec. Wins   :       8            6            7
+     Avg Bars in Win    :      82.17        41.15       102.03
+     Avg Bars in Loss   :      80.62        41.49        96.91
+     Max Consec. Wins   :      13            6           10
      Max Consec. Losses :       8            4            7
-     Minimum Capital    :   15565.00      7285.00     15505.00
+     Minimum Capital    :   15565.00      7135.00     15505.00
    # ========================================================= #
