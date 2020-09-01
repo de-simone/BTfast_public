@@ -34,6 +34,10 @@
 
  * TO DO:
 
+    - Sequential generation: select if
+        Z = (avgticks_new - avgticks_old)/[stdticks_new/sqrt(N)
+        |Z| > 1.0
+
     - run factory for GC (Mean-reverting), RTY_long/short
     - check account equity, utils_print-> account.print_equity();
     - select best-performing sample of 100 trades  from IS+OOS:
@@ -42,9 +46,8 @@
       use this best-sample as a benchmark for two-sample test (on/off-sync)
     - Performance: avg drawdown duration: avg time delay between equity peaks.
         check results, stdticks too large
-    - Sequential generation: select if avgticks_new > avgticks_old + stdticks_old
-      remove outliers before computing avg,std.
-    - print actual MasterCode strategy (ready for TS code). 
+
+    - print actual MasterCode strategy (ready for TS code).
 
 
     - directionality in mkt regime: ADX(20) > 20

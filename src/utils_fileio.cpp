@@ -95,6 +95,9 @@ void utils_fileio::read_config_file(
         else if( node_name == "DATA_FILE" ){
             data_file = node_value;                                 // string
         }
+        else if( node_name == "DATA_FILE_OOS" ){
+            data_file_oos = node_value;                             // string
+        }
         else if( node_name == "CSV_FORMAT" ){
             try{
                 csv_format = std::stoi( node_value );               // int
@@ -224,9 +227,6 @@ void utils_fileio::read_config_file(
                 std::cerr << ">>> ERROR: invalid input for SLIPPAGE\n";
                 exit(1);
             }
-        }
-        else if( node_name == "DATA_FILE_OOS" ){
-            data_file_oos = node_value;                             // string
         }
         else if( node_name == "MAX_VARIATION_PCT" ){
             try{

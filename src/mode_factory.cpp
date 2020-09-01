@@ -15,6 +15,8 @@
 
 #include "validation.h"
 
+#include <cmath>            // std::abs, std::sqrt
+
 #include <iostream>         // std::cout
 
 // ------------------------------------------------------------------------- //
@@ -200,9 +202,10 @@ void mode_factory_sequential( BTfast &btf,
     // Initialize variables
     std::vector<parameters_t> search_space {};
     bool selection_conditions {false};
+    int ntrades_with_filter {0};
     double avgticks_with_filter {0};
+    double stdticks_with_filter {0};
     double avgticks_no_filter {0};
-    // double stdticks_no_filter {0};
     double zscore_with_filter {0};
     double zscore_no_filter {0};
     double perf_relative_improvement {0.2};
@@ -300,22 +303,29 @@ void mode_factory_sequential( BTfast &btf,
         // Metrics of strategy without new filter
         avgticks_no_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", no_filter_strat );
-        //stdticks_no_filter = utils_params::strategy_attribute_by_name(
-        //                                        "StdTicks", no_filter_strat );
         zscore_no_filter = utils_params::strategy_attribute_by_name(
                                                  "Z-score", no_filter_strat );
         // Metrics of strategy with new filter
         avgticks_with_filter = utils_params::strategy_attribute_by_name(
                                                 "AvgTicks", strat );
+        stdticks_with_filter = utils_params::strategy_attribute_by_name(
+                                                "StdTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
-        //selection_conditions = avgticks_with_filter >= avgticks_no_filter
-        //          + 1.5*stdticks_no_filter;
+        /* //<<<
         selection_conditions =
             ( avgticks_with_filter >= avgticks_no_filter
                                         * ( 1 + perf_relative_improvement )
             && zscore_with_filter >= zscore_no_filter
                                         * ( 1 + perf_relative_improvement ) );
+        */
+        //<<< |Z| = |avgticks_new - avgticks_old|/[stdticks_new/sqrt(N)] > 1
+        ntrades_with_filter = utils_params::strategy_attribute_by_name(
+                                                "Ntrades", strat );
+        selection_conditions = std::sqrt(ntrades_with_filter)
+                    * std::abs(avgticks_with_filter - avgticks_no_filter)
+                    / (stdticks_with_filter) > 1.0;
+
         // Append strategy without new filter to selected vector
         selected_2.push_back(no_filter_strat);
         // Append strategy with new filter if it improves metrics
@@ -370,11 +380,20 @@ void mode_factory_sequential( BTfast &btf,
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
+        /* //<<<
         selection_conditions =
             ( avgticks_with_filter >= avgticks_no_filter
                                         * ( 1 + perf_relative_improvement )
             && zscore_with_filter >= zscore_no_filter
                                         * ( 1 + perf_relative_improvement ) );
+        */
+        //<<< |Z| = |avgticks_new - avgticks_old|/[stdticks_new/sqrt(N)] > 1
+        ntrades_with_filter = utils_params::strategy_attribute_by_name(
+                                                "Ntrades", strat );
+        selection_conditions = std::sqrt(ntrades_with_filter)
+                    * std::abs(avgticks_with_filter - avgticks_no_filter)
+                    / (stdticks_with_filter) > 1.0;
+
         // Append strategy without new filter to selected vector
         selected_3.push_back(no_filter_strat);
         // Append strategy with new filter if it improves metrics
@@ -449,11 +468,20 @@ void mode_factory_sequential( BTfast &btf,
                                                 "AvgTicks", strat );
         zscore_with_filter = utils_params::strategy_attribute_by_name(
                                                 "Z-score", strat );
+        /* //<<<
         selection_conditions =
             ( avgticks_with_filter >= avgticks_no_filter
                                         * ( 1 + perf_relative_improvement )
             && zscore_with_filter >= zscore_no_filter
                                         * ( 1 + perf_relative_improvement ) );
+        */
+        //<<< |Z| = |avgticks_new - avgticks_old|/[stdticks_new/sqrt(N)] > 1
+        ntrades_with_filter = utils_params::strategy_attribute_by_name(
+                                                "Ntrades", strat );
+        selection_conditions = std::sqrt(ntrades_with_filter)
+                    * std::abs(avgticks_with_filter - avgticks_no_filter)
+                    / (stdticks_with_filter) > 1.0;
+
         // Append strategy without new filter to selected vector
         selected_4.push_back(no_filter_strat);
         // Append strategy with new filter if it improves metrics
@@ -470,8 +498,7 @@ void mode_factory_sequential( BTfast &btf,
     }
     //---
 
-    std::vector<strategy_t> selected_5 { selected_4 };//<<<
-    /*
+
     //--- GENERATION + SELECTION STEP 5
     std::cout << "\nStarting 5th generation step (MktRegimeL_switch, MktRegimeS_switch) \n";
     std::vector<strategy_t> selected_5 {};
@@ -581,7 +608,7 @@ void mode_factory_sequential( BTfast &btf,
             }
         }
     } // end loop over selected_4 strategies
-    */
+
 
     utils_optim::remove_duplicates( selected_5, fitness_metric );
     std::cout << "Number of strategies passing 5th generation step "

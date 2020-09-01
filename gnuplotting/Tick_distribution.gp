@@ -28,15 +28,15 @@ set grid ytics
 set yrange [0:]
 
 # Histrogram settings
-bin_width = 10    # bin size in ticks
+bin_width = 50    # bin size in ticks
 bin(x)= bin_width * floor(x/bin_width) + bin_width/2.0
 set boxwidth bin_width * 0.8   # box width is 80% of bin width
 
 # Statistics
-stats datafile using 6 nooutput
-set label sprintf(" Median = %5.1f", STATS_median) right at graph 0.95,0.95 front
-set label sprintf("   Avg = %5.1f", STATS_mean) right at graph 0.95,0.90 front
-set label sprintf("   Std = %5.1f", STATS_stddev) right at graph 0.95,0.85 front
+#stats datafile using 6 nooutput
+#set label sprintf(" Median = %5.1f", STATS_median) right at graph 0.95,0.95 front
+#set label sprintf("   Avg = %5.1f", STATS_mean) right at graph 0.95,0.90 front
+#set label sprintf("   Std = %5.1f", STATS_stddev) right at graph 0.95,0.85 front
 
 plot datafile using (bin($6)):(1.0) smooth freq with boxes lt 1
 

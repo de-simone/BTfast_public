@@ -25,7 +25,7 @@ General Settings for BTfast
              5:    Noise test for Single Strategy
              6:    Market overview (no trades)
          -->
-        <Value> 5
+        <Value> 4
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -35,11 +35,11 @@ General Settings for BTfast
              NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   GC1
+        <Value>   MasterCode
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   GC
+        <Value>   RTY
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
@@ -71,7 +71,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC/GC_M10_2010-2014_2018-2019.csv
+        <Value>  RTY/RTY_M10_2010-2014_2018-2019.csv
             <!-- GC_M10_2010-2019.csv    -->                  <!-- format = 1 -->
             <!-- GC_M10_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -80,6 +80,12 @@ General Settings for BTfast
             <!-- NG_M10_2010-2014_2018-2019_DXT.csv -->     <!-- format = 3 -->
             <!-- NG_M10_2007-2012_2018-2019_DXT.csv -->     <!-- format = 3 -->
             <!-- NG_M10_2013-2017_DXT.csv -->               <!-- format = 3 -->
+        </Value></Input>
+    <Input>
+        <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
+             (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
+        <Name>    DATA_FILE_OOS     </Name>
+        <Value>   RTY/RTY_M10_2015-2017_DXT.csv
         </Value></Input>
     <Input>
         <!-- Data format of CSV file
@@ -183,12 +189,6 @@ General Settings for BTfast
 
     <!-- ========================    VALIDATION    ======================== -->
     <Input>
-        <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
-             (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
-        <Name>    DATA_FILE_OOS     </Name>
-        <Value>   NG/NG_M10_2015-2017_DXT.csv
-        </Value></Input>
-    <Input>
         <!-- Percentage of max variation (stability test) -->
         <Name>    MAX_VARIATION_PCT     </Name>
         <Value>   30
@@ -196,7 +196,7 @@ General Settings for BTfast
     <Input>
         <!-- Number of noise tests (runs with price randomization) -->
         <Name>    NOISE_TESTS     </Name>
-        <Value>   500
+        <Value>   300
         </Value></Input>
     <!-- ================================================================== -->
 

@@ -71,7 +71,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  NG_M10_2007-2019_DXT.csv
+        <Value>  NG/NG_M10_2010-2014_2018-2019_DXT.csv
             <!-- NG_M15_2014-01.csv    -->                  <!-- format = 1 -->
             <!-- GC_M15_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
@@ -81,6 +81,12 @@ General Settings for BTfast
             <!-- NG_M10_2007-2012_2018-2019_DXT.csv -->     <!-- format = 3 -->
             <!-- NG_M10_2013-2017_DXT.csv -->               <!-- format = 3 -->
             <!-- EnergyFutures.db      -->                  <!-- SQLite -->
+        </Value></Input>
+    <Input>
+        <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
+             (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
+        <Name>    DATA_FILE_OOS     </Name>
+        <Value>   NG/NG_M10_2015-2017_DXT.csv
         </Value></Input>
     <Input>
         <!-- Data format of CSV file

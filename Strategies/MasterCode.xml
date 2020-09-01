@@ -31,11 +31,11 @@ and "Side_switch" must match in 'validation.cpp'
 <Inputs>
     <Input>
         <Name>BOMR_switch</Name>        <!-- 1 = BO, 2 = MR -->
-        <Value>1</Value>
+        <Value>2</Value>
     </Input>
     <Input>
         <Name>Side_switch</Name>        <!-- 1 = L, 2 = S, 3 = both -->
-        <Value>1</Value>
+        <Value>2</Value>
     </Input>
     <Input>
         <Name>MyStop</Name>             <!--  Stop-Loss in USD per contract -->
