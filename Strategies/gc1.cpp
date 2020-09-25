@@ -1,9 +1,6 @@
 #include "gc1.h"
 
-#include "filters/exits.h"              // ExitCondition
-#include "filters/patterns.h"           // Pattern
-//#include "filters/time_filters.h"     // TimeFilter
-#include "filters/TA_indicators.h"      // ATR
+
 #include "utils_math.h"                 // modulus, round_double
 #include "utils_trade.h"                // MarketPosition, find_pos_to_close
 
@@ -123,13 +120,7 @@ int GC1::preliminaries( const std::deque<Event>& data1,
     }
     //--
 
-    //-- Update Indicator Values
-    int ATRlength {20};
-    ATR( atr_, data1, true, max_bars_back_, ATRlength );
-    // Require at least 100 days of ATR history
-    if( atr_.size() < 100 ){
-        return(0);
-    }
+
     //--
 
     return(1);
@@ -155,9 +146,9 @@ void GC1::compute_entry( const std::deque<Event>& data1,
     double fract_short { std::pow(2,fractN_short_) * 0.05 };  // 2^fractN_ / 20
     fract_short = fract_short * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
     */
-    double fract_long { 4.0 };
+    double fract_long { 1.0 };
 
-    double distance_long { atr_.front() };
+    double distance_long { aHighD_[1] - LowD_[1] };
     double level_long { utils_math::round_double(
                         POI_long  + fract_long  * distance_long,  digits_ ) };
 
@@ -169,7 +160,7 @@ void GC1::compute_entry( const std::deque<Event>& data1,
     // --------------------------------------------------------------------- //
 
     // ---------------------------    FILTER 1    -------------------------- //
-    bool Filter1_long { HighD_[0]-OpenD_[0] > HighD_[1]-OpenD_[1] };    
+    bool Filter1_long { HighD_[0]-OpenD_[0] > HighD_[1]-OpenD_[1] };
     // --------------------------------------------------------------------- //
 
     // ----------------------    COMBINE ALL FILTERS    -------------------- //
@@ -216,20 +207,20 @@ void GC1::compute_exit( const std::deque<Event>& data1,
     // ------------------------    EXIT RULES    --------------------------- //
     // Exit one bar before close of session,
     // or at open of next session if session ends earlier than usual
-    int Exit_switch { 1 };
+
     bool ExitLong   = ( MarketPosition_> 0
-                        && ExitCondition( Exit_switch, data1, name_,
-                                          position_handler.open_positions(),
-                                          CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_, 5, 5,
-                                          tf_mins_, co_mins_, NewSession_) );
+                        && (CurrentTime == OneBarBeforeClose
+                            || ( (data1[0].timestamp().time()
+                            - data1[1].timestamp().time()).tot_minutes() >
+                                co_mins_ + tf_mins_ ) ) ;
+
 
     bool ExitShort  = ( MarketPosition_< 0
-                        && ExitCondition( Exit_switch, data1, name_,
-                                          position_handler.open_positions(),
-                                          CurrentTime_, CurrentDOW_,
-                                          OneBarBeforeClose_, 5, 5,
-                                          tf_mins_, co_mins_, NewSession_ ) );
+                        && (CurrentTime == OneBarBeforeClose
+                            || ( (data1[0].timestamp().time()
+                            - data1[1].timestamp().time()).tot_minutes() >
+                                co_mins_ + tf_mins_ ) ) ;
+
     // --------------------------------------------------------------------- //
 
 

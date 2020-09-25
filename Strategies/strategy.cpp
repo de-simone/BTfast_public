@@ -1,16 +1,7 @@
 #include "strategy.h"
 
-#include "bomrcharacter.h"
 #include "gc1.h"
-#include "gc2.h"
-#include "mastercode.h"
 #include "ng1.h"
-#include "ng2.h"
-#include "ng3.h"
-#include "ng4.h"
-#include "ng5.h"
-#include "ng6.h"
-#include "template.h"
 #include "test.h"
 
 #include <cstdlib>      // exit
@@ -75,53 +66,13 @@ void select_strategy( std::unique_ptr<Strategy>& strategy_ptr,
                                                     symbol, timeframe,
                                                     max_bars_back );
     }
-    else if( strategy_name == "BOMRcharacter" ){
-        strategy_ptr = std::make_unique<BOMRcharacter> ( strategy_name,
-                                                         symbol, timeframe,
-                                                         max_bars_back );
-    }
     else if( strategy_name == "GC1" ){
         strategy_ptr = std::make_unique<GC1> ( strategy_name,
                                                symbol, timeframe,
                                                max_bars_back );
     }
-    else if( strategy_name == "GC2" ){
-        strategy_ptr = std::make_unique<GC2> ( strategy_name,
-                                               symbol, timeframe,
-                                               max_bars_back );
-    }
-    else if( strategy_name == "MasterCode" ){
-        strategy_ptr = std::make_unique<MasterCode> ( strategy_name,
-                                                      symbol, timeframe,
-                                                      max_bars_back );
-    }
     else if( strategy_name == "NG1" ){
         strategy_ptr = std::make_unique<NG1> ( strategy_name,
-                                               symbol, timeframe,
-                                               max_bars_back );
-    }
-    else if( strategy_name == "NG2" ){
-        strategy_ptr = std::make_unique<NG2> ( strategy_name,
-                                               symbol, timeframe,
-                                               max_bars_back );
-    }
-    else if( strategy_name == "NG3" ){
-        strategy_ptr = std::make_unique<NG3> ( strategy_name,
-                                               symbol, timeframe,
-                                               max_bars_back );
-    }
-    else if( strategy_name == "NG4" ){
-        strategy_ptr = std::make_unique<NG4> ( strategy_name,
-                                               symbol, timeframe,
-                                               max_bars_back );
-    }
-    else if( strategy_name == "NG5" ){
-        strategy_ptr = std::make_unique<NG5> ( strategy_name,
-                                               symbol, timeframe,
-                                               max_bars_back );
-    }
-    else if( strategy_name == "NG6" ){
-        strategy_ptr = std::make_unique<NG6> ( strategy_name,
                                                symbol, timeframe,
                                                max_bars_back );
     }

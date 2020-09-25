@@ -1,7 +1,5 @@
 #include "ng1.h"
 
-#include "filters/patterns.h"   // Pattern, OppositePattern
-#include "filters/TA_indicators.h"
 #include "utils_math.h" // modulus, round_double
 #include "utils_time.h" // CalcTime
 #include "utils_trade.h"      // MarketPosition

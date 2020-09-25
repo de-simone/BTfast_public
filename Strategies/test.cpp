@@ -1,6 +1,5 @@
 #include "test.h"
 
-#include "filters/TA_indicators.h"   // ROC
 #include "utils_math.h" // modulus, round_double
 #include "utils_trade.h"      // MarketPosition, find_pos_to_close
 
@@ -102,14 +101,7 @@ int Test::preliminaries( const std::deque<Event>& data1,
     }
     //--
 
-    //-- Update Indicator Values
-    /*
-    bool make_new_entry {true};         // if computing indicator on intraday (data1)
-    //bool make_new_entry {NewSession_}; // if computing indicators on "D" (data1D)
-    ROC( ROC_, data1, make_new_entry, max_bars_back_, 2, "CLOSE" );
-    ROC( ROC_, data1, true, max_bars_back_, 2, "CLOSE" );
-    ROC( ROC_, data1D, NewSession_, max_bars_back_, 2, "CLOSE" );
-    */
+
     //--
 
     return(1);

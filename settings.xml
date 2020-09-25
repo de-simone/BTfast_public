@@ -6,9 +6,7 @@ General Settings for BTfast
 
     <Input>
         <Name>    MAIN_DIR    </Name>
-        <Value>   /Users/Andrea/GitHub/BTfast
-        <!--    /Users/Andrea/GitHub/BTfast     -->
-        <!--    /u/d/desimon/BTfast     -->
+        <Value>   /Users/Andrea/GitHub/BTfast_public
         </Value></Input>
     <Input>
         <Name>    RUN_MODE    </Name>
@@ -31,8 +29,7 @@ General Settings for BTfast
     <!-- =======================    MAIN SETTINGS    ====================== -->
     <Input>
         <!-- Available strategies (should match .xml filenames):
-             BOMRcharacter, GC1, GC2, MasterCode, template,test,
-             NG1,NG2,NG3,NG4,NG5,NG6
+             GC1, NG1, test
         -->
         <Name>    STRATEGY_NAME     </Name>
         <Value>   GC1
@@ -65,27 +62,20 @@ General Settings for BTfast
     <Input>
         <Name>    DATA_DIR    </Name>
         <Value>   /Users/Andrea/Documents/PriceData
-        <!--      /Users/Andrea/Documents/PriceData  -->
-        <!--      /u/d/desimon/PriceData  -->
         </Value></Input>
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
         <Value>  GC/GC_M10_2010-2014_2018-2019.csv
-            <!-- GC_M10_2010-2019.csv    -->                  <!-- format = 1 -->
-            <!-- GC_M10_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
-            <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
+            <!-- GC_M10_2010-2019.csv    -->                <!-- format = 1 -->
             <!-- NG_D_2004-2014.csv    -->                  <!-- format = 2 -->
             <!-- NG_M10_2007-2019_DXT.csv -->               <!-- format = 3 -->
-            <!-- NG_M10_2010-2014_2018-2019_DXT.csv -->     <!-- format = 3 -->
-            <!-- NG_M10_2007-2012_2018-2019_DXT.csv -->     <!-- format = 3 -->
-            <!-- NG_M10_2013-2017_DXT.csv -->               <!-- format = 3 -->
         </Value></Input>
     <Input>
         <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
              (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
         <Name>    DATA_FILE_OOS     </Name>
-        <Value>   RTY/RTY_M10_2015-2017_DXT.csv
+        <Value>   GC/GC_M10_2015-2017.csv
         </Value></Input>
     <Input>
         <!-- Data format of CSV file

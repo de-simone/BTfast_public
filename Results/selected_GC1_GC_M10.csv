@@ -1,8 +1,0 @@
-# TimeStamp   : 2020-07-31 18:16:54
-# Strategy    : GC1
-# Symbol      : GC
-# TimeFrame   : M10
-# Date Range  : 2010-01-04 --> 2019-12-31
-#
-#  Ntrades, AvgTicks,  WinPerc,PftFactor,   NP/MDD,Expectancy,  Z-score,Side_switch,   MyStop,fractN_long,fractN_short,  epsilon,
-      343,    15.80,    53.94,     1.56,     5.34,     0.26,     3.01,          1,          0,          3,          3,          0,
