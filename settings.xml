@@ -125,7 +125,7 @@ General Settings for BTfast
         <!-- Write trade history to file (profits.csv) and show equity line (via gnuplot) -->
         <!-- 0: false, 1: true -->
         <Name>    WRITE_TRADES_TO_FILE  </Name>
-        <Value>   1
+        <Value>   0
         </Value></Input>
     <!-- ================================================================== -->
 
