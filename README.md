@@ -11,7 +11,8 @@ BTfast is a software written in C++ to do event-driven backtesting, optimization
 ### System Requirements:
 
  - Unix OS, with bash
- - C++17 compiler 
+ - C++17 compiler
+ - gnuplot, for plotting
 
 
 ### Use BTfast from command line (main directory):
@@ -22,9 +23,9 @@ BTfast is a software written in C++ to do event-driven backtesting, optimization
 * Run BTfast by typing “./run”,
   which is a script to run bin/BTfast.o 
 
-* To remove all output files, type “make clean”. 
+* To remove all output files, type “make clean”.
 
-* To plot results, run plotting scripts in bin/ 
+* To plot results, run plotting scripts in bin/
 
 ### Required files:
    - Configuration file: 'settings.xml'
