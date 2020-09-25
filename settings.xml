@@ -48,34 +48,33 @@ General Settings for BTfast
         <!-- Start date (included). Format: YYYY-MM-DD
             (0 for first date on file)  -->
         <Name>  START_DATE      </Name>
-        <Value>  2010-01-01       <!-- 2014-01-01 2007-10-29 -->
+        <Value>  0       <!-- 2014-01-01 2007-10-29 -->
         </Value></Input>
     <Input>
         <!-- End date (included). Format: YYYY-MM-DD
             (0 for last date on file)  -->
         <Name>  END_DATE        </Name>
-        <Value> 2019-12-31      <!-- 2014-02-03 2007-11-06 -->
+        <Value> 0      <!-- 2014-02-03 2007-11-06 -->
         </Value></Input>
     <!-- ================================================================== -->
 
     <!-- ========================    INPUT DATA    ======================== -->
     <Input>
         <Name>    DATA_DIR    </Name>
-        <Value>   /Users/Andrea/Documents/PriceData
+        <Value>   /Users/Andrea/GitHub/BTfast_public/data
         </Value></Input>
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  GC/GC_M10_2010-2014_2018-2019.csv
-            <!-- GC_M10_2010-2019.csv    -->                <!-- format = 1 -->
-            <!-- NG_D_2004-2014.csv    -->                  <!-- format = 2 -->
-            <!-- NG_M10_2007-2019_DXT.csv -->               <!-- format = 3 -->
+        <Value>  GC_M10_2015.csv
+            <!-- GC_M10_2015.csv -->               <!-- format = 1 -->
+            <!-- NG_M15_2014-01.csv -->               <!-- format = 1 -->
         </Value></Input>
     <Input>
         <!-- Name of file containing Out-of-Sample data (included in DATA_DIR)
              (Same CSV_FORMAT and DATAFEED_TYPE as DATA_FILE) -->
         <Name>    DATA_FILE_OOS     </Name>
-        <Value>   GC/GC_M10_2015-2017.csv
+        <Value>   GC_M10_2015.csv
         </Value></Input>
     <Input>
         <!-- Data format of CSV file

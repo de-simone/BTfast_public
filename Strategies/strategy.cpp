@@ -60,13 +60,7 @@ void select_strategy( std::unique_ptr<Strategy>& strategy_ptr,
                       std::string timeframe, int max_bars_back )
 {
 
-
-    if( strategy_name == "template" ){
-        strategy_ptr = std::make_unique<Template> ( strategy_name,
-                                                    symbol, timeframe,
-                                                    max_bars_back );
-    }
-    else if( strategy_name == "GC1" ){
+    if( strategy_name == "GC1" ){
         strategy_ptr = std::make_unique<GC1> ( strategy_name,
                                                symbol, timeframe,
                                                max_bars_back );
