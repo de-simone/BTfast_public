@@ -140,15 +140,8 @@ void GC1::compute_entry( const std::deque<Event>& data1,
     // --------------------------------------------------------------------- //
 
     // ------------------------    BREAKOUT LEVELS    ---------------------- //
-    /*
-    double fract_long { std::pow(2,fractN_long_) * 0.05 };  // 2^fractN_ / 20
-    fract_long = fract_long * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
-    double fract_short { std::pow(2,fractN_short_) * 0.05 };  // 2^fractN_ / 20
-    fract_short = fract_short * ( 1 + epsilon_* 0.05 );   // epsilon=1 means 5% variation
-    */
     double fract_long { 1.0 };
-
-    double distance_long { aHighD_[1] - LowD_[1] };
+    double distance_long { HighD_[1] - LowD_[1] };
     double level_long { utils_math::round_double(
                         POI_long  + fract_long  * distance_long,  digits_ ) };
 
@@ -205,21 +198,12 @@ void GC1::compute_exit( const std::deque<Event>& data1,
                                std::array<Event, 2> &signals )
 {
     // ------------------------    EXIT RULES    --------------------------- //
-    // Exit one bar before close of session,
-    // or at open of next session if session ends earlier than usual
-
+    // Exit one bar before close of session
     bool ExitLong   = ( MarketPosition_> 0
-                        && (CurrentTime == OneBarBeforeClose
-                            || ( (data1[0].timestamp().time()
-                            - data1[1].timestamp().time()).tot_minutes() >
-                                co_mins_ + tf_mins_ ) ) ;
-
+                        && ( CurrentTime_ == OneBarBeforeClose_ ) );
 
     bool ExitShort  = ( MarketPosition_< 0
-                        && (CurrentTime == OneBarBeforeClose
-                            || ( (data1[0].timestamp().time()
-                            - data1[1].timestamp().time()).tot_minutes() >
-                                co_mins_ + tf_mins_ ) ) ;
+                        && ( CurrentTime_ == OneBarBeforeClose_ ) );
 
     // --------------------------------------------------------------------- //
 

@@ -1,6 +1,5 @@
 #include "utils_trade.h"
 
-#include "../Strategies/filters/TA_indicators.h"
 
 #include <algorithm>    // std::max_element, std::min_element
 #include <array>    // std::array
@@ -197,10 +196,7 @@ void utils_trade::FeaturesExtraction( const PriceCollection &price_collection,
     }
     //--
 
-    //-- ATR
-    //std::deque<double> indi_atr {};
-    //ATR( indi_atr, data1D, true, 20, 5 );
-    //--
+
     //-- Fill vector of features
     std::vector<double> features {};
 

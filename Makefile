@@ -7,7 +7,7 @@ STRATDIR   	:= $(MAINDIR)/Strategies
 INCLUDEDIR 	:= -I$(MAINDIR)/include
 
 ### Location of source and strategy files
-SRCFILES   	:= $(SRCDIR)/*.cpp $(STRATDIR)/*.cpp $(STRATDIR)/filters/*.cpp
+SRCFILES   	:= $(SRCDIR)/*.cpp $(STRATDIR)/*.cpp
 
 ### C++ compiler to use
 CC         	:= g++ # standard C++ compiler
@@ -16,31 +16,23 @@ CC         	:= g++ # standard C++ compiler
 UNAME := $(shell uname -s)
 ifeq ($(UNAME),Darwin)	#- Mac OS -#
 
-	CFLAGS 	:= -std=c++17 -Wall -Xpreprocessor -fopenmp -lomp
-			#  -lsqlite3 -lm -lcurl
+	CFLAGS 	:= -std=c++17 -Wall -Xpreprocessor -fopenmp -lomp			
 endif
 
 ifeq ($(UNAME),Linux)		#- Linux -#
 
 	CFLAGS 	:= -std=c++17 -fopenmp #-lsqlite3
 	LIBDIR	:= /usr/local
-    #INCLUDEDIR += -I$(LIBDIR)/include 			# path to sqlite.h
-	#INCLUDEDIR += -L$(LIBDIR)/lib				# path to libsqlite3.so (<- should have this name)
 
-	INCLUDEDIR += -I/home/andrea/anaconda3/include 	# path to sqlite.h
-	INCLUDEDIR += -L/home/andrea/anaconda3/lib # path to libsqlite3.21.0.so
+	#INCLUDEDIR += -I/home/andrea/anaconda3/include 	# path to sqlite.h
+	#INCLUDEDIR += -L/home/andrea/anaconda3/lib # path to libsqlite3.21.0.so
 endif
 
 CFLAGSPROF	:= -lprofiler -ltcmalloc
-#CFLAGSSO 	:= -std=c++17 -lm -lcurl -lsqlite3 -fPIC -shared # for .so generation
 
 
 ### Name of executable output files
 OUTPUT 		:= $(MAINDIR)/bin/BTfast.o
-#OUTPUTSO 	:= $(MAINDIR)/bin/BTfast.so
-
-### Enable extended globbing
-#shopt -s extglob
 
 
 ### Create executables
@@ -58,23 +50,6 @@ debug:  	# compile for debugging (lldb)
 	@echo ">>>" BTfast compiled successfully for debugging.
 	@echo
 
-debug_addr:  	# compile for debugging (google AddressSanitizer)
-
-	$(CC) $(CFLAGS) -fsanitize=address -O1 -fno-omit-frame-pointer -g $(INCLUDEDIR) $(SRCFILES) -o $(OUTPUT)
-	@echo ">>>" BTfast compiled successfully for debugging.
-	@echo
-
-profile:  	# compile for profiling (gperftools)
-
-	$(CC) $(CFLAGS) $(CFLAGSPROF) $(INCLUDEDIR) $(SRCFILES) -o $(OUTPUT)
-	@echo ">>>" BTfast compiled successfully for profiling.
-	@echo
-
-so:		# generate .so library file
-
-	$(CC) $(CFLAGSSO) -I$(INCLUDEDIR) $(SRCFILES) -o $(OUTPUTSO)
-	@echo BTfast shared library created successfully
-	@echo
 
 clean:		# remove all outputs
 
