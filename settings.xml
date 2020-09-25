@@ -25,7 +25,7 @@ General Settings for BTfast
              5:    Noise test for Single Strategy
              6:    Market overview (no trades)
          -->
-        <Value> 4
+        <Value> 1
         </Value></Input>
 
     <!-- =======================    MAIN SETTINGS    ====================== -->
@@ -35,11 +35,11 @@ General Settings for BTfast
              NG1,NG2,NG3,NG4,NG5,NG6
         -->
         <Name>    STRATEGY_NAME     </Name>
-        <Value>   MasterCode
+        <Value>   GC1
         </Value></Input>
     <Input>
         <Name>    SYMBOL_NAME     </Name>
-        <Value>   RTY
+        <Value>   GC
         </Value></Input>
     <Input>
         <Name>    TIMEFRAME    </Name>
@@ -71,7 +71,7 @@ General Settings for BTfast
     <Input>
         <!-- Name of file containing data (included in DATA_DIR) -->
         <Name>    DATA_FILE     </Name>
-        <Value>  RTY/RTY_M10_2010-2014_2018-2019.csv
+        <Value>  GC/GC_M10_2010-2014_2018-2019.csv
             <!-- GC_M10_2010-2019.csv    -->                  <!-- format = 1 -->
             <!-- GC_M10_2010-2014_2018-2019.csv -->         <!-- format = 1 -->
             <!-- GC_M15_2015-2017.csv -->                   <!-- format = 1 -->
