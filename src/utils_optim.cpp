@@ -249,7 +249,7 @@ void utils_optim::sort_by_metric( std::vector<strategy_t> &optim,
     else if( metric == "Expectancy" ){
         std::sort( optim.begin(), optim.end(), utils_optim::sort_by_expectancy);
     }
-    else if( metric == "Z-score" ){        
+    else if( metric == "Z-score" ){
         std::sort( optim.begin(), optim.end(), utils_optim::sort_by_zscore );
     }
     else{
