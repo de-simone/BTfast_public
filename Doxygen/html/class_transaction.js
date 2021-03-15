@@ -16,7 +16,7 @@ var class_transaction =
     [ "symbol", "class_transaction.html#a2ceb6e4aaadd1093615fcc2203857d14", null ],
     [ "ticket", "class_transaction.html#aedf661bce05928349d4185891b4b5157", null ],
     [ "ticks", "class_transaction.html#aff075d9cf6466c9a7fdb4aae25eaab58", null ],
-    [ "tostring", "class_transaction.html#a9bf89765eb0c7bb323bec52915fd41e1", null ],
+    [ "tostring", "class_transaction.html#a5d13da9a3fbf2343f81c6cbc5eb36370", null ],
     [ "bars_in_trade_", "class_transaction.html#a1fed6f77d83f8dfee7d2eaba59f71bdc", null ],
     [ "cumul_pl_", "class_transaction.html#a5a8733682cdd5069649096d8f62ea288", null ],
     [ "entry_price_", "class_transaction.html#af8cb4414f182d73e8e8fd16e1ea20022", null ],

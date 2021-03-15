@@ -110,11 +110,15 @@ Storage</h2>
 <hr  />
 <p> Created by Prof. Andrea De Simone Copyright 2019 (c). All rights reserved Started on: 2019-11-22 </p>
 <h2><a class="anchor" id="autotoc_md1"></a>
-Last update: 2020-07-28</h2>
+Last update: 2020-08-24</h2>
 <p>TO DO:</p>
 <ul>
+<li>Sequential generation: select if Z = (avgticks_new - avgticks_old)/[stdticks_new/sqrt(N) |Z| &gt; 1.0</li>
+<li>run factory for GC (Mean-reverting), RTY_long/short</li>
+<li>check account equity, utils_print-&gt; account.print_equity();</li>
+<li>select best-performing sample of 100 trades from IS+OOS: moving window of 104 consecutive trades (remove 2 trades with largest profits, and 2 trades with largest loss) with max avgticks use this best-sample as a benchmark for two-sample test (on/off-sync)</li>
 <li><a class="el" href="class_performance.html">Performance</a>: avg drawdown duration: avg time delay between equity peaks. check results, stdticks too large</li>
-<li>Sequential generation: select if avgticks_new &gt; avgticks_old + stdticks_old ?</li>
+<li>print actual MasterCode strategy (ready for TS code).</li>
 <li>directionality in mkt regime: ADX(20) &gt; 20</li>
 <li>DPS: allow ps_factor=0,1,2. dynamic DOW with DPS</li>
 <li>signal weights: assign weight in [0,1] to breakout signal; distribution of ticks over weights (e.g. histogram) increase position on signal with weight associated to largest ticks</li>

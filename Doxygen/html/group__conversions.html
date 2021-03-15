@@ -91,6 +91,15 @@ $(document).ready(function(){initNavTree('group__conversions.html','');});
 <div class="title">Parsing XML files/strings to an XMLNode structure and Rendering XMLNode's to files/string.<div class="ingroups"><a class="el" href="group___x_m_l_parser_general.html">The XML parser</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Collaboration diagram for Parsing XML files/strings to an XMLNode structure and Rendering XMLNode's to files/string.:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions.png" border="0" usemap="#group____conversions" alt=""/></div>
+<map name="group____conversions" id="group____conversions">
+<area shape="rect" title=" " alt="" coords="168,5,351,75"/>
+<area shape="rect" href="group___x_m_l_parser_general.html" title=" " alt="" coords="5,27,120,53"/>
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -151,6 +160,15 @@ static XMLCSTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <p>Create an <a class="el" href="struct_x_m_l.html">XML</a> string starting from the current <a class="el" href="struct_x_m_l_node.html" title="Main Class representing a XML node.">XMLNode</a>. </p>
 <p>The returned string should be free'd using the "freeXMLString" function.</p>
 <p>If nFormat==0, no formatting is required otherwise this returns an user friendly <a class="el" href="struct_x_m_l.html">XML</a> string from a given element with appropriate white spaces and carriage returns. if pnSize is given it returns the size in character of the string. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_ga9e19d3587f88f503ff1cfd98fcd13cb1_icgraph.png" border="0" usemap="#group__conversions_ga9e19d3587f88f503ff1cfd98fcd13cb1_icgraph" alt=""/></div>
+<map name="group__conversions_ga9e19d3587f88f503ff1cfd98fcd13cb1_icgraph" id="group__conversions_ga9e19d3587f88f503ff1cfd98fcd13cb1_icgraph">
+<area shape="rect" title="Create an XML string starting from the current XMLNode." alt="" coords="204,5,389,32"/>
+<area shape="rect" href="group__conversions.html#gacef9de855bd31c6cda5482cb296f28ae" title="Save the content of an xmlNode inside a file." alt="" coords="5,5,156,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -196,6 +214,15 @@ static XMLCSTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 
 <p>Guess the character encoding of the string (ascii, utf8 or shift-JIS) </p>
 <p>The "guessCharEncoding" function try to guess the character encoding. You most-probably will never have to use this function. It then returns the appropriate value of the global parameter "characterEncoding" described in the <a class="el" href="group__conversions.html#ga2fcc1637751a4788cfc5690b1c80842b" title="Sets the global options for the conversions.">XMLNode::setGlobalOptions</a>. The guess is based on the content of a buffer of length "bufLen" bytes that contains the first bytes (minimum 25 bytes; 200 bytes is a good value) of the file to be parsed. The <a class="el" href="group__conversions.html#gacc044148e2b9b8264a320b7b6e398158" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che...">XMLNode::openFileHelper</a> function is using this function to automatically compute the value of the "characterEncoding" global parameter. There are several heuristics used to do the guess. One of the heuristic is based on the "encoding" attribute. The original <a class="el" href="struct_x_m_l.html">XML</a> specifications forbids to use this attribute to do the guess but you can still use it if you set "useXMLEncodingAttribute" to 1 (this is the default behavior and the behavior of most parsers). If an inconsistency in the encoding is detected, then the return value is "0". </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_gac7af7e3bab8d21722dd4f191a4aa7c1d_icgraph.png" border="0" usemap="#group__conversions_gac7af7e3bab8d21722dd4f191a4aa7c1d_icgraph" alt=""/></div>
+<map name="group__conversions_gac7af7e3bab8d21722dd4f191a4aa7c1d_icgraph" id="group__conversions_gac7af7e3bab8d21722dd4f191a4aa7c1d_icgraph">
+<area shape="rect" title="Guess the character encoding of the string (ascii, utf8 or shift&#45;JIS)" alt="" coords="228,5,433,32"/>
+<area shape="rect" href="group__conversions.html#gacc044148e2b9b8264a320b7b6e398158" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che..." alt="" coords="5,5,180,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -247,6 +274,24 @@ static XMLCSTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_gacc044148e2b9b8264a320b7b6e398158_cgraph.png" border="0" usemap="#group__conversions_gacc044148e2b9b8264a320b7b6e398158_cgraph" alt=""/></div>
+<map name="group__conversions_gacc044148e2b9b8264a320b7b6e398158_cgraph" id="group__conversions_gacc044148e2b9b8264a320b7b6e398158_cgraph">
+<area shape="rect" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che..." alt="" coords="5,81,180,108"/>
+<area shape="rect" href="group__conversions.html#ga4496629c7a268db5435946c7bdd4eb28" title="this gives you a user&#45;friendly explanation of the parsing error" alt="" coords="263,5,398,32"/>
+<area shape="rect" href="group__conversions.html#gac7af7e3bab8d21722dd4f191a4aa7c1d" title="Guess the character encoding of the string (ascii, utf8 or shift&#45;JIS)" alt="" coords="228,56,433,83"/>
+<area shape="rect" href="group__conversions.html#ga5e5968e052d58350918cd91e3535624b" title="Parse an XML file and return the root of a XMLNode tree representing the file." alt="" coords="260,107,401,133"/>
+<area shape="rect" href="group__conversions.html#ga2fcc1637751a4788cfc5690b1c80842b" title="Sets the global options for the conversions." alt="" coords="237,157,425,184"/>
+<area shape="rect" href="group__conversions.html#gacb95f4f00e4cf3756aac0e3a53765248" title="Parse an XML string and return the root of a XMLNode tree representing the string." alt="" coords="481,107,636,133"/>
+<area shape="rect" href="group__navigate.html#gac34f1bdbf808d2ee89552415505bb673" title="return ith child node" alt="" coords="684,5,851,32"/>
+<area shape="rect" href="group__navigate.html#ga78f873d053775e62bbe7e9b9ba9a0893" title="name of the node" alt="" coords="697,56,838,83"/>
+<area shape="rect" href="group__navigate.html#gab888c4755daee4a2f976713531f1e3c3" title="is this node Empty?" alt="" coords="699,107,835,133"/>
+<area shape="rect" href="group__navigate.html#ga37dfb85db6b3e8974474c9a6277fff94" title="return the number of child node with specific name" alt="" coords="689,157,845,184"/>
+<area shape="rect" href="group__navigate.html#ga1b13a6dc1cb8e7248caedd4960d7ba60" title="nbr of different contents for current node" alt="" coords="696,208,839,235"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -300,6 +345,29 @@ static XMLCSTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_ga5e5968e052d58350918cd91e3535624b_cgraph.png" border="0" usemap="#group__conversions_ga5e5968e052d58350918cd91e3535624b_cgraph" alt=""/></div>
+<map name="group__conversions_ga5e5968e052d58350918cd91e3535624b_cgraph" id="group__conversions_ga5e5968e052d58350918cd91e3535624b_cgraph">
+<area shape="rect" title="Parse an XML file and return the root of a XMLNode tree representing the file." alt="" coords="5,107,147,133"/>
+<area shape="rect" href="group__conversions.html#gacb95f4f00e4cf3756aac0e3a53765248" title="Parse an XML string and return the root of a XMLNode tree representing the string." alt="" coords="195,107,349,133"/>
+<area shape="rect" href="group__navigate.html#gac34f1bdbf808d2ee89552415505bb673" title="return ith child node" alt="" coords="397,5,564,32"/>
+<area shape="rect" href="group__navigate.html#ga78f873d053775e62bbe7e9b9ba9a0893" title="name of the node" alt="" coords="410,56,551,83"/>
+<area shape="rect" href="group__navigate.html#gab888c4755daee4a2f976713531f1e3c3" title="is this node Empty?" alt="" coords="413,107,549,133"/>
+<area shape="rect" href="group__navigate.html#ga37dfb85db6b3e8974474c9a6277fff94" title="return the number of child node with specific name" alt="" coords="403,157,559,184"/>
+<area shape="rect" href="group__navigate.html#ga1b13a6dc1cb8e7248caedd4960d7ba60" title="nbr of different contents for current node" alt="" coords="409,208,552,235"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_ga5e5968e052d58350918cd91e3535624b_icgraph.png" border="0" usemap="#group__conversions_ga5e5968e052d58350918cd91e3535624b_icgraph" alt=""/></div>
+<map name="group__conversions_ga5e5968e052d58350918cd91e3535624b_icgraph" id="group__conversions_ga5e5968e052d58350918cd91e3535624b_icgraph">
+<area shape="rect" title="Parse an XML file and return the root of a XMLNode tree representing the file." alt="" coords="228,5,369,32"/>
+<area shape="rect" href="group__conversions.html#gacc044148e2b9b8264a320b7b6e398158" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che..." alt="" coords="5,5,180,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -353,6 +421,29 @@ static XMLCSTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_cgraph.png" border="0" usemap="#group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_cgraph" alt=""/></div>
+<map name="group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_cgraph" id="group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_cgraph">
+<area shape="rect" title="Parse an XML string and return the root of a XMLNode tree representing the string." alt="" coords="5,107,160,133"/>
+<area shape="rect" href="group__navigate.html#gac34f1bdbf808d2ee89552415505bb673" title="return ith child node" alt="" coords="208,5,375,32"/>
+<area shape="rect" href="group__navigate.html#ga78f873d053775e62bbe7e9b9ba9a0893" title="name of the node" alt="" coords="221,56,362,83"/>
+<area shape="rect" href="group__navigate.html#gab888c4755daee4a2f976713531f1e3c3" title="is this node Empty?" alt="" coords="223,107,359,133"/>
+<area shape="rect" href="group__navigate.html#ga37dfb85db6b3e8974474c9a6277fff94" title="return the number of child node with specific name" alt="" coords="213,157,369,184"/>
+<area shape="rect" href="group__navigate.html#ga1b13a6dc1cb8e7248caedd4960d7ba60" title="nbr of different contents for current node" alt="" coords="220,208,363,235"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_icgraph.png" border="0" usemap="#group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_icgraph" alt=""/></div>
+<map name="group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_icgraph" id="group__conversions_gacb95f4f00e4cf3756aac0e3a53765248_icgraph">
+<area shape="rect" title="Parse an XML string and return the root of a XMLNode tree representing the string." alt="" coords="417,5,572,32"/>
+<area shape="rect" href="group__conversions.html#ga5e5968e052d58350918cd91e3535624b" title="Parse an XML file and return the root of a XMLNode tree representing the file." alt="" coords="228,5,369,32"/>
+<area shape="rect" href="group__conversions.html#gacc044148e2b9b8264a320b7b6e398158" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che..." alt="" coords="5,5,180,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -425,6 +516,15 @@ static XMLCSTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>"0" when there are no errors. If you try to set an unrecognized encoding then the return value will be "1" to signal an error.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Sometime, it's useful to set "guessWideCharChars=0" to disable any conversion because the test to detect the file-type (ASCII/UTF8/char* or WideChar) may fail (rarely). </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_ga2fcc1637751a4788cfc5690b1c80842b_icgraph.png" border="0" usemap="#group__conversions_ga2fcc1637751a4788cfc5690b1c80842b_icgraph" alt=""/></div>
+<map name="group__conversions_ga2fcc1637751a4788cfc5690b1c80842b_icgraph" id="group__conversions_ga2fcc1637751a4788cfc5690b1c80842b_icgraph">
+<area shape="rect" title="Sets the global options for the conversions." alt="" coords="228,5,416,32"/>
+<area shape="rect" href="group__conversions.html#gacc044148e2b9b8264a320b7b6e398158" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che..." alt="" coords="5,5,180,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -462,6 +562,17 @@ static XMLCSTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 
 <p>Save the content of an xmlNode inside a file. </p>
 <p>If nFormat==0, no formatting is required otherwise this returns an user friendly <a class="el" href="struct_x_m_l.html">XML</a> string from a given element with appropriate white spaces and carriage returns. If the global parameter "characterEncoding==encoding_UTF8", then the "encoding" parameter is ignored and always set to "utf-8". If the global parameter "characterEncoding==encoding_ShiftJIS", then the "encoding" parameter is ignored and always set to "SHIFT-JIS". If "_XMLWIDECHAR=1", then the "encoding" parameter is ignored and always set to "utf-16". If no "encoding" parameter is given the "ISO-8859-1" encoding is used. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__conversions_gacef9de855bd31c6cda5482cb296f28ae_cgraph.png" border="0" usemap="#group__conversions_gacef9de855bd31c6cda5482cb296f28ae_cgraph" alt=""/></div>
+<map name="group__conversions_gacef9de855bd31c6cda5482cb296f28ae_cgraph" id="group__conversions_gacef9de855bd31c6cda5482cb296f28ae_cgraph">
+<area shape="rect" title="Save the content of an xmlNode inside a file." alt="" coords="5,56,156,83"/>
+<area shape="rect" href="group__conversions.html#ga9e19d3587f88f503ff1cfd98fcd13cb1" title="Create an XML string starting from the current XMLNode." alt="" coords="204,5,389,32"/>
+<area shape="rect" href="group__navigate.html#gac34f1bdbf808d2ee89552415505bb673" title="return ith child node" alt="" coords="213,56,380,83"/>
+<area shape="rect" href="group__navigate.html#gaffcffca699c492a1d26a037e958c14f5" title="is this node a declaration &lt;? .... ?&gt;" alt="" coords="215,107,379,133"/>
+</map>
+</div>
 
 </div>
 </div>

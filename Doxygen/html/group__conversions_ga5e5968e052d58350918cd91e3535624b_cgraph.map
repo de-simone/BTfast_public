@@ -1,0 +1,9 @@
+<map id="XMLNode::parseFile" name="XMLNode::parseFile">
+<area shape="rect" id="node1" title="Parse an XML file and return the root of a XMLNode tree representing the file." alt="" coords="5,107,147,133"/>
+<area shape="rect" id="node2" href="$group__conversions.html#gacb95f4f00e4cf3756aac0e3a53765248" title="Parse an XML string and return the root of a XMLNode tree representing the string." alt="" coords="195,107,349,133"/>
+<area shape="rect" id="node3" href="$group__navigate.html#gac34f1bdbf808d2ee89552415505bb673" title="return ith child node" alt="" coords="397,5,564,32"/>
+<area shape="rect" id="node4" href="$group__navigate.html#ga78f873d053775e62bbe7e9b9ba9a0893" title="name of the node" alt="" coords="410,56,551,83"/>
+<area shape="rect" id="node5" href="$group__navigate.html#gab888c4755daee4a2f976713531f1e3c3" title="is this node Empty?" alt="" coords="413,107,549,133"/>
+<area shape="rect" id="node6" href="$group__navigate.html#ga37dfb85db6b3e8974474c9a6277fff94" title="return the number of child node with specific name" alt="" coords="403,157,559,184"/>
+<area shape="rect" id="node7" href="$group__navigate.html#ga1b13a6dc1cb8e7248caedd4960d7ba60" title="nbr of different contents for current node" alt="" coords="409,208,552,235"/>
+</map>

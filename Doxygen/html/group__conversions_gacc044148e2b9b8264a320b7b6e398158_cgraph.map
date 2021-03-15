@@ -1,0 +1,13 @@
+<map id="XMLNode::openFileHelper" name="XMLNode::openFileHelper">
+<area shape="rect" id="node1" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che..." alt="" coords="5,81,180,108"/>
+<area shape="rect" id="node2" href="$group__conversions.html#ga4496629c7a268db5435946c7bdd4eb28" title="this gives you a user&#45;friendly explanation of the parsing error" alt="" coords="263,5,398,32"/>
+<area shape="rect" id="node3" href="$group__conversions.html#gac7af7e3bab8d21722dd4f191a4aa7c1d" title="Guess the character encoding of the string (ascii, utf8 or shift&#45;JIS)" alt="" coords="228,56,433,83"/>
+<area shape="rect" id="node4" href="$group__conversions.html#ga5e5968e052d58350918cd91e3535624b" title="Parse an XML file and return the root of a XMLNode tree representing the file." alt="" coords="260,107,401,133"/>
+<area shape="rect" id="node11" href="$group__conversions.html#ga2fcc1637751a4788cfc5690b1c80842b" title="Sets the global options for the conversions." alt="" coords="237,157,425,184"/>
+<area shape="rect" id="node5" href="$group__conversions.html#gacb95f4f00e4cf3756aac0e3a53765248" title="Parse an XML string and return the root of a XMLNode tree representing the string." alt="" coords="481,107,636,133"/>
+<area shape="rect" id="node6" href="$group__navigate.html#gac34f1bdbf808d2ee89552415505bb673" title="return ith child node" alt="" coords="684,5,851,32"/>
+<area shape="rect" id="node7" href="$group__navigate.html#ga78f873d053775e62bbe7e9b9ba9a0893" title="name of the node" alt="" coords="697,56,838,83"/>
+<area shape="rect" id="node8" href="$group__navigate.html#gab888c4755daee4a2f976713531f1e3c3" title="is this node Empty?" alt="" coords="699,107,835,133"/>
+<area shape="rect" id="node9" href="$group__navigate.html#ga37dfb85db6b3e8974474c9a6277fff94" title="return the number of child node with specific name" alt="" coords="689,157,845,184"/>
+<area shape="rect" id="node10" href="$group__navigate.html#ga1b13a6dc1cb8e7248caedd4960d7ba60" title="nbr of different contents for current node" alt="" coords="696,208,839,235"/>
+</map>

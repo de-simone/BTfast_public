@@ -1,9 +1,0 @@
-digraph "Position helper functions (use in conjunction with the update&amp;add functions"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=box];
-  rankdir=LR;
-  Node2 [label="Create or Update the\l XMLNode structure",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__xml_modify.html",tooltip=" "];
-  Node1 [label="Position helper functions\l (use in conjunction with\l the update&add functions",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
-  Node2->Node1 [shape=plaintext, dir="back", style="solid"];
-}

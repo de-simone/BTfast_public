@@ -1,0 +1,7 @@
+<map id="BTfast::run_backtest" name="BTfast::run_backtest">
+<area shape="rect" id="node1" title=" " alt="" coords="5,64,149,91"/>
+<area shape="rect" id="node2" href="$class_b_tfast.html#a4caa0e47d5f0a7760dac76da6ab71fe7" title=" " alt="" coords="197,57,313,98"/>
+<area shape="rect" id="node3" href="$class_price_collection.html#ac9f319f79e6ef1e9eab99e73f04928e4" title=" " alt="" coords="361,5,540,32"/>
+<area shape="rect" id="node4" href="$class_position_handler.html#a632158cea9073da88a2b1310b8dff055" title=" " alt="" coords="381,57,521,98"/>
+<area shape="rect" id="node5" href="$class_signal_handler.html#ad91469a881cd82a282752ad9341b609c" title=" " alt="" coords="386,122,515,163"/>
+</map>

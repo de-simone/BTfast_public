@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['mastercode_92',['MasterCode',['../class_master_code.html',1,'MasterCode'],['../class_master_code.html#abb4b1c1fe432d224b9a092a4d4f93f95',1,'MasterCode::MasterCode()']]],
   ['max_5fconsec_5fwin_5floss_93',['max_consec_win_loss',['../class_performance.html#a9b410e647eb38c6ff669deaed84ae1ff',1,'Performance']]],
   ['metrics_5fall_5f_94',['metrics_all_',['../class_performance.html#a4c896d065688fc178a08ae1df2d50b80',1,'Performance']]],
   ['metrics_5flong_5f_95',['metrics_long_',['../class_performance.html#a9175e026e433591f44a0a64a1af93962',1,'Performance']]],

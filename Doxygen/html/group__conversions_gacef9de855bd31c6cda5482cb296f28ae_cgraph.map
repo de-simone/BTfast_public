@@ -1,0 +1,6 @@
+<map id="XMLNode::writeToFile" name="XMLNode::writeToFile">
+<area shape="rect" id="node1" title="Save the content of an xmlNode inside a file." alt="" coords="5,56,156,83"/>
+<area shape="rect" id="node2" href="$group__conversions.html#ga9e19d3587f88f503ff1cfd98fcd13cb1" title="Create an XML string starting from the current XMLNode." alt="" coords="204,5,389,32"/>
+<area shape="rect" id="node3" href="$group__navigate.html#gac34f1bdbf808d2ee89552415505bb673" title="return ith child node" alt="" coords="213,56,380,83"/>
+<area shape="rect" id="node4" href="$group__navigate.html#gaffcffca699c492a1d26a037e958c14f5" title="is this node a declaration &lt;? .... ?&gt;" alt="" coords="215,107,379,133"/>
+</map>

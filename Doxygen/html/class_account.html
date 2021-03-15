@@ -104,6 +104,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9e9bf49bbe96dab8a36e02638cee392d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf04f21545ec8a59e4d68385690af78c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_account.html#adf04f21545ec8a59e4d68385690af78c">print_transaction_history</a> () const</td></tr>
 <tr class="separator:adf04f21545ec8a59e4d68385690af78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab80674c54c4922af72d4003337450b53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_account.html#ab80674c54c4922af72d4003337450b53">print_equity</a> () const</td></tr>
+<tr class="separator:ab80674c54c4922af72d4003337450b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7d569e481a5ac163a395ca6b893e935"><td class="memItemLeft" align="right" valign="top"><a id="ad7d569e481a5ac163a395ca6b893e935"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>print_transaction_history_pl</b> () const</td></tr>
 <tr class="separator:ad7d569e481a5ac163a395ca6b893e935"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +123,9 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>initial_balance</b>
 <tr class="memitem:aa5ba7274557ad562b718e1ed6ccbc2a3"><td class="memItemLeft" align="right" valign="top"><a id="aa5ba7274557ad562b718e1ed6ccbc2a3"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>balance</b> () const</td></tr>
 <tr class="separator:aa5ba7274557ad562b718e1ed6ccbc2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e8b46cc1bb083231648580eb1a205cb"><td class="memItemLeft" align="right" valign="top"><a id="a3e8b46cc1bb083231648580eb1a205cb"></a>
+std::vector&lt; std::pair&lt; <a class="el" href="class_date.html">Date</a>, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>equity</b> () const</td></tr>
+<tr class="separator:a3e8b46cc1bb083231648580eb1a205cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0023fa979355e5ce56a5df1bc02e0561"><td class="memItemLeft" align="right" valign="top"><a id="a0023fa979355e5ce56a5df1bc02e0561"></a>
 std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>transactions</b> () const</td></tr>
 <tr class="separator:a0023fa979355e5ce56a5df1bc02e0561"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +134,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update_balance</b> (d
 <tr class="separator:a3d8e6f182f3e505026c97f4b16629602"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af983f32a7f3f17f6c22851948c5c57ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_account.html#af983f32a7f3f17f6c22851948c5c57ae">reset</a> (double initial_balance)</td></tr>
 <tr class="separator:af983f32a7f3f17f6c22851948c5c57ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90a603e050a3e8e44f83e81cc59c09c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_account.html#a90a603e050a3e8e44f83e81cc59c09c5">add_to_equity</a> (<a class="el" href="class_date.html">Date</a> new_date, double daily_pl)</td></tr>
+<tr class="separator:a90a603e050a3e8e44f83e81cc59c09c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -141,14 +148,19 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>balance_</b> {0.0}<
 <tr class="memitem:a92f9d7a9086a45dcf04717409b4a3220"><td class="memItemLeft" align="right" valign="top"><a id="a92f9d7a9086a45dcf04717409b4a3220"></a>
 std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>transactions_</b> {}</td></tr>
 <tr class="separator:a92f9d7a9086a45dcf04717409b4a3220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a653af0354dfe988eee69177a15728c74"><td class="memItemLeft" align="right" valign="top"><a id="a653af0354dfe988eee69177a15728c74"></a>
+std::vector&lt; std::pair&lt; <a class="el" href="class_date.html">Date</a>, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>equity_</b> {}</td></tr>
+<tr class="separator:a653af0354dfe988eee69177a15728c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class providing real-time status of account, and storing <a class="el" href="class_transaction.html">Transaction</a> history (vector of <a class="el" href="class_transaction.html">Transaction()</a> objects)</p>
 <p>Member Variables</p><ul>
 <li>initial_balance_: initial balance</li>
 <li>balance_: consolidated balance</li>
-<li>transactions_: vector of transaction objects [- df: pandas dataframe containing 'exit_time', 'net_pl' 'Bars_in_trade' of all transactions] [- strategy_name_: strategy name] </li>
+<li>transactions_: vector of transaction objects</li>
+<li>equity_: floating equity, non consolidated balance at end of day. vector of pairs ( <a class="el" href="class_date.html">Date</a>, double )</li>
 </ul>
+<p>[- df: pandas dataframe containing 'exit_time', 'net_pl' 'Bars_in_trade' of all transactions] [- strategy_name_: strategy name] </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2b8e094c9b92f70ebedd540c4d69f3b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2b8e094c9b92f70ebedd540c4d69f3b4">&#9670;&nbsp;</a></span>Account()</h2>
@@ -170,6 +182,44 @@ std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a90a603e050a3e8e44f83e81cc59c09c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90a603e050a3e8e44f83e81cc59c09c5">&#9670;&nbsp;</a></span>add_to_equity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Account::add_to_equity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_date.html">Date</a>&#160;</td>
+          <td class="paramname"><em>new_date</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>daily_pl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Add new entry (<a class="el" href="class_date.html">Date</a>, daily PL) to equity vector </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_account_a90a603e050a3e8e44f83e81cc59c09c5_icgraph.png" border="0" usemap="#class_account_a90a603e050a3e8e44f83e81cc59c09c5_icgraph" alt=""/></div>
+<map name="class_account_a90a603e050a3e8e44f83e81cc59c09c5_icgraph" id="class_account_a90a603e050a3e8e44f83e81cc59c09c5_icgraph">
+<area shape="rect" title=" " alt="" coords="215,5,373,32"/>
+<area shape="rect" href="class_position_handler.html#af90bc87e9293910423006b8b0b3193e6" title=" " alt="" coords="5,5,167,32"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a9e9bf49bbe96dab8a36e02638cee392d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9e9bf49bbe96dab8a36e02638cee392d">&#9670;&nbsp;</a></span>add_transaction_to_history()</h2>
 
@@ -186,6 +236,16 @@ std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;
       </table>
 </div><div class="memdoc">
 <p>Add new trade to transaction history </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_account_a9e9bf49bbe96dab8a36e02638cee392d_icgraph.png" border="0" usemap="#class_account_a9e9bf49bbe96dab8a36e02638cee392d_icgraph" alt=""/></div>
+<map name="class_account_a9e9bf49bbe96dab8a36e02638cee392d_icgraph" id="class_account_a9e9bf49bbe96dab8a36e02638cee392d_icgraph">
+<area shape="rect" title=" " alt="" coords="209,35,380,76"/>
+<area shape="rect" href="class_position_handler.html#a2b1e8424fd68beca94eb4d41cc8c2396" title=" " alt="" coords="7,5,160,47"/>
+<area shape="rect" href="class_position_handler.html#a44f8e62db887867eac7bf3552c81cdd6" title=" " alt="" coords="5,71,161,98"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -204,6 +264,36 @@ std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;
       </table>
 </div><div class="memdoc">
 <p>Compute largest losing trade in transactions (negative value) Useful for position sizing. </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_account_aa42c6bf437855c502ae39710cb643bc8_icgraph.png" border="0" usemap="#class_account_aa42c6bf437855c502ae39710cb643bc8_icgraph" alt=""/></div>
+<map name="class_account_aa42c6bf437855c502ae39710cb643bc8_icgraph" id="class_account_aa42c6bf437855c502ae39710cb643bc8_icgraph">
+<area shape="rect" title=" " alt="" coords="823,13,971,39"/>
+<area shape="rect" href="class_position_sizer.html#a99d297f11e826f18abb486d12fadd374" title=" " alt="" coords="617,5,775,47"/>
+<area shape="rect" href="class_signal_handler.html#ada26d23268e26bde810f1ba5f46e685b" title=" " alt="" coords="424,5,569,47"/>
+<area shape="rect" href="class_signal_handler.html#af7f0335bd0d42400fe6627d71dc4bded" title=" " alt="" coords="227,5,376,47"/>
+<area shape="rect" href="class_signal_handler.html#a6aa68c7d7656640356ac198bda09949e" title=" " alt="" coords="5,13,179,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab80674c54c4922af72d4003337450b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab80674c54c4922af72d4003337450b53">&#9670;&nbsp;</a></span>print_equity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Account::print_equity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Print equity history on stdout </p>
 
 </div>
 </div>
@@ -338,6 +428,16 @@ std::vector&lt; <a class="el" href="class_transaction.html">Transaction</a> &gt;
       </table>
 </div><div class="memdoc">
 <p>Write transaction history to file </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_account_a7475ee3e3ed4abb0f1e942f33a824f7d_cgraph.png" border="0" usemap="#class_account_a7475ee3e3ed4abb0f1e942f33a824f7d_cgraph" alt=""/></div>
+<map name="class_account_a7475ee3e3ed4abb0f1e942f33a824f7d_cgraph" id="class_account_a7475ee3e3ed4abb0f1e942f33a824f7d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,183,47"/>
+<area shape="rect" href="class_date_time.html#ab0b62c518a75a5ea7a2b81e3d8a186d8" title=" " alt="" coords="231,13,383,39"/>
+<area shape="rect" href="class_date_time.html#a491bd542f7201cc9f96eddd60e6f0ed7" title=" " alt="" coords="431,13,543,39"/>
+</map>
+</div>
 
 </div>
 </div>

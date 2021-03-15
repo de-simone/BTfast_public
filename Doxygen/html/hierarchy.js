@@ -23,15 +23,8 @@ var hierarchy =
     [ "PriceCollection", "class_price_collection.html", null ],
     [ "SignalHandler", "class_signal_handler.html", null ],
     [ "Strategy", "class_strategy.html", [
-      [ "BOMRcharacter", "class_b_o_m_rcharacter.html", null ],
-      [ "MasterCode", "class_master_code.html", null ],
+      [ "GC1", "class_g_c1.html", null ],
       [ "NG1", "class_n_g1.html", null ],
-      [ "NG2", "class_n_g2.html", null ],
-      [ "NG3", "class_n_g3.html", null ],
-      [ "NG4", "class_n_g4.html", null ],
-      [ "NG5", "class_n_g5.html", null ],
-      [ "NG6", "class_n_g6.html", null ],
-      [ "Template", "class_template.html", null ],
       [ "Test", "class_test.html", null ]
     ] ],
     [ "Time", "class_time.html", null ],

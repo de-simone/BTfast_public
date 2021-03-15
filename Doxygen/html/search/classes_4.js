@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['historicalbarscsv_240',['HistoricalBarsCSV',['../class_historical_bars_c_s_v.html',1,'']]]
+  ['gc1_234',['GC1',['../class_g_c1.html',1,'']]]
 ];

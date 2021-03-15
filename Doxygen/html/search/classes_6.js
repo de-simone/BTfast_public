@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mastercode_243',['MasterCode',['../class_master_code.html',1,'']]]
+  ['individual_236',['Individual',['../class_individual.html',1,'']]],
+  ['instrument_237',['Instrument',['../class_instrument.html',1,'']]]
 ];

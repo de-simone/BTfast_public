@@ -1,0 +1,4 @@
+<map id="XMLNode::guessCharEncoding" name="XMLNode::guessCharEncoding">
+<area shape="rect" id="node1" title="Guess the character encoding of the string (ascii, utf8 or shift&#45;JIS)" alt="" coords="228,5,433,32"/>
+<area shape="rect" id="node2" href="$group__conversions.html#gacc044148e2b9b8264a320b7b6e398158" title="Parse an XML file and return the root of a XMLNode tree representing the file. A very crude error che..." alt="" coords="5,5,180,32"/>
+</map>
